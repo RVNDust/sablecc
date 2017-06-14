@@ -130,10 +130,18 @@ Tokens
 >>>>>>> 
 
   {macro_definition}
+<<<<<<< HEAD
   internal_kw = 'Internal';
 
   /* custom transition *->previous state */
   insert_command = '{Insert:';
+=======
+  short_macro_comment = '//' short_comment_char* ascii_newline?;
+
+  {top_level, macro_definition}
+  long_macro_comment = '/*' [long_comment_char + '/']*
+                       ('*' (long_comment_char [long_comment_char + '/']*)?)* '*/';
+>>>>>>> 
 
   {macro_definition->macro_body}
   begin = '{Begin}';
