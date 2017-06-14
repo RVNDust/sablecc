@@ -99,6 +99,7 @@ States
 Tokens
 
   {top_level->macro_definition}
+<<<<<<< HEAD
   macro_kw = 'Macro';
 
   {macro_definition}
@@ -106,6 +107,27 @@ Tokens
 
   {macro_definition}
   string_kw = 'String';
+=======
+  macro_command = 'Macro';
+
+  {macro_definition}
+  params_kw = 'Params';
+
+  {macro_definition}
+  string_kw = 'String';
+
+  {macro_definition}
+  context_kw = 'Context';
+
+  {macro_body->command}
+  insert_command = '{Insert:';
+
+  {macro_definition->macro_body}
+  begin = '{Begin}';
+
+  {macro_body->top_level}
+  end = '{End}';
+>>>>>>> 
 
   {macro_definition}
   internal_kw = 'Internal';
@@ -119,19 +141,27 @@ Tokens
   {macro_body->top_level}
   end = '{End}';
 
+<<<<<<< HEAD
   {macro_definition, top_level, macro_body}
   comment = '#' comment_char* ascii_newline?;
 
+=======
+>>>>>>> 
   {macro_body}
   unknown_command = '{' uppercase normal_part* ':';
 
   {macro_body}
+<<<<<<< HEAD
   text_part = text_char+ | '{';
+=======
+  macro_body_text = text_char+ | '{';
+>>>>>>> 
 
   {macro_body}
   eol = ascii_newline;
 
   {macro_body}
+<<<<<<< HEAD
   text_escape = text_escape;
 
   {top_level, command, macro_body, string}
@@ -142,6 +172,20 @@ Tokens
 
   {top_level, command, macro_definition}
   invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)+;
+=======
+  escape = text_escape;
+
+  {top_level, command, text, short_comment}
+  invalid_var = '$' ascii_id_continue+ |
+                '$<' ascii_id_continue* '>'? |
+                '$(' ascii_id_continue* ')'?;
+
+  {macro_definition, command}
+  identifier = normal_identifier | rich_identifier;
+
+  {top_level, macro_body, string, command, macro_definition}
+  invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)*;
+>>>>>>> 
 
   {command, macro_definition}
   l_par = '(';
@@ -149,9 +193,12 @@ Tokens
   {command, macro_definition}
   r_par = ')';
 
+<<<<<<< HEAD
   /* custom transition *->previous state */
   r_brace = '}';
 
+=======
+>>>>>>> 
   {macro_definition, command}
   comma = ',';
 
@@ -171,6 +218,7 @@ Tokens
   {string}
   string_escape = string_escape;
 
+<<<<<<< HEAD
   {macro_body, string}
   variable = '{' normal_identifier '}';
 
@@ -179,6 +227,13 @@ Tokens
 
   {macro_definition}
   semi_colon = ';';
+=======
+  {top_level}
+  ignore_macro_start = '{StartIgnoring}';
+
+  {top_level}
+  ignore_macro_end = '{StopIgnoring}';
+>>>>>>> 
 
   ctrl_z = 0x001A;
 
