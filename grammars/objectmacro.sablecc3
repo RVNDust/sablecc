@@ -73,11 +73,15 @@ Helpers
   white_space_not_newline = [ascii_pattern_white_space - [0x000A .. 0x000D]];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   comment_char = [[ascii - ascii_c] + white_space_not_newline];
 =======
   short_comment_char = [[ascii - ascii_c] + white_space_not_newline];
   long_comment_char = [[[ascii - ascii_c] + ascii_pattern_white_space] - ['*' + '/']];
 >>>>>>> 
+=======
+  comment_char = [[ascii - ascii_c] + white_space_not_newline];
+>>>>>>> New grammar for intermediate representation and objectmacro
 
   text_char = [[[ascii - ascii_c] + white_space_not_newline] - '{'];
   text_escape = '{' '{';
@@ -100,6 +104,7 @@ Tokens
 
   {top_level->macro_definition}
 <<<<<<< HEAD
+<<<<<<< HEAD
   macro_kw = 'Macro';
 
   {macro_definition}
@@ -109,6 +114,9 @@ Tokens
   string_kw = 'String';
 =======
   macro_command = 'Macro';
+=======
+  macro_kw = 'Macro';
+>>>>>>> New grammar for intermediate representation and objectmacro
 
   {macro_definition}
   params_kw = 'Params';
@@ -119,7 +127,7 @@ Tokens
   {macro_definition}
   context_kw = 'Context';
 
-  {macro_body->command}
+  {macro_body->command, string->command}
   insert_command = '{Insert:';
 
   {macro_definition->macro_body}
@@ -129,6 +137,7 @@ Tokens
   end = '{End}';
 >>>>>>> 
 
+<<<<<<< HEAD
   {macro_definition}
 <<<<<<< HEAD
   internal_kw = 'Internal';
@@ -148,6 +157,10 @@ Tokens
 
   {macro_body->top_level}
   end = '{End}';
+=======
+  {macro_definition, top_level, macro_body}
+  comment = '#' comment_char* ascii_newline?;
+>>>>>>> New grammar for intermediate representation and objectmacro
 
 <<<<<<< HEAD
   {macro_definition, top_level, macro_body}
@@ -160,15 +173,20 @@ Tokens
 
   {macro_body}
 <<<<<<< HEAD
+<<<<<<< HEAD
   text_part = text_char+ | '{';
 =======
   macro_body_text = text_char+ | '{';
 >>>>>>> 
+=======
+  text_part = text_char+ | '{';
+>>>>>>> New grammar for intermediate representation and objectmacro
 
   {macro_body}
   eol = ascii_newline;
 
   {macro_body}
+<<<<<<< HEAD
 <<<<<<< HEAD
   text_escape = text_escape;
 
@@ -182,11 +200,12 @@ Tokens
   invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)+;
 =======
   escape = text_escape;
+=======
+  text_escape = text_escape;
+>>>>>>> New grammar for intermediate representation and objectmacro
 
-  {top_level, command, text, short_comment}
-  invalid_var = '$' ascii_id_continue+ |
-                '$<' ascii_id_continue* '>'? |
-                '$(' ascii_id_continue* ')'?;
+  {top_level, command}
+  invalid_var = '{' ascii_id_start* ('_' digit+ ascii_id_continue*)* '}';
 
   {macro_definition, command}
   identifier = normal_identifier | rich_identifier;
@@ -202,11 +221,17 @@ Tokens
   r_par = ')';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /* custom transition *->previous state */
   r_brace = '}';
 
 =======
 >>>>>>> 
+=======
+  {command->macro_body}
+  r_brace = '}';
+
+>>>>>>> New grammar for intermediate representation and objectmacro
   {macro_definition, command}
   comma = ',';
 
@@ -227,6 +252,7 @@ Tokens
   string_escape = string_escape;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   {macro_body, string}
   variable = '{' normal_identifier '}';
 
@@ -242,6 +268,16 @@ Tokens
   {top_level}
   ignore_macro_end = '{StopIgnoring}';
 >>>>>>> 
+=======
+  {macro_body, string}
+  variable = '{' normal_identifier '}';
+
+  {macro_definition, command}
+  colon = ':';
+
+  {macro_definition}
+  semi_colon = ';';
+>>>>>>> New grammar for intermediate representation and objectmacro
 
   ctrl_z = 0x001A;
 
@@ -269,15 +305,26 @@ Productions
     =
       macro_definition macro_body
          {-> New macro(macro_definition.macro_kw, macro_definition.identifier,
+<<<<<<< HEAD
             [macro_definition.params], [macro_definition.internals],
+=======
+            [macro_definition.params], [macro_definition.contexts],
+>>>>>>> New grammar for intermediate representation and objectmacro
              macro_body.begin, [macro_body.macro_body_parts])}
     ;
 
   macro_definition
+<<<<<<< HEAD
         {-> macro_kw identifier [params]:param* [internals]:internal* }
     =
       macro_kw identifier macro_parameters
         {-> macro_kw identifier [macro_parameters.params] [macro_parameters.internals] }
+=======
+        {-> macro_kw identifier [params]:param* [contexts]:param* }
+    =
+      macro_kw identifier macro_parameters
+        {-> macro_kw identifier [macro_parameters.params] [macro_parameters.contexts] }
+>>>>>>> New grammar for intermediate representation and objectmacro
     ;
 
   macro_body
@@ -291,7 +338,10 @@ Productions
         {-> macro_body_part? }
     =
       {insert} insert_command macro_reference r_brace
+<<<<<<< HEAD
         {-> New macro_body_part.insert(macro_reference)}
+=======
+>>>>>>> New grammar for intermediate representation and objectmacro
     |
       {text} text_part
     |
@@ -300,6 +350,7 @@ Productions
       {escape} text_escape
     |
       {var} variable
+<<<<<<< HEAD
     ;
 
   macro_parameters
@@ -377,6 +428,62 @@ Productions
     =
       comma identifier
         {-> identifier}
+=======
+    ;
+
+  macro_parameters
+        {-> [params]:param* [contexts]:param*}
+    =
+      [params]:external_args? [contexts]:internal_args?
+        {-> [params.params] [contexts.params] }
+    ;
+
+  external_args
+        {-> [params]:param*}
+    =
+      params_kw [params]:param+
+        {-> [params.param]};
+
+  internal_args
+        {-> [params]:param*}
+    =
+      context_kw [params]:param+
+        {-> [params.param]}
+    ;
+
+  param
+    =
+      [name]:identifier colon type [directives]:directive* semi_colon
+        {-> New param(name, type, [directives])}
+    ;
+
+  directive
+    =
+      comma identifier assign string
+        {-> New directive(identifier, [string.string])}
+    ;
+
+  macro_reference
+    =
+      {name} identifier call?
+        {-> New macro_reference(identifier, [call.static_values])}
+    ;
+
+  static_value
+    =
+      {var} identifier
+    |
+      {string} string
+        {-> New static_value.string([string.string])}
+    ;
+
+  type
+    =
+      {string} string_kw
+        {-> New type.string(string_kw)}|
+      {macros} macro_reference [additional_macros_reference]:additional_macro_reference*
+        {-> New type.macros([macro_reference, additional_macros_reference.macro_reference])}
+>>>>>>> New grammar for intermediate representation and objectmacro
     ;
 
   additional_macro_reference
@@ -407,16 +514,26 @@ Productions
         {-> static_value};
 
   string
+<<<<<<< HEAD
         {-> dquote [string]:string_part*}
     =
       [l_dquote]:dquote [parts]:string_part* [r_dquote]:dquote
         {-> l_dquote [parts.string_part]}
+=======
+        {-> [string]:string_part*}
+    =
+      [l_dquote]:dquote [parts]:string_part* [r_dquote]:dquote
+        {-> [parts.string_part]}
+>>>>>>> New grammar for intermediate representation and objectmacro
     ;
 
   string_part
     =
       {insert} insert_command macro_reference r_brace
+<<<<<<< HEAD
         {-> New string_part.insert(macro_reference)}
+=======
+>>>>>>> New grammar for intermediate representation and objectmacro
     |
       {text} [text]:string_text
     |
@@ -434,10 +551,17 @@ Abstract Syntax Tree
       {macro} macro;
 
   macro =
+<<<<<<< HEAD
       macro_kw [name]:identifier [params]:param* [internals]:internal* begin [macro_body_parts]:macro_body_part*;
 
   macro_body_part =
       {insert} macro_reference |
+=======
+      macro_kw [name]:identifier [params]:param* [contexts]:param* begin [macro_body_parts]:macro_body_part*;
+
+  macro_body_part =
+      {insert} insert_command macro_reference r_brace |
+>>>>>>> New grammar for intermediate representation and objectmacro
       {var} variable |
       {text} text_part |
       {eol} eol |
@@ -446,23 +570,41 @@ Abstract Syntax Tree
   param =
       [name]:identifier type [directives]:directive*;
 
+<<<<<<< HEAD
   internal =
       [name]:identifier [type]:internal_type;
 
   directive =
       [name]:identifier [l_dquote]:dquote [parts]:string_part*;
 
+=======
+  directive =
+      [name]:identifier [parts]:string_part*;
+
+>>>>>>> New grammar for intermediate representation and objectmacro
   macro_reference =
       [name]:identifier [values]:static_value*;
 
   static_value =
       {var} identifier |
+<<<<<<< HEAD
       {string} [l_dquote]:dquote [parts]:string_part*;
+=======
+      {string} [parts]:string_part*;
+
+  type =
+      {string} string_kw |
+      {macros} macro_reference+;
+
+  call =
+      [static_values]:static_value+;
+>>>>>>> New grammar for intermediate representation and objectmacro
 
   type =
       {string} string_kw |
       {macros} [macros]:macro_reference+;
 
+<<<<<<< HEAD
   internal_type =
       {string} string_kw |
       {identifiers} [macros]:identifier+;
@@ -472,6 +614,10 @@ Abstract Syntax Tree
 
   string_part =
       {insert} [macro]:macro_reference |
+=======
+  string_part =
+      {insert} insert_command [macro]:macro_reference r_brace |
+>>>>>>> New grammar for intermediate representation and objectmacro
       {text} [text]:string_text |
       {escape} string_escape |
       {var} variable;
