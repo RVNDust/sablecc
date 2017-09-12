@@ -28,6 +28,7 @@ import org.sablecc.objectmacro.syntax3.node.*;
 public class CustomLexer
         extends Lexer {
 
+<<<<<<< HEAD
     public CustomLexer(PushbackReader in) {
         super(in);
     }
@@ -65,5 +66,35 @@ public class CustomLexer
 
         int lastStateIndex = this.states.size() - 1;
         return this.states.remove(lastStateIndex);
+=======
+    private State previousState = null;
+
+    private int textDepth = 0;
+
+    public CustomLexer(
+            PushbackReader in) {
+
+        super(in);
+    }
+
+    @Override
+    protected void filter()
+            throws LexerException, IOException {
+
+        if(this.token instanceof TDquote){
+
+            if(this.textDepth == 0){
+                this.previousState = this.state;
+                this.state = State.STRING;
+                this.textDepth++;
+
+            }
+            else{
+                this.textDepth--;
+                this.state = this.previousState;
+
+            }
+        }
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 }

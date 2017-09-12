@@ -22,8 +22,12 @@ import java.util.*;
 import org.sablecc.exception.*;
 import org.sablecc.objectmacro.exception.*;
 import org.sablecc.objectmacro.syntax3.node.*;
+<<<<<<< HEAD
 import org.sablecc.util.ComponentFinder;
 import org.sablecc.util.Progeny;
+=======
+import org.sablecc.objectmacro.util.Utils;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
 public class Macro{
 
@@ -31,6 +35,7 @@ public class Macro{
 
     private final AMacro declaration;
 
+<<<<<<< HEAD
     private final Set<External> allParams = new LinkedHashSet<>();
 
     private final Map<String, External> namedParams = new HashMap<>();
@@ -40,6 +45,17 @@ public class Macro{
     private final Map<String, Internal> namedInternals = new HashMap<>();
 
     private ComponentFinder<Param> paramsComponentFinder;
+=======
+    private final Set<Param> allParams = new LinkedHashSet<>();
+
+    private final Map<String, Param> namedParams = new HashMap<>();
+
+    private final Set<Param> allContexts = new LinkedHashSet<>();
+
+    private final Map<String, Param> namedContexts = new HashMap<>();
+
+    private Set<Insert> inserts = new LinkedHashSet<>();
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
     Macro(
             GlobalIndex globalIndex,
@@ -56,6 +72,14 @@ public class Macro{
         this.globalIndex = globalIndex;
         this.declaration = declaration;
     }
+<<<<<<< HEAD
+
+    public Param newParam(
+            AParam param){
+
+        if(param == null){
+            throw new InternalException("AParam should not be null");
+=======
 
     public Param newParam(
             AParam param){
@@ -64,6 +88,21 @@ public class Macro{
             throw new InternalException("AParam should not be null");
         }
 
+        TIdentifier name = param.getName();
+        String stringName = name.getText();
+        Param newParam = new Param(param, this);
+
+        if(containsKeyInContexts(stringName) || containsKeyInParams(stringName)){
+            throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+        }
+        this.namedParams.put(stringName, newParam);
+        this.allParams.add(newParam);
+
+        return newParam;
+    }
+
+<<<<<<< HEAD
         TIdentifier name = param.getName();
         String stringName = name.getText();
 
@@ -139,6 +178,105 @@ public class Macro{
         this.getParam(variable).setString();
     }
 
+=======
+    public Param newContext(
+            AParam param){
+
+        if(param == null){
+            throw new InternalException("AParam should not be null");
+        }
+
+        TIdentifier name = param.getName();
+        String stringName = name.getText();
+        Param newContext = new Param(param, this);
+
+        if(containsKeyInContexts(stringName) || containsKeyInParams(stringName)){
+            throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
+        }
+        this.allContexts.add(newContext);
+        this.namedContexts.put(stringName, newContext);
+
+        return newContext;
+    }
+
+    public Insert newInsert(
+            AMacroReference macroReference){
+
+        Macro referencedMacro = this.globalIndex.getMacro(macroReference.getName());
+
+        if(referencedMacro == this){
+            throw CompilerException.cyclicReference(
+                    macroReference.getName(), getNameDeclaration());
+        }
+
+        Insert newInsert = new Insert(
+                referencedMacro, this, macroReference);
+
+        this.inserts.add(newInsert);
+
+        return newInsert;
+    }
+
+    public int getNbStringContexts(){
+
+        int nbString = 0;
+
+        for(Param context : getAllContexts()){
+            if(context.getDeclaration().getType() instanceof AStringType){
+                nbString++;
+            }
+        }
+
+        return nbString;
+    }
+
+    public Param getParam(
+            TIdentifier variable){
+
+        String name = variable.getText();
+        if(containsKeyInParams(name)){
+            return this.namedParams.get(name);
+
+        }else if(containsKeyInContexts(name)){
+            return this.namedContexts.get(name);
+        }
+
+        throw CompilerException.unknownParam(variable);
+    }
+
+    public void setParamUsed(
+            TIdentifier variable){
+
+        String name = variable.getText();
+        if(containsKeyInParams(name)){
+            this.namedParams.get(name).setUsed();
+
+        }else if(containsKeyInContexts(name)){
+            this.namedContexts.get(name).setUsed();
+
+        }
+
+        throw CompilerException.unknownParam(variable);
+    }
+
+    public void setParamToString(
+            TIdentifier variable){
+
+        String name = variable.getText();
+        if(containsKeyInParams(name)){
+            this.namedParams.get(name).setString();
+
+        }else if(containsKeyInContexts(name)){
+            this.namedContexts.get(name).setString();
+
+        }
+
+        throw CompilerException.unknownParam(variable);
+    }
+
+
+    public AMacro getDeclaration() {
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
     public AMacro getDeclaration() {
         return this.declaration;
@@ -148,6 +286,7 @@ public class Macro{
         return this.declaration.getName();
     }
 
+<<<<<<< HEAD
     public String getName(){
         return this.declaration.getName().getText();
     }
@@ -218,5 +357,88 @@ public class Macro{
 
     public ComponentFinder<Param> getComponentFinder(){
         return this.paramsComponentFinder;
+=======
+    GlobalIndex getGlobalIndex(){
+        return this.globalIndex;
+    }
+
+    public String getName(){
+
+        return this.declaration.getName().getText();
+    }
+
+    public Set<Param> getAllParams(){
+
+        return this.allParams;
+    }
+
+    public Set<Param> getAllContexts(){
+
+        return this.allContexts;
+    }
+
+    public Set<Insert> getInserts() { return this.inserts; }
+
+    public boolean containsKeyInContexts(
+            String name){
+
+        if(name == null){
+            throw new InternalException("Name should not be null");
+        }
+
+        return this.namedContexts.containsKey(name);
+    }
+
+    public boolean containsKeyInParams(
+            String name){
+
+        if(name == null){
+            throw new InternalException("Name should not be null");
+        }
+
+        return this.namedParams.containsKey(name);
+    }
+
+    public boolean isUsing(
+            Macro macro){
+
+        return isReferencedInParams(macro) || isReferencedInInserts(macro) || isReferencedInContexts(macro);
+    }
+
+    private boolean isReferencedInParams(
+            Macro macro){
+
+        for(Param parameter : getAllParams()){
+            if(parameter.getMacroReferenceOrNull(macro.getName()) != null){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isReferencedInContexts(
+            Macro macro){
+
+        for(Param parameter : getAllContexts()){
+            if(parameter.getMacroReferenceOrNull(macro.getName()) != null){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isReferencedInInserts(
+            Macro macro){
+
+        for(Insert insert : getInserts()){
+            if(insert.getReferencedMacro() == macro){
+                return true;
+            }
+        }
+
+        return false;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 }

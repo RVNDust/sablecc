@@ -43,8 +43,14 @@ public class GlobalIndex {
 
         Macro firstMacro = getMacroOrNull(duplicateDeclaration);
         if (firstMacro != null) {
+<<<<<<< HEAD
             throw CompilerException.duplicateDeclaration(duplicateDeclaration,
                     firstMacro.getNameDeclaration());
+=======
+            TIdentifier firstDeclaration = firstMacro.getNameDeclaration();
+            throw CompilerException.duplicateDeclaration(duplicateDeclaration,
+                    firstDeclaration);
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
         }
 
         Macro macro = new Macro(this, declaration);
@@ -62,7 +68,13 @@ public class GlobalIndex {
             throw new InternalException("identifier may not be null");
         }
 
+<<<<<<< HEAD
         return this.macroMap.get(identifier.getText());
+=======
+        String name = identifier.getText();
+
+        return this.macroMap.get(name);
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
     public Macro getMacro(
@@ -73,6 +85,10 @@ public class GlobalIndex {
         }
 
         Macro macro = getMacroOrNull(identifier);
+<<<<<<< HEAD
+=======
+
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
         if (macro == null) {
             throw CompilerException.unknownMacro(identifier);
         }
@@ -81,7 +97,34 @@ public class GlobalIndex {
 
     }
 
+<<<<<<< HEAD
+=======
+    public Macro getMacroByReference(
+            AMacroReference macroReference){
+
+        return this.getMacro(macroReference.getName());
+    }
+
+    public void checkReferencedMacro(
+            Macro macro,
+            Macro referencedMacro,
+            Token error){
+
+        if(referencedMacro == macro){
+
+//            throw new CompilerException("Cannot self reference macro", error);
+        }else if(referencedMacro.isUsing(macro)) {
+            //TODO EXCEPTION
+//            throw new CompilerException("Cyclic reference of macros", error);
+        }
+    }
+
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     public Set<Macro> getAllMacros() {
         return this.allMacros;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 }

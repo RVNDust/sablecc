@@ -24,6 +24,16 @@ import org.sablecc.exception.*;
 import org.sablecc.objectmacro.intermediate.macro.*;
 import org.sablecc.objectmacro.errormessage.*;
 import org.sablecc.objectmacro.exception.*;
+<<<<<<< HEAD
+=======
+import org.sablecc.objectmacro.intermediate.syntax3.node.*;
+import org.sablecc.objectmacro.intermediate.syntax3.node.AMacro;
+import org.sablecc.objectmacro.intermediate.syntax3.node.AOption;
+import org.sablecc.objectmacro.intermediate.syntax3.node.PMacro;
+import org.sablecc.objectmacro.intermediate.syntax3.node.POption;
+import org.sablecc.objectmacro.intermediate.syntax3.node.PParam;
+import org.sablecc.objectmacro.intermediate.syntax3.node.PType;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 import org.sablecc.objectmacro.structure.*;
 import org.sablecc.objectmacro.syntax3.lexer.*;
 import org.sablecc.objectmacro.syntax3.node.*;
@@ -288,6 +298,7 @@ public class ObjectMacro {
         GlobalIndex globalIndex = new GlobalIndex();
 
         ast.apply(new DeclarationCollector(globalIndex));
+<<<<<<< HEAD
         ast.apply(new MacroReferenceCollector(globalIndex));
         ast.apply(new ParamReferenceCollector(globalIndex));
         ast.apply(new DirectiveCollector(globalIndex));
@@ -304,6 +315,15 @@ public class ObjectMacro {
                 allParamsInternals.addAll(macro.getAllParams());
 
                 for (Param param : allParamsInternals) {
+=======
+        ast.apply(new DefinitionCollector(globalIndex));
+        ast.apply(new OptionCollector(globalIndex));
+        ast.apply(new VarVerifier(globalIndex));
+
+        if (strictness == Strictness.STRICT) {
+            for (Macro macro : globalIndex.getAllMacros()) {
+                for (Param param : macro.getAllParams()) {
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
                     if (!param.isUsed()) {
                         throw CompilerException.unusedParam(param);
                     }
@@ -325,6 +345,7 @@ public class ObjectMacro {
             System.out.println(" Creating intermediate structure");
             break;
         }
+<<<<<<< HEAD
 
         StringBuilder macros_string = new StringBuilder();
 
@@ -350,6 +371,8 @@ public class ObjectMacro {
         catch (IOException e) {
             throw CompilerException.outputError(destination.toString(), e);
         }
+=======
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
     private static MMacro createMacro(
@@ -361,6 +384,7 @@ public class ObjectMacro {
             mMacro.newSimpleName(part);
         }
 
+<<<<<<< HEAD
         Set<Internal> macro_internals = macro.getAllInternals();
         Set<External> macro_params = macro.getAllParams();
 
@@ -374,6 +398,9 @@ public class ObjectMacro {
         for(Internal internal : macro_internals){
             createInternal(mMacro.newInternal(), internal);
         }
+=======
+        List<PMacro> macros = new LinkedList<PMacro>();
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
         MInitializationOrder mInitializationOrder = mMacro.newInitializationOrder();
 
@@ -383,6 +410,7 @@ public class ObjectMacro {
             }
         }
 
+<<<<<<< HEAD
         return mMacro;
     }
 
@@ -658,8 +686,281 @@ public class ObjectMacro {
                 for(String part : macroRefName){
                     varArgument.newSimpleName(part);
                 }
+=======
+        return new AIntermediateRepresentation(macros);
+    }
+
+    private static AMacro createMacro(
+            Macro macro) {
+
+        TString name = new TString(macro.getName());
+        List<PParam> params = new LinkedList<>();
+        Set<Param> macro_contexts = macro.getAllContexts();
+        Set<Param> macro_params = macro.getAllParams();
+        List<PMacroBodyPart> macroBodyParts = macro.getDeclaration().getMacroBodyParts();
+        List<PMacroPart> macroParts = createMacroBody(macroBodyParts);
+
+        for(Param context : macro_contexts){
+            params.add(createContext(context));
+        }
+
+        for(Param param : macro_params){
+            params.add(createParam(param));
+        }
+
+        return new AMacro(name, params, macroParts);
+    }
+
+    private static List<PMacroPart> createMacroBody(
+            List<PMacroBodyPart> macroBodyParts){
+
+        List<PMacroPart> macroParts = new LinkedList<>();
+        StringBuilder macroBuilder = null;
+
+        for(PMacroBodyPart bodyPart : macroBodyParts){
+
+            if(bodyPart instanceof AEolMacroBodyPart){
+
+                if(macroBuilder != null){
+                    macroParts.add(
+                            new AStringMacroPart(
+                                    new TString(macroBuilder.toString())));
+
+                    macroBuilder = null;
+                }
+
+                macroParts.add(new AEolMacroPart());
+
+            }else if(bodyPart instanceof AEscapeMacroBodyPart){
+
+                AEscapeMacroBodyPart escapeMacroBodyPart = (AEscapeMacroBodyPart) bodyPart;
+
+                if(escapeMacroBodyPart.getTextEscape().getText().equals("{{")){
+                    if(macroBuilder == null){
+                        macroBuilder = new StringBuilder();
+                    }
+
+                    macroBuilder.append("{");
+                }else{
+                    throw new InternalException("case unhandled");
+                }
+
+            }else if(bodyPart instanceof AInsertMacroBodyPart){
+
+                if(macroBuilder != null){
+                    macroParts.add(
+                            new AStringMacroPart(
+                                    new TString(macroBuilder.toString())));
+
+                    macroBuilder = null;
+                }
+
+                AInsertMacroBodyPart insertMacroBodyPart = (AInsertMacroBodyPart) bodyPart;
+                AMacroRef macroRef = createMacroRef((AMacroReference)insertMacroBodyPart.getMacroReference());
+                AInsertMacroPart insertMacroPart = new AInsertMacroPart(macroRef);
+                macroParts.add(insertMacroPart);
+
+            }else if(bodyPart instanceof ATextMacroBodyPart){
+
+                if(macroBuilder == null){
+                    macroBuilder = new StringBuilder();
+
+                }
+
+                macroBuilder.append(((ATextMacroBodyPart) bodyPart).getTextPart().getText());
+
+            }else if(bodyPart instanceof AVarMacroBodyPart){
+
+                if(macroBuilder != null){
+                    macroParts.add(
+                            new AStringMacroPart(
+                                    new TString(macroBuilder.toString())));
+
+                    macroBuilder = null;
+                }
+
+                AVarMacroBodyPart varBodyPart = (AVarMacroBodyPart) bodyPart;
+                String varName = Utils.getVarName(varBodyPart.getVariable());
+                macroParts.add(new AVarMacroPart(new TString(varName)));
+
+            }else{
+                throw new InternalException("case not handled");
+            }
+        }
+
+        if(macroBuilder != null){
+            macroParts.add(
+                    new AStringMacroPart(
+                            new TString(macroBuilder.toString())));
+        }
+
+        return macroParts;
+    }
+
+    private static List<PTextPart> createTextParts(
+            List<PStringPart> stringParts){
+
+        List<PTextPart> text_parts = new LinkedList<>();
+        {
+            StringBuilder text_builder = null;
+            for(PStringPart stringPart : stringParts){
+                if(stringPart instanceof AEscapeStringPart){
+                    AEscapeStringPart aEscapeStringPart = (AEscapeStringPart) stringPart;
+                    String escape = aEscapeStringPart.getStringEscape().getText();
+
+                    if(escape.equals("{{")){
+                        if(text_builder == null){
+                            text_builder = new StringBuilder();
+                        }
+                        text_builder.append("{");
+
+                    }else if(escape.equals("\\n")){
+                        if(text_builder != null){
+                            text_parts.add(
+                                    new AStringTextPart(
+                                            new TString(text_builder.toString())));
+
+                            text_builder = null;
+                        }
+
+                        text_parts.add(new AEolTextPart());
+                    }else{
+                        throw new InternalException("case not handled");
+                    }
+
+                }else if(stringPart instanceof ATextStringPart){
+
+                    if(text_builder == null){
+                        text_builder = new StringBuilder();
+                    }
+
+                    ATextStringPart aTextStringPart = (ATextStringPart) stringPart;
+                    text_builder.append(aTextStringPart.getText().getText());
+
+                }else if(stringPart instanceof AVarStringPart){
+                    AVarStringPart aVarStringPart = (AVarStringPart) stringPart;
+
+                    if(text_builder != null){
+                        text_parts.add(new AStringTextPart(
+                                new TString(text_builder.toString())
+                        ));
+
+                        text_builder = null;
+                    }
+
+                    text_parts.add(new AVarTextPart(
+                            new TString(aVarStringPart.getVariable().getText())));
+                }else {
+                    throw new InternalException("case not handled");
+                }
+            }
+
+            if(text_builder != null){
+                text_parts.add(new AStringTextPart(
+                        new TString(text_builder.toString())
+                ));
+
+            }
+        }
+
+        return text_parts;
+    }
+
+    private static PParam createContext(
+            Param param){
+
+        List<POption> options = createOptions(param.getAllDirectives());
+        TString pName = new TString(param.getDeclaration().getName().getText());
+        PType type = createParamType(param);
+
+        return new AContextParam(pName, type, options);
+    }
+
+    private static AParamParam createParam(
+            Param param){
+
+        List<POption> options = createOptions(param.getAllDirectives());
+        TString pName = new TString(param.getDeclaration().getName().getText());
+        PType type = createParamType(param);
+
+        return new AParamParam(pName, type, options);
+    }
+
+    private static PType createParamType(
+            Param param){
+
+        PType type = null;
+        if(param.getDeclaration().getType() instanceof AStringType){
+            type = new org.sablecc.objectmacro.intermediate.syntax3.node.AStringType();
+
+        }else if(param.getDeclaration().getType() instanceof AMacrosType){
+            Set<AMacroReference> macroReferences = param.getMacroReferences();
+            List<AMacroRef> macroRefs = new LinkedList<>();
+
+            for(AMacroReference l_macroRef : macroReferences){
+
+                macroRefs.add(createMacroRef(l_macroRef));
+            }
+
+            type = new AMacroRefsType(macroRefs);
+
+        }
+
+        return type;
+    }
+
+    private static List<POption> createOptions(Set<Directive> directives){
+
+        List<POption> options_node = new LinkedList<>();
+
+        for(Directive l_directive : directives){
+            TString optionName = new TString(
+                    l_directive.getName());
+            List<PTextPart> text_parts = createTextParts(
+                    l_directive.getDeclaration().getParts());
+            AStringValue value = new AStringValue(text_parts);
+            options_node.add(new AOption(optionName, value));
+
+        }
+
+        return options_node;
+    }
+
+    private static List<PValue> createValues(
+            AMacroReference macroReference){
+
+        List<PValue> values = new LinkedList<>();
+        List<PStaticValue> args = macroReference.getValues();
+
+        for(PStaticValue argument : args){
+            if(argument instanceof AStringStaticValue){
+                AStringStaticValue stringStaticValue = (AStringStaticValue) argument;
+                List<PTextPart> text_parts = createTextParts(stringStaticValue.getParts());
+                AStringValue value = new AStringValue(text_parts);
+                values.add(value);
+
+            }else if(argument instanceof AVarStaticValue){
+                AVarStaticValue aVarStaticValue = (AVarStaticValue) argument;
+                AVarValue value = new AVarValue(
+                        new TString(aVarStaticValue.getIdentifier().getText()));
+                values.add(value);
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
             }
             i++;
         }
+<<<<<<< HEAD
+=======
+
+        return values;
+    }
+
+    private static AMacroRef createMacroRef(
+            AMacroReference macroReference){
+
+        List<PValue> values = createValues(macroReference);
+        TString macroRefName = new TString(macroReference.getName().getText());
+
+        return new AMacroRef(macroRefName, values);
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 }

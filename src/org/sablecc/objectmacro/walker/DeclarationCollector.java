@@ -30,6 +30,11 @@ public class DeclarationCollector
 
     private final GlobalIndex globalIndex;
 
+<<<<<<< HEAD
+=======
+    private Macro currentMacro;
+
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     public DeclarationCollector(
             GlobalIndex globalIndex) {
 
@@ -44,6 +49,7 @@ public class DeclarationCollector
     public void caseAMacro(
             AMacro node) {
 
+<<<<<<< HEAD
         if (node.getBegin().getPos() != 1) {
             throw CompilerException.beginTokenMisused(node.getBegin());
         }
@@ -62,5 +68,48 @@ public class DeclarationCollector
             AInternal param_node = (AInternal) param_production;
             macro.newInternal(param_node);
         }
+=======
+        this.currentMacro = this.globalIndex.newMacro(node);
+    }
+
+    @Override
+    public void caseAMacro(
+            AMacro node) {
+
+        if (node.getBegin().getPos() != 1) {
+            //TODO Exception
+//            throw new CompilerException(
+//                    "Token {Begin} must be at the beginning of the line", node.getBegin());
+        }
+
+        List<PParam> params = node.getParams();
+        List<PParam> contexts = node.getContexts();
+
+        for (PParam param_production : params) {
+
+            AParam param_node = (AParam) param_production;
+            this.currentMacro.newParam(param_node);
+        }
+
+        for (PParam param_production : contexts) {
+
+            AParam param_node = (AParam) param_production;
+            this.currentMacro.newContext(param_node);
+        }
+    }
+
+    @Override
+    public void outAMacro(
+            AMacro node) {
+
+        this.currentMacro = null;
+    }
+
+    @Override
+    public void inAParam(
+            AParam node) {
+
+        this.currentMacro.newParam(node);
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 }

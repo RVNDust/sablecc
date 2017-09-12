@@ -18,8 +18,14 @@
 package org.sablecc.objectmacro.structure;
 
 import org.sablecc.exception.*;
+<<<<<<< HEAD
 import org.sablecc.objectmacro.exception.*;
+=======
+import org.sablecc.objectmacro.exception.CompilerException;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 import org.sablecc.objectmacro.syntax3.node.*;
+
+import java.util.*;
 
 import java.util.*;
 
@@ -31,28 +37,111 @@ public class Param {
 
     private final Set<AMacroReference> macroReferences = new LinkedHashSet<>();
 
+<<<<<<< HEAD
     private final Map<String, AMacroReference> macroReferencesName = new HashMap<>();
 
     private final Map<String, Param> paramReferences = new LinkedHashMap<>();
+=======
+    private final Macro parent;
+
+    private final Set<AMacroReference> macroReferences = new LinkedHashSet<>();
+
+    private final Map<String, AMacroReference> macroReferencesName = new HashMap<>();
+
+    private final Map<String, Directive> directives = new HashMap<>();
+
+    private final Set<Directive> allDirectives = new LinkedHashSet<>();
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
     private boolean isUsed;
 
     private boolean isString;
 
     Param(
+<<<<<<< HEAD
             Macro macro,
             GlobalIndex globalIndex) {
+=======
+            AParam declaration,
+            Macro macro) {
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
         if (macro == null) {
             throw new InternalException("scope may not be null");
         }
 
+<<<<<<< HEAD
         if(globalIndex == null){
             throw new InternalException("globalIndex may not be null");
         }
 
         this.parent = macro;
         this.globalIndex = globalIndex;
+=======
+        if (macro == null) {
+            throw new InternalException("scope may not be null");
+        }
+
+        this.declaration = declaration;
+        this.parent = macro;
+    }
+
+    public Directive newDirective(
+            ADirective directive) {
+
+        String optionName = directive.getName().getText();
+        if (this.directives.containsKey(optionName)) {
+            throw CompilerException.duplicateOption(
+                    directive, this.directives.get(optionName).getDeclaration());
+        }
+
+        Directive newDirective = new Directive(directive);
+        this.directives.put(
+                optionName, newDirective);
+        this.allDirectives.add(newDirective);
+
+        return newDirective;
+    }
+
+    public void addMacroReference(
+            AMacroReference macroRef){
+
+        if(macroRef == null){
+            throw new InternalException("Macro reference cannot be null");
+        }
+
+        String name = macroRef.getName().getText();
+        if(this.macroReferencesName.containsKey(name)){
+            return;
+            //TODO Exception
+//            throw new CompilerException(
+//                    "This parameter already references macro of name '" + name + "'", macroRef.getName());
+        }else if(this.isString){
+            //TODO Exception
+//            throw new CompilerException(
+//                    "Cannot reference a macro with a string", macroRef.getName());
+        }
+
+        this.macroReferences.add(macroRef);
+        this.macroReferencesName.put(name, macroRef);
+
+    }
+
+    public PMacroReference getMacroReferenceOrNull(
+            String macroName){
+
+        return this.macroReferencesName.get(macroName);
+    }
+
+    public Set<Directive> getAllDirectives(){
+
+        return this.allDirectives;
+    }
+
+    public Set<AMacroReference> getMacroReferences(){
+
+        return this.macroReferences;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
     public void addMacroReference(
@@ -96,12 +185,18 @@ public class Param {
         this.paramReferences.put(name, newParamRef);
     }
 
+<<<<<<< HEAD
     public Set<AMacroReference> getMacroReferences(){
         return this.macroReferences;
     }
 
     public TIdentifier getNameDeclaration(){
         return null;
+=======
+    public AParam getDeclaration(){
+
+        return this.declaration;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
     public String getName() {
@@ -117,10 +212,15 @@ public class Param {
     }
 
     public boolean isString(){
+<<<<<<< HEAD
+=======
+
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
         return this.isString;
     }
 
     void setString(){
+<<<<<<< HEAD
         this.isString = true;
     }
 
@@ -136,5 +236,9 @@ public class Param {
 
     public Macro getParent(){
         return this.parent;
+=======
+
+        this.isString = true;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 }

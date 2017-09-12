@@ -249,6 +249,7 @@ public class CompilerException
                         + "").toString());
     }
 
+<<<<<<< HEAD
     public static CompilerException selfReference(
             TIdentifier reference,
             TIdentifier context) {
@@ -259,6 +260,8 @@ public class CompilerException
                 + "").toString());
     }
 
+=======
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     public static CompilerException unusedParam(
             Param param) {
 
@@ -271,6 +274,7 @@ public class CompilerException
     public static CompilerException incorrectArgumentCount(
             AMacroReference declaration, Macro macroReferenced) {
 
+<<<<<<< HEAD
         String line = String.valueOf(declaration.getName().getLine());
         String pos = String.valueOf(declaration.getName().getPos());
         String expectedCount = String.valueOf(macroReferenced.getAllInternals().size());
@@ -291,6 +295,23 @@ public class CompilerException
 
         return new CompilerException(
                 new MIncorrectArgumentType(expected, found, stringLine, stringPos).toString());
+=======
+//        TIdentifier insertName = declaration.getName();
+//        TIdentifier textBlockName = textInsert.getInsertedTextBlock()
+//                .getNameDeclaration();
+//        int argCount = textInsert.getDeclaration().getStaticValues().size();
+//        int paramCount = textInsert.getInsertedTextBlock().getDeclaration()
+//                .getParams().size();
+//
+//        return new CompilerException(
+//                new MIncorrectArgumentCount(insertName.getLine() + "",
+//                        insertName.getPos() + "", argCount + "", textBlockName
+//                                .getText(), textBlockName.getLine() + "",
+//                        +textBlockName.getPos() + "", paramCount + "")
+//                        .toString());
+        //TODO
+        return null;
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
     public static CompilerException cannotCreateDirectory(

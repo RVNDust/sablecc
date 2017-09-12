@@ -23,9 +23,12 @@ import org.sablecc.objectmacro.structure.*;
 import org.sablecc.objectmacro.syntax3.analysis.*;
 import org.sablecc.objectmacro.syntax3.node.*;
 import org.sablecc.objectmacro.util.Utils;
+<<<<<<< HEAD
 
 import java.util.HashSet;
 import java.util.Set;
+=======
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
 public class VarVerifier
         extends DepthFirstAdapter {
@@ -33,10 +36,13 @@ public class VarVerifier
     private final GlobalIndex globalIndex;
 
     private Macro currentMacro;
+<<<<<<< HEAD
 
     private Param paramsList[];
 
     private Integer currentIndex = 0;
+=======
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
     public VarVerifier(
             GlobalIndex globalIndex) {
@@ -61,6 +67,7 @@ public class VarVerifier
 
         Macro referencedMacro = this.globalIndex.getMacro(node.getName());
 
+<<<<<<< HEAD
         int internalsSize = referencedMacro.getAllInternals().size();
         if(node.getValues().size() != internalsSize){
             throw CompilerException.incorrectArgumentCount(node, referencedMacro);
@@ -103,6 +110,10 @@ public class VarVerifier
         Param providedParam = this.currentMacro.getParam(node.getIdentifier());
         Set<String> expectedMacrosType = new HashSet<>();
         Set<String> providedMacrosType = new HashSet<>();
+=======
+        this.currentMacro = null;
+    }
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
         if(expectedParam.isString()
                 && !providedParam.isString()){
@@ -116,6 +127,7 @@ public class VarVerifier
             expectedMacrosType.add(macroReference.getName().getText());
         }
 
+<<<<<<< HEAD
         for(AMacroReference macroReference : providedParam.getMacroReferences()){
             providedMacrosType.add(macroReference.getName().getText());
         }
@@ -137,15 +149,22 @@ public class VarVerifier
                 new TIdentifier(Utils.getVarName(
                                     node.getVariable()),
                                     node.getVariable().getLine(), node.getVariable().getPos()));
+=======
+        this.currentMacro.getParam(new TIdentifier(Utils.getVarName(node.getVariable())));
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
     @Override
     public void caseAVarStringPart(
             AVarStringPart node) {
 
+<<<<<<< HEAD
         this.currentMacro.setParamUsed(
                 new TIdentifier(Utils.getVarName(
                                     node.getVariable()),
                                     node.getVariable().getLine(), node.getVariable().getPos()));
+=======
+        this.currentMacro.getParam(node.getIdentifier());
+>>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 }
