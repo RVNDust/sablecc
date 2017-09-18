@@ -34,6 +34,9 @@
 /t/alt/
 /t/src/
 /.idea/
+<<<<<<< HEAD
 /sablecc.org.iml
 /tests/objectmacro/java/*/macro/
 /tests/objectmacro/common/intermediate/
+=======
+>>>>>>> add .idea to gitIgnore
