@@ -46,6 +46,7 @@ public class DeclarationCollector
     }
 
     @Override
+<<<<<<< HEAD
     public void caseAMacro(
             AMacro node) {
 
@@ -73,14 +74,18 @@ public class DeclarationCollector
     }
 
     @Override
+=======
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
     public void caseAMacro(
             AMacro node) {
 
         if (node.getBegin().getPos() != 1) {
-            //TODO Exception
+            //TODO EXception
 //            throw new CompilerException(
 //                    "Token {Begin} must be at the beginning of the line", node.getBegin());
         }
+
+        this.currentMacro = this.globalIndex.newMacro(node);
 
         List<PParam> params = node.getParams();
         List<PParam> contexts = node.getContexts();
@@ -96,6 +101,8 @@ public class DeclarationCollector
             AParam param_node = (AParam) param_production;
             this.currentMacro.newContext(param_node);
         }
+
+        this.currentMacro = null;
     }
 
     @Override
@@ -104,6 +111,7 @@ public class DeclarationCollector
 
         this.currentMacro = null;
     }
+<<<<<<< HEAD
 
     @Override
     public void inAParam(
@@ -112,4 +120,6 @@ public class DeclarationCollector
         this.currentMacro.newParam(node);
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
+=======
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
 }

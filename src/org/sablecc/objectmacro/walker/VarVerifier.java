@@ -145,6 +145,7 @@ public class VarVerifier
     public void caseAVarMacroBodyPart(
             AVarMacroBodyPart node) {
 
+<<<<<<< HEAD
         this.currentMacro.setParamUsed(
                 new TIdentifier(Utils.getVarName(
                                     node.getVariable()),
@@ -152,6 +153,13 @@ public class VarVerifier
 =======
         this.currentMacro.getParam(new TIdentifier(Utils.getVarName(node.getVariable())));
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+        this.currentMacro.getParam(
+                new TIdentifier(
+                        Utils.getVarName(
+                                node.getVariable())));
+
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
     }
 
     @Override

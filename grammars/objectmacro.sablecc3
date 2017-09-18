@@ -127,7 +127,7 @@ Tokens
   {macro_definition}
   context_kw = 'Context';
 
-  {macro_body->command, string->command}
+  /* custom transition *->previous state */
   insert_command = '{Insert:';
 
   {macro_definition->macro_body}
@@ -204,15 +204,20 @@ Tokens
   text_escape = text_escape;
 >>>>>>> New grammar for intermediate representation and objectmacro
 
-  {top_level, command}
-  invalid_var = '{' ascii_id_start* ('_' digit+ ascii_id_continue*)* '}';
+  {top_level, command, macro_body, string}
+  invalid_var = '{' ascii_id_start* ('_' digit+ ascii_id_continue*)+ '}';
 
   {macro_definition, command}
   identifier = normal_identifier | rich_identifier;
 
+<<<<<<< HEAD
   {top_level, macro_body, string, command, macro_definition}
   invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)*;
 >>>>>>> 
+=======
+  {top_level, command, macro_definition}
+  invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)+;
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
 
   {command, macro_definition}
   l_par = '(';
@@ -222,6 +227,7 @@ Tokens
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   /* custom transition *->previous state */
   r_brace = '}';
 
@@ -229,6 +235,9 @@ Tokens
 >>>>>>> 
 =======
   {command->macro_body}
+=======
+  /* custom transition *->previous state */
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
   r_brace = '}';
 
 >>>>>>> New grammar for intermediate representation and objectmacro
@@ -339,9 +348,13 @@ Productions
     =
       {insert} insert_command macro_reference r_brace
 <<<<<<< HEAD
+<<<<<<< HEAD
         {-> New macro_body_part.insert(macro_reference)}
 =======
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+        {-> New macro_body_part.insert(macro_reference)}
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
     |
       {text} text_part
     |
@@ -531,9 +544,13 @@ Productions
     =
       {insert} insert_command macro_reference r_brace
 <<<<<<< HEAD
+<<<<<<< HEAD
         {-> New string_part.insert(macro_reference)}
 =======
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+        {-> New string_part.insert(macro_reference)}
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
     |
       {text} [text]:string_text
     |
@@ -560,8 +577,12 @@ Abstract Syntax Tree
       macro_kw [name]:identifier [params]:param* [contexts]:param* begin [macro_body_parts]:macro_body_part*;
 
   macro_body_part =
+<<<<<<< HEAD
       {insert} insert_command macro_reference r_brace |
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+      {insert} macro_reference |
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
       {var} variable |
       {text} text_part |
       {eol} eol |
@@ -616,8 +637,12 @@ Abstract Syntax Tree
       {insert} [macro]:macro_reference |
 =======
   string_part =
+<<<<<<< HEAD
       {insert} insert_command [macro]:macro_reference r_brace |
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+      {insert} [macro]:macro_reference |
+>>>>>>> Update walkers and fix lexer to handle inserts in string argument
       {text} [text]:string_text |
       {escape} string_escape |
       {var} variable;

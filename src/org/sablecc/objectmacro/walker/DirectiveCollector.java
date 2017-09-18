@@ -1,27 +1,16 @@
-/* This file is part of SableCC ( http://sablecc.org ).
- *
- * See the NOTICE file distributed with this work for copyright information.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.sablecc.objectmacro.walker;
 
-import org.sablecc.objectmacro.exception.CompilerException;
-import org.sablecc.objectmacro.structure.*;
+import org.sablecc.objectmacro.structure.Directive;
+import org.sablecc.objectmacro.structure.GlobalIndex;
+import org.sablecc.objectmacro.structure.Macro;
+import org.sablecc.objectmacro.structure.Param;
 import org.sablecc.objectmacro.syntax3.analysis.DepthFirstAdapter;
 import org.sablecc.objectmacro.syntax3.node.*;
 import org.sablecc.objectmacro.util.Utils;
 
+/**
+ * Created by lam on 07/09/17.
+ */
 public class DirectiveCollector
         extends DepthFirstAdapter {
 
@@ -29,7 +18,9 @@ public class DirectiveCollector
 
     private Macro currentMacro;
 
-    private External currentParam;
+    private Param currentParam;
+
+    private Directive currentDirective;
 
     public DirectiveCollector(
             GlobalIndex globalIndex){
@@ -55,7 +46,7 @@ public class DirectiveCollector
     public void inAParam(
             AParam node) {
 
-        this.currentParam = (External) this.currentMacro.getParam(node.getName());
+        this.currentParam = this.currentMacro.getParam(node.getName());
     }
 
     @Override
@@ -69,15 +60,40 @@ public class DirectiveCollector
     public void inADirective(
             ADirective node) {
 
-        String directive_name = node.getName().getText();
-        if(!directive_name.equals("separator")
-                && !directive_name.equals("after_last")
-                && !directive_name.equals("before_first")
-                && !directive_name.equals("none") ){
+        this.currentDirective = this.currentParam.newDirective(node);
+    }
 
-            throw CompilerException.unknownOption(node);
+    @Override
+    public void outADirective(
+            ADirective node) {
+
+        this.currentDirective = null;
+    }
+
+    @Override
+    public void caseAVarStaticValue(
+            AVarStaticValue node) {
+
+        if(this.currentDirective == null){
+            return;
         }
 
-        this.currentParam.newDirective(node);
+        Param param = this.currentMacro.getParam(node.getIdentifier());
+        this.currentDirective.addReferencedParam(param);
+    }
+
+    @Override
+    public void caseAVarStringPart(
+            AVarStringPart node) {
+
+        if(this.currentDirective == null){
+            return;
+        }
+
+        String name = Utils.getVarName(node.getVariable());
+        TIdentifier varName = new TIdentifier(name);
+        Param param = this.currentMacro.getParam(varName);
+
+        this.currentDirective.addReferencedParam(param);
     }
 }
