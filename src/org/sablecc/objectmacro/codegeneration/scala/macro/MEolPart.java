@@ -4,8 +4,10 @@ package org.sablecc.objectmacro.codegeneration.scala.macro;
 
 public class MEolPart {
 
-    public MEolPart() {
+  public MEolPart() {
+  }
 
+<<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/scala/macro/MEolPart.java
     }
 
     @Override
@@ -16,5 +18,14 @@ public class MEolPart {
         sb.append(System.getProperty("line.separator"));
         return sb.toString();
     }
+=======
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("  eol;");
+    sb.append(System.getProperty("line.separator"));
+    return sb.toString();
+  }
+>>>>>>> Updated intermediate representation macro:src/org/sablecc/objectmacro/codegeneration/intermediate/macro/MEolPart.java
 
 }

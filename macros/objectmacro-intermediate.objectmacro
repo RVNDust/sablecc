@@ -22,6 +22,7 @@ $macro: intermediate_representation $
 $expand: macro $
 $end: intermediate_representation $
 
+<<<<<<< HEAD
 $comment: ========= macro ============== $
 
 $macro: macro $
@@ -30,22 +31,36 @@ Macro {
 $expand: param $
 $expand: internal $
 $expand: initialization_order $
+=======
+$macro: macro(name) $
+Macro {
+  Name = '$name'
+$expand: param $
+$expand: context $
+>>>>>>> Updated intermediate representation macro
   MacroBody{
 $expand: string_part, eol_part, param_insert, macro_insert$
   }
 }
 $end: macro $
 
+<<<<<<< HEAD
 $comment: ========= param ============== $
 
 $macro: param $
  Param {
     Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
+=======
+$macro: param(name) $
+ Param {
+    Name = '$name'
+>>>>>>> Updated intermediate representation macro
 $expand: string_type, macro_type$
 $expand: directive, separator=", "$
  }
 $end: param $
 
+<<<<<<< HEAD
 $comment: ========= internal ============== $
 
 $macro: internal $
@@ -57,13 +72,25 @@ $expand: directive, separator=", "$
 $end: internal $
 
 $comment: ========= string_type ============== $
+=======
+$macro: context(name) $
+ Context {
+ Name = '$name'
+$expand: string_type, macro_type$
+$expand: directive, separator=", "$
+ }
+$end: context $
+>>>>>>> Updated intermediate representation macro
 
 $macro: string_type$
  Type = String $expand: directive, separator=", ", before_one=", "$
 $end: string_type $
 
+<<<<<<< HEAD
 $comment: ========= macro_type ============== $
 
+=======
+>>>>>>> Updated intermediate representation macro
 $macro: macro_type$
  Type {
 $expand: macro_ref $
@@ -71,23 +98,33 @@ $expand: directive, separator=", "$
  }
 $end: macro_type $
 
+<<<<<<< HEAD
 $comment: ========= macro_ref ============== $
 
 $macro: macro_ref$
  MacroRef {
  Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
+=======
+$macro: macro_ref(name)$
+ MacroRef {
+ Name = '$name'
+>>>>>>> Updated intermediate representation macro
 $expand: args$
  }
 $end: macro_ref $
 
+<<<<<<< HEAD
 $comment: ========= args ============== $
 
+=======
+>>>>>>> Updated intermediate representation macro
 $macro: args$
  Args {
 $expand: var_argument, text_argument, separator=", "$
  }
 $end: args$
 
+<<<<<<< HEAD
 $comment: ========= var_argument ============== $
 
 $macro: var_argument $
@@ -113,6 +150,17 @@ $macro: param_name(param_name) $
 $end: param_name $
 
 $comment: ========= string_part ============== $
+=======
+$macro: var_argument (name)$
+ Var = '$name'
+$end: var_argument $
+
+$macro: text_argument$
+ Value {
+$expand: string_part, eol_part, param_insert, macro_insert$
+ }
+$end: text_argument$
+>>>>>>> Updated intermediate representation macro
 
 $macro: string_part(string) $
   '$string';
@@ -124,14 +172,18 @@ $macro: eol_part $
   eol;
 $end: eol_part $
 
+<<<<<<< HEAD
 $comment: ========= macro_insert ============== $
 
+=======
+>>>>>>> Updated intermediate representation macro
 $macro: macro_insert$
  MacroInsert {
 $expand: macro_ref $
  };
 $end: macro_insert $
 
+<<<<<<< HEAD
 $comment: ========= param_insert ============== $
 
 $macro: param_insert $
@@ -160,3 +212,16 @@ $macro: initialization_order$
         $expand: simple_name $
     }
 $end: initialization_order $
+=======
+$macro: param_insert(name) $
+ ParamInsert = '$name';
+$end: param_insert $
+
+$macro: directive(name) $
+ Directive {
+     Name = '$name'
+$expand: text_argument$
+ }
+$end: directive $
+
+>>>>>>> Updated intermediate representation macro
