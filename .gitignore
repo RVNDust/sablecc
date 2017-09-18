@@ -35,8 +35,12 @@
 /t/src/
 /.idea/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /sablecc.org.iml
 /tests/objectmacro/java/*/macro/
 /tests/objectmacro/common/intermediate/
 =======
 >>>>>>> add .idea to gitIgnore
+=======
+/sablecc.org.iml
+>>>>>>> Add sablecc.org.iml to gitignore
