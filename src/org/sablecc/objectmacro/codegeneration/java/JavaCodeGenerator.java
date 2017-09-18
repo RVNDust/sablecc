@@ -73,6 +73,7 @@ public class JavaCodeGenerator
             }
         }
 
+<<<<<<< HEAD
         Map<String, Macro> macros = new LinkedHashMap<>();
 
         MacroCollector macroCollector = new MacroCollector(macros);
@@ -84,5 +85,10 @@ public class JavaCodeGenerator
 
         getIr().getAST().apply(walker);
         getIr().getAST().apply(utilsGenerationWalker);
+=======
+//        CodeGenerationWalker walker = new CodeGenerationWalker(getIr(),
+//                packageDirectory);
+//        getIr().getAST().apply(walker);
+>>>>>>> Comment Code generation to compile ObjectMacro
     }
 }

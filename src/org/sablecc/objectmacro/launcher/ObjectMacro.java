@@ -297,6 +297,7 @@ public class ObjectMacro {
         generateIntermediateFile(
                 globalIndex, verbosity);
 
+<<<<<<< HEAD
         PIntermediateRepresentation intermediateAST = generateIntermediateAST(
                 globalIndex, verbosity);
 >>>>>>> New Intermediate Representation file generated 
@@ -306,6 +307,50 @@ public class ObjectMacro {
                     verbosity, destinationDirectory, macroFile);
         }
 
+=======
+//        PIntermediateRepresentation intermediateAST = generateIntermediateAST(
+//                globalIndex, verbosity);
+//
+//        IntermediateRepresentation ir = new IntermediateRepresentation(
+//                intermediateAST, macroFile, destinationDirectory,
+//                destinationPackage);
+//
+//        CodeGenerator codeGenerator;
+//
+//        if (targetLanguage.equals("java")) {
+//            codeGenerator = new JavaCodeGenerator(ir);
+//        }
+//        else if (targetLanguage.equals("intermediate")) {
+//            codeGenerator = new IntermediateCodeGenerator(ir);
+//        }
+//        else if (targetLanguage.equals("c")) {
+//            codeGenerator = new CCodeGenerator(ir);
+//        }
+//        else if (targetLanguage.equals("scala")) {
+//            codeGenerator = new ScalaCodeGenerator(ir);
+//        }
+//        else {
+//            throw new InternalException("unhandled case");
+//        }
+//
+//        switch (verbosity) {
+//        case VERBOSE:
+//            System.out.println(" Verifying target-specific semantics");
+//            break;
+//        }
+//
+//        codeGenerator.verifyTargetSpecificSemantics(strictness);
+//
+//        if (generateCode) {
+//            switch (verbosity) {
+//            case VERBOSE:
+//                System.out.println(" Generating code");
+//                break;
+//            }
+//
+//            codeGenerator.generateCode();
+//        }
+>>>>>>> Comment Code generation to compile ObjectMacro
     }
 
     private static GlobalIndex verifySemantics(
