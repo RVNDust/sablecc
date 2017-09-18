@@ -31,8 +31,12 @@ Tokens
     directive_kw = 'Directive';
 =======
     context_kw = 'Context';
+<<<<<<< HEAD
     option_kw = 'Option';
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+    directive_kw = 'Directive';
+>>>>>>> Updated intermediate representation grammar to get a more readable file
     name_kw = 'Name';
     macro_ref_kw = 'MacroRef';
     type_kw = 'Type';
@@ -40,15 +44,21 @@ Tokens
     insert_kw = 'Insert';
     value_kw = 'Value';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Updated intermediate representation grammar to get a more readable file
     args_kw = 'Args';
     macro_insert_kw = 'MacroInsert';
     var_kw = 'Var';
     macro_body_kw = 'MacroBody';
+<<<<<<< HEAD
     initialization_kw = 'Initialization Order';
 =======
     call_kw = 'Call';
     macro_insert_kw = 'Macro_Insert';
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+>>>>>>> Updated intermediate representation grammar to get a more readable file
 
     l_brace = '{';
     r_brace = '}';
@@ -72,14 +82,20 @@ Productions
     macro
         =
 <<<<<<< HEAD
+<<<<<<< HEAD
             macro_kw l_brace name [params]:param* [internals]:internal* initialization_order macro_body r_brace
                 {-> New macro([name.names], [params], [internals], [initialization_order.names], [macro_body.macro_parts])};
+=======
+            macro_kw l_brace name [params]:param* macro_body r_brace
+                {-> New macro(name.string, [params], [macro_body.macro_parts])};
+>>>>>>> Updated intermediate representation grammar to get a more readable file
 
     macro_body
             {-> [macro_parts]:macro_part*}
         =
             macro_body_kw l_brace [macro_parts]:macro_part* r_brace
                 {-> [macro_parts]};
+<<<<<<< HEAD
 
     param
         =
@@ -114,28 +130,35 @@ Productions
 =======
         macro_kw l_brace name [params]:param* [macro_parts]:macro_part* r_brace
              {-> New macro(name.string, [params], [macro_parts])};
+=======
+>>>>>>> Updated intermediate representation grammar to get a more readable file
 
     param
         =
-            {param} param_kw name type directives
+            {param} param_kw l_brace name type directives? r_brace
                 {-> New param.param(name.string, type, [directives.directives])} |
-            {context} context_kw name type directives
+            {context} context_kw l_brace name type directives? r_brace
                 {-> New param.context(name.string, type, [directives.directives])}
-         ;
-
-    directives
-            {-> [directives]:option*}
-        =
-            option [additional_options]:additional_option*
-                {-> [option, additional_options.option]}
         ;
 
-    additional_option
-            {-> option}
+    directives
+            {-> [directives]:directive*}
         =
+            directive [additional_directives]:additional_directive*
+                {-> [directive, additional_directives.directive]}
+        ;
+
+    additional_directive
+                {-> directive}
+        =
+<<<<<<< HEAD
             comma option
                 {-> option}
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+            comma directive
+                {-> directive}
+>>>>>>> Updated intermediate representation grammar to get a more readable file
         ;
 
     type
@@ -148,6 +171,7 @@ Productions
         ;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     directive
         =
             directive_kw l_brace name [text_parts]:text_part+ r_brace
@@ -158,10 +182,17 @@ Productions
             option_kw l_brace name assign value r_brace
                 {-> New option(name.string, value)}
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+    directive
+        =
+            directive_kw l_brace name value r_brace
+                {-> New directive(name.string, value)}
+>>>>>>> Updated intermediate representation grammar to get a more readable file
         ;
 
     macro_ref
         =
+<<<<<<< HEAD
 <<<<<<< HEAD
             {identifier} macro_ref_kw l_brace name args? r_brace
                 {-> New macro_ref([name.names], [args.values])}
@@ -174,13 +205,21 @@ Productions
 =======
             {identifier} name call?
                 {-> New macro_ref(name.string, [call.values])}
+=======
+            {identifier} macro_ref_kw l_brace name args? r_brace
+                {-> New macro_ref(name.string, [args.values])}
+>>>>>>> Updated intermediate representation grammar to get a more readable file
         ;
 
-    call
+    args
             {-> [values]:value*}
         =
+<<<<<<< HEAD
             call_kw values
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+            args_kw l_brace values r_brace
+>>>>>>> Updated intermediate representation grammar to get a more readable file
                 {-> [values.values]}
         ;
 
@@ -200,6 +239,7 @@ Productions
 
     value
         =
+<<<<<<< HEAD
 <<<<<<< HEAD
             {var} var_kw l_brace param_name name r_brace
                 {-> New value.var([param_name.names], [name.names])}
@@ -238,8 +278,12 @@ Productions
 =======
             {var} name
                 {-> New value.var(name.string)}
+=======
+            {var} var_kw assign string
+                {-> New value.var(string)}
+>>>>>>> Updated intermediate representation grammar to get a more readable file
         |
-            {string} value_kw assign [text_parts]:text_part*
+            {string} value_kw l_brace [text_parts]:text_part+ r_brace
                 {-> New value.string([text_parts])}
         ;
 
@@ -261,6 +305,7 @@ Productions
                 {-> New macro_part.eol()}
         |
 <<<<<<< HEAD
+<<<<<<< HEAD
             {var} param_insert semicolon
                 {-> New macro_part.var([param_insert.names])}
         |
@@ -271,6 +316,12 @@ Productions
         |
             {insert} macro_insert
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+            {var} param_insert semicolon
+                {-> New macro_part.var(param_insert.string)}
+        |
+            {insert} macro_insert semicolon
+>>>>>>> Updated intermediate representation grammar to get a more readable file
                 {-> New macro_part.insert(macro_insert.macro_ref)}
         ;
 
@@ -288,6 +339,7 @@ Productions
                 {-> New text_part.string(string)}
         |
 <<<<<<< HEAD
+<<<<<<< HEAD
             {var} param_insert semicolon
                 {-> New text_part.var([param_insert.names])}
         |
@@ -297,13 +349,20 @@ Productions
             {eol} eol_kw semicolon
 =======
             {var} param_insert
+=======
+            {var} param_insert semicolon
+>>>>>>> Updated intermediate representation grammar to get a more readable file
                 {-> New text_part.var(param_insert.string)}
         |
-            {insert} macro_insert
+            {insert} macro_insert semicolon
                 {-> New text_part.insert(macro_insert.macro_ref)}
         |
+<<<<<<< HEAD
             {eol} eol_kw
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+            {eol} eol_kw semicolon
+>>>>>>> Updated intermediate representation grammar to get a more readable file
                 {-> New text_part.eol()}
         ;
 
@@ -341,14 +400,20 @@ Abstract Syntax Tree
         [name]:string [params]:param* [macro_parts]:macro_part*;
 
     param =
+<<<<<<< HEAD
         {param} [name]:string type [directives]:option* |
         {context} [name]:string type [directives]:option*;
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+        {param} [name]:string type [directives]:directive* |
+        {context} [name]:string type [directives]:directive*;
+>>>>>>> Updated intermediate representation grammar to get a more readable file
 
     type =
         {string} string_kw |
         {macro_refs} macro_ref*;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     directive =
         [names]:string* [parts]:text_part+;
@@ -361,6 +426,9 @@ Abstract Syntax Tree
         {string} [param_name]:string* [parts]:text_part+;
 =======
     option =
+=======
+    directive =
+>>>>>>> Updated intermediate representation grammar to get a more readable file
         [name]:string value;
 
     macro_ref =
@@ -368,8 +436,12 @@ Abstract Syntax Tree
 
     value =
         {var} [name]:string |
+<<<<<<< HEAD
         {string} [parts]:text_part*;
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+        {string} [parts]:text_part+;
+>>>>>>> Updated intermediate representation grammar to get a more readable file
 
     macro_part =
         {string} string |
@@ -391,6 +463,7 @@ Abstract Syntax Tree
         {var} [name]:string |
         {insert} macro_ref |
         {eol} ;
+<<<<<<< HEAD
 
 
 
@@ -400,3 +473,5 @@ Abstract Syntax Tree
 
 
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+>>>>>>> Updated intermediate representation grammar to get a more readable file
