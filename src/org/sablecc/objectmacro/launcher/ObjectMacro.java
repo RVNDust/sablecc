@@ -295,7 +295,7 @@ public class ObjectMacro {
         processSemantics(globalIndex, verbosity);
 
         generateIntermediateFile(
-                globalIndex, verbosity);
+                globalIndex, verbosity, destinationDirectory);
 
 <<<<<<< HEAD
         PIntermediateRepresentation intermediateAST = generateIntermediateAST(
@@ -450,8 +450,13 @@ public class ObjectMacro {
 =======
     private static void generateIntermediateFile(
             GlobalIndex globalIndex,
+<<<<<<< HEAD
             Verbosity verbosity) {
 >>>>>>> New Intermediate Representation file generated 
+=======
+            Verbosity verbosity,
+            File destinationDirectory) {
+>>>>>>> Fix Destination Directory for generated intermediate file 
 
         MMacro mMacro = new MMacro();
         String splittedMacroName[] = Utils.splitName(macro.getNameDeclaration());
@@ -775,7 +780,7 @@ public class ObjectMacro {
 
         }
 
-        File destination = new File("/home/lam/", "test.intermediate");
+        File destination = new File(destinationDirectory, "test.intermediate");
 
         try {
             FileWriter fw = new FileWriter(destination);
