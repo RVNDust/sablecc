@@ -36,8 +36,12 @@ $macro: macro(name) $
 Macro {
   Name = '$name'
 $expand: param $
+<<<<<<< HEAD
 $expand: context $
 >>>>>>> Updated intermediate representation macro
+=======
+$expand: internal $
+>>>>>>> Rename Context by Internal
   MacroBody{
 $expand: string_part, eol_part, param_insert, macro_insert$
   }
@@ -61,6 +65,7 @@ $expand: directive, separator=", "$
 $end: param $
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $comment: ========= internal ============== $
 
 $macro: internal $
@@ -75,12 +80,20 @@ $comment: ========= string_type ============== $
 =======
 $macro: context(name) $
  Context {
+=======
+$macro: internal(name) $
+ Internal {
+>>>>>>> Rename Context by Internal
  Name = '$name'
 $expand: string_type, macro_type$
 $expand: directive, separator=", "$
  }
+<<<<<<< HEAD
 $end: context $
 >>>>>>> Updated intermediate representation macro
+=======
+$end: internal $
+>>>>>>> Rename Context by Internal
 
 $macro: string_type$
  Type = String $expand: directive, separator=", ", before_one=", "$
