@@ -195,6 +195,7 @@ Tokens
 
   {macro_definition, command}
   identifier = normal_identifier;
+<<<<<<< HEAD
 
   {top_level, command, macro_definition}
   invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)+;
@@ -209,6 +210,8 @@ Tokens
 
   {macro_definition, command}
   identifier = normal_identifier | rich_identifier;
+=======
+>>>>>>> Removed rich identifier in ObjectMacro
 
 <<<<<<< HEAD
   {top_level, macro_body, string, command, macro_definition}
