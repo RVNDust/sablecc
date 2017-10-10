@@ -407,6 +407,7 @@ Line: $line
 Char: $char
 Parameter '$param' has already referenced Macro '$macro'.
 $end: duplicate_macro_ref $
+<<<<<<< HEAD
 
 $comment: ========== incorrect_macro_type ============ $
 
@@ -427,3 +428,5 @@ Line : $line
 Char : $char
 Macro '$name' cannot be inserted because it also has parameters.
 $end: invalid_insert $
+=======
+>>>>>>> Add some exceptions on objectmacro front

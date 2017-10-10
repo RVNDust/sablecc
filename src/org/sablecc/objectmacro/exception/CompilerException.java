@@ -343,6 +343,7 @@ public class CompilerException
                         paramName.getText(), macroRef.getText(), line, pos).toString());
 
     }
+<<<<<<< HEAD
 
     public static CompilerException incorrectMacroType(
             Set<String> expectedMacros,
@@ -377,4 +378,6 @@ public class CompilerException
 
         return new CompilerException(new MInvalidInsert(line, pos, name.getText()).toString());
     }
+=======
+>>>>>>> Add some exceptions on objectmacro front
 }
