@@ -6,16 +6,9 @@ import java.util.*;
 
 public class MVarArgument {
 
-  private final List<Object> eParamName = new LinkedList<Object>();
   private final List<Object> eSimpleName = new LinkedList<Object>();
 
   public MVarArgument() {
-  }
-
-  public MParamName newParamName(String pParamName) {
-    MParamName lParamName = new MParamName(pParamName);
-    this.eParamName.add(lParamName);
-    return lParamName;
   }
 
   public MSimpleName newSimpleName(String pName) {
@@ -27,13 +20,7 @@ public class MVarArgument {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(" Var {");
-    sb.append(System.getProperty("line.separator"));
-    sb.append("    ");
-    for(Object oParamName : this.eParamName) {
-      sb.append(oParamName.toString());
-    }
-    sb.append("    Name = ");
+    sb.append(" Var = ");
     if(this.eSimpleName.size() > 1) {
       sb.append("{ ");
     }
@@ -52,8 +39,6 @@ public class MVarArgument {
     if(this.eSimpleName.size() > 1) {
       sb.append(" }");
     }
-    sb.append(" }");
-    sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
 
