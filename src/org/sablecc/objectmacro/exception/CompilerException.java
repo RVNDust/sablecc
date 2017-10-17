@@ -275,6 +275,9 @@ public class CompilerException
             AMacroReference declaration, Macro macroReferenced) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add new errors incorrectArgumentType and incorrectArgumentCount
         String line = String.valueOf(declaration.getName().getLine());
         String pos = String.valueOf(declaration.getName().getPos());
         String expectedCount = String.valueOf(macroReferenced.getAllInternals().size());
@@ -295,6 +298,7 @@ public class CompilerException
 
         return new CompilerException(
                 new MIncorrectArgumentType(expected, found, stringLine, stringPos).toString());
+<<<<<<< HEAD
 =======
 //        TIdentifier insertName = declaration.getName();
 //        TIdentifier textBlockName = textInsert.getInsertedTextBlock()
@@ -312,6 +316,8 @@ public class CompilerException
         //TODO
         return null;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> Add new errors incorrectArgumentType and incorrectArgumentCount
     }
 
     public static CompilerException cannotCreateDirectory(
