@@ -23,6 +23,7 @@ import java.util.*;
 import org.sablecc.exception.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.objectmacro.intermediate.macro.*;
 =======
 import org.sablecc.objectmacro.codegeneration.*;
@@ -49,6 +50,11 @@ import org.sablecc.objectmacro.intermediate.syntax3.node.PType;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
 >>>>>>> New Intermediate Representation file generated 
+=======
+import org.sablecc.objectmacro.intermediate.macro.*;
+import org.sablecc.objectmacro.errormessage.*;
+import org.sablecc.objectmacro.exception.*;
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
 import org.sablecc.objectmacro.structure.*;
 import org.sablecc.objectmacro.syntax3.lexer.*;
 import org.sablecc.objectmacro.syntax3.node.*;
@@ -56,6 +62,7 @@ import org.sablecc.objectmacro.syntax3.node.AStringType;
 import org.sablecc.objectmacro.syntax3.node.Start;
 import org.sablecc.objectmacro.syntax3.parser.*;
 import org.sablecc.objectmacro.util.Utils;
+<<<<<<< HEAD
 <<<<<<< HEAD
 import org.sablecc.objectmacro.walker.*;
 
@@ -65,6 +72,10 @@ import org.sablecc.objectmacro.walker.DefinitionCollector;
 import org.sablecc.objectmacro.walker.DirectiveCollector;
 import org.sablecc.objectmacro.walker.VarVerifier;
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+import org.sablecc.objectmacro.walker.*;
+
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
 import org.sablecc.util.*;
 
 /**
@@ -383,6 +394,7 @@ public class ObjectMacro {
 
         ast.apply(new DeclarationCollector(globalIndex));
 <<<<<<< HEAD
+<<<<<<< HEAD
         ast.apply(new MacroReferenceCollector(globalIndex));
         ast.apply(new ParamReferenceCollector(globalIndex));
         ast.apply(new DirectiveCollector(globalIndex));
@@ -401,6 +413,10 @@ public class ObjectMacro {
                 for (Param param : allParamsInternals) {
 =======
         ast.apply(new DefinitionCollector(globalIndex));
+=======
+        ast.apply(new MacroReferenceCollector(globalIndex));
+        ast.apply(new ParamReferenceCollector(globalIndex));
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
         ast.apply(new DirectiveCollector(globalIndex));
         ast.apply(new VarVerifier(globalIndex));
 

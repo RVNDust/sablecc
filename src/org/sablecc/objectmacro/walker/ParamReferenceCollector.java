@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -16,6 +17,12 @@
  */
 package org.sablecc.objectmacro.walker;
 
+=======
+package org.sablecc.objectmacro.walker;
+
+import org.sablecc.objectmacro.exception.CompilerException;
+import org.sablecc.objectmacro.structure.Insert;
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
 import org.sablecc.objectmacro.syntax3.analysis.DepthFirstAdapter;
 import org.sablecc.objectmacro.structure.GlobalIndex;
 import org.sablecc.objectmacro.structure.Macro;
@@ -23,6 +30,12 @@ import org.sablecc.objectmacro.structure.Param;
 import org.sablecc.objectmacro.syntax3.node.*;
 import org.sablecc.objectmacro.util.Utils;
 
+<<<<<<< HEAD
+=======
+/**
+ * Created by lam on 06/09/17.
+ */
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
 public class ParamReferenceCollector
         extends DepthFirstAdapter {
 
@@ -60,7 +73,11 @@ public class ParamReferenceCollector
             this.currentParam.addParamReference(
                     new TIdentifier(
                             Utils.getVarName(
+<<<<<<< HEAD
                                     node.getVariable()), node.getVariable().getLine(), node.getVariable().getPos()));
+=======
+                                    node.getVariable())));
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
         }
     }
 
@@ -89,6 +106,7 @@ public class ParamReferenceCollector
     }
 
     @Override
+<<<<<<< HEAD
     public void inAInternal(
             AInternal node) {
 
@@ -101,5 +119,12 @@ public class ParamReferenceCollector
             AInternal node) {
 
         this.currentParam = null;
+=======
+    public void caseAStringType(
+            AStringType node) {
+
+        this.currentMacro.setParamToString(
+                this.currentParam.getNameDeclaration());
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
     }
 }

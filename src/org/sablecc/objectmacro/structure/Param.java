@@ -48,6 +48,8 @@ public class Param {
 
     private final Map<String, AMacroReference> macroReferencesName = new HashMap<>();
 
+    private final Map<String, Param> paramReferences = new LinkedHashMap<>();
+
     private final Map<String, Directive> directives = new HashMap<>();
 
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
@@ -128,6 +130,25 @@ public class Param {
 
     }
 
+    public void addParamReference(
+            TIdentifier paramName){
+
+        if(paramName == null){
+            throw new InternalException("param cannot be null");
+        }
+
+        String name = paramName.getText();
+        Param newParamRef = this.parent.getParam(paramName);
+        if(newParamRef
+                .getParamReferenceOrNull(this.getNameDeclaration()) != null){
+
+            throw CompilerException.cyclicReference(
+                    paramName, this.getNameDeclaration());
+        }
+
+        this.paramReferences.put(name, newParamRef);
+    }
+
     public PMacroReference getMacroReferenceOrNull(
             String macroName){
 
@@ -166,6 +187,7 @@ public class Param {
         this.macroReferencesName.put(identifier.getText(), macroRef);
     }
 
+<<<<<<< HEAD
     public void addParamReference(
             TIdentifier paramName){
 
@@ -194,6 +216,8 @@ public class Param {
     public TIdentifier getNameDeclaration(){
         return null;
 =======
+=======
+>>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
     public AParam getDeclaration(){
 
         return this.declaration;
@@ -241,5 +265,11 @@ public class Param {
 
         this.isString = true;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+    }
+
+    Param getParamReferenceOrNull(
+            TIdentifier paramName){
+
+        return this.paramReferences.get(paramName.getText());
     }
 }
