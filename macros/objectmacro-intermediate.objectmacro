@@ -23,6 +23,7 @@ $expand: macro $
 $end: intermediate_representation $
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $comment: ========= macro ============== $
 
 $macro: macro $
@@ -33,8 +34,11 @@ $expand: internal $
 $expand: initialization_order $
 =======
 $macro: macro(name) $
+=======
+$macro: macro $
+>>>>>>> FrontEnd is now independent about name conventions
 Macro {
-  Name = '$name'
+  Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
 $expand: param $
 <<<<<<< HEAD
 $expand: context $
@@ -49,6 +53,7 @@ $expand: string_part, eol_part, param_insert, macro_insert$
 $end: macro $
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $comment: ========= param ============== $
 
 $macro: param $
@@ -59,11 +64,17 @@ $macro: param(name) $
  Param {
     Name = '$name'
 >>>>>>> Updated intermediate representation macro
+=======
+$macro: param $
+ Param {
+    Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
+>>>>>>> FrontEnd is now independent about name conventions
 $expand: string_type, macro_type$
 $expand: directive, separator=", "$
  }
 $end: param $
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========= internal ============== $
@@ -85,6 +96,11 @@ $macro: internal(name) $
  Internal {
 >>>>>>> Rename Context by Internal
  Name = '$name'
+=======
+$macro: internal $
+ Internal {
+ Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
+>>>>>>> FrontEnd is now independent about name conventions
 $expand: string_type, macro_type$
 $expand: directive, separator=", "$
  }
@@ -112,6 +128,7 @@ $expand: directive, separator=", "$
 $end: macro_type $
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $comment: ========= macro_ref ============== $
 
 $macro: macro_ref$
@@ -122,6 +139,11 @@ $macro: macro_ref(name)$
  MacroRef {
  Name = '$name'
 >>>>>>> Updated intermediate representation macro
+=======
+$macro: macro_ref$
+ MacroRef {
+ Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
+>>>>>>> FrontEnd is now independent about name conventions
 $expand: args$
  }
 $end: macro_ref $
@@ -137,6 +159,7 @@ $expand: var_argument, text_argument, separator=", "$
  }
 $end: args$
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========= var_argument ============== $
 
@@ -166,14 +189,22 @@ $comment: ========= string_part ============== $
 =======
 $macro: var_argument (name)$
  Var = '$name'
+=======
+$macro: var_argument $
+ Var = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
+>>>>>>> FrontEnd is now independent about name conventions
 $end: var_argument $
 
-$macro: text_argument$
+$macro: text_argument $
  Value {
 $expand: string_part, eol_part, param_insert, macro_insert$
  }
+<<<<<<< HEAD
 $end: text_argument$
 >>>>>>> Updated intermediate representation macro
+=======
+$end: text_argument $
+>>>>>>> FrontEnd is now independent about name conventions
 
 $macro: string_part(string) $
   '$string';
@@ -196,6 +227,7 @@ $expand: macro_ref $
  };
 $end: macro_insert $
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========= param_insert ============== $
 
@@ -228,13 +260,23 @@ $end: initialization_order $
 =======
 $macro: param_insert(name) $
  ParamInsert = '$name';
+=======
+$macro: param_insert $
+ ParamInsert { Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $ } ;
+>>>>>>> FrontEnd is now independent about name conventions
 $end: param_insert $
 
-$macro: directive(name) $
+$macro: directive $
  Directive {
-     Name = '$name'
+     Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
 $expand: text_argument$
  }
 $end: directive $
 
+<<<<<<< HEAD
 >>>>>>> Updated intermediate representation macro
+=======
+$macro: simple_name(name) $
+'$name'$no_eol$
+$end: simple_name $
+>>>>>>> FrontEnd is now independent about name conventions

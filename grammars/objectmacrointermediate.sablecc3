@@ -91,8 +91,12 @@ Productions
                 {-> New macro([name.names], [params], [internals], [initialization_order.names], [macro_body.macro_parts])};
 =======
             macro_kw l_brace name [params]:param* macro_body r_brace
+<<<<<<< HEAD
                 {-> New macro(name.string, [params], [macro_body.macro_parts])};
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+                {-> New macro([name.names], [params], [macro_body.macro_parts])};
+>>>>>>> FrontEnd is now independent about name conventions
 
     macro_body
             {-> [macro_parts]:macro_part*}
@@ -140,9 +144,9 @@ Productions
     param
         =
             {param} param_kw l_brace name type directives? r_brace
-                {-> New param.param(name.string, type, [directives.directives])} |
+                {-> New param.param([name.names], type, [directives.directives])} |
             {internal} internal_kw l_brace name type directives? r_brace
-                {-> New param.internal(name.string, type, [directives.directives])}
+                {-> New param.internal([name.names], type, [directives.directives])}
         ;
 
     directives
@@ -190,8 +194,12 @@ Productions
     directive
         =
             directive_kw l_brace name value r_brace
+<<<<<<< HEAD
                 {-> New directive(name.string, value)}
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+                {-> New directive([name.names], value)}
+>>>>>>> FrontEnd is now independent about name conventions
         ;
 
     macro_ref
@@ -211,8 +219,12 @@ Productions
                 {-> New macro_ref(name.string, [call.values])}
 =======
             {identifier} macro_ref_kw l_brace name args? r_brace
+<<<<<<< HEAD
                 {-> New macro_ref(name.string, [args.values])}
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+                {-> New macro_ref([name.names], [args.values])}
+>>>>>>> FrontEnd is now independent about name conventions
         ;
 
     args
@@ -243,6 +255,7 @@ Productions
 
     value
         =
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             {var} var_kw l_brace param_name name r_brace
@@ -286,16 +299,41 @@ Productions
             {var} var_kw assign string
                 {-> New value.var(string)}
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+            {var} var_kw assign name
+                {-> New value.var([name.names])}
+>>>>>>> FrontEnd is now independent about name conventions
         |
             {string} value_kw l_brace [text_parts]:text_part+ r_brace
                 {-> New value.string([text_parts])}
         ;
 
     name
+            {-> [names]:string*}
+        =
+            {simple} name_kw assign string
+                {-> [string]}
+        |
+            {complex} name_kw assign complex_string
+                {-> [complex_string.names]}
+        ;
+
+    complex_string
+            {-> [names]:string*}
+        =
+            l_brace string [additional_names]:additional_string* r_brace
+                {-> [string, additional_names.string]}
+        ;
+
+    additional_string
             {-> string}
         =
+<<<<<<< HEAD
             name_kw assign string
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+            comma string
+>>>>>>> FrontEnd is now independent about name conventions
                 {-> string}
         ;
 
@@ -322,7 +360,7 @@ Productions
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
             {var} param_insert semicolon
-                {-> New macro_part.var(param_insert.string)}
+                {-> New macro_part.var([param_insert.names])}
         |
             {insert} macro_insert semicolon
 >>>>>>> Updated intermediate representation grammar to get a more readable file
@@ -355,8 +393,12 @@ Productions
             {var} param_insert
 =======
             {var} param_insert semicolon
+<<<<<<< HEAD
 >>>>>>> Updated intermediate representation grammar to get a more readable file
                 {-> New text_part.var(param_insert.string)}
+=======
+                {-> New text_part.var([param_insert.names])}
+>>>>>>> FrontEnd is now independent about name conventions
         |
             {insert} macro_insert semicolon
                 {-> New text_part.insert(macro_insert.macro_ref)}
@@ -372,6 +414,7 @@ Productions
 
     param_insert
 <<<<<<< HEAD
+<<<<<<< HEAD
             {-> [names]:string*}
         =
             param_insert_kw l_brace name r_brace
@@ -382,6 +425,12 @@ Productions
             param_insert_kw assign string
                 {-> string}
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+            {-> [names]:string*}
+        =
+            param_insert_kw l_brace name r_brace
+                {-> [name.names]}
+>>>>>>> FrontEnd is now independent about name conventions
         ;
 
 Abstract Syntax Tree
@@ -392,6 +441,7 @@ Abstract Syntax Tree
         ;
 
     macro =
+<<<<<<< HEAD
 <<<<<<< HEAD
         [names]:string* [params]:param* [internals]:internal* [init_order]:string* [macro_parts]:macro_part*;
 
@@ -416,6 +466,13 @@ Abstract Syntax Tree
 =======
         {internal} [name]:string type [directives]:directive*;
 >>>>>>> Rename Context by Internal
+=======
+        [names]:string* [params]:param* [macro_parts]:macro_part*;
+
+    param =
+        {param} [names]:string* type [directives]:directive* |
+        {internal} [names]:string* type [directives]:directive*;
+>>>>>>> FrontEnd is now independent about name conventions
 
     type =
         {string} string_kw |
@@ -436,18 +493,26 @@ Abstract Syntax Tree
     option =
 =======
     directive =
+<<<<<<< HEAD
 >>>>>>> Updated intermediate representation grammar to get a more readable file
         [name]:string value;
+=======
+        [names]:string* value;
+>>>>>>> FrontEnd is now independent about name conventions
 
     macro_ref =
-        string [args]:value*;
+        [names]:string* [args]:value*;
 
     value =
+<<<<<<< HEAD
         {var} [name]:string |
 <<<<<<< HEAD
         {string} [parts]:text_part*;
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
+=======
+        {var} [names]:string* |
+>>>>>>> FrontEnd is now independent about name conventions
         {string} [parts]:text_part+;
 >>>>>>> Updated intermediate representation grammar to get a more readable file
 
@@ -455,20 +520,28 @@ Abstract Syntax Tree
         {string} string |
         {eol} |
 <<<<<<< HEAD
+<<<<<<< HEAD
         {var} [names]:string* |
 =======
         {var} [name]:string |
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+        {var} [names]:string* |
+>>>>>>> FrontEnd is now independent about name conventions
         {insert} macro_ref;
 
     text_part =
         {string} string |
+<<<<<<< HEAD
 <<<<<<< HEAD
         {var} [names]:string* |
         {insert} macro_ref |
         {eol} ;
 =======
         {var} [name]:string |
+=======
+        {var} [names]:string* |
+>>>>>>> FrontEnd is now independent about name conventions
         {insert} macro_ref |
         {eol} ;
 <<<<<<< HEAD

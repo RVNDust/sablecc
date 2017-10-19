@@ -22,6 +22,7 @@ import java.util.*;
 
 import org.sablecc.exception.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.objectmacro.intermediate.macro.*;
 =======
 import org.sablecc.objectmacro.codegeneration.*;
@@ -29,6 +30,8 @@ import org.sablecc.objectmacro.codegeneration.c.*;
 import org.sablecc.objectmacro.codegeneration.intermediate.*;
 import org.sablecc.objectmacro.codegeneration.java.*;
 import org.sablecc.objectmacro.codegeneration.scala.*;
+=======
+>>>>>>> FrontEnd is now independent about name conventions
 import org.sablecc.objectmacro.codegeneration.intermediate.macro.*;
 >>>>>>> New Intermediate Representation file generated 
 import org.sablecc.objectmacro.errormessage.*;
@@ -53,8 +56,15 @@ import org.sablecc.objectmacro.syntax3.node.AStringType;
 import org.sablecc.objectmacro.syntax3.node.Start;
 import org.sablecc.objectmacro.syntax3.parser.*;
 import org.sablecc.objectmacro.util.Utils;
+<<<<<<< HEAD
 import org.sablecc.objectmacro.walker.*;
 
+=======
+import org.sablecc.objectmacro.walker.DeclarationCollector;
+import org.sablecc.objectmacro.walker.DefinitionCollector;
+import org.sablecc.objectmacro.walker.DirectiveCollector;
+import org.sablecc.objectmacro.walker.VarVerifier;
+>>>>>>> FrontEnd is now independent about name conventions
 import org.sablecc.util.*;
 
 /**
@@ -295,6 +305,7 @@ public class ObjectMacro {
         processSemantics(globalIndex, verbosity);
 
         generateIntermediateFile(
+<<<<<<< HEAD
                 globalIndex, verbosity, destinationDirectory);
 
 <<<<<<< HEAD
@@ -351,6 +362,10 @@ public class ObjectMacro {
 //            codeGenerator.generateCode();
 //        }
 >>>>>>> Comment Code generation to compile ObjectMacro
+=======
+                globalIndex, verbosity, destinationDirectory, macroFile);
+
+>>>>>>> FrontEnd is now independent about name conventions
     }
 
     private static GlobalIndex verifySemantics(
@@ -455,8 +470,13 @@ public class ObjectMacro {
 >>>>>>> New Intermediate Representation file generated 
 =======
             Verbosity verbosity,
+<<<<<<< HEAD
             File destinationDirectory) {
 >>>>>>> Fix Destination Directory for generated intermediate file 
+=======
+            File destinationDirectory,
+            File macroFile) {
+>>>>>>> FrontEnd is now independent about name conventions
 
         MMacro mMacro = new MMacro();
         String splittedMacroName[] = Utils.splitName(macro.getNameDeclaration());
@@ -780,7 +800,13 @@ public class ObjectMacro {
 
         }
 
-        File destination = new File(destinationDirectory, "class.objectmacro.intermediate");
+        String macroFileName = macroFile.getName();
+        int length = macroFileName.length();
+
+        String name = macroFile.getName()
+                .substring(0, length - ".objectmacro".length());
+
+        File destination = new File(destinationDirectory, name.concat(".intermediate"));
 
         try {
             FileWriter fw = new FileWriter(destination);
@@ -796,7 +822,13 @@ public class ObjectMacro {
     private static MMacro createMacro(
             Macro macro) {
 
-        MMacro mMacro = new MMacro(macro.getName());
+        MMacro mMacro = new MMacro();
+        String macroNames[] = Utils.splitName(macro.getNameDeclaration());
+        for(String part : macroNames){
+            mMacro.newSimpleName(part);
+
+        }
+
         Set<Param> macro_internals = macro.getAllInternals();
         Set<Param> macro_params = macro.getAllParams();
         List<PMacroBodyPart> macroBodyParts = macro.getDeclaration().getMacroBodyParts();
@@ -805,13 +837,13 @@ public class ObjectMacro {
         for(Param param : macro_params){
 
             createParam(
-                    mMacro.newParam(param.getName()), param);
+                    mMacro.newParam(), param);
         }
 
         for(Param internal : macro_internals){
 
             createInternal(
-                    mMacro.newInternal(internal.getName()), internal);
+                    mMacro.newInternal(), internal);
         }
 
         return mMacro;
@@ -844,7 +876,13 @@ public class ObjectMacro {
                 AInsertMacroBodyPart aInsertMacroBodyPart = (AInsertMacroBodyPart) bodyPart;
                 AMacroReference macroRef = (AMacroReference) aInsertMacroBodyPart.getMacroReference();
                 MMacroInsert macroInsert = mMacro.newMacroInsert();
-                MMacroRef mMacroRef = macroInsert.newMacroRef(macroRef.getName().getText());
+                MMacroRef mMacroRef = macroInsert.newMacroRef();
+
+                String macroRefName[] = Utils.splitName(macroRef.getName());
+                for(String part : macroRefName){
+                    mMacroRef.newSimpleName(part);
+
+                }
 
                 if(macroRef.getValues().size() > 0){
                     createArgs(mMacroRef.newArgs(), macroRef.getValues());
@@ -853,9 +891,13 @@ public class ObjectMacro {
             }else if(bodyPart instanceof AVarMacroBodyPart){
 
                 AVarMacroBodyPart aVarMacroBodyPart = (AVarMacroBodyPart) bodyPart;
-                String macro_name = Utils.getVarName(aVarMacroBodyPart.getVariable());
-                mMacro.newParamInsert(macro_name);
+                String varNames[] = Utils.getVarName(aVarMacroBodyPart.getVariable()).split(Utils.NAME_SEPARATOR);
+                MParamInsert mParamInsert = mMacro.newParamInsert();
 
+                for(String part : varNames){
+                    mParamInsert.newSimpleName(part);
+
+                }
             }else if(bodyPart instanceof AEolMacroBodyPart){
 
                 mMacro.newEolPart();
@@ -881,15 +923,37 @@ public class ObjectMacro {
 
                 AMacroReference macro_node = (AMacroReference) ((AInsertStringPart) stringPart).getMacro();
                 MMacroInsert mMacroInsert = mTextArgument.newMacroInsert();
-                MMacroRef mMacroRef = mMacroInsert.newMacroRef(macro_node.getName().getText());
+                MMacroRef mMacroRef = mMacroInsert.newMacroRef();
+
+                String macroRefName[] = Utils.splitName(macro_node.getName());
+                for(String part : macroRefName){
+                    mMacroRef.newSimpleName(part);
+
+                }
 
                 if(macro_node.getValues().size() > 0){
                     createArgs(mMacroRef.newArgs(), macro_node.getValues());
                 }
             }else if(stringPart instanceof AVarStringPart){
                 TVariable tVariable = ((AVarStringPart) stringPart).getVariable();
-                String name = Utils.getVarName(tVariable);
-                mTextArgument.newParamInsert(name);
+                MParamInsert mParamInsert = mTextArgument.newParamInsert();
+
+                String varNames[] = Utils.getVarName(tVariable).split(Utils.NAME_SEPARATOR);
+                for(String part : varNames){
+                    mParamInsert.newSimpleName(part);
+
+                }
+            }else if(stringPart instanceof AEscapeStringPart){
+
+                AEscapeStringPart escapeStringPart = (AEscapeStringPart) stringPart;
+                if(escapeStringPart.getStringEscape().getText().equals("\\\\")){
+                    mTextArgument.newStringPart("\\");
+                }else if(escapeStringPart.getStringEscape().getText().equals("\\n")){
+                    mTextArgument.newEolPart();
+                }
+                else{
+                    throw new InternalException("case unhandled");
+                }
             }
         }
     }
@@ -897,6 +961,12 @@ public class ObjectMacro {
     private static void createParam(
             MParam macro_param,
             Param param){
+
+        String paramNames[] = Utils.splitName(param.getNameDeclaration());
+        for(String part : paramNames){
+            macro_param.newSimpleName(part);
+
+        }
 
         if(param.getDeclaration().getType() instanceof AStringType){
             macro_param.newStringType();
@@ -908,7 +978,13 @@ public class ObjectMacro {
 
             for(AMacroReference l_macroRef : macroReferences){
 
-                MMacroRef macroRef = macro_param_type.newMacroRef(l_macroRef.getName().getText());
+                MMacroRef macroRef = macro_param_type.newMacroRef();
+                String macroRefName[] = Utils.splitName(l_macroRef.getName());
+                for(String part : macroRefName){
+                    macroRef.newSimpleName(part);
+
+                }
+
                 if(l_macroRef.getValues().size() > 0){
                     createArgs(macroRef.newArgs(), l_macroRef.getValues());
                 }
@@ -916,17 +992,27 @@ public class ObjectMacro {
         }
 
         Set<Directive> directives = param.getAllDirectives();
-        if(directives.size() > 0){
-            for(Directive l_directive : directives){
-                MDirective mDirective = macro_param.newDirective(l_directive.getName());
-                createTextParts(mDirective.newTextArgument(), l_directive.getDeclaration().getParts());
+        for(Directive l_directive : directives){
+            MDirective mDirective = macro_param.newDirective();
+
+            String directiveNames[] = Utils.splitName(l_directive.getDeclaration().getName());
+            for(String part : directiveNames){
+                mDirective.newSimpleName(part);
+
             }
+            createTextParts(mDirective.newTextArgument(), l_directive.getDeclaration().getParts());
         }
     }
 
     private static void createInternal(
             MInternal macro_internal,
             Param param){
+
+        String paramNames[] = Utils.splitName(param.getNameDeclaration());
+        for(String part : paramNames){
+            macro_internal.newSimpleName(part);
+
+        }
 
         if(param.getDeclaration().getType() instanceof AStringType){
             macro_internal.newStringType();
@@ -938,7 +1024,7 @@ public class ObjectMacro {
 
             for(AMacroReference l_macroRef : macroReferences){
 
-                MMacroRef macroRef = macro_param_type.newMacroRef(l_macroRef.getName().getText());
+                MMacroRef macroRef = macro_param_type.newMacroRef();
                 if(l_macroRef.getValues().size() > 0){
                     createArgs(macroRef.newArgs(), l_macroRef.getValues());
                 }
@@ -947,11 +1033,16 @@ public class ObjectMacro {
         }
 
         Set<Directive> directives = param.getAllDirectives();
-        if(directives.size() > 0){
-            for(Directive l_directive : directives){
-                MDirective mDirective = macro_internal.newDirective(l_directive.getName());
-                createTextParts(mDirective.newTextArgument(), l_directive.getDeclaration().getParts());
+
+        for(Directive l_directive : directives){
+
+            MDirective mDirective = macro_internal.newDirective();
+            String directiveNames[] = Utils.splitName(l_directive.getDeclaration().getName());
+            for(String part : directiveNames){
+                mDirective.newSimpleName(part);
+
             }
+            createTextParts(mDirective.newTextArgument(), l_directive.getDeclaration().getParts());
         }
     }
 
@@ -970,6 +1061,7 @@ public class ObjectMacro {
 
                 AVarStaticValue aVarStaticValue = (AVarStaticValue) argument;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 AVarValue value = new AVarValue(
                         new TString(aVarStaticValue.getIdentifier().getText()));
                 values.add(value);
@@ -977,6 +1069,15 @@ public class ObjectMacro {
 =======
                 macro_args.newVarArgument(aVarStaticValue.getIdentifier().getText());
 >>>>>>> New Intermediate Representation file generated 
+=======
+                MVarArgument mVarArgument = macro_args.newVarArgument();
+
+                String macroRefName[] = Utils.splitName(aVarStaticValue.getIdentifier());
+                for(String part : macroRefName){
+                    mVarArgument.newSimpleName(part);
+
+                }
+>>>>>>> FrontEnd is now independent about name conventions
             }
             i++;
         }
