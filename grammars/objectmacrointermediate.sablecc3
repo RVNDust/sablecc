@@ -279,6 +279,7 @@ Productions
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {var} var_kw l_brace param_name name r_brace
                 {-> New value.var([param_name.names], [name.names])}
         |
@@ -322,6 +323,9 @@ Productions
 >>>>>>> Updated intermediate representation grammar to get a more readable file
 =======
             {var} var_kw assign name
+=======
+            {var} var_kw l_brace name r_brace
+>>>>>>> Fix simple names to macro refs and var refs
                 {-> New value.var([name.names])}
 >>>>>>> FrontEnd is now independent about name conventions
         |
