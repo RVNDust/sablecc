@@ -57,6 +57,7 @@ Tokens
     macro_body_kw = 'MacroBody';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     initialization_kw = 'Initialization Order';
 =======
     call_kw = 'Call';
@@ -67,6 +68,9 @@ Tokens
 =======
     initialization_kw = 'Initialisation Order';
 >>>>>>> Add initialization order to params depending on the relations between params
+=======
+    initialization_kw = 'Initialization Order';
+>>>>>>> Correct english for initialization
 
     l_brace = '{';
     r_brace = '}';
