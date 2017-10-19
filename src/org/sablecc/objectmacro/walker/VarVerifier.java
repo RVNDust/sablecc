@@ -44,8 +44,6 @@ public class VarVerifier
 =======
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
-    private Param currentParam;
-
     private Param paramsList[];
 
     private Integer currentIndex = 0;
@@ -68,6 +66,7 @@ public class VarVerifier
     }
 
     @Override
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void inAMacroReference(
             AMacroReference node) {
@@ -196,6 +195,8 @@ public class VarVerifier
     }
 
     @Override
+=======
+>>>>>>> Add initialization order to params depending on the relations between params
     public void inAMacroReference(
             AMacroReference node) {
 

@@ -56,6 +56,7 @@ Tokens
     var_kw = 'Var';
     macro_body_kw = 'MacroBody';
 <<<<<<< HEAD
+<<<<<<< HEAD
     initialization_kw = 'Initialization Order';
 =======
     call_kw = 'Call';
@@ -63,6 +64,9 @@ Tokens
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+    initialization_kw = 'Initialisation Order';
+>>>>>>> Add initialization order to params depending on the relations between params
 
     l_brace = '{';
     r_brace = '}';
@@ -87,6 +91,7 @@ Productions
         =
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             macro_kw l_brace name [params]:param* [internals]:internal* initialization_order macro_body r_brace
                 {-> New macro([name.names], [params], [internals], [initialization_order.names], [macro_body.macro_parts])};
 =======
@@ -97,6 +102,10 @@ Productions
 =======
                 {-> New macro([name.names], [params], [macro_body.macro_parts])};
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+            macro_kw l_brace name [params]:param* initialization_order macro_body r_brace
+                {-> New macro([name.names], [params], [initialization_order.names], [macro_body.macro_parts])};
+>>>>>>> Add initialization order to params depending on the relations between params
 
     macro_body
             {-> [macro_parts]:macro_part*}
@@ -148,6 +157,14 @@ Productions
             {internal} internal_kw l_brace name type directives? r_brace
                 {-> New param.internal([name.names], type, [directives.directives])}
         ;
+
+    initialization_order
+            {-> [names]:string*}
+        =
+            initialization_kw l_brace [names]:string* r_brace
+                {-> [names]}
+        ;
+
 
     directives
             {-> [directives]:directive*}
@@ -443,6 +460,7 @@ Abstract Syntax Tree
     macro =
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         [names]:string* [params]:param* [internals]:internal* [init_order]:string* [macro_parts]:macro_part*;
 
     param =
@@ -468,6 +486,9 @@ Abstract Syntax Tree
 >>>>>>> Rename Context by Internal
 =======
         [names]:string* [params]:param* [macro_parts]:macro_part*;
+=======
+        [names]:string* [params]:param* [init_order]:string* [macro_parts]:macro_part*;
+>>>>>>> Add initialization order to params depending on the relations between params
 
     param =
         {param} [names]:string* type [directives]:directive* |

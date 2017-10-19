@@ -50,6 +50,8 @@ public class Param {
 
     private final Map<String, Param> paramReferences = new LinkedHashMap<>();
 
+    private final Map<String, Param> referencedParams = new LinkedHashMap<>();
+
     private final Map<String, Directive> directives = new HashMap<>();
 
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
@@ -117,13 +119,6 @@ public class Param {
         if(this.macroReferencesName.containsKey(name)){
             throw CompilerException.duplicateMacroRef(macroRef.getName(), getDeclaration().getName());
         }
-        else if(this.isString){
-            //TODO Exception
-//            throw new CompilerException(
-//                    "Cannot reference a macro with a string", macroRef.getName());
-//            throw CompilerException.incorrectArgument(getDeclaration().getName());
-            return;
-        }
 
         this.macroReferences.add(macroRef);
         this.macroReferencesName.put(name, macroRef);
@@ -147,12 +142,39 @@ public class Param {
         }
 
         this.paramReferences.put(name, newParamRef);
+        newParamRef.addReferencedParam(this);
+    }
+
+    private void addReferencedParam(
+            Param param){
+
+        if(param == null){
+            throw new InternalException("paramName cannot be null here");
+        }
+
+        String name = param.getName();
+        if(!this.referencedParams.containsKey(name)){
+
+            this.referencedParams.put(name, param);
+        }
     }
 
     public PMacroReference getMacroReferenceOrNull(
             String macroName){
 
         return this.macroReferencesName.get(macroName);
+    }
+
+    Param getParamReferenceOrNull(
+            TIdentifier paramName){
+
+        return this.paramReferences.get(paramName.getText());
+    }
+
+    public boolean references(
+            TIdentifier paramName){
+
+        return this.getParamReferenceOrNull(paramName) != null;
     }
 
     public Set<Directive> getAllDirectives(){
@@ -265,11 +287,5 @@ public class Param {
 
         this.isString = true;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
-    }
-
-    Param getParamReferenceOrNull(
-            TIdentifier paramName){
-
-        return this.paramReferences.get(paramName.getText());
     }
 }
