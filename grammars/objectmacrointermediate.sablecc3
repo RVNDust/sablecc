@@ -27,6 +27,9 @@ Tokens
     param_insert_kw = 'ParamInsert';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add internals name in intermediate representation in args
     param_name_kw = 'ParamName';
     internal_kw = 'Internal';
     directive_kw = 'Directive';
@@ -280,6 +283,7 @@ Productions
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {var} var_kw l_brace param_name name r_brace
                 {-> New value.var([param_name.names], [name.names])}
         |
@@ -328,10 +332,20 @@ Productions
 >>>>>>> Fix simple names to macro refs and var refs
                 {-> New value.var([name.names])}
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+            {var} param_name param_kw var_kw l_brace name r_brace
+                {-> New value.var([param_name.names], [name.names])}
+>>>>>>> Add internals name in intermediate representation in args
         |
-            {string} value_kw l_brace [text_parts]:text_part+ r_brace
-                {-> New value.string([text_parts])}
+            {string} param_name value_kw l_brace [text_parts]:text_part+ r_brace
+                {-> New value.string([param_name.names], [text_parts])}
         ;
+
+    param_name
+        { -> [names]:string* }
+        =
+            param_name_kw l_brace name r_brace
+                {-> [name.names]};
 
     name
             {-> [names]:string*}
@@ -534,6 +548,7 @@ Abstract Syntax Tree
 
     value =
 <<<<<<< HEAD
+<<<<<<< HEAD
         {var} [name]:string |
 <<<<<<< HEAD
         {string} [parts]:text_part*;
@@ -544,6 +559,10 @@ Abstract Syntax Tree
 >>>>>>> FrontEnd is now independent about name conventions
         {string} [parts]:text_part+;
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+        {var} [param_name]:string* [names]:string* |
+        {string} [param_name]:string* [parts]:text_part+;
+>>>>>>> Add internals name in intermediate representation in args
 
     macro_part =
         {string} string |

@@ -23,7 +23,11 @@ public class MParamName {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append("    ParamName { Name = '");
+=======
+    sb.append("    ParamName { '");
+>>>>>>> Add internals name in intermediate representation in args
     sb.append(rParamName());
     sb.append("' }");
     sb.append(System.getProperty("line.separator"));

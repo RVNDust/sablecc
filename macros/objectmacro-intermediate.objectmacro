@@ -215,6 +215,7 @@ $end: text_argument $
 $comment: ========== param_name ============== $
 
 $macro: param_name(param_name) $
+<<<<<<< HEAD
     ParamName { Name = '$param_name' }
 $end: param_name $
 
@@ -251,6 +252,11 @@ $end: text_argument$
 $end: text_argument $
 >>>>>>> FrontEnd is now independent about name conventions
 
+=======
+    ParamName { '$param_name' }
+$end: param_name $
+
+>>>>>>> Add internals name in intermediate representation in args
 $comment: ========= string_part ============== $
 
 $macro: string_part(string) $

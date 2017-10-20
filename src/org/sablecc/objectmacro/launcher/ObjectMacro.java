@@ -309,6 +309,7 @@ public class ObjectMacro {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         globalIndex = verifySemantics(ast, strictness, verbosity);
 =======
         GlobalIndex globalIndex = verifySemantics(ast, strictness, verbosity);
@@ -373,6 +374,12 @@ public class ObjectMacro {
 >>>>>>> Comment Code generation to compile ObjectMacro
 =======
                 globalIndex, verbosity, destinationDirectory, macroFile);
+=======
+        globalIndex = verifySemantics(ast, strictness, verbosity);
+
+        generateIntermediateFile(
+                verbosity, destinationDirectory, macroFile);
+>>>>>>> Add internals name in intermediate representation in args
 
 >>>>>>> FrontEnd is now independent about name conventions
     }
@@ -915,7 +922,7 @@ public class ObjectMacro {
                 }
 
                 if(macroRef.getValues().size() > 0){
-                    createArgs(mMacroRef.newArgs(), macroRef.getValues());
+                    createArgs(mMacroRef.newArgs(), macroRef);
                 }
 
             }else if(bodyPart instanceof AVarMacroBodyPart){
@@ -962,7 +969,7 @@ public class ObjectMacro {
                 }
 
                 if(macro_node.getValues().size() > 0){
-                    createArgs(mMacroRef.newArgs(), macro_node.getValues());
+                    createArgs(mMacroRef.newArgs(), macro_node);
                 }
             }else if(stringPart instanceof AVarStringPart){
                 TVariable tVariable = ((AVarStringPart) stringPart).getVariable();
@@ -1016,7 +1023,7 @@ public class ObjectMacro {
                 }
 
                 if(l_macroRef.getValues().size() > 0){
-                    createArgs(macroRef.newArgs(), l_macroRef.getValues());
+                    createArgs(macroRef.newArgs(), l_macroRef);
                 }
             }
         }
@@ -1056,7 +1063,7 @@ public class ObjectMacro {
 
                 MMacroRef macroRef = macro_param_type.newMacroRef();
                 if(l_macroRef.getValues().size() > 0){
-                    createArgs(macroRef.newArgs(), l_macroRef.getValues());
+                    createArgs(macroRef.newArgs(), l_macroRef);
                 }
 
                 String macroRefNames[] = Utils.splitName(l_macroRef.getName());
@@ -1082,13 +1089,19 @@ public class ObjectMacro {
 
     private static void createArgs(
             MArgs macro_args,
-            List<PStaticValue> arguments){
+            AMacroReference aMacroReference){
+
+        Macro macroReferenced = globalIndex.getMacro(aMacroReference.getName());
+        List<String> paramNames = macroReferenced.getInternalsName();
+        List<PStaticValue> arguments = aMacroReference.getValues();
+        int i = 0;
 
         for(PStaticValue argument : arguments){
             if(argument instanceof AStringStaticValue){
 
                 AStringStaticValue aStringStaticValue = (AStringStaticValue) argument;
                 MTextArgument mTextArgument = macro_args.newTextArgument();
+                mTextArgument.newParamName(paramNames.get(i));
                 createTextParts(mTextArgument, aStringStaticValue.getParts());
 
             }else if(argument instanceof AVarStaticValue){
@@ -1105,6 +1118,7 @@ public class ObjectMacro {
 >>>>>>> New Intermediate Representation file generated 
 =======
                 MVarArgument mVarArgument = macro_args.newVarArgument();
+                mVarArgument.newParamName(paramNames.get(i));
 
                 String macroRefName[] = Utils.splitName(aVarStaticValue.getIdentifier());
                 for(String part : macroRefName){

@@ -273,6 +273,7 @@ public class Macro{
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public String getName(){
         return this.declaration.getName().getText();
     }
@@ -348,6 +349,8 @@ public class Macro{
         return this.globalIndex;
     }
 
+=======
+>>>>>>> Add internals name in intermediate representation in args
     public String getName(){
 
         return this.declaration.getName().getText();
@@ -426,5 +429,15 @@ public class Macro{
 
         return false;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+    }
+
+    public List<String> getInternalsName(){
+
+        List<String> paramsName = new LinkedList<>();
+        for(Param internal : this.getAllInternals()){
+            paramsName.add(internal.getName());
+        }
+
+        return paramsName;
     }
 }
