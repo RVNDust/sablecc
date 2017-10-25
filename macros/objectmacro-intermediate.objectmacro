@@ -216,6 +216,7 @@ $comment: ========== param_name ============== $
 
 $macro: param_name(param_name) $
 <<<<<<< HEAD
+<<<<<<< HEAD
     ParamName { Name = '$param_name' }
 $end: param_name $
 
@@ -254,6 +255,9 @@ $end: text_argument $
 
 =======
     ParamName { '$param_name' }
+=======
+    ParamName { Name = '$param_name' }
+>>>>>>> Fix macro intermediate representation
 $end: param_name $
 
 >>>>>>> Add internals name in intermediate representation in args
