@@ -284,6 +284,7 @@ Productions
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {var} var_kw l_brace param_name name r_brace
                 {-> New value.var([param_name.names], [name.names])}
         |
@@ -334,10 +335,13 @@ Productions
 >>>>>>> FrontEnd is now independent about name conventions
 =======
             {var} param_name param_kw var_kw l_brace name r_brace
+=======
+            {var} var_kw l_brace param_name name r_brace
+>>>>>>> Fix param name in intermediate representation grammar in value
                 {-> New value.var([param_name.names], [name.names])}
 >>>>>>> Add internals name in intermediate representation in args
         |
-            {string} param_name value_kw l_brace [text_parts]:text_part+ r_brace
+            {string} value_kw l_brace param_name [text_parts]:text_part+ r_brace
                 {-> New value.string([param_name.names], [text_parts])}
         ;
 
