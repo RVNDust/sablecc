@@ -50,12 +50,12 @@ public class Param {
 
     private final Map<String, Param> paramReferences = new LinkedHashMap<>();
 
-    private final Map<String, Param> referencedParams = new LinkedHashMap<>();
-
     private final Map<String, Directive> directives = new HashMap<>();
 
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+
+    private final Set<Param> indirectParamReferences = new LinkedHashSet<>();
 
     private boolean isUsed;
 
@@ -134,29 +134,8 @@ public class Param {
 
         String name = paramName.getText();
         Param newParamRef = this.parent.getParam(paramName);
-        if(newParamRef
-                .getParamReferenceOrNull(this.getNameDeclaration()) != null){
-
-            throw CompilerException.cyclicReference(
-                    paramName, this.getNameDeclaration());
-        }
 
         this.paramReferences.put(name, newParamRef);
-        newParamRef.addReferencedParam(this);
-    }
-
-    private void addReferencedParam(
-            Param param){
-
-        if(param == null){
-            throw new InternalException("paramName cannot be null here");
-        }
-
-        String name = param.getName();
-        if(!this.referencedParams.containsKey(name)){
-
-            this.referencedParams.put(name, param);
-        }
     }
 
     public PMacroReference getMacroReferenceOrNull(
@@ -287,5 +266,26 @@ public class Param {
 
         this.isString = true;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+    }
+
+    public Set<Param> getDirectlyParamReferences(){
+
+        Set<Param> directlyParams = new HashSet<>();
+        for(Param param : this.paramReferences.values()){
+            directlyParams.add(param);
+        }
+
+        return Collections.unmodifiableSet(directlyParams);
+    }
+
+    public Set<Param> getIndirectParamReferences(){
+
+        return this.indirectParamReferences;
+    }
+
+    void setIndirectParamReferences(
+            Set<Param> params){
+
+        this.indirectParamReferences.addAll(params);
     }
 }

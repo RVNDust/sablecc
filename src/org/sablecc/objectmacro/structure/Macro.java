@@ -27,7 +27,12 @@ import org.sablecc.util.ComponentFinder;
 import org.sablecc.util.Progeny;
 =======
 import org.sablecc.objectmacro.util.Utils;
+<<<<<<< HEAD
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+import org.sablecc.util.ComponentFinder;
+import org.sablecc.util.Progeny;
+>>>>>>> Add cyclic semantic verification using component finder and progeny
 
 public class Macro{
 
@@ -439,5 +444,37 @@ public class Macro{
         }
 
         return paramsName;
+    }
+
+    public void computeIndirectParamReferences(){
+
+        Progeny<Param> referencedParamProgeny = new Progeny<Param>() {
+
+            @Override
+            protected Set<Param> getChildrenNoCache(
+                    Param param) {
+
+                Set<Param> children = new LinkedHashSet<>();
+                children.addAll(param.getDirectlyParamReferences());
+                return children;
+            }
+        };
+
+        Set<Param> params = new LinkedHashSet<>();
+        params.addAll(this.getAllInternals());
+        params.addAll(this.getAllParams());
+        ComponentFinder<Param> componentFinder =
+                new ComponentFinder<>(params, referencedParamProgeny);
+
+        for(Param param : params){
+            Set<Param> reach = new LinkedHashSet<>();
+            for(Param reachedParam : componentFinder.getReach(
+                    componentFinder.getRepresentative(param))){
+
+                reach.add(reachedParam);
+            }
+
+            param.setIndirectParamReferences(reach);
+        }
     }
 }

@@ -250,6 +250,9 @@ public class CompilerException
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add cyclic semantic verification using component finder and progeny
     public static CompilerException selfReference(
             TIdentifier reference,
             TIdentifier context) {
@@ -260,8 +263,11 @@ public class CompilerException
                 + "").toString());
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> Add cyclic semantic verification using component finder and progeny
     public static CompilerException unusedParam(
             Param param) {
 

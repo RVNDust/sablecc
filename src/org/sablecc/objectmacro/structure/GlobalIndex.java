@@ -98,6 +98,7 @@ public class GlobalIndex {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     public Macro getMacroByReference(
             AMacroReference macroReference){
@@ -118,11 +119,16 @@ public class GlobalIndex {
     }
 
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> Add cyclic semantic verification using component finder and progeny
     public Set<Macro> getAllMacros() {
         return this.allMacros;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> Add cyclic semantic verification using component finder and progeny
 }

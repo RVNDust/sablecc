@@ -24,10 +24,14 @@ public class MParamName {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    ParamName { Name = '");
 =======
     sb.append("    ParamName { '");
 >>>>>>> Add internals name in intermediate representation in args
+=======
+    sb.append("    ParamName { Name = '");
+>>>>>>> Add cyclic semantic verification using component finder and progeny
     sb.append(rParamName());
     sb.append("' }");
     sb.append(System.getProperty("line.separator"));
