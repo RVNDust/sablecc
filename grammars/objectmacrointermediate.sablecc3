@@ -217,6 +217,7 @@ Productions
 =======
     directive
         =
+<<<<<<< HEAD
             directive_kw l_brace name value r_brace
 <<<<<<< HEAD
                 {-> New directive(name.string, value)}
@@ -224,6 +225,10 @@ Productions
 =======
                 {-> New directive([name.names], value)}
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+            directive_kw l_brace name [text_parts]:text_part+ r_brace
+                {-> New directive([name.names], [text_parts])}
+>>>>>>> Value of directive is now only string
         ;
 
     macro_ref
@@ -529,6 +534,7 @@ Abstract Syntax Tree
 <<<<<<< HEAD
     directive =
         [names]:string* [parts]:text_part+;
+<<<<<<< HEAD
 
     macro_ref =
         [names]:string* [args]:value*;
@@ -546,6 +552,8 @@ Abstract Syntax Tree
 =======
         [names]:string* value;
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+>>>>>>> Value of directive is now only string
 
     macro_ref =
         [names]:string* [args]:value*;

@@ -957,7 +957,8 @@ public class ObjectMacro {
                 stringPartText = stringPartText.replaceAll("'", "\\'");
 
                 mTextArgument.newStringPart(stringPartText);
-            }else if(stringPart instanceof AInsertStringPart){
+            }
+            else if(stringPart instanceof AInsertStringPart){
 
                 AMacroReference macro_node = (AMacroReference) ((AInsertStringPart) stringPart).getMacro();
                 MMacroInsert mMacroInsert = mTextArgument.newMacroInsert();
@@ -972,7 +973,8 @@ public class ObjectMacro {
                 if(macro_node.getValues().size() > 0){
                     createArgs(mMacroRef.newArgs(), macro_node);
                 }
-            }else if(stringPart instanceof AVarStringPart){
+            }
+            else if(stringPart instanceof AVarStringPart){
                 TVariable tVariable = ((AVarStringPart) stringPart).getVariable();
                 MParamInsert mParamInsert = mTextArgument.newParamInsert();
 
@@ -981,7 +983,8 @@ public class ObjectMacro {
                     mParamInsert.newSimpleName(part);
 
                 }
-            }else if(stringPart instanceof AEscapeStringPart){
+            }
+            else if(stringPart instanceof AEscapeStringPart){
 
                 AEscapeStringPart escapeStringPart = (AEscapeStringPart) stringPart;
                 if(escapeStringPart.getStringEscape().getText().equals("\\\\")){
@@ -992,6 +995,65 @@ public class ObjectMacro {
                 else{
                     throw new InternalException("case unhandled");
                 }
+            }
+            else{
+                throw new InternalException("case unhandled");
+            }
+        }
+    }
+
+    private static void createDirectiveParts(
+            MDirective mDirective,
+            List<PStringPart> stringParts){
+
+        for(PStringPart stringPart : stringParts){
+            if(stringPart instanceof ATextStringPart){
+                String stringPartText = ((ATextStringPart) stringPart).getText().getText();
+
+                stringPartText = stringPartText.replaceAll("'", "\\'");
+
+                mDirective.newStringPart(stringPartText);
+            }
+            else if(stringPart instanceof AInsertStringPart){
+
+                AMacroReference macro_node = (AMacroReference) ((AInsertStringPart) stringPart).getMacro();
+                MMacroInsert mMacroInsert = mDirective.newMacroInsert();
+                MMacroRef mMacroRef = mMacroInsert.newMacroRef();
+
+                String macroRefName[] = Utils.splitName(macro_node.getName());
+                for(String part : macroRefName){
+                    mMacroRef.newSimpleName(part);
+
+                }
+
+                if(macro_node.getValues().size() > 0){
+                    createArgs(mMacroRef.newArgs(), macro_node);
+                }
+            }
+            else if(stringPart instanceof AVarStringPart){
+                TVariable tVariable = ((AVarStringPart) stringPart).getVariable();
+                MParamInsert mParamInsert = mDirective.newParamInsert();
+
+                String varNames[] = Utils.getVarName(tVariable).split(Utils.NAME_SEPARATOR);
+                for(String part : varNames){
+                    mParamInsert.newSimpleName(part);
+
+                }
+            }
+            else if(stringPart instanceof AEscapeStringPart){
+
+                AEscapeStringPart escapeStringPart = (AEscapeStringPart) stringPart;
+                if(escapeStringPart.getStringEscape().getText().equals("\\\\")){
+                    mDirective.newStringPart("\\");
+                }else if(escapeStringPart.getStringEscape().getText().equals("\\n")){
+                    mDirective.newEolPart();
+                }
+                else{
+                    throw new InternalException("case unhandled");
+                }
+            }
+            else{
+                throw new InternalException("case unhandled");
             }
         }
     }
@@ -1038,7 +1100,7 @@ public class ObjectMacro {
                 mDirective.newSimpleName(part);
 
             }
-            createTextParts(mDirective.newTextArgument(), l_directive.getDeclaration().getParts());
+            createDirectiveParts(mDirective, l_directive.getDeclaration().getParts());
         }
     }
 
@@ -1084,7 +1146,7 @@ public class ObjectMacro {
                 mDirective.newSimpleName(part);
 
             }
-            createTextParts(mDirective.newTextArgument(), l_directive.getDeclaration().getParts());
+            createDirectiveParts(mDirective, l_directive.getDeclaration().getParts());
         }
     }
 
