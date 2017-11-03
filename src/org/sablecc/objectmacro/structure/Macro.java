@@ -63,11 +63,16 @@ public class Macro{
     private final Map<String, Param> namedInternals = new HashMap<>();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private Set<Insert> inserts = new LinkedHashSet<>();
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
 =======
 >>>>>>> Clean up some unused code
+=======
+    private ComponentFinder<Param> paramsComponentFinder;
+
+>>>>>>> Update initialization order using linearisation created in the component finder
     Macro(
             GlobalIndex globalIndex,
             AMacro declaration) {
@@ -214,22 +219,6 @@ public class Macro{
         return newInternal;
     }
 
-    public Insert newInsert(
-            AMacroReference macroReference){
-
-        Macro referencedMacro = this.globalIndex.getMacro(macroReference.getName());
-
-        if(referencedMacro == this){
-            throw CompilerException.cyclicReference(
-                    macroReference.getName(), getNameDeclaration());
-        }
-
-        Insert newInsert = new Insert(
-                referencedMacro, this, macroReference);
-
-        return newInsert;
-    }
-
     public Param getParam(
             TIdentifier variable){
 
@@ -237,7 +226,9 @@ public class Macro{
         if(containsKeyInParams(name)){
             return this.namedParams.get(name);
 
-        }else if(containsKeyInInternals(name)){
+        }
+
+        if(containsKeyInInternals(name)){
             return this.namedInternals.get(name);
         }
 
@@ -362,7 +353,7 @@ public class Macro{
         return this.allInternals;
     }
 
-    public boolean containsKeyInInternals(
+    private boolean containsKeyInInternals(
             String name){
 
         if(name == null){
@@ -372,7 +363,7 @@ public class Macro{
         return this.namedInternals.containsKey(name);
     }
 
-    public boolean containsKeyInParams(
+    private boolean containsKeyInParams(
             String name){
 
         if(name == null){
@@ -455,18 +446,22 @@ public class Macro{
         Set<Param> params = new LinkedHashSet<>();
         params.addAll(this.getAllInternals());
         params.addAll(this.getAllParams());
-        ComponentFinder<Param> componentFinder =
+        this.paramsComponentFinder =
                 new ComponentFinder<>(params, referencedParamProgeny);
 
         for(Param param : params){
             Set<Param> reach = new LinkedHashSet<>();
-            for(Param reachedParam : componentFinder.getReach(
-                    componentFinder.getRepresentative(param))){
+            for(Param reachedParam : this.paramsComponentFinder.getReach(
+                    this.paramsComponentFinder.getRepresentative(param))){
 
                 reach.add(reachedParam);
             }
 
             param.setIndirectParamReferences(reach);
         }
+    }
+
+    public ComponentFinder<Param> getComponentFinder(){
+        return this.paramsComponentFinder;
     }
 }
