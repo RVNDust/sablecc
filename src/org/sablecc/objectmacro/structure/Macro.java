@@ -23,6 +23,7 @@ import org.sablecc.exception.*;
 import org.sablecc.objectmacro.exception.*;
 import org.sablecc.objectmacro.syntax3.node.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.util.ComponentFinder;
 import org.sablecc.util.Progeny;
 =======
@@ -30,6 +31,8 @@ import org.sablecc.objectmacro.util.Utils;
 <<<<<<< HEAD
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
+=======
+>>>>>>> Clean up some unused code
 import org.sablecc.util.ComponentFinder;
 import org.sablecc.util.Progeny;
 >>>>>>> Add cyclic semantic verification using component finder and progeny
@@ -59,9 +62,12 @@ public class Macro{
 
     private final Map<String, Param> namedInternals = new HashMap<>();
 
+<<<<<<< HEAD
     private Set<Insert> inserts = new LinkedHashSet<>();
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
+=======
+>>>>>>> Clean up some unused code
     Macro(
             GlobalIndex globalIndex,
             AMacro declaration) {
@@ -221,22 +227,7 @@ public class Macro{
         Insert newInsert = new Insert(
                 referencedMacro, this, macroReference);
 
-        this.inserts.add(newInsert);
-
         return newInsert;
-    }
-
-    public int getNbStringInternals(){
-
-        int nbString = 0;
-
-        for(Param internal : getAllInternals()){
-            if(internal.getDeclaration().getType() instanceof AStringType){
-                nbString++;
-            }
-        }
-
-        return nbString;
     }
 
     public Param getParam(
@@ -371,8 +362,6 @@ public class Macro{
         return this.allInternals;
     }
 
-    public Set<Insert> getInserts() { return this.inserts; }
-
     public boolean containsKeyInInternals(
             String name){
 
@@ -393,6 +382,7 @@ public class Macro{
         return this.namedParams.containsKey(name);
     }
 
+<<<<<<< HEAD
     public boolean isUsing(
             Macro macro){
 
@@ -436,6 +426,8 @@ public class Macro{
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
+=======
+>>>>>>> Clean up some unused code
     public List<String> getInternalsName(){
 
         List<String> paramsName = new LinkedList<>();
@@ -455,7 +447,7 @@ public class Macro{
                     Param param) {
 
                 Set<Param> children = new LinkedHashSet<>();
-                children.addAll(param.getDirectlyParamReferences());
+                children.addAll(param.getDirectParamReferences());
                 return children;
             }
         };
