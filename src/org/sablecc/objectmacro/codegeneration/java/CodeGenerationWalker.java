@@ -18,7 +18,14 @@
 package org.sablecc.objectmacro.codegeneration.java;
 
 import java.io.*;
+<<<<<<< HEAD
 import java.util.*;
+=======
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
 import org.sablecc.exception.*;
 import org.sablecc.objectmacro.codegeneration.*;
@@ -26,15 +33,32 @@ import org.sablecc.objectmacro.codegeneration.java.macro.*;
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
 import org.sablecc.objectmacro.intermediate.syntax3.analysis.*;
 import org.sablecc.objectmacro.intermediate.syntax3.node.*;
+import org.sablecc.objectmacro.util.Utils;
 
 public class CodeGenerationWalker
         extends DepthFirstAdapter {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+    private static final String CONTEXT_STRING = "Context";
+
+    private static final String INSERT_VAR_NAME = "insert_";
+
+    private static final String SEPARATOR_DIRECTIVE = "separator";
+
+    private static final String AFTER_LAST_DIRECTIVE = "afterlast";
+
+    private static final String NONE_DIRECTIVE = "none";
+
+    private static final String BEFORE_FIRST_DIRECTIVE = "beforefirst";
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
     private final IntermediateRepresentation ir;
 
     private final File packageDirectory;
 
+<<<<<<< HEAD
     /**
      * List of macros in the file
      */
@@ -156,28 +180,183 @@ public class CodeGenerationWalker
      * Boolean to test whether the macro has or does not have internals
      */
     private boolean currentMacroHasInternals;
+=======
+    private MMacro currentMacro;
+
+    private MConstructor currentConstructor;
+
+    private MSuperMacro superMacro;
+
+    private MInternalsInitializer mInternalsInitializer;
+
+    private MContext mContext;
+
+    private MMacroBuilder currentMacroBuilder;
+
+    private MApplyInternalsInitializer currentApplyInitializer;
+
+    private MRedefinedInternalsSetter currentRedefinedInternalsSetter;
+
+    private Integer indexBuilder = 0;
+
+    private Integer indexInsert = 0;
+
+    private String currentMacroName;
+
+    private final Map<String, MMacro> macros;
+
+    private String currentContext;
+
+    private MInsertMacroPart currentInsertMacroPart;
+
+    private List<String> contextNames = new ArrayList<>();
+
+    private List<String> createdBuilders = new ArrayList<>();
+
+    private boolean isCurrentMacroPackageProtected = false;
+
+    private List<String> currentParameters = new ArrayList<>();
+
+    private MSeparator currentSeparator;
+
+    private MAfterLast currentAfterLast;
+
+    private MBeforeFirst currentBeforeFirst;
+
+    private MNone currentNone;
+
+    private MParamMacroRef currentParamMacroRef;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
     public CodeGenerationWalker(
             IntermediateRepresentation ir,
             File packageDirectory,
+<<<<<<< HEAD
             Map<String, Macro> macros) {
+=======
+            Map<String, MMacro> macros) {
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
         this.ir = ir;
         this.packageDirectory = packageDirectory;
         this.macros = macros;
     }
 
+<<<<<<< HEAD
+=======
+    private String string(
+            TString tString) {
+
+        String string = tString.getText();
+        int length = string.length();
+        return string.substring(1, length - 1);
+    }
+
+    private String escapedString(
+            TString tString) {
+
+        StringBuilder sb = new StringBuilder();
+        String s = string(tString);
+        boolean escaped = false;
+        for (char c : s.toCharArray()) {
+            if (escaped) {
+                escaped = false;
+
+                if (c == '\\') {
+                    sb.append('\\');
+                    sb.append('\\');
+                }
+                else if (c == '\'') {
+                    sb.append('\'');
+                }
+                else {
+                    throw new InternalException("unhandled case");
+                }
+            }
+            else if (c == '\\') {
+                escaped = true;
+            }
+            else if (c == '\"') {
+                sb.append('\\');
+                sb.append('\"');
+            }
+            else {
+                sb.append(c);
+            }
+        }
+
+        if (escaped) {
+            throw new InternalException("incomplete escape");
+        }
+
+        return sb.toString();
+    }
+
+    private String buildNameCamelCase(
+            LinkedList<TString> name_parts){
+
+        StringBuilder macroName = new StringBuilder();
+        for(TString partName : name_parts){
+            macroName.append(Utils.toCamelCase(string(partName)));
+        }
+
+        return macroName.toString();
+    }
+
+    private String buildName(
+            LinkedList<TString> name_parts){
+
+        StringBuilder macroName = new StringBuilder();
+        for(TString partName : name_parts){
+            macroName.append(string(partName));
+        }
+
+        return macroName.toString();
+    }
+
+    private void writeFile(
+            String fileName,
+            String content){
+
+        File destination = new File(this.packageDirectory, fileName);
+
+        try {
+            FileWriter fw = new FileWriter(destination);
+            fw.write(content);
+            fw.close();
+        }
+        catch (IOException e) {
+            throw CompilerException.outputError(destination.toString(), e);
+        }
+    }
+
+    private String getLetterFromInteger(
+            Integer i){
+
+        return i > 0 && i < 27 ? String.valueOf((char) (i + 64)) : null;
+    }
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     @Override
     public void inAIntermediateRepresentation(
             AIntermediateRepresentation node) {
 
         this.superMacro = new MSuperMacro();
         this.mInternalsInitializer = new MInternalsInitializer();
+<<<<<<< HEAD
+=======
+        this.mContext = new MContext();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
             this.superMacro.newPackageDeclaration(destinationPackage);
             this.mInternalsInitializer.newPackageDeclaration(destinationPackage);
+<<<<<<< HEAD
+=======
+            this.mContext.newPackageDeclaration(destinationPackage);
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
 
         this.superMacro.newImportJavaUtil();
@@ -189,15 +368,44 @@ public class CodeGenerationWalker
     public void outAIntermediateRepresentation(
             AIntermediateRepresentation node) {
 
+<<<<<<< HEAD
         GenerationUtils.writeFile(this.packageDirectory, "Macro.java", this.superMacro.toString());
         GenerationUtils
                 .writeFile(this.packageDirectory,"InternalsInitializer.java", this.mInternalsInitializer.toString());
+=======
+        writeFile("Macro.java", this.superMacro.toString());
+        writeFile("Context.java", this.mContext.toString());
+        writeFile("InternalsInitializer.java", this.mInternalsInitializer.toString());
+
+        MParameterNull mParameterNull = new MParameterNull();
+        MIncorrectType mIncorrectType = new MIncorrectType();
+        MObjectMacroErrorHead mObjectMacroErrorHead = new MObjectMacroErrorHead();
+        MMacroNullInList mMacroNullInList = new MMacroNullInList();
+        MObjectMacroException mObjectMacroException = new MObjectMacroException();
+
+        if(!this.ir.getDestinationPackage().equals("")){
+            String destinationPackage = this.ir.getDestinationPackage();
+            mIncorrectType.newPackageDeclaration(destinationPackage);
+            mParameterNull.newPackageDeclaration(destinationPackage);
+            mObjectMacroErrorHead.newPackageDeclaration(destinationPackage);
+            mMacroNullInList.newPackageDeclaration(destinationPackage);
+            mObjectMacroException.newPackageDeclaration(destinationPackage);
+
+        }
+
+        writeFile("MIncorrectType.java", mIncorrectType.toString());
+        writeFile("MParameterNull.java", mParameterNull.toString());
+        writeFile("MObjectMacroErrorHead.java", mObjectMacroErrorHead.toString());
+        writeFile("MMacroNullInList.java", mMacroNullInList.toString());
+        writeFile("ObjectMacroException.java", mObjectMacroException.toString());
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
 
     @Override
     public void inAMacro(
             AMacro node) {
 
+<<<<<<< HEAD
         String macroName = GenerationUtils.buildNameCamelCase(node.getNames());
         if(!this.macros.containsKey(macroName)){
             throw new InternalException(macroName + " does not exist");
@@ -233,6 +441,36 @@ public class CodeGenerationWalker
         else{
             this.currentMacroBuilder.newPublic();
             this.currentMacroToBuild.newEmptyBuilderWithContext();
+=======
+        String macroName = buildNameCamelCase(node.getNames());
+        this.currentMacro = this.macros.get(macroName);
+        this.contextNames = new ArrayList<>();
+
+        if(this.currentMacro == null){
+            throw new InternalException("currentMacro cannot be null here");
+        }
+
+        if (!this.ir.getDestinationPackage().equals("")) {
+
+            this.currentMacro.newPackageDeclaration(this.ir.getDestinationPackage());
+        }
+
+        this.currentConstructor
+                = this.currentMacro.newConstructor(macroName);
+        this.currentMacroBuilder = this.currentMacro.newMacroBuilder();
+
+        if(node.getInternals().size() > 0){
+            isCurrentMacroPackageProtected = true;
+            this.mInternalsInitializer.newParentInternalsSetter(macroName);
+            this.currentMacro.newRedefinedApplyInitializer(macroName);
+            this.currentMacroBuilder.newContextParam();
+            this.currentMacroBuilder.newContextExpansion();
+            this.currentMacroBuilder.newNewContextExpansion();
+            this.currentMacro.newImportJavaUtil();
+        }
+        else{
+            this.currentMacroBuilder.newPublic();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
     }
 
@@ -240,6 +478,7 @@ public class CodeGenerationWalker
     public void caseAInternal(
             AInternal node) {
 
+<<<<<<< HEAD
         String paramName = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(node.getType() instanceof AStringType){
@@ -263,10 +502,51 @@ public class CodeGenerationWalker
 
             this.indexBuilder = 0;
             this.currentMacroToBuild.newInternalMacroSetter(paramName);
+=======
+        String paramName = buildNameCamelCase(node.getNames());
+        this.indexBuilder = 0;
+
+        if(node.getType() instanceof AStringType){
+            this.currentMacro
+                    .newInternalStringField(paramName);
+            this.currentMacro.newInternalStringSetter(paramName);
+            MParamStringRef mParamStringRef = this.currentMacro.newParamStringRef(paramName);
+            mParamStringRef.newContextParam();
+            mParamStringRef.newGetInternalTail();
+
+        }
+        else if(node.getType() instanceof AMacroRefsType){
+
+            this.currentMacro
+                    .newInternalMacroField(paramName);
+            this.currentMacro.newContextField(paramName);
+
+            this.currentParamMacroRef = this.currentMacro.newParamMacroRef(paramName, String.valueOf(this.indexBuilder));
+            this.currentParamMacroRef.newContextParam();
+            this.currentParamMacroRef.newGetInternalTail();
+            this.currentParamMacroRef.newContextName(paramName.concat(CONTEXT_STRING));
+
+            for (PDirective directive : node.getDirectives()) {
+                directive.apply(this);
+            }
+
+            this.indexBuilder = 0;
+
+            this.currentContext = paramName.concat(CONTEXT_STRING);
+            this.contextNames.add(currentContext);
+            this.currentApplyInitializer =
+                    this.currentMacro.newInternalMacroSetter(paramName)
+                            .newApplyInternalsInitializer(paramName);
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
         else{
             throw new InternalException("case unhandled");
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         node.getType().apply(this);
         outAInternal(node);
     }
@@ -275,6 +555,7 @@ public class CodeGenerationWalker
     public void outAInternal(
             AInternal node) {
 
+<<<<<<< HEAD
         this.currentContextName = null;
         this.currentApplyInitializer = null;
         this.indexBuilder = 0;
@@ -282,12 +563,21 @@ public class CodeGenerationWalker
         this.currentParamMacroRefBuilder = null;
         this.createdBuilders = new ArrayList<>();
         this.createdInserts = new ArrayList<>();
+=======
+        this.currentContext = null;
+        this.currentApplyInitializer = null;
+        this.indexBuilder = 0;
+        this.indexInsert = 0;
+        this.currentParamMacroRef = null;
+        this.createdBuilders.clear();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
 
     @Override
     public void caseAParam(
             AParam node) {
 
+<<<<<<< HEAD
         String paramName = this.currentParamName = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(node.getType() instanceof AStringType){
@@ -316,11 +606,33 @@ public class CodeGenerationWalker
             this.currentMacroToBuild.newParamMacroRef(paramName);
 
             this.currentInitDirectives = this.currentMacroToBuild.newInitDirectives(paramName);
+=======
+        String paramName = buildNameCamelCase(node.getNames());
+
+        if(node.getType() instanceof AStringType){
+
+            this.currentMacro.newParamStringField(paramName);
+            this.currentMacro.newParamStringRef(paramName);
+            this.currentMacro.newParamStringSetter(paramName);
+
+            this.currentConstructor.newStringParam(paramName);
+
+        }
+        else if(node.getType() instanceof AMacroRefsType){
+
+            this.currentMacro.newParamMacroField(paramName);
+            this.currentMacro.newContextField(paramName);
+
+            this.currentParamMacroRef = this.currentMacro.newParamMacroRef(
+                    paramName, String.valueOf(this.indexBuilder));
+            this.currentParamMacroRef.newContextName(paramName.concat(CONTEXT_STRING));
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
             for (PDirective directive : node.getDirectives()) {
                 directive.apply(this);
             }
 
+<<<<<<< HEAD
             this.currentContextName = paramName.concat(GenerationUtils.CONTEXT_STRING);
             this.indexBuilder = 0;
 
@@ -342,16 +654,33 @@ public class CodeGenerationWalker
             else{
                 mAddAll.newIsBuilt(this.currentMacro.getName());
             }
+=======
+            this.currentContext = paramName.concat(CONTEXT_STRING);
+            this.indexBuilder = 0;
+
+            MParamMacroSetter mParamMacroSetter = this.currentMacro.newParamMacroSetter(paramName);
+            mParamMacroSetter.newParamArg(paramName);
+            mParamMacroSetter.newMacroParam(paramName);
+
+            this.currentConstructor.newMacroParam(paramName);
+            this.currentApplyInitializer = mParamMacroSetter.newApplyInternalsInitializer(paramName);
+            this.contextNames.add(currentContext);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
         else{
             throw new InternalException("case unhandled");
         }
 
+<<<<<<< HEAD
+=======
+        this.currentParameters.add(paramName);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         node.getType().apply(this);
         outAParam(node);
     }
 
     @Override
+<<<<<<< HEAD
     public void outAParam(
             AParam node) {
 
@@ -365,12 +694,23 @@ public class CodeGenerationWalker
         this.createdInserts = new ArrayList<>();
         this.currentParamMacroRefBuilder = null;
         this.currentInitDirectives = null;
+=======
+    public void outAParam(AParam node) {
+
+        this.currentContext = null;
+        this.currentApplyInitializer = null;
+        this.indexBuilder = 0;
+        this.indexInsert = 0;
+        this.createdBuilders.clear();
+        this.currentParamMacroRef = null;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
 
     @Override
     public void inADirective(
             ADirective node) {
 
+<<<<<<< HEAD
         String directive_name = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(directive_name.equals(GenerationUtils.NONE_DIRECTIVE)){
@@ -382,6 +722,24 @@ public class CodeGenerationWalker
         else{
             this.currentDirective = this.currentInitDirectives
                     .newNewDirective(this.currentParamName, directive_name, this.indexBuilder.toString());
+=======
+        String directive_name = buildName(node.getNames());
+
+        if(directive_name.equals(SEPARATOR_DIRECTIVE)){
+            this.currentSeparator = this.currentParamMacroRef.newSeparator();
+        }
+        else if(directive_name.equals(AFTER_LAST_DIRECTIVE)){
+            this.currentAfterLast = this.currentParamMacroRef.newAfterLast();
+        }
+        else if(directive_name.equals(BEFORE_FIRST_DIRECTIVE)){
+            this.currentBeforeFirst = this.currentParamMacroRef.newBeforeFirst();
+        }
+        else if(directive_name.equals(NONE_DIRECTIVE)){
+            this.currentNone = this.currentParamMacroRef.newNone();
+        }
+        else{
+            throw new InternalException("case unhandled");
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
     }
 
@@ -389,15 +747,23 @@ public class CodeGenerationWalker
     public void outADirective(
             ADirective node) {
 
+<<<<<<< HEAD
         this.indexBuilder++;
         this.currentDirective = null;
         this.mSetNoneDirective = null;
+=======
+        this.currentSeparator = null;
+        this.currentAfterLast = null;
+        this.currentBeforeFirst = null;
+        this.currentNone = null;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
 
     @Override
     public void inAMacroRef(
             AMacroRef node) {
 
+<<<<<<< HEAD
         String macro_ref_name = this.currentMacroRefName = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(this.currentContextName != null){
@@ -411,27 +777,51 @@ public class CodeGenerationWalker
 
             this.currentAddAllApplyInitializer.newRedefinedInternalsSetter(macro_ref_name);
         }
+=======
+        this.currentMacroName = buildNameCamelCase(node.getNames());
+
+        if(this.currentContext == null){
+            return;
+        }
+
+        this.currentRedefinedInternalsSetter = this.currentApplyInitializer.newRedefinedInternalsSetter(
+                    currentMacroName);
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
 
     @Override
     public void outAMacroRef(
             AMacroRef node) {
 
+<<<<<<< HEAD
         this.currentMacroRefName = null;
     }
 
     @Override
     public void caseAStringValue(
+=======
+        this.currentMacroName = null;
+    }
+
+    @Override
+    public void inAStringValue(
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
             AStringValue node) {
 
         this.indexBuilder++;
         String index_builder = String.valueOf(this.indexBuilder);
+<<<<<<< HEAD
         boolean anyContext = this.currentContextName != null;
+=======
+        boolean anyContext = this.currentContext != null;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
         if(anyContext){
             this.currentRedefinedInternalsSetter.newInitStringBuilder(index_builder);
 
             this.currentRedefinedInternalsSetter.newSetInternal(
+<<<<<<< HEAD
                     this.currentMacroRefName,
                     GenerationUtils.buildNameCamelCase(node.getParamName()),
                     this.currentContextName).newStringBuilderBuild(index_builder);
@@ -467,6 +857,29 @@ public class CodeGenerationWalker
                     GenerationUtils.INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
                     GenerationUtils.buildNameCamelCase(node.getParamName()),
                     "null").newStringBuilderBuild(index_builder);
+=======
+                    this.currentMacroName,
+                    buildNameCamelCase(node.getParamName()),
+                    this.currentContext).newStringBuilderBuild(index_builder);
+        }
+        else{
+
+            index_builder = getLetterFromInteger(this.indexBuilder);
+
+            if(this.createdBuilders.contains(index_builder)){
+                this.indexBuilder++;
+                index_builder = getLetterFromInteger(this.indexBuilder);
+            }
+
+            this.currentInsertMacroPart.newInitStringBuilder(index_builder);
+
+            this.currentInsertMacroPart.newSetInternal(
+                    INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
+                    buildNameCamelCase(node.getParamName()),
+                    "null").newStringBuilderBuild(index_builder);
+
+            this.createdBuilders.add(index_builder);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
     }
 
@@ -476,6 +889,7 @@ public class CodeGenerationWalker
 
         String index_builder = String.valueOf(this.indexBuilder);
 
+<<<<<<< HEAD
         if(this.currentContextName != null
                 && this.currentRedefinedInternalsSetter != null){
 
@@ -488,10 +902,27 @@ public class CodeGenerationWalker
 
             if(this.currentInsertMacroPart != null){
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+=======
+        if(this.currentContext != null
+                && this.currentRedefinedInternalsSetter != null){
+
+            this.currentRedefinedInternalsSetter.newStringPart(
+                    escapedString(node.getString()),
+                    String.valueOf(this.indexBuilder));
+
+        }
+        else {
+
+            String string = escapedString(node.getString());
+
+            if(this.currentInsertMacroPart != null){
+                index_builder = getLetterFromInteger(this.indexBuilder);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
                 this.currentInsertMacroPart.newStringPart(
                         string,
                         index_builder);
             }
+<<<<<<< HEAD
             else if(this.currentDirective != null){
                 this.currentDirective.newStringPart(
                         string,
@@ -499,6 +930,25 @@ public class CodeGenerationWalker
             }
             else if(this.mSetNoneDirective != null){
                 this.mSetNoneDirective.newStringPart(
+=======
+            else if(this.currentNone != null){
+                this.currentNone.newStringPart(
+                        string,
+                        index_builder);
+
+            }else if(this.currentBeforeFirst != null){
+                this.currentBeforeFirst.newStringPart(
+                        string,
+                        index_builder);
+
+            }else if(this.currentAfterLast != null){
+                this.currentAfterLast.newStringPart(
+                        string,
+                        index_builder);
+
+            }else if(this.currentSeparator != null){
+                this.currentSeparator.newStringPart(
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
                         string,
                         index_builder);
             }
@@ -510,6 +960,7 @@ public class CodeGenerationWalker
             AVarTextPart node) {
 
         String index_builder = String.valueOf(this.indexBuilder);
+<<<<<<< HEAD
         String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
         if(this.currentContextName != null
                 && this.currentRedefinedInternalsSetter != null){
@@ -521,10 +972,27 @@ public class CodeGenerationWalker
         else {
             if(this.currentInsertMacroPart != null){
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+=======
+
+        if(this.currentContext != null
+                && this.currentRedefinedInternalsSetter != null){
+
+            this.currentRedefinedInternalsSetter.newParamInsertPart(
+                    buildNameCamelCase(node.getNames()),
+                    String.valueOf(this.indexBuilder));
+
+        }
+        else {
+            String param_name = buildNameCamelCase(node.getNames());
+
+            if(this.currentInsertMacroPart != null){
+                index_builder = getLetterFromInteger(this.indexBuilder);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
                 this.currentInsertMacroPart.newParamInsertPart(
                         param_name,
                         index_builder);
             }
+<<<<<<< HEAD
             else if(this.currentDirective != null){
                 this.currentDirective.newParamInsertPart(
                         param_name,
@@ -532,6 +1000,25 @@ public class CodeGenerationWalker
             }
             else if(this.mSetNoneDirective != null){
                 this.mSetNoneDirective.newParamInsertPart(
+=======
+            else if(this.currentNone != null){
+                this.currentNone.newParamInsertPart(
+                        param_name,
+                        index_builder);
+
+            }else if(this.currentBeforeFirst != null){
+                this.currentBeforeFirst.newParamInsertPart(
+                        param_name,
+                        index_builder);
+
+            }else if(this.currentAfterLast != null){
+                this.currentAfterLast.newParamInsertPart(
+                        param_name,
+                        index_builder);
+
+            }else if(this.currentSeparator != null){
+                this.currentSeparator.newParamInsertPart(
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
                         param_name,
                         index_builder);
             }
@@ -544,14 +1031,23 @@ public class CodeGenerationWalker
 
         String index_builder = String.valueOf(indexBuilder);
 
+<<<<<<< HEAD
         if(this.currentContextName != null
                 && this.currentRedefinedInternalsSetter != null){
 
             this.currentRedefinedInternalsSetter.newEolPart(index_builder);
+=======
+        if(this.currentContext != null
+                && this.currentRedefinedInternalsSetter != null){
+
+            this.currentRedefinedInternalsSetter.newEolPart(index_builder);
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
         else {
 
             if(this.currentInsertMacroPart != null){
+<<<<<<< HEAD
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
                 this.currentInsertMacroPart.newEolPart(
                         index_builder);
@@ -561,6 +1057,23 @@ public class CodeGenerationWalker
             }
             else if(this.mSetNoneDirective != null){
                 this.mSetNoneDirective.newEolPart(index_builder);
+=======
+                index_builder = getLetterFromInteger(this.indexBuilder);
+                this.currentInsertMacroPart.newEolPart(
+                        index_builder);
+            }
+            else if(this.currentNone != null){
+                this.currentNone.newEolPart(index_builder);
+
+            }else if(this.currentBeforeFirst != null){
+                this.currentBeforeFirst.newEolPart(index_builder);
+
+            }else if(this.currentAfterLast != null){
+                this.currentAfterLast.newEolPart(index_builder);
+
+            }else if(this.currentSeparator != null){
+                this.currentSeparator.newEolPart(index_builder);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
             }
         }
     }
@@ -571,6 +1084,7 @@ public class CodeGenerationWalker
 
         MInsertMacroPart tempInsertMacroPart = this.currentInsertMacroPart;
         AMacroRef macroRef = (AMacroRef) node.getMacroRef();
+<<<<<<< HEAD
         String macro_name = GenerationUtils.buildNameCamelCase(macroRef.getNames());
         String index_builder = String.valueOf(this.indexBuilder);
 
@@ -584,21 +1098,38 @@ public class CodeGenerationWalker
         if(this.currentContextName != null
                 && this.currentRedefinedInternalsSetter != null){
 
+=======
+        String macro_name = buildNameCamelCase(macroRef.getNames());
+        String index_builder = String.valueOf(this.indexBuilder);
+
+        this.indexInsert++;
+        String index_insert = String.valueOf(this.indexInsert);
+
+        if(this.currentContext != null
+                && this.currentRedefinedInternalsSetter != null){
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
             this.currentInsertMacroPart =
                     this.currentRedefinedInternalsSetter.newInsertMacroPart(
                             macro_name,
                             index_builder,
                             index_insert);
+<<<<<<< HEAD
         }
         else{
             if(tempInsertMacroPart != null){
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
 
+=======
+
+        }else{
+            if(tempInsertMacroPart != null){
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
                 this.currentInsertMacroPart =
                         tempInsertMacroPart.newInsertMacroPart(
                                 macro_name,
                                 index_builder,
                                 index_insert);
+<<<<<<< HEAD
 
             }
             else if(this.currentDirective != null){
@@ -622,13 +1153,51 @@ public class CodeGenerationWalker
         Integer tempIndex = this.indexBuilder;
         Integer tempIndexInsert = this.indexInsert;
         this.currentContextName = null;
+=======
+            }
+            else if(this.currentNone != null){
+                this.currentInsertMacroPart =
+                    this.currentNone.newInsertMacroPart(macro_name,
+                            index_builder,
+                            index_insert);
+
+            }else if(this.currentBeforeFirst != null){
+                this.currentInsertMacroPart =
+                        this.currentBeforeFirst.newInsertMacroPart(macro_name,
+                            index_builder,
+                            index_insert);
+
+            }else if(this.currentAfterLast != null){
+                this.currentInsertMacroPart =
+                    this.currentAfterLast.newInsertMacroPart(macro_name,
+                            index_builder,
+                            index_insert);
+
+            }else if(this.currentSeparator != null){
+                this.currentInsertMacroPart =
+                    this.currentSeparator.newInsertMacroPart(macro_name,
+                            index_builder,
+                            index_insert);
+            }
+        }
+
+        String tempContext = this.currentContext;
+        String tempMacroName = this.currentMacroName;
+        Integer tempIndex = this.indexBuilder;
+        this.currentContext = null;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
         node.getMacroRef().apply(this);
 
         this.indexBuilder = tempIndex;
+<<<<<<< HEAD
         this.indexInsert = tempIndexInsert;
         this.currentContextName = tempContext;
         this.currentMacroRefName = tempMacroName;
+=======
+        this.currentContext = tempContext;
+        this.currentMacroName = tempMacroName;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         this.currentInsertMacroPart = tempInsertMacroPart;
 
     }
@@ -637,6 +1206,7 @@ public class CodeGenerationWalker
     public void outAVarValue(
             AVarValue node) {
 
+<<<<<<< HEAD
         String var_name = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(this.currentContextName != null){
@@ -661,6 +1231,23 @@ public class CodeGenerationWalker
             if(this.currentMacro.getInternalsName().contains(var_name)){
                 mParamRef.newContextArg();
             }
+=======
+        if(this.currentContext != null){
+            this.currentRedefinedInternalsSetter.newSetInternal(
+                    this.currentMacroName,
+                    buildNameCamelCase(node.getParamName()),
+                    this.currentContext)
+                    .newMacroArg(buildNameCamelCase(node.getNames()));
+
+        }
+        else{
+            this.currentInsertMacroPart.newSetInternal(
+                    INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
+                    buildNameCamelCase(node.getParamName()),
+                    "null")
+                    .newMacroArg(buildNameCamelCase(node.getNames()));
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         }
     }
 
@@ -668,6 +1255,7 @@ public class CodeGenerationWalker
     public void outAMacro(
             AMacro node) {
 
+<<<<<<< HEAD
         String macroName = GenerationUtils.buildNameCamelCase(node.getNames());
         GenerationUtils.writeFile(this.packageDirectory, "M" + macroName + ".java", this.currentMacroToBuild.toString());
 
@@ -684,6 +1272,30 @@ public class CodeGenerationWalker
 
         this.currentMacroBuilder.newStringPart(
                 GenerationUtils.escapedString(node.getString()),
+=======
+        for(TString string : node.getInitOrder()){
+            String param_name = Utils.toCamelCase(string(string));
+            if(this.currentParameters.contains(param_name)){
+                this.currentConstructor.newSetParam(param_name).newParamArg(param_name);
+            }
+        }
+
+        String macroName = buildNameCamelCase(node.getNames());
+        writeFile("M" + macroName + ".java", this.currentMacro.toString());
+
+        this.contextNames = null;
+        this.currentMacro = null;
+        this.currentConstructor = null;
+        this.isCurrentMacroPackageProtected = false;
+        this.currentParameters.clear();
+    }
+
+    @Override
+    public void caseAStringMacroPart(AStringMacroPart node) {
+
+        this.currentMacroBuilder.newStringPart(
+                escapedString(node.getString()),
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
                 String.valueOf(indexBuilder));
     }
 
@@ -699,13 +1311,18 @@ public class CodeGenerationWalker
             AInsertMacroPart node) {
 
         AMacroRef macroRef = (AMacroRef) node.getMacroRef();
+<<<<<<< HEAD
         String macro_name = GenerationUtils.buildNameCamelCase(macroRef.getNames());
+=======
+        String macro_name = buildNameCamelCase(macroRef.getNames());
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         this.indexInsert++;
 
         this.currentInsertMacroPart =
                 this.currentMacroBuilder.newInsertMacroPart(
                         macro_name, String.valueOf(indexBuilder), String.valueOf(indexInsert));
 
+<<<<<<< HEAD
         this.createdInserts.add(this.indexInsert);
         Integer tempIndexBuilder = this.indexBuilder;
         Integer tempIndexInsert = this.indexInsert;
@@ -713,6 +1330,12 @@ public class CodeGenerationWalker
         node.getMacroRef().apply(this);
 
         this.indexInsert = tempIndexInsert;
+=======
+        Integer tempIndexBuilder = this.indexBuilder;
+
+        node.getMacroRef().apply(this);
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         this.indexBuilder = tempIndexBuilder;
         this.currentInsertMacroPart = null;
     }
@@ -721,6 +1344,7 @@ public class CodeGenerationWalker
     public void outAVarMacroPart(
             AVarMacroPart node) {
 
+<<<<<<< HEAD
         String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
         MParamInsertPart mParamInsertPart =
                 this.currentMacroBuilder.newParamInsertPart(
@@ -1289,4 +1913,15 @@ public class CodeGenerationWalker
 //        }
 //    }
 >>>>>>> Comment Code generation to compile ObjectMacro
+=======
+        MParamInsertPart mParamInsertPart =
+                this.currentMacroBuilder.newParamInsertPart(
+                    buildNameCamelCase(node.getNames()),
+                    String.valueOf(indexBuilder));
+
+        if(this.isCurrentMacroPackageProtected){
+            mParamInsertPart.newContextArg();
+        }
+    }
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 }

@@ -10,7 +10,11 @@ public class MSetInternal {
   private final String pParamName;
   private final String pContext;
   private final MSetInternal mSetInternal = this;
+<<<<<<< HEAD
   private final List<Object> eParamRef_StringBuilderBuild = new LinkedList<Object>();
+=======
+  private final List<Object> eMacroArg_StringBuilderBuild = new LinkedList<Object>();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
   public MSetInternal(String pMacroName, String pParamName, String pContext) {
     if(pMacroName == null) throw new NullPointerException();
@@ -21,15 +25,26 @@ public class MSetInternal {
     this.pContext = pContext;
   }
 
+<<<<<<< HEAD
   public MParamRef newParamRef(String pName) {
     MParamRef lParamRef = new MParamRef(pName);
     this.eParamRef_StringBuilderBuild.add(lParamRef);
     return lParamRef;
+=======
+  public MMacroArg newMacroArg(String pName) {
+    MMacroArg lMacroArg = new MMacroArg(pName);
+    this.eMacroArg_StringBuilderBuild.add(lMacroArg);
+    return lMacroArg;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   }
 
   public MStringBuilderBuild newStringBuilderBuild(String pIndexBuilder) {
     MStringBuilderBuild lStringBuilderBuild = new MStringBuilderBuild(pIndexBuilder);
+<<<<<<< HEAD
     this.eParamRef_StringBuilderBuild.add(lStringBuilderBuild);
+=======
+    this.eMacroArg_StringBuilderBuild.add(lStringBuilderBuild);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     return lStringBuilderBuild;
   }
 
@@ -67,8 +82,13 @@ public class MSetInternal {
     sb.append("(");
     sb.append(rContext());
     sb.append(", ");
+<<<<<<< HEAD
     for(Object oParamRef_StringBuilderBuild : this.eParamRef_StringBuilderBuild) {
       sb.append(oParamRef_StringBuilderBuild.toString());
+=======
+    for(Object oMacroArg_StringBuilderBuild : this.eMacroArg_StringBuilderBuild) {
+      sb.append(oMacroArg_StringBuilderBuild.toString());
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
     sb.append(");");
     sb.append(System.getProperty("line.separator"));

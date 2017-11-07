@@ -2,35 +2,31 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
-<<<<<<< HEAD
-public class MInternalMacroSetter {
-
-  private final String pParamName;
-  private final MInternalMacroSetter mInternalMacroSetter = this;
-
-  public MInternalMacroSetter(String pParamName) {
-    if(pParamName == null) throw new NullPointerException();
-    this.pParamName = pParamName;
-  }
-
-  String pParamName() {
-    return this.pParamName;
-  }
-
-  private String rParamName() {
-    return this.mInternalMacroSetter.pParamName();
-=======
 import java.util.*;
 
-public class MInternalMacroSetter {
+public class MParamMacroSetter {
 
   private final String pName;
-  private final MInternalMacroSetter mInternalMacroSetter = this;
+  private final MParamMacroSetter mParamMacroSetter = this;
+  private final List<Object> eMacroParam = new LinkedList<Object>();
+  private final List<Object> eParamArg = new LinkedList<Object>();
   private final List<Object> eApplyInternalsInitializer = new LinkedList<Object>();
 
-  public MInternalMacroSetter(String pName) {
+  public MParamMacroSetter(String pName) {
     if(pName == null) throw new NullPointerException();
     this.pName = pName;
+  }
+
+  public MMacroParam newMacroParam(String pName) {
+    MMacroParam lMacroParam = new MMacroParam(pName);
+    this.eMacroParam.add(lMacroParam);
+    return lMacroParam;
+  }
+
+  public MParamArg newParamArg(String pName) {
+    MParamArg lParamArg = new MParamArg(pName);
+    this.eParamArg.add(lParamArg);
+    return lParamArg;
   }
 
   public MApplyInternalsInitializer newApplyInternalsInitializer(String pParamName) {
@@ -44,48 +40,47 @@ public class MInternalMacroSetter {
   }
 
   private String rName() {
-    return this.mInternalMacroSetter.pName();
->>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+    return this.mParamMacroSetter.pName();
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("    void set");
-<<<<<<< HEAD
-    sb.append(rParamName());
-=======
+    sb.append("    private void setP");
     sb.append(rName());
->>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append("(");
+    for(Object oMacroParam : this.eMacroParam) {
+      sb.append(oMacroParam.toString());
+    }
+    sb.append("){");
     sb.append(System.getProperty("line.separator"));
-    sb.append("            Context context,");
+    sb.append("        if(");
+    for(Object oParamArg : this.eParamArg) {
+      sb.append(oParamArg.toString());
+    }
+    sb.append(" == null){");
     sb.append(System.getProperty("line.separator"));
-<<<<<<< HEAD
-    sb.append("            InternalValue internal_value) {");
-    sb.append(System.getProperty("line.separator"));
-    sb.append(System.getProperty("line.separator"));
-    sb.append("        if(internal_value == null){");
-    sb.append(System.getProperty("line.separator"));
-    sb.append("            throw new RuntimeException(\"macros cannot be null\");");
-=======
-    sb.append("            Macro macros[]) {");
-    sb.append(System.getProperty("line.separator"));
-    sb.append(System.getProperty("line.separator"));
-    sb.append("        if(macros == null){");
-    sb.append(System.getProperty("line.separator"));
-    sb.append("            throw new RuntimeException(\"macros cannot be null here\");");
+    sb.append("            throw ObjectMacroException.parameterNull(\"");
+    sb.append(rName());
+    sb.append("\");");
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("        Macro[] tempMacros = new Macro[macros.length];");
+    sb.append("        Macro macros[] = ");
+    for(Object oParamArg : this.eParamArg) {
+      sb.append(oParamArg.toString());
+    }
+    sb.append(";");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        this.list_");
+    sb.append(rName());
+    sb.append(" = new Macro[macros.length];");
     sb.append(System.getProperty("line.separator"));
     sb.append("        int i = 0;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        for(Macro macro : macros){");
-    sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("            if(macro == null){");
     sb.append(System.getProperty("line.separator"));
@@ -101,20 +96,12 @@ public class MInternalMacroSetter {
       sb.append(oApplyInternalsInitializer.toString());
     }
     sb.append(System.getProperty("line.separator"));
-    sb.append("            tempMacros[i++] = macro;");
->>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+    sb.append("            this.list_");
+    sb.append(rName());
+    sb.append("[i++] = macro;");
+    sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
-    sb.append(System.getProperty("line.separator"));
-    sb.append(System.getProperty("line.separator"));
-    sb.append("        this.list_");
-<<<<<<< HEAD
-    sb.append(rParamName());
-    sb.append(".put(context, internal_value);");
-=======
-    sb.append(rName());
-    sb.append(".put(context, tempMacros);");
->>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));

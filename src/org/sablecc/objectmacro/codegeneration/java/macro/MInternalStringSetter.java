@@ -23,7 +23,11 @@ public class MInternalStringSetter {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append("    void set");
+=======
+    sb.append("    public void set");
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append(rName());
     sb.append("(");
     sb.append(System.getProperty("line.separator"));

@@ -23,9 +23,15 @@ public class MParamMacroField {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append("    private final List<Macro> list_");
     sb.append(rName());
     sb.append(";");
+=======
+    sb.append("    private Macro list_");
+    sb.append(rName());
+    sb.append("[];");
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

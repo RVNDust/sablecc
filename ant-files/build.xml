@@ -176,7 +176,11 @@ public class Version {
 
     </jar>
 
+<<<<<<< HEAD
     <jar destfile="${lib.dir}/objectmacro-back.jar"
+=======
+    <jar destfile="${lib.dir}/objectmacro-BACK.jar"
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
          manifest="${manifest.dir}/OBJECTMACRO-BACK.MF"
          index="true"
          compress="true"

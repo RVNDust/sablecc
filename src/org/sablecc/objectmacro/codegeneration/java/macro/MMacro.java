@@ -10,6 +10,7 @@ public class MMacro {
   private final MMacro mMacro = this;
   private final List<Object> ePackageDeclaration = new LinkedList<Object>();
   private final List<Object> eImportJavaUtil = new LinkedList<Object>();
+<<<<<<< HEAD
   private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField = new LinkedList<Object>();
   private final List<Object> eContextField = new LinkedList<Object>();
   private final List<Object> eConstructor = new LinkedList<Object>();
@@ -21,6 +22,15 @@ public class MMacro {
   private final List<Object> eRedefinedApplyInitializer = new LinkedList<Object>();
   private final List<Object> eMacroBuilder = new LinkedList<Object>();
   private final List<Object> eEmptyBuilderWithContext = new LinkedList<Object>();
+=======
+  private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField = new LinkedList<Object>();
+  private final List<Object> eContextField = new LinkedList<Object>();
+  private final List<Object> eConstructor = new LinkedList<Object>();
+  private final List<Object> eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter = new LinkedList<Object>();
+  private final List<Object> eParamStringRef_ParamMacroRef = new LinkedList<Object>();
+  private final List<Object> eRedefinedApplyInitializer = new LinkedList<Object>();
+  private final List<Object> eMacroBuilder = new LinkedList<Object>();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
   public MMacro(String pName) {
     if(pName == null) throw new NullPointerException();
@@ -41,24 +51,37 @@ public class MMacro {
 
   public MParamMacroField newParamMacroField(String pName) {
     MParamMacroField lParamMacroField = new MParamMacroField(pName);
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamMacroField);
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lParamMacroField);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     return lParamMacroField;
   }
 
   public MParamStringField newParamStringField(String pName) {
     MParamStringField lParamStringField = new MParamStringField(pName);
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamStringField);
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lParamStringField);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     return lParamStringField;
   }
 
   public MInternalMacroField newInternalMacroField(String pName) {
     MInternalMacroField lInternalMacroField = new MInternalMacroField(pName);
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalMacroField);
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lInternalMacroField);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     return lInternalMacroField;
   }
 
   public MInternalStringField newInternalStringField(String pName) {
     MInternalStringField lInternalStringField = new MInternalStringField(pName);
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalStringField);
     return lInternalStringField;
   }
@@ -81,6 +104,12 @@ public class MMacro {
     return lNoneDirectiveField;
   }
 
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lInternalStringField);
+    return lInternalStringField;
+  }
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   public MContextField newContextField(String pName) {
     MContextField lContextField = new MContextField(pName);
     this.eContextField.add(lContextField);
@@ -95,6 +124,7 @@ public class MMacro {
 
   public MParamStringSetter newParamStringSetter(String pName) {
     MParamStringSetter lParamStringSetter = new MParamStringSetter(pName);
+<<<<<<< HEAD
     this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lParamStringSetter);
     return lParamStringSetter;
   }
@@ -109,10 +139,21 @@ public class MMacro {
     MSingleAdd lSingleAdd = new MSingleAdd(pMacroName, pParamName);
     this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lSingleAdd);
     return lSingleAdd;
+=======
+    this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.add(lParamStringSetter);
+    return lParamStringSetter;
+  }
+
+  public MParamMacroSetter newParamMacroSetter(String pName) {
+    MParamMacroSetter lParamMacroSetter = new MParamMacroSetter(pName);
+    this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.add(lParamMacroSetter);
+    return lParamMacroSetter;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   }
 
   public MInternalStringSetter newInternalStringSetter(String pName) {
     MInternalStringSetter lInternalStringSetter = new MInternalStringSetter(pName);
+<<<<<<< HEAD
     this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lInternalStringSetter);
     return lInternalStringSetter;
   }
@@ -171,24 +212,56 @@ public class MMacro {
     return lInitDirectives;
   }
 
+=======
+    this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.add(lInternalStringSetter);
+    return lInternalStringSetter;
+  }
+
+  public MInternalMacroSetter newInternalMacroSetter(String pName) {
+    MInternalMacroSetter lInternalMacroSetter = new MInternalMacroSetter(pName);
+    this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.add(lInternalMacroSetter);
+    return lInternalMacroSetter;
+  }
+
+  public MParamStringRef newParamStringRef(String pName) {
+    MParamStringRef lParamStringRef = new MParamStringRef(pName);
+    this.eParamStringRef_ParamMacroRef.add(lParamStringRef);
+    return lParamStringRef;
+  }
+
+  public MParamMacroRef newParamMacroRef(String pName, String pIndexBuilder) {
+    MParamMacroRef lParamMacroRef = new MParamMacroRef(pName, pIndexBuilder);
+    this.eParamStringRef_ParamMacroRef.add(lParamMacroRef);
+    return lParamMacroRef;
+  }
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   public MRedefinedApplyInitializer newRedefinedApplyInitializer(String pName) {
     MRedefinedApplyInitializer lRedefinedApplyInitializer = new MRedefinedApplyInitializer(pName);
     this.eRedefinedApplyInitializer.add(lRedefinedApplyInitializer);
     return lRedefinedApplyInitializer;
   }
 
+<<<<<<< HEAD
   public MMacroBuilder newMacroBuilder(String pMacroName) {
     MMacroBuilder lMacroBuilder = new MMacroBuilder(pMacroName);
+=======
+  public MMacroBuilder newMacroBuilder() {
+    MMacroBuilder lMacroBuilder = new MMacroBuilder();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     this.eMacroBuilder.add(lMacroBuilder);
     return lMacroBuilder;
   }
 
+<<<<<<< HEAD
   public MEmptyBuilderWithContext newEmptyBuilderWithContext() {
     MEmptyBuilderWithContext lEmptyBuilderWithContext = new MEmptyBuilderWithContext();
     this.eEmptyBuilderWithContext.add(lEmptyBuilderWithContext);
     return lEmptyBuilderWithContext;
   }
 
+=======
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   String pName() {
     return this.pName;
   }
@@ -218,19 +291,31 @@ public class MMacro {
     sb.append(rName());
     sb.append(" extends Macro{");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.size() > 0) {
+=======
+    if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.size() > 0) {
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
+<<<<<<< HEAD
       for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField) {
+=======
+      for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField) {
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         if(first) {
           first = false;
         }
         else {
           sb.append(System.getProperty("line.separator"));
         }
+<<<<<<< HEAD
         sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.toString());
+=======
+        sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField.toString());
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
       }
     }
     if(this.eContextField.size() > 0) {
@@ -245,18 +330,27 @@ public class MMacro {
     for(Object oConstructor : this.eConstructor) {
       sb.append(oConstructor.toString());
     }
+<<<<<<< HEAD
     if(this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.size() > 0) {
+=======
+    if(this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.size() > 0) {
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
+<<<<<<< HEAD
       for(Object oParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter : this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter) {
+=======
+      for(Object oParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter : this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter) {
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         if(first) {
           first = false;
         }
         else {
           sb.append(System.getProperty("line.separator"));
         }
+<<<<<<< HEAD
         sb.append(oParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.toString());
       }
     }
@@ -332,6 +426,37 @@ public class MMacro {
     for(Object oEmptyBuilderWithContext : this.eEmptyBuilderWithContext) {
       sb.append(oEmptyBuilderWithContext.toString());
     }
+=======
+        sb.append(oParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.toString());
+      }
+    }
+    if(this.eParamStringRef_ParamMacroRef.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    {
+      boolean first = true;
+      for(Object oParamStringRef_ParamMacroRef : this.eParamStringRef_ParamMacroRef) {
+        if(first) {
+          first = false;
+        }
+        else {
+          sb.append(System.getProperty("line.separator"));
+        }
+        sb.append(oParamStringRef_ParamMacroRef.toString());
+      }
+    }
+    sb.append(System.getProperty("line.separator"));
+    for(Object oRedefinedApplyInitializer : this.eRedefinedApplyInitializer) {
+      sb.append(oRedefinedApplyInitializer.toString());
+    }
+    if(this.eMacroBuilder.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oMacroBuilder : this.eMacroBuilder) {
+      sb.append(oMacroBuilder.toString());
+    }
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append("}");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();

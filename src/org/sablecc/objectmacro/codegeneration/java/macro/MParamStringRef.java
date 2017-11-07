@@ -39,9 +39,17 @@ public class MParamStringRef {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append("    private String get");
     sb.append(rName());
     sb.append("(");
+=======
+    sb.append("    private String build");
+    sb.append(rName());
+    sb.append("(");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            ");
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     for(Object oContextParam : this.eContextParam) {
       sb.append(oContextParam.toString());
     }

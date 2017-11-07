@@ -6,6 +6,7 @@ import java.util.*;
 
 public class MNone {
 
+<<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/scala/macro/MNone.java
     private final MExpandInsertPart mExpandInsertPart;
 
     private final List<Object> eInlineText_ParamInsert_TextInsert = new LinkedList<Object>();
@@ -64,6 +65,49 @@ public class MNone {
         sb.append("    }");
         sb.append(System.getProperty("line.separator"));
         return sb.toString();
+=======
+  private final List<Object> eStringPart_ParamInsertPart_EolPart_InsertMacroPart = new LinkedList<Object>();
+
+  public MNone() {
+  }
+
+  public MStringPart newStringPart(String pString, String pIndexBuilder) {
+    MStringPart lStringPart = new MStringPart(pString, pIndexBuilder);
+    this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lStringPart);
+    return lStringPart;
+  }
+
+  public MParamInsertPart newParamInsertPart(String pParamName, String pIndexBuilder) {
+    MParamInsertPart lParamInsertPart = new MParamInsertPart(pParamName, pIndexBuilder);
+    this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lParamInsertPart);
+    return lParamInsertPart;
+  }
+
+  public MEolPart newEolPart(String pIndexBuilder) {
+    MEolPart lEolPart = new MEolPart(pIndexBuilder);
+    this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lEolPart);
+    return lEolPart;
+  }
+
+  public MInsertMacroPart newInsertMacroPart(String pName, String pIndexBuilder, String pIndexInsert) {
+    MInsertMacroPart lInsertMacroPart = new MInsertMacroPart(pName, pIndexBuilder, pIndexInsert);
+    this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lInsertMacroPart);
+    return lInsertMacroPart;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("if(macros.length == 0){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    ");
+    for(Object oStringPart_ParamInsertPart_EolPart_InsertMacroPart : this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart) {
+      sb.append(oStringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1:src/org/sablecc/objectmacro/codegeneration/java/macro/MNone.java
     }
+    sb.append("}");
+    sb.append(System.getProperty("line.separator"));
+    return sb.toString();
+  }
 
 }

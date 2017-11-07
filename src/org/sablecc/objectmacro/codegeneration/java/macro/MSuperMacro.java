@@ -41,6 +41,7 @@ public class MSuperMacro {
     sb.append("public abstract class Macro {");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("    final static String LINE_SEPARATOR = System.getProperty(\"line.separator\");");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -48,6 +49,15 @@ public class MSuperMacro {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    final Map<Context, BuildState> build_states = new LinkedHashMap<>();");
+=======
+    sb.append("    public final static String LINE_SEPARATOR = System.getProperty(\"line.separator\");");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    public String expansion;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    public Map<Context, String> expansions = new LinkedHashMap<>();");
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    public String build(){");

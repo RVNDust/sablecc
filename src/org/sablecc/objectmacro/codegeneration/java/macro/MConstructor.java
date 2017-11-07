@@ -8,10 +8,16 @@ public class MConstructor {
 
   private final String pName;
   private final MConstructor mConstructor = this;
+<<<<<<< HEAD
   private final List<Object> eStringParam = new LinkedList<Object>();
   private final List<Object> eSetParam = new LinkedList<Object>();
   private final List<Object> eInitMacroParam_InitMacroInternal_InitStringInternal = new LinkedList<Object>();
   private final List<Object> eInitInternalValue = new LinkedList<Object>();
+=======
+  private final List<Object> eStringParam_MacroParam = new LinkedList<Object>();
+  private final List<Object> eSetParam = new LinkedList<Object>();
+  private final List<Object> eInitMacroInternal_InitStringInternal = new LinkedList<Object>();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
   public MConstructor(String pName) {
     if(pName == null) throw new NullPointerException();
@@ -20,16 +26,30 @@ public class MConstructor {
 
   public MStringParam newStringParam(String pName) {
     MStringParam lStringParam = new MStringParam(pName);
+<<<<<<< HEAD
     this.eStringParam.add(lStringParam);
     return lStringParam;
   }
 
+=======
+    this.eStringParam_MacroParam.add(lStringParam);
+    return lStringParam;
+  }
+
+  public MMacroParam newMacroParam(String pName) {
+    MMacroParam lMacroParam = new MMacroParam(pName);
+    this.eStringParam_MacroParam.add(lMacroParam);
+    return lMacroParam;
+  }
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   public MSetParam newSetParam(String pName) {
     MSetParam lSetParam = new MSetParam(pName);
     this.eSetParam.add(lSetParam);
     return lSetParam;
   }
 
+<<<<<<< HEAD
   public MInitMacroParam newInitMacroParam(String pName) {
     MInitMacroParam lInitMacroParam = new MInitMacroParam(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroParam);
@@ -39,11 +59,17 @@ public class MConstructor {
   public MInitMacroInternal newInitMacroInternal(String pName) {
     MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroInternal);
+=======
+  public MInitMacroInternal newInitMacroInternal(String pName) {
+    MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
+    this.eInitMacroInternal_InitStringInternal.add(lInitMacroInternal);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     return lInitMacroInternal;
   }
 
   public MInitStringInternal newInitStringInternal(String pName) {
     MInitStringInternal lInitStringInternal = new MInitStringInternal(pName);
+<<<<<<< HEAD
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitStringInternal);
     return lInitStringInternal;
   }
@@ -54,6 +80,12 @@ public class MConstructor {
     return lInitInternalValue;
   }
 
+=======
+    this.eInitMacroInternal_InitStringInternal.add(lInitStringInternal);
+    return lInitStringInternal;
+  }
+
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   String pName() {
     return this.pName;
   }
@@ -70,14 +102,22 @@ public class MConstructor {
     sb.append("(");
     {
       boolean first = true;
+<<<<<<< HEAD
       for(Object oStringParam : this.eStringParam) {
+=======
+      for(Object oStringParam_MacroParam : this.eStringParam_MacroParam) {
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
         if(first) {
           first = false;
         }
         else {
           sb.append(", ");
         }
+<<<<<<< HEAD
         sb.append(oStringParam.toString());
+=======
+        sb.append(oStringParam_MacroParam.toString());
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
       }
     }
     sb.append("){");
@@ -88,6 +128,7 @@ public class MConstructor {
     for(Object oSetParam : this.eSetParam) {
       sb.append(oSetParam.toString());
     }
+<<<<<<< HEAD
     if(this.eInitMacroParam_InitMacroInternal_InitStringInternal.size() > 0) {
       sb.append(System.getProperty("line.separator"));
     }
@@ -99,6 +140,13 @@ public class MConstructor {
     }
     for(Object oInitInternalValue : this.eInitInternalValue) {
       sb.append(oInitInternalValue.toString());
+=======
+    if(this.eInitMacroInternal_InitStringInternal.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oInitMacroInternal_InitStringInternal : this.eInitMacroInternal_InitStringInternal) {
+      sb.append(oInitMacroInternal_InitStringInternal.toString());
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));

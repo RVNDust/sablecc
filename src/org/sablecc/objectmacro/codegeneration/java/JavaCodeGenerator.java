@@ -22,7 +22,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.sablecc.objectmacro.codegeneration.*;
+<<<<<<< HEAD
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
+=======
+import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 import org.sablecc.objectmacro.exception.*;
 import org.sablecc.util.*;
 
@@ -74,13 +78,18 @@ public class JavaCodeGenerator
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         Map<String, Macro> macros = new LinkedHashMap<>();
+=======
+        Map<String, MMacro> macros = new LinkedHashMap<>();
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
         MacroCollector macroCollector = new MacroCollector(macros);
         getIr().getAST().apply(macroCollector);
 
         CodeGenerationWalker walker = new CodeGenerationWalker(getIr(),
                 packageDirectory, macros);
+<<<<<<< HEAD
         UtilsGenerationWalker utilsGenerationWalker = new UtilsGenerationWalker(getIr(), packageDirectory);
 
         getIr().getAST().apply(walker);
@@ -90,5 +99,8 @@ public class JavaCodeGenerator
 //                packageDirectory);
 //        getIr().getAST().apply(walker);
 >>>>>>> Comment Code generation to compile ObjectMacro
+=======
+        getIr().getAST().apply(walker);
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
 }
