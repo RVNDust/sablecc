@@ -356,6 +356,9 @@ public class CompilerException
 
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add semantic verification on argument type provided in a macro reference
 
     public static CompilerException incorrectMacroType(
             Set<String> expectedMacros,
@@ -381,6 +384,7 @@ public class CompilerException
                         String.valueOf(index), String.valueOf(parameter_name.getLine()),
                         String.valueOf(parameter_name.getPos())).toString());
     }
+<<<<<<< HEAD
 
     public static CompilerException invalidInsert(
             Token name){
@@ -392,4 +396,6 @@ public class CompilerException
     }
 =======
 >>>>>>> Add some exceptions on objectmacro front
+=======
+>>>>>>> Add semantic verification on argument type provided in a macro reference
 }

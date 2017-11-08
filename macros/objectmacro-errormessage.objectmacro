@@ -408,6 +408,9 @@ Char: $char
 Parameter '$param' has already referenced Macro '$macro'.
 $end: duplicate_macro_ref $
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add semantic verification on argument type provided in a macro reference
 
 $comment: ========== incorrect_macro_type ============ $
 
@@ -416,6 +419,7 @@ $insert: semantic_error_head $
 
 Line : $line
 Char : $char
+<<<<<<< HEAD
 Incorrect macro type at index $index. (expected : $expected, found : $found)
 $end: incorrect_macro_type $
 
@@ -430,3 +434,7 @@ Macro '$name' cannot be inserted because it also has parameters.
 $end: invalid_insert $
 =======
 >>>>>>> Add some exceptions on objectmacro front
+=======
+You provided a wrong argument type at index $index. (expected : $expected, found : $found)
+$end: incorrect_macro_type $
+>>>>>>> Add semantic verification on argument type provided in a macro reference
