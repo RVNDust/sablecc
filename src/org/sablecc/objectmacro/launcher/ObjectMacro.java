@@ -427,9 +427,19 @@ public class ObjectMacro {
         ast.apply(new VarVerifier(globalIndex));
 
         if (strictness == Strictness.STRICT) {
+
+        if(strictness == Strictness.STRICT){
             for (Macro macro : globalIndex.getAllMacros()) {
+<<<<<<< HEAD
                 for (Param param : macro.getAllParams()) {
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+                Set<Param> allParamsInternals = new LinkedHashSet<>();
+                allParamsInternals.addAll(macro.getAllInternals());
+                allParamsInternals.addAll(macro.getAllParams());
+
+                for (Param param : allParamsInternals) {
+>>>>>>> Verify params and internals if they are all used
                     if (!param.isUsed()) {
                         throw CompilerException.unusedParam(param);
                     }
