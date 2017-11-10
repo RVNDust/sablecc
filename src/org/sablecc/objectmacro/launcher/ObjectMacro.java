@@ -411,9 +411,9 @@ public class ObjectMacro {
         ast.apply(new ParamReferenceCollector(globalIndex));
         ast.apply(new DirectiveCollector(globalIndex));
         ast.apply(new VarVerifier(globalIndex));
-        ast.apply(new CyclicDetector(globalIndex));
 
         for(Macro macro : globalIndex.getAllMacros()){
+<<<<<<< HEAD
             macro.detectParamsCyclicReference();
         }
 
@@ -434,6 +434,14 @@ public class ObjectMacro {
         ast.apply(new VarVerifier(globalIndex));
 
         if (strictness == Strictness.STRICT) {
+=======
+            Set<Param> allParamsInternals = new LinkedHashSet<>();
+            allParamsInternals.addAll(macro.getAllInternals());
+            allParamsInternals.addAll(macro.getAllParams());
+
+            macro.detectParamsCyclicReference();
+        }
+>>>>>>> Removed walker cyclic detector and computing indirect param references
 
         if(strictness == Strictness.STRICT){
             for (Macro macro : globalIndex.getAllMacros()) {

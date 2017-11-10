@@ -213,6 +213,7 @@ public class Macro{
         if(containsKeyInInternals(stringName) || containsKeyInParams(stringName)){
             throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
         }
+
         this.allInternals.add(newInternal);
         this.namedInternals.put(stringName, newInternal);
 
@@ -225,7 +226,6 @@ public class Macro{
         String name = variable.getText();
         if(containsKeyInParams(name)){
             return this.namedParams.get(name);
-
         }
 
         if(containsKeyInInternals(name)){
@@ -429,7 +429,7 @@ public class Macro{
         return paramsName;
     }
 
-    public void computeIndirectParamReferences(){
+    public void detectParamsCyclicReference(){
 
         Progeny<Param> referencedParamProgeny = new Progeny<Param>() {
 
@@ -450,17 +450,12 @@ public class Macro{
                 new ComponentFinder<>(params, referencedParamProgeny);
 
         for(Param param : params){
-            Set<Param> reach = new LinkedHashSet<>();
-            for(Param reachedParam : this.paramsComponentFinder.getReach(
-                    this.paramsComponentFinder.getRepresentative(param))){
-
-                reach.add(reachedParam);
+            Param representative = this.paramsComponentFinder.getRepresentative(param);
+            if(param != representative){
+                throw CompilerException.cyclicReference(param.getNameDeclaration(), representative.getNameDeclaration());
             }
-
-            param.setIndirectParamReferences(reach);
         }
     }
-
     public ComponentFinder<Param> getComponentFinder(){
         return this.paramsComponentFinder;
     }
