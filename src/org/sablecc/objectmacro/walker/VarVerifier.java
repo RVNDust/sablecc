@@ -217,7 +217,7 @@ public class VarVerifier
         Param currentParam = this.paramsList[this.currentIndex++];
         AMacroReference macroReference = (AMacroReference) node.parent();
 
-        //Among the internals of the referenced macro, the parameter must be of type String here
+        //The internal corresponding to currentIndex must be of type String here
         if(!currentParam.isString()){
 
             throw CompilerException.incorrectArgumentType("Macro", "String",
@@ -245,7 +245,9 @@ public class VarVerifier
         Set<String> expectedMacrosType = new HashSet<>();
         Set<String> providedMacrosType = new HashSet<>();
 
-        if(expectedParam.isString()){
+        if(expectedParam.isString()
+                && !providedParam.isString()){
+
             throw CompilerException.incorrectArgumentType(
                     "String", "Macro",
                     node.getIdentifier().getLine(), node.getIdentifier().getPos());
@@ -274,9 +276,9 @@ public class VarVerifier
             AVarMacroBodyPart node) {
 
         this.currentMacro.setParamUsed(
-                new TIdentifier(
-                        Utils.getVarName(
-                                node.getVariable())));
+                new TIdentifier(Utils.getVarName(
+                                    node.getVariable()),
+                                    node.getVariable().getLine(), node.getVariable().getPos()));
 
 >>>>>>> Add new errors incorrectArgumentType and incorrectArgumentCount
     }
