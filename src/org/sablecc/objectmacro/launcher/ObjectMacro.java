@@ -377,9 +377,16 @@ public class ObjectMacro {
 =======
         globalIndex = verifySemantics(ast, strictness, verbosity);
 
+<<<<<<< HEAD
         generateIntermediateFile(
                 verbosity, destinationDirectory, macroFile);
 >>>>>>> Add internals name in intermediate representation in args
+=======
+        if(generateCode){
+            generateIntermediateFile(
+                    verbosity, destinationDirectory, macroFile);
+        }
+>>>>>>> Clean up code, add comments
 
 >>>>>>> FrontEnd is now independent about name conventions
     }
@@ -467,6 +474,7 @@ public class ObjectMacro {
         StringBuilder macros_string = new StringBuilder();
 
         for (Macro macro : globalIndex.getAllMacros()) {
+<<<<<<< HEAD
             MMacro macro_macro = createMacro(macro);
             macros_string.append(macro_macro.toString());
             macros_string.append(System.getProperty("line.separator"));
@@ -829,10 +837,11 @@ public class ObjectMacro {
 =======
         return new AIntermediateRepresentation(macros);
 =======
+=======
+>>>>>>> Clean up code, add comments
             MMacro macro_macro = createMacro(macro);
             macros_string.append(macro_macro.toString());
             macros_string.append(System.getProperty("line.separator"));
-
         }
 
         String macroFileName = macroFile.getName();
@@ -861,7 +870,6 @@ public class ObjectMacro {
         String macroNames[] = Utils.splitName(macro.getNameDeclaration());
         for(String part : macroNames){
             mMacro.newSimpleName(part);
-
         }
 
         Set<Param> macro_internals = macro.getAllInternals();
@@ -871,13 +879,11 @@ public class ObjectMacro {
         createMacroBody(mMacro, macroBodyParts);
 
         for(Param param : macro_params){
-
             createParam(
                     mMacro.newParam(), param);
         }
 
         for(Param internal : macro_internals){
-
             createInternal(
                     mMacro.newInternal(), internal);
         }
@@ -1190,7 +1196,6 @@ public class ObjectMacro {
                 String macroRefName[] = Utils.splitName(aVarStaticValue.getIdentifier());
                 for(String part : macroRefName){
                     mVarArgument.newSimpleName(part);
-
                 }
 >>>>>>> FrontEnd is now independent about name conventions
             }

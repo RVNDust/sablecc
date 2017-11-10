@@ -101,12 +101,17 @@ public class ObjectMacroBack {
             throws ParserException, LexerException {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         // default target is java-constructor
         String targetLanguage = "java-constructor";
 =======
         // default target is java
         String targetLanguage = "java";
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        // default target is java-constructor
+        String targetLanguage = "java-constructor";
+>>>>>>> Clean up code, add comments
 
         // default destination directory is current working directory
         File destinationDirectory = new File(System.getProperty("user.dir"));
@@ -132,6 +137,7 @@ public class ObjectMacroBack {
             case LIST_TARGETS:
                 System.out.println("Available targets:");
 <<<<<<< HEAD
+<<<<<<< HEAD
                 System.out.println(" java-constructor (default)");
 =======
                 System.out.println(" java (default)");
@@ -139,6 +145,9 @@ public class ObjectMacroBack {
                 System.out.println(" scala");
                 System.out.println(" intermediate");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+                System.out.println(" java-constructor (default)");
+>>>>>>> Clean up code, add comments
                 return;
 
             case TARGET:
@@ -196,8 +205,12 @@ public class ObjectMacroBack {
                         + Option.getShortHelpMessage() + " file.intermediate");
 =======
                 System.out.println("Usage: objectmacro "
+<<<<<<< HEAD
                         + Option.getShortHelpMessage() + " file.objectmacro");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+                        + Option.getShortHelpMessage() + " file.intermediate");
+>>>>>>> Clean up code, add comments
                 System.out.println("Options:");
                 System.out.println(Option.getLongHelpMessage());
                 return;
@@ -224,10 +237,14 @@ public class ObjectMacroBack {
         if (argumentCollection.getTextArguments().size() == 0) {
             System.out.println("Usage: objectmacro "
 <<<<<<< HEAD
+<<<<<<< HEAD
                     + Option.getShortHelpMessage() + " file.intermediate");
 =======
                     + Option.getShortHelpMessage() + " file.objectmacro");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+                    + Option.getShortHelpMessage() + " file.intermediate");
+>>>>>>> Clean up code, add comments
             return;
         }
         else if (argumentCollection.getTextArguments().size() > 1) {
@@ -236,12 +253,16 @@ public class ObjectMacroBack {
 
         // check target
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (!(targetLanguage.equals("java-constructor"))) {
 =======
         if (!(targetLanguage.equals("java")
                 || targetLanguage.equals("intermediate")
                 || targetLanguage.equals("c") || targetLanguage.equals("scala"))) {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        if (!(targetLanguage.equals("java-constructor"))) {
+>>>>>>> Clean up code, add comments
             throw CompilerException.unknownTarget(targetLanguage);
         }
 
@@ -252,12 +273,19 @@ public class ObjectMacroBack {
         File macroFile = new File(textArgument.getText());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (!textArgument.getText().endsWith(".intermediate")) {
             throw CompilerException.invalidIntermediateSuffix(textArgument.getText());
         }
 
 =======
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        if (!textArgument.getText().endsWith(".intermediate")) {
+            throw CompilerException.invalidSuffix(textArgument.getText());
+        }
+
+>>>>>>> Clean up code, add comments
         if (!macroFile.exists()) {
             throw CompilerException.missingMacroFile(textArgument.getText());
         }
@@ -321,6 +349,9 @@ public class ObjectMacroBack {
         codeGenerator.generateCode();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Clean up code, add comments
         if (targetLanguage.equals("java-constructor")) {
             codeGenerator = new JavaCodeGenerator(ir);
         }
@@ -345,6 +376,7 @@ public class ObjectMacroBack {
 
             codeGenerator.generateCode();
         }
+<<<<<<< HEAD
 =======
 //        if (targetLanguage.equals("java")) {
 //            codeGenerator = new JavaCodeGenerator(ir);
@@ -380,5 +412,7 @@ public class ObjectMacroBack {
 //            codeGenerator.generateCode();
 //        }
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Clean up code, add comments
     }
 }

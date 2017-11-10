@@ -44,6 +44,7 @@ public class GlobalIndex {
         Macro firstMacro = getMacroOrNull(duplicateDeclaration);
         if (firstMacro != null) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             throw CompilerException.duplicateDeclaration(duplicateDeclaration,
                     firstMacro.getNameDeclaration());
 =======
@@ -51,6 +52,10 @@ public class GlobalIndex {
             throw CompilerException.duplicateDeclaration(duplicateDeclaration,
                     firstDeclaration);
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+            throw CompilerException.duplicateDeclaration(duplicateDeclaration,
+                    firstMacro.getNameDeclaration());
+>>>>>>> Clean up code, add comments
         }
 
         Macro macro = new Macro(this, declaration);
@@ -69,12 +74,16 @@ public class GlobalIndex {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         return this.macroMap.get(identifier.getText());
 =======
         String name = identifier.getText();
 
         return this.macroMap.get(name);
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+        return this.macroMap.get(identifier.getText());
+>>>>>>> Clean up code, add comments
     }
 
     public Macro getMacro(

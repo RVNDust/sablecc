@@ -24,8 +24,11 @@ import org.sablecc.objectmacro.exception.*;
 import org.sablecc.objectmacro.exception.CompilerException;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 import org.sablecc.objectmacro.syntax3.node.*;
+<<<<<<< HEAD
 
 import java.util.*;
+=======
+>>>>>>> Clean up code, add comments
 
 import java.util.*;
 
@@ -54,8 +57,6 @@ public class Param {
 
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
-
-    private final Set<Param> indirectParamReferences = new LinkedHashSet<>();
 
     private boolean isUsed;
 
@@ -99,7 +100,7 @@ public class Param {
                     directive, this.directives.get(optionName).getDeclaration());
         }
 
-        Directive newDirective = new Directive(directive);
+        Directive newDirective = new Directive(directive, this);
         this.directives.put(
                 optionName, newDirective);
         this.allDirectives.add(newDirective);
@@ -138,29 +139,16 @@ public class Param {
         this.paramReferences.put(name, newParamRef);
     }
 
-    Param getParamReferenceOrNull(
-            TIdentifier paramName){
-
-        return this.paramReferences.get(paramName.getText());
-    }
-
-    public boolean references(
-            TIdentifier paramName){
-
-        return this.getParamReferenceOrNull(paramName) != null;
-    }
-
     public Set<Directive> getAllDirectives(){
-
         return this.allDirectives;
     }
 
     public Set<AMacroReference> getMacroReferences(){
-
         return this.macroReferences;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
+<<<<<<< HEAD
     public void addMacroReference(
             AMacroReference macroRef){
 
@@ -201,6 +189,14 @@ public class Param {
         }
 
         this.paramReferences.put(name, newParamRef);
+=======
+    public TIdentifier getNameDeclaration() {
+        return this.declaration.getName();
+    }
+
+    public String getName() {
+        return this.declaration.getName().getText();
+>>>>>>> Clean up code, add comments
     }
 
 <<<<<<< HEAD
@@ -214,15 +210,17 @@ public class Param {
 =======
 >>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
     public AParam getDeclaration(){
-
         return this.declaration;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
+<<<<<<< HEAD
     public String getName() {
         return null;
     }
 
+=======
+>>>>>>> Clean up code, add comments
     public boolean isUsed() {
         return this.isUsed;
     }
@@ -233,13 +231,17 @@ public class Param {
 
     public boolean isString(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> Clean up code, add comments
         return this.isString;
     }
 
     void setString(){
+<<<<<<< HEAD
 <<<<<<< HEAD
         this.isString = true;
     }
@@ -258,6 +260,8 @@ public class Param {
         return this.parent;
 =======
 
+=======
+>>>>>>> Clean up code, add comments
         this.isString = true;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
@@ -272,14 +276,7 @@ public class Param {
         return Collections.unmodifiableSet(directlyParams);
     }
 
-    public Set<Param> getIndirectParamReferences(){
-
-        return this.indirectParamReferences;
-    }
-
-    void setIndirectParamReferences(
-            Set<Param> params){
-
-        this.indirectParamReferences.addAll(params);
+    public Macro getParent(){
+        return this.parent;
     }
 }

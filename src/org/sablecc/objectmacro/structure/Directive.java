@@ -20,11 +20,18 @@ import org.sablecc.exception.InternalException;
 import org.sablecc.objectmacro.syntax3.node.ADirective;
 import org.sablecc.objectmacro.syntax3.node.TIdentifier;
 
+<<<<<<< HEAD
+=======
+/**
+ * Created by lam on 06/09/17.
+ */
+>>>>>>> Clean up code, add comments
 public class Directive {
 
     private final Param parent;
 
     private final ADirective declaration;
+<<<<<<< HEAD
 
     Directive(
             ADirective declaration,
@@ -41,6 +48,30 @@ public class Directive {
         this.declaration = declaration;
         this.parent = parent;
 
+=======
+
+    Directive(
+            ADirective declaration,
+            Param parent){
+
+        if(parent == null){
+            throw new InternalException("parent may not be null here");
+        }
+
+        if(declaration == null){
+            throw new InternalException("declaration may not be null here");
+        }
+
+        this.declaration = declaration;
+        this.parent = parent;
+
+    }
+
+    public void addParamReference(
+            TIdentifier name){
+
+        this.parent.getParent().getParam(name);
+>>>>>>> Clean up code, add comments
     }
 
     public ADirective getDeclaration(){
