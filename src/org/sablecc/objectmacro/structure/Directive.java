@@ -21,11 +21,14 @@ import org.sablecc.objectmacro.syntax3.node.ADirective;
 import org.sablecc.objectmacro.syntax3.node.TIdentifier;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /**
  * Created by lam on 06/09/17.
  */
 >>>>>>> Clean up code, add comments
+=======
+>>>>>>> Add copyrights
 public class Directive {
 
     private final Param parent;

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add copyrights
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -15,6 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD
 package org.sablecc.objectmacro.walker;
 
 =======
@@ -26,6 +30,10 @@ import org.sablecc.objectmacro.structure.Insert;
 >>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
 =======
 >>>>>>> Add line and pos to a param reference in order to get the line and position in an error
+=======
+package org.sablecc.objectmacro.walker;
+
+>>>>>>> Add copyrights
 import org.sablecc.objectmacro.syntax3.analysis.DepthFirstAdapter;
 import org.sablecc.objectmacro.structure.GlobalIndex;
 import org.sablecc.objectmacro.structure.Macro;
@@ -34,11 +42,14 @@ import org.sablecc.objectmacro.syntax3.node.*;
 import org.sablecc.objectmacro.util.Utils;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /**
  * Created by lam on 06/09/17.
  */
 >>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
+=======
+>>>>>>> Add copyrights
 public class ParamReferenceCollector
         extends DepthFirstAdapter {
 

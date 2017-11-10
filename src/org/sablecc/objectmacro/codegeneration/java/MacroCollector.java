@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add copyrights
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -15,6 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD
 package org.sablecc.objectmacro.codegeneration.java;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
@@ -38,6 +42,8 @@ public class MacroCollector
     public MacroCollector(
             Map<String, Macro> macros){
 =======
+=======
+>>>>>>> Add copyrights
 package org.sablecc.objectmacro.codegeneration.java;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
@@ -49,9 +55,6 @@ import org.sablecc.objectmacro.util.Utils;
 import java.util.LinkedList;
 import java.util.Map;
 
-/**
- * Created by lam on 05/10/17.
- */
 public class MacroCollector
         extends DepthFirstAdapter{
 
