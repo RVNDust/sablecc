@@ -21,8 +21,11 @@ package org.sablecc.objectmacro.walker;
 package org.sablecc.objectmacro.walker;
 
 import org.sablecc.objectmacro.exception.CompilerException;
+<<<<<<< HEAD
 import org.sablecc.objectmacro.structure.Insert;
 >>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
+=======
+>>>>>>> Add line and pos to a param reference in order to get the line and position in an error
 import org.sablecc.objectmacro.syntax3.analysis.DepthFirstAdapter;
 import org.sablecc.objectmacro.structure.GlobalIndex;
 import org.sablecc.objectmacro.structure.Macro;
@@ -74,10 +77,14 @@ public class ParamReferenceCollector
                     new TIdentifier(
                             Utils.getVarName(
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     node.getVariable()), node.getVariable().getLine(), node.getVariable().getPos()));
 =======
                                     node.getVariable())));
 >>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
+=======
+                                    node.getVariable()), node.getVariable().getLine(), node.getVariable().getPos()));
+>>>>>>> Add line and pos to a param reference in order to get the line and position in an error
         }
     }
 
