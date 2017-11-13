@@ -287,4 +287,14 @@ public class VarVerifier
 
 >>>>>>> Add new errors incorrectArgumentType and incorrectArgumentCount
     }
+
+    @Override
+    public void caseAVarStringPart(
+            AVarStringPart node) {
+
+        this.currentMacro.setParamUsed(
+                new TIdentifier(Utils.getVarName(
+                                    node.getVariable()),
+                                    node.getVariable().getLine(), node.getVariable().getPos()));
+    }
 }
