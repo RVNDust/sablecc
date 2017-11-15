@@ -487,7 +487,7 @@ Productions
   directive
     =
       comma identifier assign string
-        {-> New directive(identifier, [string.string])}
+        {-> New directive(identifier, string.dquote, [string.string])}
     ;
 
   macro_reference
@@ -501,7 +501,7 @@ Productions
       {var} identifier
     |
       {string} string
-        {-> New static_value.string([string.string])}
+        {-> New static_value.string(string.dquote, [string.string])}
     ;
 
   type
@@ -542,6 +542,7 @@ Productions
 
   string
 <<<<<<< HEAD
+<<<<<<< HEAD
         {-> dquote [string]:string_part*}
     =
       [l_dquote]:dquote [parts]:string_part* [r_dquote]:dquote
@@ -552,6 +553,12 @@ Productions
       [l_dquote]:dquote [parts]:string_part* [r_dquote]:dquote
         {-> [parts.string_part]}
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+        {-> dquote [string]:string_part*}
+    =
+      [l_dquote]:dquote [parts]:string_part* [r_dquote]:dquote
+        {-> l_dquote [parts.string_part]}
+>>>>>>> Add left double quote to AST for incorrect type exception
     ;
 
   string_part
@@ -618,7 +625,7 @@ Abstract Syntax Tree
 
 =======
   directive =
-      [name]:identifier [parts]:string_part*;
+      [name]:identifier [l_dquote]:dquote [parts]:string_part*;
 
 >>>>>>> New grammar for intermediate representation and objectmacro
   macro_reference =
@@ -627,9 +634,13 @@ Abstract Syntax Tree
   static_value =
       {var} identifier |
 <<<<<<< HEAD
+<<<<<<< HEAD
       {string} [l_dquote]:dquote [parts]:string_part*;
 =======
       {string} [parts]:string_part*;
+=======
+      {string} [l_dquote]:dquote [parts]:string_part*;
+>>>>>>> Add left double quote to AST for incorrect type exception
 
   type =
       {string} string_kw |
@@ -639,6 +650,7 @@ Abstract Syntax Tree
       [static_values]:static_value+;
 >>>>>>> New grammar for intermediate representation and objectmacro
 
+<<<<<<< HEAD
   type =
       {string} string_kw |
       {macros} [macros]:macro_reference+;
@@ -654,6 +666,8 @@ Abstract Syntax Tree
   string_part =
       {insert} [macro]:macro_reference |
 =======
+=======
+>>>>>>> Add left double quote to AST for incorrect type exception
   string_part =
 <<<<<<< HEAD
       {insert} insert_command [macro]:macro_reference r_brace |
