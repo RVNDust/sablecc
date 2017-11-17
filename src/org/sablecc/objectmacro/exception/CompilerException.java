@@ -385,6 +385,9 @@ public class CompilerException
                         String.valueOf(parameter_name.getPos())).toString());
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add semantic verification cannot insert a macro with params
 
     public static CompilerException invalidInsert(
             Token name){
@@ -394,8 +397,11 @@ public class CompilerException
 
         return new CompilerException(new MInvalidInsert(line, pos, name.getText()).toString());
     }
+<<<<<<< HEAD
 =======
 >>>>>>> Add some exceptions on objectmacro front
 =======
 >>>>>>> Add semantic verification on argument type provided in a macro reference
+=======
+>>>>>>> Add semantic verification cannot insert a macro with params
 }

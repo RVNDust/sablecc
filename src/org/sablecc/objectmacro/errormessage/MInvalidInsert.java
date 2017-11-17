@@ -55,7 +55,13 @@ public class MInvalidInsert {
     sb.append(System.getProperty("line.separator"));
     sb.append("Macro '");
     sb.append(rName());
+<<<<<<< HEAD
     sb.append("' cannot be inserted because it also has parameters.");
+=======
+    sb.append("' cannot be inserted because '");
+    sb.append(rName());
+    sb.append("' does not only have internals.");
+>>>>>>> Add semantic verification cannot insert a macro with params
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

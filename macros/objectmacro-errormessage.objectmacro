@@ -437,4 +437,17 @@ $end: invalid_insert $
 =======
 You provided a wrong argument type at index $index. (expected : $expected, found : $found)
 $end: incorrect_macro_type $
+<<<<<<< HEAD
 >>>>>>> Add semantic verification on argument type provided in a macro reference
+=======
+
+$comment: ========== invalid_insert ========== $
+
+$macro: invalid_insert(line, char, name) $
+$insert: semantic_error_head $
+
+Line : $line
+Char : $char
+Macro '$name' cannot be inserted because '$name' does not only have internals.
+$end: invalid_insert $
+>>>>>>> Add semantic verification cannot insert a macro with params
