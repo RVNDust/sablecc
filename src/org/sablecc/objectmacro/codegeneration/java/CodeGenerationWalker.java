@@ -533,7 +533,6 @@ public class CodeGenerationWalker
             this.currentMacroToBuild.newInternalMacroSetter(paramName);
 =======
         String paramName = buildNameCamelCase(node.getNames());
-        this.indexBuilder = 0;
 
         if(node.getType() instanceof AStringType){
             this.currentMacroToBuild.newInternalStringField(paramName);
@@ -609,8 +608,12 @@ public class CodeGenerationWalker
         this.indexBuilder = 0;
         this.indexInsert = 0;
         this.currentParamMacroRefBuilder = null;
+<<<<<<< HEAD
         this.createdBuilders.clear();
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        this.createdBuilders = new ArrayList<>();
+>>>>>>> fix creating same string builder in macro body
     }
 
     @Override
@@ -752,11 +755,15 @@ public class CodeGenerationWalker
         this.currentApplyInitializer = null;
         this.indexBuilder = 0;
         this.indexInsert = 0;
+<<<<<<< HEAD
         this.createdBuilders.clear();
 <<<<<<< HEAD
         this.currentParamMacroRef = null;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
+=======
+        this.createdBuilders = new ArrayList<>();
+>>>>>>> fix creating same string builder in macro body
         this.currentParamMacroRefBuilder = null;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     }
@@ -946,7 +953,7 @@ public class CodeGenerationWalker
             index_builder = getLetterFromInteger(this.indexBuilder);
 
             //Avoid declaring stringbuilder of the same name
-            if(this.createdBuilders.contains(index_builder)){
+            while(this.createdBuilders.contains(index_builder)){
                 this.indexBuilder++;
                 index_builder = getLetterFromInteger(this.indexBuilder);
             }
@@ -1204,12 +1211,18 @@ public class CodeGenerationWalker
 
         }else{
             if(tempInsertMacroPart != null){
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+                index_builder = getLetterFromInteger(this.indexBuilder);
+
+>>>>>>> fix creating same string builder in macro body
                 this.currentInsertMacroPart =
                         tempInsertMacroPart.newInsertMacroPart(
                                 macro_name,
                                 index_builder,
                                 index_insert);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
             }
@@ -1235,6 +1248,9 @@ public class CodeGenerationWalker
         Integer tempIndexInsert = this.indexInsert;
         this.currentContextName = null;
 =======
+=======
+
+>>>>>>> fix creating same string builder in macro body
             }
             else if(this.currentNone != null){
                 this.currentInsertMacroPart =
