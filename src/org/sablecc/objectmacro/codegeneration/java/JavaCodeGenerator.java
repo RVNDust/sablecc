@@ -23,10 +23,14 @@ import java.util.Map;
 
 import org.sablecc.objectmacro.codegeneration.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
 =======
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 import org.sablecc.objectmacro.exception.*;
 import org.sablecc.util.*;
 
@@ -79,10 +83,14 @@ public class JavaCodeGenerator
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         Map<String, Macro> macros = new LinkedHashMap<>();
 =======
         Map<String, MMacro> macros = new LinkedHashMap<>();
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        Map<String, Macro> macros = new LinkedHashMap<>();
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
         MacroCollector macroCollector = new MacroCollector(macros);
         getIr().getAST().apply(macroCollector);

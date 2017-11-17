@@ -37,9 +37,12 @@ public class MApplyInternalsInitializer {
     sb.append("\"){");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     sb.append("    ");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     for(Object oRedefinedInternalsSetter : this.eRedefinedInternalsSetter) {
       sb.append(oRedefinedInternalsSetter.toString());
     }

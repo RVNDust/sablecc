@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -15,16 +16,27 @@
  * limitations under the License.
  */
 
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 package org.sablecc.objectmacro.codegeneration.java.structure;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
 
+<<<<<<< HEAD
 import java.util.*;
 
+=======
+import java.util.List;
+
+/**
+ * Created by lam on 17/11/17.
+ */
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 public class Macro {
 
     private final MMacro macro;
 
+<<<<<<< HEAD
     private final String name;
 
     private final List<String> parametersName;
@@ -57,5 +69,34 @@ public class Macro {
 
     public String getName(){
         return this.name;
+=======
+    private final List<String> parameters;
+
+    private final List<String> internals;
+
+    public Macro(
+            MMacro macro,
+            List<String> parameters,
+            List<String> internals){
+
+        this.macro = macro;
+        this.parameters = parameters;
+        this.internals = internals;
+    }
+
+    public List<String> getInternals() {
+
+        return internals;
+    }
+
+    public List<String> getParameters() {
+
+        return parameters;
+    }
+
+    public MMacro getMacro() {
+
+        return macro;
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     }
 }

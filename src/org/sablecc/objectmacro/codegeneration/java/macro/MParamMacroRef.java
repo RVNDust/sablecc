@@ -17,21 +17,13 @@ import java.util.*;
 public class MParamMacroRef {
 
   private final String pName;
-  private final String pIndexBuilder;
   private final MParamMacroRef mParamMacroRef = this;
   private final List<Object> eContextParam = new LinkedList<Object>();
-  private final List<Object> eContextName = new LinkedList<Object>();
   private final List<Object> eGetInternalTail = new LinkedList<Object>();
-  private final List<Object> eNone = new LinkedList<Object>();
-  private final List<Object> eBeforeFirst = new LinkedList<Object>();
-  private final List<Object> eSeparator = new LinkedList<Object>();
-  private final List<Object> eAfterLast = new LinkedList<Object>();
 
-  public MParamMacroRef(String pName, String pIndexBuilder) {
+  public MParamMacroRef(String pName) {
     if(pName == null) throw new NullPointerException();
     this.pName = pName;
-    if(pIndexBuilder == null) throw new NullPointerException();
-    this.pIndexBuilder = pIndexBuilder;
   }
 
   public MContextParam newContextParam() {
@@ -40,18 +32,13 @@ public class MParamMacroRef {
     return lContextParam;
   }
 
-  public MContextName newContextName(String pContextName) {
-    MContextName lContextName = new MContextName(pContextName);
-    this.eContextName.add(lContextName);
-    return lContextName;
-  }
-
   public MGetInternalTail newGetInternalTail() {
     MGetInternalTail lGetInternalTail = new MGetInternalTail();
     this.eGetInternalTail.add(lGetInternalTail);
     return lGetInternalTail;
   }
 
+<<<<<<< HEAD
   public MNone newNone() {
     MNone lNone = new MNone();
     this.eNone.add(lNone);
@@ -77,10 +64,13 @@ public class MParamMacroRef {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
   }
 
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
   String pName() {
     return this.pName;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   String pIndexBuilder() {
@@ -88,10 +78,13 @@ public class MParamMacroRef {
   }
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
   private String rName() {
     return this.mParamMacroRef.pName();
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   @Override
   public String toString() {
@@ -108,40 +101,28 @@ public class MParamMacroRef {
     return this.mParamMacroRef.pIndexBuilder();
   }
 
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("    private String build");
+    sb.append("    private Macro[] get");
     sb.append(rName());
     sb.append("(");
-    sb.append(System.getProperty("line.separator"));
-    sb.append("            ");
     for(Object oContextParam : this.eContextParam) {
       sb.append(oContextParam.toString());
     }
     sb.append("){");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("        StringBuilder sb");
-    sb.append(rIndexBuilder());
-    sb.append(" = new StringBuilder();");
-    sb.append(System.getProperty("line.separator"));
-    sb.append("        Context local_context = ");
-    if(this.eContextName.size() == 0) {
-      sb.append("context");
-    }
-    for(Object oContextName : this.eContextName) {
-      sb.append(oContextName.toString());
-    }
-    sb.append(";");
-    sb.append(System.getProperty("line.separator"));
-    sb.append("        Macro macros[] = this.list_");
+    sb.append("        return this.list_");
     sb.append(rName());
     for(Object oGetInternalTail : this.eGetInternalTail) {
       sb.append(oGetInternalTail.toString());
     }
     sb.append(";");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        ");
     for(Object oNone : this.eNone) {
       sb.append(oNone.toString());
@@ -181,6 +162,8 @@ public class MParamMacroRef {
     sb.append(".toString();");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append(System.getProperty("line.separator"));
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();

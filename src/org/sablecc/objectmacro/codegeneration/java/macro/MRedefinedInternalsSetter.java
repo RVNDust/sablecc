@@ -64,6 +64,7 @@ public class MRedefinedInternalsSetter {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("@Override");
     sb.append(System.getProperty("line.separator"));
     sb.append("void set");
@@ -72,6 +73,11 @@ public class MRedefinedInternalsSetter {
     sb.append(System.getProperty("line.separator"));
     sb.append("    void set");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("@Override");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("void set");
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append(rName());
     sb.append("(M");
     sb.append(rName());
@@ -81,10 +87,14 @@ public class MRedefinedInternalsSetter {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    ");
 =======
     sb.append("        ");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("    ");
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     {
       boolean first = true;
       for(Object oInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart : this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart) {
@@ -98,6 +108,7 @@ public class MRedefinedInternalsSetter {
       }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    ");
     for(Object oSetInternal : this.eSetInternal) {
       sb.append(oSetInternal.toString());
@@ -110,6 +121,13 @@ public class MRedefinedInternalsSetter {
     }
     sb.append("    }");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("    ");
+    for(Object oSetInternal : this.eSetInternal) {
+      sb.append(oSetInternal.toString());
+    }
+    sb.append("}");
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

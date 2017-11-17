@@ -299,6 +299,7 @@ $expand: param_macro_field, param_string_field, internal_macro_field, internal_s
 $expand: context_field, before_first="\n" $
 $expand: constructor, before_first="\n" $
 $expand: param_string_setter, param_macro_setter, internal_string_setter, internal_macro_setter, before_first="\n", separator="\n" $
+$expand: param_string_ref_builder, param_macro_ref_builder, separator="\n", before_first="\n" $
 $expand: param_string_ref, param_macro_ref, separator="\n", before_first="\n" $
 
 $expand: redefined_apply_initializer $
@@ -1201,14 +1202,23 @@ $macro: class_separator $
 $insert: header $
 $expand: package_declaration, before_first="\n" $
 
+<<<<<<< HEAD
 class DSeparator
         extends Directive {
+=======
+$macro: apply_internals_initializer(param_name) $
+macro.apply(new InternalsInitializer("$param_name"){
+$expand: redefined_internals_setter $
+});
+$end: apply_internals_initializer $
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
     DSeparator(String value) {
 
         super(value);
     }
 
+<<<<<<< HEAD
     @Override
     String apply(
             Integer index,
@@ -1223,6 +1233,16 @@ class DSeparator
     }
 }
 $end: class_separator $
+=======
+$macro: redefined_internals_setter(name) $
+@Override
+void set$name(M$name m$name){
+
+    $expand: init_string_builder, string_part, param_insert_part, eol_part, insert_macro_part, separator="\n" $
+    $expand: set_internal $
+}
+$end: redefined_internals_setter $
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
 $comment$
 =========================================================
@@ -1296,8 +1316,14 @@ public class ObjectMacroException
     static ObjectMacroException cannotModify(
             String macroName){
 
+<<<<<<< HEAD
         return new ObjectMacroException(new MCannotModify(macroName).toString());
     }
+=======
+$macro: set_internal(macro_name, param_name, context)   $
+        m$macro_name.set$param_name($context, $expand: param_ref, string_builder_build $);
+$end: set_internal $
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
 }
 $end: object_macro_exception $
@@ -1306,11 +1332,18 @@ $macro: incorrect_type $
 $insert: header $
 $expand: package_declaration, before_first="\n" $
 
+<<<<<<< HEAD
 public class MIncorrectType {
 
   private final String pType;
   private final String pParamName;
   private final MIncorrectType mIncorrectType = this;
+=======
+$comment: ========== param_macro_ref_builder ================== $
+
+$macro: param_macro_ref_builder(name, index_builder) $
+    private String build$name($expand: context_param $){
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
   public MIncorrectType(String pType, String pParamName) {
     if(pType == null) throw new NullPointerException();
@@ -1331,6 +1364,7 @@ public class MIncorrectType {
     return this.mIncorrectType.pType();
   }
 
+<<<<<<< HEAD
   private String rParamName() {
     return this.mIncorrectType.pParamName();
   }
@@ -1347,6 +1381,46 @@ public class MIncorrectType {
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+=======
+        return sb$index_builder.toString();
+    }
+$end: param_macro_ref_builder $
+
+$comment: =========== param_string_ref_builder ============= $
+
+$macro: param_string_ref_builder(name) $
+    private String build$name($expand: context_param$){
+
+        return this.field_$(name)$expand: get_internal_tail $;
+    }
+$end: param_string_ref_builder $
+
+$comment: ========== param_macro_ref ============== $
+
+$macro: param_macro_ref(name) $
+    private Macro[] get$name($expand: context_param $){
+
+        return this.list_$(name)$expand: get_internal_tail $;
+    }
+$end: param_macro_ref $
+
+$comment: ========== param_string_ref ============== $
+
+$macro: param_string_ref(name) $
+    private String get$name($expand: context_param $){
+
+        return this.field_$(name)$expand: get_internal_tail $;
+    }
+$end: param_string_ref $
+
+$comment: =========== param_ref =========== $
+
+$macro: param_ref(name) $
+get$name($expand: context_arg, context_name$)$no_eol$
+$end: param_ref $
+
+$comment: =========== context_name ============= $
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
 }
 $end: incorrect_type $
@@ -1390,16 +1464,6 @@ else {
 }
 $end: separator $
 
-$comment: =========== param_string_ref ============= $
-
-$macro: param_string_ref(name) $
-    private String build$name(
-            $expand: context_param$){
-
-        return this.field_$(name)$expand: get_internal_tail $;
-    }
-$end: param_string_ref $
-
 $comment: =========== get_internal_tail ============ $
 
 $macro: get_internal_tail $
@@ -1429,7 +1493,7 @@ $end: context_arg $
 $comment: ========= internal_string_setter ========= $
 
 $macro: internal_string_setter(name) $
-    public void set$name(
+    void set$name(
             Context context,
             String value) {
 
@@ -1453,7 +1517,11 @@ $macro: init_string_internal(name) $
     this.field_$name = new LinkedHashMap<>();
 $end: init_string_internal $
 
-$comment: ============ EXCEPTIONS ============ $
+$comment$
+=========================================================
+=====================  EXCEPTIONS =======================
+=========================================================
+$end$
 
 $comment: ============ object_macro_exception =========== $
 

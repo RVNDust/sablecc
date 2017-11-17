@@ -29,8 +29,13 @@ import java.util.Map;
 
 import org.sablecc.exception.*;
 import org.sablecc.objectmacro.codegeneration.*;
+import org.sablecc.objectmacro.codegeneration.c.macro.MParam;
 import org.sablecc.objectmacro.codegeneration.java.macro.*;
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
+<<<<<<< HEAD
+=======
+import org.sablecc.objectmacro.exception.*;
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 import org.sablecc.objectmacro.intermediate.syntax3.analysis.*;
 import org.sablecc.objectmacro.intermediate.syntax3.node.*;
 import org.sablecc.objectmacro.util.Utils;
@@ -58,6 +63,7 @@ public class CodeGenerationWalker
 
     private final File packageDirectory;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     /**
      * List of macros in the file
@@ -182,6 +188,11 @@ public class CodeGenerationWalker
     private boolean currentMacroHasInternals;
 =======
     private MMacro currentMacro;
+=======
+    private MMacro currentMacroToBuild;
+
+    private Macro currentMacro;
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
     private MConstructor currentConstructor;
 
@@ -203,7 +214,7 @@ public class CodeGenerationWalker
 
     private String currentMacroName;
 
-    private final Map<String, MMacro> macros;
+    private final Map<String, Macro> macros;
 
     private String currentContext;
 
@@ -213,10 +224,6 @@ public class CodeGenerationWalker
 
     private List<String> createdBuilders = new ArrayList<>();
 
-    private boolean currentMacroContainsInternals = false;
-
-    private List<String> currentParameters = new ArrayList<>();
-
     private MSeparator currentSeparator;
 
     private MAfterLast currentAfterLast;
@@ -225,17 +232,25 @@ public class CodeGenerationWalker
 
     private MNone currentNone;
 
+<<<<<<< HEAD
     private MParamMacroRef currentParamMacroRef;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    private MParamMacroRefBuilder currentParamMacroRefBuilder;
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
     public CodeGenerationWalker(
             IntermediateRepresentation ir,
             File packageDirectory,
 <<<<<<< HEAD
+<<<<<<< HEAD
             Map<String, Macro> macros) {
 =======
             Map<String, MMacro> macros) {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            Map<String, Macro> macros) {
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
         this.ir = ir;
         this.packageDirectory = packageDirectory;
@@ -446,28 +461,41 @@ public class CodeGenerationWalker
             this.currentMacroToBuild.newEmptyBuilderWithContext();
 =======
         String macroName = buildNameCamelCase(node.getNames());
+        if(!this.macros.containsKey(macroName)){
+            throw new InternalException(macroName + " does not exist");
+        }
+
         this.currentMacro = this.macros.get(macroName);
+        this.currentMacroToBuild = this.currentMacro.getMacro();
         this.contextNames = new ArrayList<>();
 
-        if(this.currentMacro == null){
-            throw new InternalException("currentMacro cannot be null here");
+        if(this.currentMacroToBuild == null){
+            throw new InternalException("currentMacroToBuild cannot be null here");
         }
 
         if (!this.ir.getDestinationPackage().equals("")) {
-            this.currentMacro.newPackageDeclaration(this.ir.getDestinationPackage());
+            this.currentMacroToBuild.newPackageDeclaration(this.ir.getDestinationPackage());
         }
 
-        this.currentConstructor = this.currentMacro.newConstructor(macroName);
-        this.currentMacroBuilder = this.currentMacro.newMacroBuilder();
+        this.currentConstructor = this.currentMacroToBuild.newConstructor(macroName);
+        this.currentMacroBuilder = this.currentMacroToBuild.newMacroBuilder();
+
+        this.mInternalsInitializer.newParentInternalsSetter(macroName);
+        this.currentMacroToBuild.newRedefinedApplyInitializer(macroName);
+
+        for(TString string : node.getInitOrder()){
+            String param_name = Utils.toCamelCase(string(string));
+            if(this.currentMacro.getParameters().contains(param_name)){
+                this.currentConstructor.newSetParam(param_name).newParamArg(param_name);
+            }
+        }
 
         if(node.getInternals().size() > 0){
-            currentMacroContainsInternals = true;
-            this.mInternalsInitializer.newParentInternalsSetter(macroName);
-            this.currentMacro.newRedefinedApplyInitializer(macroName);
+            //method build is package protected so a context parameter to build the current macro
             this.currentMacroBuilder.newContextParam();
             this.currentMacroBuilder.newContextExpansion();
             this.currentMacroBuilder.newNewContextExpansion();
-            this.currentMacro.newImportJavaUtil();
+            this.currentMacroToBuild.newImportJavaUtil();
         }
         else{
             this.currentMacroBuilder.newPublic();
@@ -508,22 +536,33 @@ public class CodeGenerationWalker
         this.indexBuilder = 0;
 
         if(node.getType() instanceof AStringType){
-            this.currentMacro.newInternalStringField(paramName);
-            this.currentMacro.newInternalStringSetter(paramName);
+            this.currentMacroToBuild.newInternalStringField(paramName);
+            this.currentMacroToBuild.newInternalStringSetter(paramName);
 
-            MParamStringRef mParamStringRef = this.currentMacro.newParamStringRef(paramName);
+            MParamStringRefBuilder mParamStringRefBuilder = this.currentMacroToBuild
+                    .newParamStringRefBuilder(paramName);
+            mParamStringRefBuilder.newContextParam();
+            mParamStringRefBuilder.newGetInternalTail();
+
+            MParamStringRef mParamStringRef = this.currentMacroToBuild.newParamStringRef(paramName);
             mParamStringRef.newContextParam();
             mParamStringRef.newGetInternalTail();
         }
         else if(node.getType() instanceof AMacroRefsType){
-            this.currentMacro.newInternalMacroField(paramName);
-            this.currentMacro.newContextField(paramName);
+            this.currentMacroToBuild.newInternalMacroField(paramName);
+            this.currentMacroToBuild.newContextField(paramName);
 
-            this.currentParamMacroRef = this.currentMacro.newParamMacroRef(paramName, String.valueOf(this.indexBuilder));
-            this.currentParamMacroRef.newContextParam();
-            this.currentParamMacroRef.newGetInternalTail();
-            this.currentParamMacroRef.newContextName(paramName.concat(CONTEXT_STRING));
+            this.currentParamMacroRefBuilder = this.currentMacroToBuild
+                    .newParamMacroRefBuilder(paramName, String.valueOf(this.indexBuilder));
+            this.currentParamMacroRefBuilder.newContextParam();
+            this.currentParamMacroRefBuilder.newGetInternalTail();
+            this.currentParamMacroRefBuilder.newContextName(paramName.concat(CONTEXT_STRING));
 
+            MParamMacroRef mParamMacroRef = this.currentMacroToBuild.newParamMacroRef(paramName);
+            mParamMacroRef.newGetInternalTail();
+            mParamMacroRef.newContextParam();
+
+            //Initialize directives before type because of conflicts with stringBuilder
             for (PDirective directive : node.getDirectives()) {
                 directive.apply(this);
             }
@@ -533,7 +572,7 @@ public class CodeGenerationWalker
             this.currentContext = paramName.concat(CONTEXT_STRING);
             this.contextNames.add(currentContext);
             this.currentApplyInitializer =
-                    this.currentMacro.newInternalMacroSetter(paramName)
+                    this.currentMacroToBuild.newInternalMacroSetter(paramName)
                             .newApplyInternalsInitializer(paramName);
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
@@ -542,9 +581,12 @@ public class CodeGenerationWalker
             throw new InternalException("case unhandled");
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         node.getType().apply(this);
         outAInternal(node);
     }
@@ -566,7 +608,7 @@ public class CodeGenerationWalker
         this.currentApplyInitializer = null;
         this.indexBuilder = 0;
         this.indexInsert = 0;
-        this.currentParamMacroRef = null;
+        this.currentParamMacroRefBuilder = null;
         this.createdBuilders.clear();
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
@@ -608,21 +650,31 @@ public class CodeGenerationWalker
         String paramName = buildNameCamelCase(node.getNames());
 
         if(node.getType() instanceof AStringType){
-            this.currentMacro.newParamStringField(paramName);
-            this.currentMacro.newParamStringRef(paramName);
-            this.currentMacro.newParamStringSetter(paramName);
+            this.currentMacroToBuild.newParamStringField(paramName);
+            this.currentMacroToBuild.newParamStringRefBuilder(paramName);
+            this.currentMacroToBuild.newParamStringRef(paramName);
+
+            MParamStringSetter mParamStringSetter = this.currentMacroToBuild.newParamStringSetter(paramName);
+            mParamStringSetter.newParamArg(paramName);
+            mParamStringSetter.newStringParam(paramName);
+
 
             this.currentConstructor.newStringParam(paramName);
         }
         else if(node.getType() instanceof AMacroRefsType){
 
-            this.currentMacro.newParamMacroField(paramName);
-            this.currentMacro.newContextField(paramName);
+            this.currentMacroToBuild.newParamMacroField(paramName);
+            this.currentMacroToBuild.newContextField(paramName);
 
-            this.currentParamMacroRef = this.currentMacro.newParamMacroRef(
+            this.currentParamMacroRefBuilder = this.currentMacroToBuild.newParamMacroRefBuilder(
                     paramName, String.valueOf(this.indexBuilder));
+<<<<<<< HEAD
             this.currentParamMacroRef.newContextName(paramName.concat(CONTEXT_STRING));
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            this.currentParamMacroRefBuilder.newContextName(paramName.concat(CONTEXT_STRING));
+            this.currentMacroToBuild.newParamMacroRef(paramName);
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
             for (PDirective directive : node.getDirectives()) {
                 directive.apply(this);
@@ -654,7 +706,7 @@ public class CodeGenerationWalker
             this.currentContext = paramName.concat(CONTEXT_STRING);
             this.indexBuilder = 0;
 
-            MParamMacroSetter mParamMacroSetter = this.currentMacro.newParamMacroSetter(paramName);
+            MParamMacroSetter mParamMacroSetter = this.currentMacroToBuild.newParamMacroSetter(paramName);
             mParamMacroSetter.newParamArg(paramName);
             mParamMacroSetter.newMacroParam(paramName);
 
@@ -668,9 +720,12 @@ public class CodeGenerationWalker
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         this.currentParameters.add(paramName);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         node.getType().apply(this);
         outAParam(node);
     }
@@ -698,8 +753,12 @@ public class CodeGenerationWalker
         this.indexBuilder = 0;
         this.indexInsert = 0;
         this.createdBuilders.clear();
+<<<<<<< HEAD
         this.currentParamMacroRef = null;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        this.currentParamMacroRefBuilder = null;
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     }
 
     @Override
@@ -740,20 +799,20 @@ public class CodeGenerationWalker
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
             case SEPARATOR_DIRECTIVE:
-                this.currentSeparator = this.currentParamMacroRef.newSeparator();
+                this.currentSeparator = this.currentParamMacroRefBuilder.newSeparator();
                 break;
 
             case AFTER_LAST_DIRECTIVE:
-                this.currentAfterLast = this.currentParamMacroRef.newAfterLast();
+                this.currentAfterLast = this.currentParamMacroRefBuilder.newAfterLast();
                 break;
 
             case BEFORE_FIRST_DIRECTIVE:
-                this.currentBeforeFirst = this.currentParamMacroRef
+                this.currentBeforeFirst = this.currentParamMacroRefBuilder
                         .newBeforeFirst();
                 break;
 
             case NONE_DIRECTIVE:
-                this.currentNone = this.currentParamMacroRef.newNone();
+                this.currentNone = this.currentParamMacroRefBuilder.newNone();
                 break;
 
             default:
@@ -981,6 +1040,7 @@ public class CodeGenerationWalker
 
         String index_builder = String.valueOf(this.indexBuilder);
 <<<<<<< HEAD
+<<<<<<< HEAD
         String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
         if(this.currentContextName != null
                 && this.currentRedefinedInternalsSetter != null){
@@ -994,16 +1054,17 @@ public class CodeGenerationWalker
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
 =======
 
+=======
+        String param_name = buildNameCamelCase(node.getNames());
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         if(this.currentContext != null
                 && this.currentRedefinedInternalsSetter != null){
 
             this.currentRedefinedInternalsSetter.newParamInsertPart(
-                    buildNameCamelCase(node.getNames()),
-                    String.valueOf(this.indexBuilder));
-
+                    param_name,
+                    index_builder);
         }
         else {
-            String param_name = buildNameCamelCase(node.getNames());
 
             if(this.currentInsertMacroPart != null){
                 index_builder = getLetterFromInteger(this.indexBuilder);
@@ -1227,6 +1288,7 @@ public class CodeGenerationWalker
             AVarValue node) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         String var_name = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(this.currentContextName != null){
@@ -1252,15 +1314,23 @@ public class CodeGenerationWalker
                 mParamRef.newContextArg();
             }
 =======
+=======
+        String var_name = buildNameCamelCase(node.getNames());
+
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         if(this.currentContext != null){
-            this.currentRedefinedInternalsSetter.newSetInternal(
+            MParamRef paramRef = this.currentRedefinedInternalsSetter.newSetInternal(
                     this.currentMacroName,
                     buildNameCamelCase(node.getParamName()),
                     this.currentContext)
-                    .newMacroArg(buildNameCamelCase(node.getNames()));
+                        .newParamRef(var_name);
 
+            if(this.currentMacro.getInternals().contains(var_name)){
+                paramRef.newContextName(this.currentContext);
+            }
         }
         else{
+<<<<<<< HEAD
             this.currentInsertMacroPart.newSetInternal(
                     INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
                     buildNameCamelCase(node.getParamName()),
@@ -1268,13 +1338,27 @@ public class CodeGenerationWalker
                     .newMacroArg(buildNameCamelCase(node.getNames()));
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            MParamRef mParamRef =
+                    this.currentInsertMacroPart.newSetInternal(
+                        INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
+                        buildNameCamelCase(node.getParamName()),
+                        "null").newParamRef(var_name);
+
+            if(this.currentMacro.getInternals().contains(var_name)){
+                mParamRef.newContextArg();
+            }
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         }
+
+
     }
 
     @Override
     public void outAMacro(
             AMacro node) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         String macroName = GenerationUtils.buildNameCamelCase(node.getNames());
         GenerationUtils.writeFile(this.packageDirectory, "M" + macroName + ".java", this.currentMacroToBuild.toString());
@@ -1300,14 +1384,14 @@ public class CodeGenerationWalker
             }
         }
 
+=======
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         String macroName = buildNameCamelCase(node.getNames());
-        writeFile("M" + macroName + ".java", this.currentMacro.toString());
+        writeFile("M" + macroName + ".java", this.currentMacroToBuild.toString());
 
         this.contextNames = null;
-        this.currentMacro = null;
+        this.currentMacroToBuild = null;
         this.currentConstructor = null;
-        this.currentMacroContainsInternals = false;
-        this.currentParameters.clear();
     }
 
     @Override
@@ -1364,6 +1448,7 @@ public class CodeGenerationWalker
     public void outAVarMacroPart(
             AVarMacroPart node) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
         MParamInsertPart mParamInsertPart =
@@ -1934,12 +2019,15 @@ public class CodeGenerationWalker
 //    }
 >>>>>>> Comment Code generation to compile ObjectMacro
 =======
+=======
+        String param_name = buildNameCamelCase(node.getNames());
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         MParamInsertPart mParamInsertPart =
                 this.currentMacroBuilder.newParamInsertPart(
-                    buildNameCamelCase(node.getNames()),
-                    String.valueOf(indexBuilder));
+                        param_name,
+                        String.valueOf(indexBuilder));
 
-        if(this.currentMacroContainsInternals){
+        if(this.currentMacro.getInternals().contains(param_name)){
             mParamInsertPart.newContextArg();
         }
     }

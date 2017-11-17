@@ -40,6 +40,7 @@ public class MParamStringRef {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    private String get");
     sb.append(rName());
     sb.append("(");
@@ -50,6 +51,11 @@ public class MParamStringRef {
     sb.append(System.getProperty("line.separator"));
     sb.append("            ");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("    private String get");
+    sb.append(rName());
+    sb.append("(");
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     for(Object oContextParam : this.eContextParam) {
       sb.append(oContextParam.toString());
     }

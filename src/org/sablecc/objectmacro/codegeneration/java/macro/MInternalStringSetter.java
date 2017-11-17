@@ -24,10 +24,14 @@ public class MInternalStringSetter {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    void set");
 =======
     sb.append("    public void set");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("    void set");
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append(rName());
     sb.append("(");
     sb.append(System.getProperty("line.separator"));

@@ -9,8 +9,18 @@ public class MParamMacroRefBuilder {
   private final String pName;
   private final String pIndexBuilder;
   private final MParamMacroRefBuilder mParamMacroRefBuilder = this;
+<<<<<<< HEAD
   private final List<Object> eContextName = new LinkedList<Object>();
   private final List<Object> eApplyNoneDirective = new LinkedList<Object>();
+=======
+  private final List<Object> eContextParam = new LinkedList<Object>();
+  private final List<Object> eContextName = new LinkedList<Object>();
+  private final List<Object> eGetInternalTail = new LinkedList<Object>();
+  private final List<Object> eNone = new LinkedList<Object>();
+  private final List<Object> eBeforeFirst = new LinkedList<Object>();
+  private final List<Object> eSeparator = new LinkedList<Object>();
+  private final List<Object> eAfterLast = new LinkedList<Object>();
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
   public MParamMacroRefBuilder(String pName, String pIndexBuilder) {
     if(pName == null) throw new NullPointerException();
@@ -19,10 +29,17 @@ public class MParamMacroRefBuilder {
     this.pIndexBuilder = pIndexBuilder;
   }
 
+<<<<<<< HEAD
   public MApplyNoneDirective newApplyNoneDirective() {
     MApplyNoneDirective lApplyNoneDirective = new MApplyNoneDirective(mParamMacroRefBuilder);
     this.eApplyNoneDirective.add(lApplyNoneDirective);
     return lApplyNoneDirective;
+=======
+  public MContextParam newContextParam() {
+    MContextParam lContextParam = new MContextParam();
+    this.eContextParam.add(lContextParam);
+    return lContextParam;
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
   }
 
   public MContextName newContextName(String pContextName) {
@@ -31,6 +48,39 @@ public class MParamMacroRefBuilder {
     return lContextName;
   }
 
+<<<<<<< HEAD
+=======
+  public MGetInternalTail newGetInternalTail() {
+    MGetInternalTail lGetInternalTail = new MGetInternalTail();
+    this.eGetInternalTail.add(lGetInternalTail);
+    return lGetInternalTail;
+  }
+
+  public MNone newNone() {
+    MNone lNone = new MNone();
+    this.eNone.add(lNone);
+    return lNone;
+  }
+
+  public MBeforeFirst newBeforeFirst() {
+    MBeforeFirst lBeforeFirst = new MBeforeFirst();
+    this.eBeforeFirst.add(lBeforeFirst);
+    return lBeforeFirst;
+  }
+
+  public MSeparator newSeparator() {
+    MSeparator lSeparator = new MSeparator();
+    this.eSeparator.add(lSeparator);
+    return lSeparator;
+  }
+
+  public MAfterLast newAfterLast() {
+    MAfterLast lAfterLast = new MAfterLast();
+    this.eAfterLast.add(lAfterLast);
+    return lAfterLast;
+  }
+
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
   String pName() {
     return this.pName;
   }
@@ -52,7 +102,16 @@ public class MParamMacroRefBuilder {
     StringBuilder sb = new StringBuilder();
     sb.append("    private String build");
     sb.append(rName());
+<<<<<<< HEAD
     sb.append("(){");
+=======
+    sb.append("(");
+    for(Object oContextParam : this.eContextParam) {
+      sb.append(oContextParam.toString());
+    }
+    sb.append("){");
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append(System.getProperty("line.separator"));
     sb.append("        StringBuilder sb");
     sb.append(rIndexBuilder());
@@ -67,6 +126,7 @@ public class MParamMacroRefBuilder {
     }
     sb.append(";");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        List<Macro> macros = this.list_");
     sb.append(rName());
     sb.append(";");
@@ -103,6 +163,46 @@ public class MParamMacroRefBuilder {
     sb.append(System.getProperty("line.separator"));
     sb.append("            i++;");
     sb.append(System.getProperty("line.separator"));
+=======
+    sb.append("        Macro macros[] = this.list_");
+    sb.append(rName());
+    for(Object oGetInternalTail : this.eGetInternalTail) {
+      sb.append(oGetInternalTail.toString());
+    }
+    sb.append(";");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        ");
+    for(Object oNone : this.eNone) {
+      sb.append(oNone.toString());
+    }
+    sb.append("        boolean first = true;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        int i = 0;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        for(Macro macro : macros){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            ");
+    for(Object oBeforeFirst : this.eBeforeFirst) {
+      sb.append(oBeforeFirst.toString());
+    }
+    sb.append("            ");
+    for(Object oSeparator : this.eSeparator) {
+      sb.append(oSeparator.toString());
+    }
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            sb");
+    sb.append(rIndexBuilder());
+    sb.append(".append(macro.build(local_context));");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            i++;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            ");
+    for(Object oAfterLast : this.eAfterLast) {
+      sb.append(oAfterLast.toString());
+    }
+>>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
