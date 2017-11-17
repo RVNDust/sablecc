@@ -192,14 +192,19 @@ public class ObjectMacroBack {
 
             case VERSION:
 <<<<<<< HEAD
+<<<<<<< HEAD
                 System.out.println("ObjectMacro-back, part of SableCC version "
 =======
                 System.out.println("ObjectMacroBack, part of SableCC version "
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+                System.out.println("ObjectMacro-back, part of SableCC version "
+>>>>>>> Invalid suffix intermediate
                         + Version.VERSION);
                 return;
 
             case HELP:
+<<<<<<< HEAD
 <<<<<<< HEAD
                 System.out.println("Usage: objectmacro backend "
                         + Option.getShortHelpMessage() + " file.intermediate");
@@ -209,6 +214,9 @@ public class ObjectMacroBack {
                         + Option.getShortHelpMessage() + " file.objectmacro");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
+=======
+                System.out.println("Usage: objectmacro backend "
+>>>>>>> Invalid suffix intermediate
                         + Option.getShortHelpMessage() + " file.intermediate");
 >>>>>>> Clean up code, add comments
                 System.out.println("Options:");
@@ -282,7 +290,7 @@ public class ObjectMacroBack {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
         if (!textArgument.getText().endsWith(".intermediate")) {
-            throw CompilerException.invalidSuffix(textArgument.getText());
+            throw CompilerException.invalidIntermediateSuffix(textArgument.getText());
         }
 
 >>>>>>> Clean up code, add comments
