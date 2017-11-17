@@ -38,6 +38,7 @@ import org.sablecc.objectmacro.exception.*;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 import org.sablecc.objectmacro.intermediate.syntax3.analysis.*;
 import org.sablecc.objectmacro.intermediate.syntax3.node.*;
+import org.sablecc.objectmacro.syntax3.node.PStringPart;
 import org.sablecc.objectmacro.util.Utils;
 
 public class CodeGenerationWalker
@@ -891,8 +892,12 @@ public class CodeGenerationWalker
     }
 
     @Override
+<<<<<<< HEAD
     public void inAStringValue(
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    public void caseAStringValue(
+>>>>>>> indexInsert could be modified in the children nodes of stringValue
             AStringValue node) {
 
         this.indexBuilder++;
@@ -947,6 +952,10 @@ public class CodeGenerationWalker
                     this.currentMacroName,
                     buildNameCamelCase(node.getParamName()),
                     this.currentContext).newStringBuilderBuild(index_builder);
+
+            for(PTextPart part : node.getParts()){
+                part.apply(this);
+            }
         }
         else{
 
@@ -959,13 +968,29 @@ public class CodeGenerationWalker
             }
 
             this.currentInsertMacroPart.newInitStringBuilder(index_builder);
+            this.createdBuilders.add(index_builder);
+
+            //To avoid modification on indexes
+            Integer tempIndexBuilder = this.indexBuilder;
+            Integer tempIndexInsert = this.indexInsert;
+
+            for(PTextPart part : node.getParts()){
+                part.apply(this);
+            }
+
+            this.indexBuilder = tempIndexBuilder;
+            this.indexInsert = tempIndexInsert;
+
             this.currentInsertMacroPart.newSetInternal(
                     INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
                     buildNameCamelCase(node.getParamName()),
                     "null").newStringBuilderBuild(index_builder);
 
+<<<<<<< HEAD
             this.createdBuilders.add(index_builder);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> indexInsert could be modified in the children nodes of stringValue
         }
     }
 
@@ -1281,6 +1306,7 @@ public class CodeGenerationWalker
         String tempContext = this.currentContext;
         String tempMacroName = this.currentMacroName;
         Integer tempIndex = this.indexBuilder;
+        Integer tempIndexInsert = this.indexInsert;
         this.currentContext = null;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
@@ -1288,10 +1314,14 @@ public class CodeGenerationWalker
 
         this.indexBuilder = tempIndex;
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.indexInsert = tempIndexInsert;
         this.currentContextName = tempContext;
         this.currentMacroRefName = tempMacroName;
 =======
+=======
+        this.indexInsert = tempIndexInsert;
+>>>>>>> indexInsert could be modified in the children nodes of stringValue
         this.currentContext = tempContext;
         this.currentMacroName = tempMacroName;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
@@ -1452,10 +1482,15 @@ public class CodeGenerationWalker
         this.indexInsert = tempIndexInsert;
 =======
         Integer tempIndexBuilder = this.indexBuilder;
+        Integer tempIndexInsert = this.indexInsert;
 
         node.getMacroRef().apply(this);
 
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        this.indexInsert = tempIndexInsert;
+>>>>>>> indexInsert could be modified in the children nodes of stringValue
         this.indexBuilder = tempIndexBuilder;
         this.currentInsertMacroPart = null;
     }
