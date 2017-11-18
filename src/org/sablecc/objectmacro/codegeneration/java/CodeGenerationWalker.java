@@ -500,7 +500,11 @@ public class CodeGenerationWalker
         }
         else{
             this.currentMacroBuilder.newPublic();
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            this.currentMacroToBuild.newEmptyBuilderWithContext();
+>>>>>>> Now macro without internals has a builder with context that only return build
         }
     }
 

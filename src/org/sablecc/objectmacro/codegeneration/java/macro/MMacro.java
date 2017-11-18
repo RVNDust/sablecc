@@ -31,7 +31,11 @@ public class MMacro {
   private final List<Object> eParamStringRef_ParamMacroRef = new LinkedList<Object>();
   private final List<Object> eRedefinedApplyInitializer = new LinkedList<Object>();
   private final List<Object> eMacroBuilder = new LinkedList<Object>();
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+  private final List<Object> eEmptyBuilderWithContext = new LinkedList<Object>();
+>>>>>>> Now macro without internals has a builder with context that only return build
 
   public MMacro(String pName) {
     if(pName == null) throw new NullPointerException();
@@ -267,14 +271,20 @@ public class MMacro {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Now macro without internals has a builder with context that only return build
   public MEmptyBuilderWithContext newEmptyBuilderWithContext() {
     MEmptyBuilderWithContext lEmptyBuilderWithContext = new MEmptyBuilderWithContext();
     this.eEmptyBuilderWithContext.add(lEmptyBuilderWithContext);
     return lEmptyBuilderWithContext;
   }
 
+<<<<<<< HEAD
 =======
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Now macro without internals has a builder with context that only return build
   String pName() {
     return this.pName;
   }
@@ -483,8 +493,17 @@ public class MMacro {
     for(Object oMacroBuilder : this.eMacroBuilder) {
       sb.append(oMacroBuilder.toString());
     }
+<<<<<<< HEAD
     sb.append(System.getProperty("line.separator"));
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    if(this.eEmptyBuilderWithContext.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oEmptyBuilderWithContext : this.eEmptyBuilderWithContext) {
+      sb.append(oEmptyBuilderWithContext.toString());
+    }
+>>>>>>> Now macro without internals has a builder with context that only return build
     sb.append("}");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();

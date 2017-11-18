@@ -31,9 +31,13 @@ Macro entity
 {Begin}
 {package}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Add refused, accepted tests
+=======
+
+>>>>>>> Now macro without internals has a builder with context that only return build
 @Entity
 {Insert: annotation_table(name)}
 public class {name} {
@@ -64,10 +68,14 @@ Macro attribute
         name : String;
         type : String;
 <<<<<<< HEAD
+<<<<<<< HEAD
         id : primary_key, id_incrementation_strategy, separator="\n";
 =======
         id : primary_key, id_incrementation_strategy;
 >>>>>>> Add refused, accepted tests
+=======
+        id : primary_key, id_incrementation_strategy, separator="\n";
+>>>>>>> Now macro without internals has a builder with context that only return build
         not_null : not_null;
 {Begin}
 {id}

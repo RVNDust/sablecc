@@ -304,6 +304,7 @@ $expand: param_string_ref, param_macro_ref, separator="\n", before_first="\n" $
 
 $expand: redefined_apply_initializer $
 $expand: macro_builder, before_first="\n" $
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 
 public class M$name extends Macro{
@@ -317,6 +318,8 @@ $expand: init_internals_method, separator="\n" $
 $expand: init_directives, separator="\n", before_first="\n"$
 $expand: redefined_apply_initializer $
 $expand: macro_builder, before_first="\n" $
+=======
+>>>>>>> Now macro without internals has a builder with context that only return build
 $expand: empty_builder_with_context, before_first="\n"$
 }
 $end: macro $
@@ -350,7 +353,20 @@ $macro: init_macro_param(name) $
     this.list_$name = new ArrayList<>();
 $end: init_macro_param $
 
+<<<<<<< HEAD
 $comment: ========== init_string_internal =========== $
+=======
+$comment: ============ empty_builder_with_context ============ $
+
+$macro: empty_builder_with_context $
+    @Override
+    String build(Context context) {
+        return build();
+    }
+$end: empty_builder_with_context$
+
+$comment: ========= public ============= $
+>>>>>>> Now macro without internals has a builder with context that only return build
 
 $macro: init_string_internal(name) $
     this.field_$name = new LinkedHashMap<>();
