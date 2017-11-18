@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -22,6 +23,13 @@ import entity.macro.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+=======
+package entity;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+>>>>>>> Add refused, accepted tests
 
 public class Main {
 
@@ -29,6 +37,7 @@ public class Main {
             String[] args){
 
         MEntity entity = createEntity("Person");
+<<<<<<< HEAD
         File entities_directory = new File("tests/objectmacro/java/entities");
         if(!entities_directory.exists()){
             entities_directory.mkdir();
@@ -39,6 +48,8 @@ public class Main {
             directory.mkdir();
         }
 
+=======
+>>>>>>> Add refused, accepted tests
         File destination = new File("tests/objectmacro/java/entities", "Person.java");
         writeFile(destination, entity.build());
         entity = createEntity("Book");
@@ -63,6 +74,7 @@ public class Main {
     private static MEntity createEntity(
             String entity_name){
 
+<<<<<<< HEAD
         MEntity mEntity = new MEntity(entity_name);
         mEntity.addPackage(new MPackageDeclaration("entities"));
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
@@ -85,19 +97,48 @@ public class Main {
         mEntity.addAccessors(getter);
 
         return mEntity;
+=======
+        MPackageDeclaration mPackageDeclaration = new MPackageDeclaration("entities");
+        MAttribute[] attributes = new MAttribute[3];
+        Macro[] accessors = new Macro[6];
+
+        attributes[0] = createId("id_" + entity_name.toLowerCase(), "AUTO");
+        MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
+        MGetter getter = new MGetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
+        accessors[0] = setter;
+        accessors[1] = getter;
+
+        attributes[1] = createAttribute("A", Integer.class.getSimpleName());
+        setter = new MSetter("A" + entity_name, Integer.class.getSimpleName());
+        getter = new MGetter("A" + entity_name, Integer.class.getSimpleName());
+        accessors[2] = setter;
+        accessors[3] = getter;
+
+        attributes[2] = createAttribute("B", String.class.getSimpleName());
+        setter = new MSetter("B" + entity_name, String.class.getSimpleName());
+        getter = new MGetter("B" + entity_name, String.class.getSimpleName());
+        accessors[4] = setter;
+        accessors[5] = getter;
+
+        return new MEntity(entity_name, new MPackageDeclaration[]{mPackageDeclaration}, attributes, new MRelationship[0], accessors);
+>>>>>>> Add refused, accepted tests
     }
 
     private static MAttribute createId(
             String name,
             String generation_strategy){
 
+<<<<<<< HEAD
         MAttribute mAttribute = new MAttribute(name, "Integer");
+=======
+>>>>>>> Add refused, accepted tests
         MPrimaryKey mPrimaryKey = new MPrimaryKey();
         MIdIncrementationStrategy mIdIncrementationStrategy = null;
         if(!generation_strategy.equals("")){
             mIdIncrementationStrategy = new MIdIncrementationStrategy(generation_strategy);
         }
 
+<<<<<<< HEAD
         mAttribute.addNotNull(new MNotNull());
 
         if (mIdIncrementationStrategy == null) {
@@ -109,10 +150,22 @@ public class Main {
         }
 
         return mAttribute;
+=======
+        Macro[] id_related;
+        if (mIdIncrementationStrategy == null) {
+            id_related = new Macro[]{mPrimaryKey};
+        }
+        else{
+            id_related = new Macro[]{mPrimaryKey, mIdIncrementationStrategy};
+        }
+
+        return new MAttribute(name, "Integer", id_related, new Macro[0]);
+>>>>>>> Add refused, accepted tests
     }
 
     private static MAttribute createAttribute(
             String name,
+<<<<<<< HEAD
             String type,
             boolean notNull){
 
@@ -122,6 +175,12 @@ public class Main {
         }
 
         return mAttribute;
+=======
+            String type){
+
+
+        return new MAttribute(name, type, new Macro[0], new Macro[]{new MNotNull()});
+>>>>>>> Add refused, accepted tests
     }
 
 }
