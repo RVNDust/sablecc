@@ -398,10 +398,18 @@ public class CompilerException
         return new CompilerException(new MInvalidInsert(line, pos, name.getText()).toString());
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add some exceptions on objectmacro front
 =======
 >>>>>>> Add semantic verification on argument type provided in a macro reference
 =======
 >>>>>>> Add semantic verification cannot insert a macro with params
+=======
+
+    public static CompilerException minimumMacroError(){
+
+        return new CompilerException(new MMinimumMacroError().toString());
+    }
+>>>>>>> Verify there is at least 1 macro without internals
 }

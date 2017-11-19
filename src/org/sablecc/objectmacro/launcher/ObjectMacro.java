@@ -403,6 +403,7 @@ public class ObjectMacro {
         }
 
         GlobalIndex globalIndex = new GlobalIndex();
+        boolean withoutInternals = false;
 
         ast.apply(new DeclarationCollector(globalIndex));
 <<<<<<< HEAD
@@ -413,6 +414,7 @@ public class ObjectMacro {
         ast.apply(new VarVerifier(globalIndex));
 
         for(Macro macro : globalIndex.getAllMacros()){
+<<<<<<< HEAD
 <<<<<<< HEAD
             macro.detectParamsCyclicReference();
         }
@@ -439,7 +441,17 @@ public class ObjectMacro {
             allParamsInternals.addAll(macro.getAllInternals());
             allParamsInternals.addAll(macro.getAllParams());
 
+=======
+>>>>>>> Verify there is at least 1 macro without internals
             macro.detectParamsCyclicReference();
+
+            if(macro.getAllInternals().isEmpty()){
+                withoutInternals = true;
+            }
+        }
+
+        if(!withoutInternals){
+            throw CompilerException.minimumMacroError();
         }
 >>>>>>> Removed walker cyclic detector and computing indirect param references
 
