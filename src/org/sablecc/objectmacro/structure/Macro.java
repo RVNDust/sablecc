@@ -106,7 +106,6 @@ public class Macro{
 
         TIdentifier name = param.getName();
         String stringName = name.getText();
-        Param newParam = new Param(param, this);
 
         if(containsKeyInInternals(stringName) || containsKeyInParams(stringName)){
             throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
@@ -127,7 +126,11 @@ public class Macro{
             throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
         }
 
+<<<<<<< HEAD
         External newParam = new External(param, this, this.globalIndex);
+=======
+        Param newParam = new Param(param, this, this.globalIndex);
+>>>>>>> Verification macro existence when adding a new macro reference
         this.namedParams.put(stringName, newParam);
         this.allParams.add(newParam);
 
@@ -208,12 +211,12 @@ public class Macro{
 
         TIdentifier name = param.getName();
         String stringName = name.getText();
-        Param newInternal = new Param(param, this);
 
         if(containsKeyInInternals(stringName) || containsKeyInParams(stringName)){
             throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
         }
 
+        Param newInternal = new Param(param, this, this.globalIndex);
         this.allInternals.add(newInternal);
         this.namedInternals.put(stringName, newInternal);
 
