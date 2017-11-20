@@ -52,12 +52,17 @@ Macro macro_params
 
 Macro macro_internals
     Internal
+<<<<<<< HEAD
         a : text_internals;
+=======
+        a : text_internals("a", "b");
+>>>>>>> Add refused and accepted tests for objectmacro
         b : text_params;
 {Begin}
     {a} {b}
 {End}
 
+<<<<<<< HEAD
 Macro macro_text_macro_internal
     Internal
         a : text_params;
@@ -67,6 +72,8 @@ Macro macro_text_macro_internal
 {b}
 {End}
 
+=======
+>>>>>>> Add refused and accepted tests for objectmacro
 Macro macro_internals_references
     Param
         a : String;
@@ -84,14 +91,21 @@ Macro macro_internals_references
 Macro macro_params_internals_references
     Param
         a : macro_internals(c, b);
+<<<<<<< HEAD
         d : text_internals("a", "b");
     Internal
         b : text_params;
         c : String;
+=======
+    Internal
+        b : text_params;
+        c : text_internals("a", "b");
+>>>>>>> Add refused and accepted tests for objectmacro
 {Begin}
 {a}
 {b}
 {c}
+<<<<<<< HEAD
 {d}
 {End}
 
@@ -100,6 +114,8 @@ Macro macro_test_params_internals
         a : text_params;
 {Begin}
 {Insert: macro_text_macro_internal(a, "String")}
+=======
+>>>>>>> Add refused and accepted tests for objectmacro
 {End}
 
 # ========== insert ==========
@@ -177,6 +193,7 @@ Macro macro_escape_string
 {text : this is also text}
 {Insert: macro_escape("\{")}
 {End}
+<<<<<<< HEAD
 
 # =============== lexer test ============
 
@@ -194,3 +211,5 @@ Macro lexer_b
 
 
 
+=======
+>>>>>>> Add refused and accepted tests for objectmacro
