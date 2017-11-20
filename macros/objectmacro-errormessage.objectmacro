@@ -420,6 +420,7 @@ $insert: semantic_error_head $
 Line : $line
 Char : $char
 <<<<<<< HEAD
+<<<<<<< HEAD
 Incorrect macro type at index $index. (expected : $expected, found : $found)
 $end: incorrect_macro_type $
 
@@ -436,6 +437,9 @@ $end: invalid_insert $
 >>>>>>> Add some exceptions on objectmacro front
 =======
 You provided a wrong argument type at index $index. (expected : $expected, found : $found)
+=======
+Incorrect macro type at index $index. (expected : $expected, found : $found)
+>>>>>>> Update error message incorrect macro type
 $end: incorrect_macro_type $
 <<<<<<< HEAD
 >>>>>>> Add semantic verification on argument type provided in a macro reference

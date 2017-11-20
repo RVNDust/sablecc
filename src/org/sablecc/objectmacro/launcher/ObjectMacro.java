@@ -450,6 +450,7 @@ public class ObjectMacro {
             }
         }
 
+        //At least one macro does not have any internal
         if(!withoutInternals){
             throw CompilerException.minimumMacroError();
         }
