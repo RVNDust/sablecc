@@ -1020,6 +1020,9 @@ public class ObjectMacro {
                 else if(text.equals("\\n")){
                     mTextArgument.newEolPart();
                 }
+                else if(text.startsWith("\\")){
+                    mTextArgument.newStringPart(text.substring(text.length() - 1));
+                }
                 else{
                     throw new InternalException("case unhandled");
                 }
