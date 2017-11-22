@@ -399,6 +399,7 @@ public class CompilerException
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add some exceptions on objectmacro front
 =======
@@ -412,4 +413,6 @@ public class CompilerException
         return new CompilerException(new MMinimumMacroError().toString());
     }
 >>>>>>> Verify there is at least 1 macro without internals
+=======
+>>>>>>> Removed at least one macro without internals verification
 }

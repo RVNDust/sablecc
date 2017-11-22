@@ -281,8 +281,11 @@ public class VarVerifier
                 new TIdentifier(Utils.getVarName(
                                     node.getVariable()),
                                     node.getVariable().getLine(), node.getVariable().getPos()));
+<<<<<<< HEAD
 
 >>>>>>> Add new errors incorrectArgumentType and incorrectArgumentCount
+=======
+>>>>>>> Removed at least one macro without internals verification
     }
 
     @Override

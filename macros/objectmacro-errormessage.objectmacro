@@ -455,6 +455,7 @@ Char : $char
 Macro '$name' cannot be inserted because '$name' does not only have internals.
 $end: invalid_insert $
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Add semantic verification cannot insert a macro with params
 =======
 
@@ -466,3 +467,5 @@ $insert: semantic_error_head $
 There must be at least one macro without internals.
 $end: minimum_macro_error $
 >>>>>>> Verify there is at least 1 macro without internals
+=======
+>>>>>>> Removed at least one macro without internals verification
