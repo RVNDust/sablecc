@@ -63,6 +63,9 @@ Macro macro_internals
 {End}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add macro reference tests
 Macro macro_text_macro_internal
     Internal
         a : text_params;
@@ -72,8 +75,11 @@ Macro macro_text_macro_internal
 {b}
 {End}
 
+<<<<<<< HEAD
 =======
 >>>>>>> Add refused and accepted tests for objectmacro
+=======
+>>>>>>> Add macro reference tests
 Macro macro_internals_references
     Param
         a : String;
@@ -92,6 +98,7 @@ Macro macro_params_internals_references
     Param
         a : macro_internals(c, b);
 <<<<<<< HEAD
+<<<<<<< HEAD
         d : text_internals("a", "b");
     Internal
         b : text_params;
@@ -101,11 +108,20 @@ Macro macro_params_internals_references
         b : text_params;
         c : text_internals("a", "b");
 >>>>>>> Add refused and accepted tests for objectmacro
+=======
+        d : text_internals("a", "b");
+    Internal
+        b : text_params;
+        c : String;
+>>>>>>> Add macro reference tests
 {Begin}
 {a}
 {b}
 {c}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add macro reference tests
 {d}
 {End}
 
@@ -114,8 +130,11 @@ Macro macro_test_params_internals
         a : text_params;
 {Begin}
 {Insert: macro_text_macro_internal(a, "String")}
+<<<<<<< HEAD
 =======
 >>>>>>> Add refused and accepted tests for objectmacro
+=======
+>>>>>>> Add macro reference tests
 {End}
 
 # ========== insert ==========
