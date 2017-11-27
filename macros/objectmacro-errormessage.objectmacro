@@ -432,6 +432,7 @@ $insert: semantic_error_head $
 Line : $line
 Char : $char
 Macro '$name' cannot be inserted because it also has parameters.
+<<<<<<< HEAD
 $end: invalid_insert $
 =======
 >>>>>>> Add some exceptions on objectmacro front
@@ -453,6 +454,8 @@ $insert: semantic_error_head $
 Line : $line
 Char : $char
 Macro '$name' cannot be inserted because '$name' does not only have internals.
+=======
+>>>>>>> Update error message for invalid insert with tests
 $end: invalid_insert $
 <<<<<<< HEAD
 <<<<<<< HEAD
