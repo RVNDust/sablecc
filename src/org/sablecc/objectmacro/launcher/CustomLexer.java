@@ -30,6 +30,7 @@ public class CustomLexer
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public CustomLexer(PushbackReader in) {
         super(in);
     }
@@ -74,6 +75,8 @@ public class CustomLexer
 >>>>>>> Update walkers and fix lexer to handle inserts in string argument
     private int textDepth = 0;
 
+=======
+>>>>>>> Useless verification in Custom Lexer
     public CustomLexer(PushbackReader in) {
         super(in);
     }
@@ -88,12 +91,8 @@ public class CustomLexer
             if(this.state != State.STRING){
                 this.states.add(this.state);
                 this.state = State.STRING;
-                this.textDepth++;
             }
-            else if(this.textDepth > 0
-                            && this.state == State.STRING){
-
-                this.textDepth--;
+            else {
                 this.state = getLastState();
             }
         }
