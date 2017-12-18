@@ -19,14 +19,20 @@ set -e
 # limitations under the License.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> create common/intermediate directory in bash file
 mkdir -p tests/objectmacro/common/intermediate
 
 java -jar lib/objectmacro.jar -d tests/objectmacro/common/intermediate/ tests/objectmacro/common/back-tests/back.objectmacro
 java -jar lib/objectmacro-back.jar -d tests/objectmacro/java -p back.macro tests/objectmacro/common/intermediate/back.intermediate
+<<<<<<< HEAD
 =======
 java -jar lib/objectmacro.jar -d tests/objectmacro/intermediate/ tests/objectmacro/common/back-tests/back.objectmacro
 java -jar lib/objectmacro-back.jar -d tests/objectmacro/java -p back.macro tests/objectmacro/intermediate/back.intermediate
 >>>>>>> Add back end tests
+=======
+>>>>>>> create common/intermediate directory in bash file
 javac -cp tests/objectmacro/java/ -d classes/ tests/objectmacro/java/back/*.java
 
 # Refused tests
