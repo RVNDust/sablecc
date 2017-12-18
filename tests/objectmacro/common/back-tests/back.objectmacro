@@ -31,7 +31,11 @@ empty
 
 Macro semicolon_separator
     Internal
+<<<<<<< HEAD
         x : empty_macro;
+=======
+        x : empty_macro, separator="; ";
+>>>>>>> Add back end tests
 {Begin}
 Le corps de C : {x}
 {End}
@@ -44,12 +48,17 @@ Macro a
         y : b(z), separator="\n";
         z : c("first argument of c in a", x);
 {Begin}
+<<<<<<< HEAD
 ============= A ===============
 Y : {y}
+=======
+{y}
+>>>>>>> Add back end tests
 {End}
 
 Macro b
     Param
+<<<<<<< HEAD
         o : String;
         s : c(o, o);
     Internal
@@ -58,16 +67,30 @@ Macro b
 ============== B ===============
 P : {p}
 S : {s}
+=======
+        x : String;
+    Internal
+        y : c("first argument of c in b", x), separator="\n";
+{Begin}
+{y}
+>>>>>>> Add back end tests
 {End}
 
 Macro c
     Internal
+<<<<<<< HEAD
         q : String;
         r : String;
 {Begin}
 =============== C ==============
 Q : {q}
 R : {r}
+=======
+        y : String;
+        z : String;
+{Begin}
+{y} {z}
+>>>>>>> Add back end tests
 {End}
 
 Macro d
@@ -81,6 +104,7 @@ Macro d
 
 Macro e
     Internal
+<<<<<<< HEAD
         s : String;
         t : String;
         u : String;
@@ -121,10 +145,18 @@ Macro i
         y : k("lala");
         z : k("On est dans i"), j(y);
 {Begin}
+=======
+        x : String;
+        y : String;
+        z : String;
+{Begin}
+{x}
+>>>>>>> Add back end tests
 {y}
 {z}
 {End}
 
+<<<<<<< HEAD
 Macro j
     Internal
         y : k;
@@ -140,3 +172,6 @@ Macro k
 {End}
 
 
+=======
+#{Insert: c("y2 ", "")}
+>>>>>>> Add back end tests

@@ -20,12 +20,18 @@ import back.macro.*;
 
 public class Inserts {
 
+<<<<<<< HEAD
     public static void main(
             String[] args){
 
         System.out.print("======== Inserts Test ===========\n");
         Macro d = new MD();
         System.out.println(d.build());
+=======
+    public static void main(String[] args){
+        Macro d = new MD();
+        d.build();
+>>>>>>> Add back end tests
     }
 
 }

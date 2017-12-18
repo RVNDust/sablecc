@@ -18,14 +18,18 @@ package back;
 
 import back.macro.*;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> Add back end tests
 public class Main {
 
     public static void main(
             String[] args){
 
+<<<<<<< HEAD
         System.out.print("======== Main Test ===========\n");
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
@@ -42,6 +46,20 @@ public class Main {
             ma.addY(mb);
             ma.addZ(new MC());
             mb2.addS(new MC());
+=======
+        Macro[] macros = new Macro[3];
+        macros[0] = new MB("First argument in MB0");
+        macros[1] = new MB("First argument in MB1");
+        macros[2] = new MB("First argument in MB2");
+
+        Macro[] macros1 = new Macro[2];
+        macros1[0] = new MC();
+        macros1[1] = new MC();
+
+        try{
+            MA ma = new MA("First argument of MA", macros, macros1);
+            macros[0] = new  MC();
+>>>>>>> Add back end tests
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){

@@ -18,15 +18,19 @@ package back;
 
 import back.macro.*;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> Add back end tests
 public class ParameterNull {
 
     public static void main(
             String[] args){
 
         System.out.println("---------- Parameter null ----------");
+<<<<<<< HEAD
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
         macros.add(new MB("First argument in MB0"));
@@ -36,6 +40,15 @@ public class ParameterNull {
         try{
             ma.addZ(null);
             ma.addAllY(macros);
+=======
+        Macro[] macros = new Macro[3];
+        macros[0] = new MB("First argument in MB0");
+        macros[1] = new MB("First argument in MB1");
+        macros[2] = new MB("First argument in MB2");
+
+        try{
+            MA ma = new MA("First argument of MA", macros, null);
+>>>>>>> Add back end tests
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);
