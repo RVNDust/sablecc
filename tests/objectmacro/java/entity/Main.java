@@ -49,15 +49,21 @@ public class Main {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add script to run jpa entity test
         File directory = new File("tests/objectmacro/java/entities");
         if(!directory.exists()){
             directory.mkdir();
         }
 
+<<<<<<< HEAD
 =======
 >>>>>>> Add refused, accepted tests
 =======
 >>>>>>> moved jpa_entity test
+=======
+>>>>>>> Add script to run jpa entity test
         File destination = new File("tests/objectmacro/java/entities", "Person.java");
         writeFile(destination, entity.build());
         entity = createEntity("Book");
