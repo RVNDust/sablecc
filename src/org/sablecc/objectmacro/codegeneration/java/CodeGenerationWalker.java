@@ -225,6 +225,8 @@ public class CodeGenerationWalker
 
     private List<String> createdBuilders = new ArrayList<>();
 
+    private List<Integer> createdInserts = new ArrayList<>();
+
     private MSeparator currentSeparator;
 
     private MAfterLast currentAfterLast;
@@ -618,7 +620,11 @@ public class CodeGenerationWalker
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
         this.createdBuilders = new ArrayList<>();
+<<<<<<< HEAD
 >>>>>>> fix creating same string builder in macro body
+=======
+        this.createdInserts = new ArrayList<>();
+>>>>>>> Fix index inserts when creating 2 inserts in 2 different stringValue of a same macro reference
     }
 
     @Override
@@ -768,7 +774,11 @@ public class CodeGenerationWalker
 =======
 =======
         this.createdBuilders = new ArrayList<>();
+<<<<<<< HEAD
 >>>>>>> fix creating same string builder in macro body
+=======
+        this.createdInserts = new ArrayList<>();
+>>>>>>> Fix index inserts when creating 2 inserts in 2 different stringValue of a same macro reference
         this.currentParamMacroRefBuilder = null;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     }
@@ -989,12 +999,15 @@ public class CodeGenerationWalker
                     INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
                     buildNameCamelCase(node.getParamName()),
                     "null").newStringBuilderBuild(index_builder);
+<<<<<<< HEAD
 
 <<<<<<< HEAD
             this.createdBuilders.add(index_builder);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
 >>>>>>> indexInsert could be modified in the children nodes of stringValue
+=======
+>>>>>>> Fix index inserts when creating 2 inserts in 2 different stringValue of a same macro reference
         }
     }
 
@@ -1219,7 +1232,11 @@ public class CodeGenerationWalker
         String macro_name = buildNameCamelCase(macroRef.getNames());
         String index_builder = String.valueOf(this.indexBuilder);
 
-        this.indexInsert++;
+        //Avoid declaring insert of the same name
+        while(this.createdInserts.contains(this.indexInsert)){
+            this.indexInsert++;
+        }
+
         String index_insert = String.valueOf(this.indexInsert);
 
         if(this.currentContext != null
@@ -1306,6 +1323,7 @@ public class CodeGenerationWalker
                             index_insert);
             }
         }
+        this.createdInserts.add(this.indexInsert);
 
         String tempContext = this.currentContext;
         String tempMacroName = this.currentMacroName;
@@ -1477,6 +1495,7 @@ public class CodeGenerationWalker
                         macro_name, String.valueOf(indexBuilder), String.valueOf(indexInsert));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.createdInserts.add(this.indexInsert);
         Integer tempIndexBuilder = this.indexBuilder;
         Integer tempIndexInsert = this.indexInsert;
@@ -1485,6 +1504,9 @@ public class CodeGenerationWalker
 
         this.indexInsert = tempIndexInsert;
 =======
+=======
+        this.createdInserts.add(this.indexInsert);
+>>>>>>> Fix index inserts when creating 2 inserts in 2 different stringValue of a same macro reference
         Integer tempIndexBuilder = this.indexBuilder;
         Integer tempIndexInsert = this.indexInsert;
 
