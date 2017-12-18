@@ -95,9 +95,12 @@ public class GlobalIndex {
 
         Macro macro = getMacroOrNull(identifier);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> Cleanup some code
         if (macro == null) {
             throw CompilerException.unknownMacro(identifier);
         }
@@ -106,6 +109,7 @@ public class GlobalIndex {
 
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -130,6 +134,8 @@ public class GlobalIndex {
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
 >>>>>>> Add cyclic semantic verification using component finder and progeny
+=======
+>>>>>>> Cleanup some code
     public Set<Macro> getAllMacros() {
         return this.allMacros;
     }

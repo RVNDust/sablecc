@@ -70,6 +70,7 @@ public class Directive {
 
     }
 
+<<<<<<< HEAD
     public void addParamReference(
             TIdentifier name){
 
@@ -77,6 +78,8 @@ public class Directive {
 >>>>>>> Clean up code, add comments
     }
 
+=======
+>>>>>>> Cleanup some code
     public ADirective getDeclaration(){
         return this.declaration;
     }
