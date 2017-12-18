@@ -213,6 +213,9 @@ Macro macro_escape_string
 {Insert: macro_escape("\{")}
 {End}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add lexer test for state transitioning
 
 # =============== lexer test ============
 
@@ -230,5 +233,8 @@ Macro lexer_b
 
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> Add refused and accepted tests for objectmacro
+=======
+>>>>>>> Add lexer test for state transitioning
