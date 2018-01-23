@@ -19,11 +19,17 @@ package back;
 import back.macro.*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 =======
 >>>>>>> Add back end tests
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> Update tests to be adapted to the lazy initialization
 public class ParameterNull {
 
     public static void main(
@@ -31,11 +37,15 @@ public class ParameterNull {
 
         System.out.println("---------- Parameter null ----------");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Update tests to be adapted to the lazy initialization
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
         macros.add(new MB("First argument in MB0"));
         macros.add(new MB("First argument in MB1"));
         macros.add(new MB("First argument in MB2"));
+<<<<<<< HEAD
 
         try{
             ma.addZ(null);
@@ -49,6 +59,12 @@ public class ParameterNull {
         try{
             MA ma = new MA("First argument of MA", macros, null);
 >>>>>>> Add back end tests
+=======
+
+        try{
+            ma.addPZ(null);
+            ma.setPY(macros);
+>>>>>>> Update tests to be adapted to the lazy initialization
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

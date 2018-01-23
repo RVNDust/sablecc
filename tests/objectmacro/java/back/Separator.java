@@ -15,9 +15,13 @@
  * limitations under the License.
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Add back end tests
+=======
+
+>>>>>>> Update tests to be adapted to the lazy initialization
 package back;
 
 import back.macro.MCommaSeparator;
@@ -31,6 +35,7 @@ public class Separator {
 
         MEmptyMacro mEmptyMacro = new MEmptyMacro();
 <<<<<<< HEAD
+<<<<<<< HEAD
         MCommaSeparator mCommaSeparator = new MCommaSeparator();
         mCommaSeparator.addX(mEmptyMacro);
         mCommaSeparator.addX(mEmptyMacro);
@@ -39,6 +44,12 @@ public class Separator {
         MCommaSeparator mCommaSeparator = new MCommaSeparator(new Macro[]{mEmptyMacro, mEmptyMacro, mEmptyMacro});
 
 >>>>>>> Add back end tests
+=======
+        MCommaSeparator mCommaSeparator = new MCommaSeparator();
+        mCommaSeparator.addPX(mEmptyMacro);
+        mCommaSeparator.addPX(mEmptyMacro);
+        mCommaSeparator.addPX(mEmptyMacro);
+>>>>>>> Update tests to be adapted to the lazy initialization
         System.out.println(mCommaSeparator.build());
     }
 

@@ -59,6 +59,7 @@ Y : {y}
 Macro b
     Param
 <<<<<<< HEAD
+<<<<<<< HEAD
         o : String;
         s : c(o, o);
     Internal
@@ -69,15 +70,23 @@ P : {p}
 S : {s}
 =======
         x : String;
+=======
+        o : String;
+>>>>>>> Update tests to be adapted to the lazy initialization
     Internal
-        y : c("first argument of c in b", x), separator="\n";
+        p : c("first argument of c in b", o), separator="\n";
 {Begin}
+<<<<<<< HEAD
 {y}
 >>>>>>> Add back end tests
+=======
+{p}
+>>>>>>> Update tests to be adapted to the lazy initialization
 {End}
 
 Macro c
     Internal
+<<<<<<< HEAD
 <<<<<<< HEAD
         q : String;
         r : String;
@@ -91,6 +100,12 @@ R : {r}
 {Begin}
 {y} {z}
 >>>>>>> Add back end tests
+=======
+        q : String;
+        r : String;
+{Begin}
+{q} {r}
+>>>>>>> Update tests to be adapted to the lazy initialization
 {End}
 
 Macro d
@@ -104,6 +119,7 @@ Macro d
 
 Macro e
     Internal
+<<<<<<< HEAD
 <<<<<<< HEAD
         s : String;
         t : String;
@@ -175,3 +191,13 @@ Macro k
 =======
 #{Insert: c("y2 ", "")}
 >>>>>>> Add back end tests
+=======
+        s : String;
+        t : String;
+        u : String;
+{Begin}
+{s}
+{t}
+{u}
+{End}
+>>>>>>> Update tests to be adapted to the lazy initialization

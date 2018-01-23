@@ -19,16 +19,23 @@ package back;
 import back.macro.*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 =======
 >>>>>>> Add back end tests
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> Update tests to be adapted to the lazy initialization
 public class Main {
 
     public static void main(
             String[] args){
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         System.out.print("======== Main Test ===========\n");
         MA ma = new MA("First argument of MA");
@@ -60,6 +67,19 @@ public class Main {
             MA ma = new MA("First argument of MA", macros, macros1);
             macros[0] = new  MC();
 >>>>>>> Add back end tests
+=======
+        MA ma = new MA("First argument of MA");
+        List<Macro> macros = new ArrayList<>();
+        macros.add(new MB("First argument in MB0"));
+        macros.add(new MB("First argument in MB1"));
+        macros.add(new MB("First argument in MB2"));
+
+        try{
+            //Z must be added before Y because Y depends on Z
+            ma.addPZ(new MC());
+            ma.addPZ(new MC());
+            ma.setPY(macros);
+>>>>>>> Update tests to be adapted to the lazy initialization
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){

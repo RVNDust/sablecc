@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Update tests to be adapted to the lazy initialization
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -16,6 +19,7 @@
  * limitations under the License.
  */
 
+<<<<<<< HEAD
 package entity;
 
 import entity.macro.*;
@@ -24,14 +28,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 =======
+=======
+>>>>>>> Update tests to be adapted to the lazy initialization
 package entity;
 
 import entity.macro.*;
 
 import java.io.File;
 import java.io.FileWriter;
+<<<<<<< HEAD
 import java.io.IOException;
 >>>>>>> Add refused, accepted tests
+=======
+import java.util.ArrayList;
+>>>>>>> Update tests to be adapted to the lazy initialization
 
 public class Main {
 
@@ -89,6 +99,7 @@ public class Main {
             String entity_name){
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         MEntity mEntity = new MEntity(entity_name);
         mEntity.addPackage(new MPackageDeclaration("entities"));
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
@@ -117,25 +128,37 @@ public class Main {
         Macro[] accessors = new Macro[6];
 
         attributes[0] = createId("id_" + entity_name.toLowerCase(), "AUTO");
+=======
+        MEntity mEntity = new MEntity(entity_name);
+        mEntity.addPPackage(new MPackageDeclaration("entities"));
+>>>>>>> Update tests to be adapted to the lazy initialization
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
         MGetter getter = new MGetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
-        accessors[0] = setter;
-        accessors[1] = getter;
 
-        attributes[1] = createAttribute("A", Integer.class.getSimpleName());
+        mEntity.addPAttributes(createId("id_" + entity_name.toLowerCase(), "AUTO"));
+        mEntity.addPAccessors(setter);
+        mEntity.addPAccessors(getter);
+
+        mEntity.addPAttributes(createAttribute("A", Integer.class.getSimpleName(), false));
         setter = new MSetter("A", Integer.class.getSimpleName());
         getter = new MGetter("A", Integer.class.getSimpleName());
-        accessors[2] = setter;
-        accessors[3] = getter;
+        mEntity.addPAccessors(setter);
+        mEntity.addPAccessors(getter);
 
-        attributes[2] = createAttribute("B", String.class.getSimpleName());
+        mEntity.addPAttributes(createAttribute("B", String.class.getSimpleName(), true));
         setter = new MSetter("B", String.class.getSimpleName());
         getter = new MGetter("B", String.class.getSimpleName());
-        accessors[4] = setter;
-        accessors[5] = getter;
+        mEntity.addPAccessors(setter);
+        mEntity.addPAccessors(getter);
 
+        mEntity.setPRelationships(new ArrayList<>());
+
+<<<<<<< HEAD
         return new MEntity(entity_name, new MPackageDeclaration[]{mPackageDeclaration}, attributes, new MRelationship[0], accessors);
 >>>>>>> Add refused, accepted tests
+=======
+        return mEntity;
+>>>>>>> Update tests to be adapted to the lazy initialization
     }
 
     private static MAttribute createId(
@@ -143,15 +166,20 @@ public class Main {
             String generation_strategy){
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         MAttribute mAttribute = new MAttribute(name, "Integer");
 =======
 >>>>>>> Add refused, accepted tests
+=======
+        MAttribute mAttribute = new MAttribute(name, "Integer");
+>>>>>>> Update tests to be adapted to the lazy initialization
         MPrimaryKey mPrimaryKey = new MPrimaryKey();
         MIdIncrementationStrategy mIdIncrementationStrategy = null;
         if(!generation_strategy.equals("")){
             mIdIncrementationStrategy = new MIdIncrementationStrategy(generation_strategy);
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         mAttribute.addNotNull(new MNotNull());
 
@@ -166,19 +194,29 @@ public class Main {
         return mAttribute;
 =======
         Macro[] id_related;
+=======
+        mAttribute.addPNotNull(new MNotNull());
+
+>>>>>>> Update tests to be adapted to the lazy initialization
         if (mIdIncrementationStrategy == null) {
-            id_related = new Macro[]{mPrimaryKey};
+            mAttribute.addPId(mPrimaryKey);
         }
         else{
-            id_related = new Macro[]{mPrimaryKey, mIdIncrementationStrategy};
+            mAttribute.addPId(mPrimaryKey);
+            mAttribute.addPId(mIdIncrementationStrategy);
         }
 
+<<<<<<< HEAD
         return new MAttribute(name, "Integer", id_related, new Macro[0]);
 >>>>>>> Add refused, accepted tests
+=======
+        return mAttribute;
+>>>>>>> Update tests to be adapted to the lazy initialization
     }
 
     private static MAttribute createAttribute(
             String name,
+<<<<<<< HEAD
 <<<<<<< HEAD
             String type,
             boolean notNull){
@@ -191,10 +229,26 @@ public class Main {
         return mAttribute;
 =======
             String type){
+=======
+            String type,
+            boolean notNull){
+>>>>>>> Update tests to be adapted to the lazy initialization
 
+        MAttribute mAttribute = new MAttribute(name, type);
+        if(notNull) {
+            mAttribute.addPNotNull(new MNotNull());
+        }
+        else {
+            mAttribute.setPNotNull(new ArrayList<>());
+        }
 
+<<<<<<< HEAD
         return new MAttribute(name, type, new Macro[0], new Macro[]{new MNotNull()});
 >>>>>>> Add refused, accepted tests
+=======
+        mAttribute.setPId(new ArrayList<>());
+        return mAttribute;
+>>>>>>> Update tests to be adapted to the lazy initialization
     }
 
 }
