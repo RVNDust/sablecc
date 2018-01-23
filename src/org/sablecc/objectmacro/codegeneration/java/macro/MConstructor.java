@@ -9,12 +9,16 @@ public class MConstructor {
   private final String pName;
   private final MConstructor mConstructor = this;
 <<<<<<< HEAD
+<<<<<<< HEAD
   private final List<Object> eStringParam = new LinkedList<Object>();
   private final List<Object> eSetParam = new LinkedList<Object>();
   private final List<Object> eInitMacroParam_InitMacroInternal_InitStringInternal = new LinkedList<Object>();
   private final List<Object> eInitInternalValue = new LinkedList<Object>();
 =======
   private final List<Object> eStringParam_MacroParam = new LinkedList<Object>();
+=======
+  private final List<Object> eStringParam = new LinkedList<Object>();
+>>>>>>> Removed in constructor initialization and add lazy initialization
   private final List<Object> eSetParam = new LinkedList<Object>();
   private final List<Object> eInitMacroInternal_InitStringInternal = new LinkedList<Object>();
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
@@ -26,6 +30,7 @@ public class MConstructor {
 
   public MStringParam newStringParam(String pName) {
     MStringParam lStringParam = new MStringParam(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
     this.eStringParam.add(lStringParam);
     return lStringParam;
@@ -43,6 +48,12 @@ public class MConstructor {
   }
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    this.eStringParam.add(lStringParam);
+    return lStringParam;
+  }
+
+>>>>>>> Removed in constructor initialization and add lazy initialization
   public MSetParam newSetParam(String pName) {
     MSetParam lSetParam = new MSetParam(pName);
     this.eSetParam.add(lSetParam);
@@ -103,10 +114,14 @@ public class MConstructor {
     {
       boolean first = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
       for(Object oStringParam : this.eStringParam) {
 =======
       for(Object oStringParam_MacroParam : this.eStringParam_MacroParam) {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+      for(Object oStringParam : this.eStringParam) {
+>>>>>>> Removed in constructor initialization and add lazy initialization
         if(first) {
           first = false;
         }
@@ -114,10 +129,14 @@ public class MConstructor {
           sb.append(", ");
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         sb.append(oStringParam.toString());
 =======
         sb.append(oStringParam_MacroParam.toString());
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        sb.append(oStringParam.toString());
+>>>>>>> Removed in constructor initialization and add lazy initialization
       }
     }
     sb.append("){");

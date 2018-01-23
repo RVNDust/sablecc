@@ -401,10 +401,16 @@ $macro: add_all(param_name) $
 
         int i = 0;
 
+<<<<<<< HEAD
         for(Macro macro : macros){
             if(macro == null){
                 throw ObjectMacroException.macroNull(i, "$param_name");
             }
+=======
+$macro: param_macro_field(name) $
+    private List<Macro> list_$name;
+$end: param_macro_field $
+>>>>>>> Removed in constructor initialization and add lazy initialization
 
             $expand: apply_internals_initializer $
 
@@ -416,12 +422,18 @@ $end: add_all $
 
 $comment: ========= single_add =========== $
 
+<<<<<<< HEAD
 $macro: single_add(macro_name, param_name) $
     public void add$param_name(M$macro_name macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("$param_name");
         }
         $expand: is_built $
+=======
+$macro: internal_macro_field(name) $
+    private Map<Context, List<Macro>> list_$name = new LinkedHashMap<>();
+$end: internal_macro_field $
+>>>>>>> Removed in constructor initialization and add lazy initialization
 
         this.list_$param_name.add(macro);
     }
@@ -440,7 +452,14 @@ $comment: =========== param_string_ref_builder ============= $
 $macro: param_string_ref_builder(name) $
     private String build$name($expand: context_param$){
 
+<<<<<<< HEAD
         return this.field_$(name)$expand: get_internal_tail $;
+=======
+$macro: constructor(name) $
+    public M$name($expand: string_param, separator=", "$){
+$expand: set_param, before_first="\n" $
+$expand: init_macro_internal, init_string_internal, before_first="\n" $
+>>>>>>> Removed in constructor initialization and add lazy initialization
     }
 $end: param_string_ref_builder $
 
@@ -452,6 +471,7 @@ $macro: param_macro_ref_builder(name, index_builder) $
         Context local_context = $expand: context_name, none="context"$;
         List<Macro> macros = this.list_$name;
 
+<<<<<<< HEAD
         int i = 0;
         int nb_macros = macros.size();
         String expansion = null;
@@ -461,6 +481,19 @@ $macro: param_macro_ref_builder(name, index_builder) $
             sb$index_builder.append(this.$(name)None.apply(i, "", nb_macros));
         }
         $end: apply_none_directive $
+=======
+$comment: ========== list_macro_param ========== $
+
+$macro: list_macro_param(name) $
+List<Macro> p$(name)$no_eol$
+$end: list_macro_param $
+
+$comment: ========== macro_param ========== $
+
+$macro: macro_param(name) $
+Macro p$(name)$no_eol$
+$end: macro_param $
+>>>>>>> Removed in constructor initialization and add lazy initialization
 
         for(Macro macro : macros){
             expansion = macro.build(local_context);
@@ -478,6 +511,7 @@ $end: param_macro_ref_builder $
 
 $comment: =========== internal_macro_ref_builder ================ $
 
+<<<<<<< HEAD
 $macro: internal_macro_ref_builder(internal_name) $
     private String build$internal_name(Context context){
 
@@ -1163,12 +1197,24 @@ $expand: package_declaration, before_first="\n" $
 
 class DBeforeFirst
         extends Directive {
+=======
+$macro: param_macro_setter(name) $
+    public void setP$name($expand: list_macro_param $){
+        if($expand: param_arg $ == null){
+            throw ObjectMacroException.parameterNull("$name");
+        }
+
+        List<Macro> macros = $expand: param_arg $;
+        this.list_$name = new ArrayList<>();
+        int i = 0;
+>>>>>>> Removed in constructor initialization and add lazy initialization
 
     DBeforeFirst(String value) {
 
         super(value);
     }
 
+<<<<<<< HEAD
     @Override
     String apply(
             Integer index,
@@ -1179,11 +1225,31 @@ class DBeforeFirst
             return this.value.concat(macro);
         }
         return macro;
+=======
+            this.list_$name.add(macro);
+
+        }
+    }
+
+    public void addP$name(Macro macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("$name");
+        }
+
+        if(this.list_$name == null){
+            this.list_$name = new ArrayList<>();
+        }
+
+        $expand: apply_internals_initializer $
+
+        this.list_$name.add(macro);
+>>>>>>> Removed in constructor initialization and add lazy initialization
     }
 }
 
 $end: class_before_first $
 
+<<<<<<< HEAD
 $comment: ========== class_after_last ========== $
 
 $macro: class_after_last $
@@ -1192,6 +1258,19 @@ $expand: package_declaration, before_first="\n" $
 
 class DAfterLast
         extends Directive {
+=======
+$macro: internal_macro_setter(name) $
+    void set$name(
+            Context context,
+            List<Macro> macros) {
+
+        if(macros == null){
+            throw new RuntimeException("macros provided to $name cannot be null");
+        }
+
+        List<Macro> tempMacros = new ArrayList<>();
+        int i = 0;
+>>>>>>> Removed in constructor initialization and add lazy initialization
 
     DAfterLast(String value) {
 
@@ -1204,8 +1283,12 @@ class DAfterLast
             String macro,
             Integer list_size) {
 
+<<<<<<< HEAD
         if(index == list_size - 1){
             return macro.concat(this.value);
+=======
+            tempMacros.add(macro);
+>>>>>>> Removed in constructor initialization and add lazy initialization
         }
         return macro;
     }
@@ -1361,12 +1444,21 @@ $macro: param_macro_ref_builder(name, index_builder) $
     private String build$name($expand: context_param $){
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
+<<<<<<< HEAD
   public MIncorrectType(String pType, String pParamName) {
     if(pType == null) throw new NullPointerException();
     this.pType = pType;
     if(pParamName == null) throw new NullPointerException();
     this.pParamName = pParamName;
   }
+=======
+        StringBuilder sb$index_builder = new StringBuilder();
+        Context local_context = $expand: context_name, none="context"$;
+        List<Macro> macros = this.list_$(name)$expand: get_internal_tail $;
+        $expand: none $
+        boolean first = true;
+        int i = 0;
+>>>>>>> Removed in constructor initialization and add lazy initialization
 
   String pType() {
     return this.pType;
@@ -1414,7 +1506,7 @@ $end: param_string_ref_builder $
 $comment: ========== param_macro_ref ============== $
 
 $macro: param_macro_ref(name) $
-    private Macro[] get$name($expand: context_param $){
+    private List<Macro> get$name($expand: context_param $){
 
         return this.list_$(name)$expand: get_internal_tail $;
     }
@@ -1447,7 +1539,7 @@ $comment: ============== object_macro_error_head =========== $
 $comment: =========== none ============ $
 
 $macro: none $
-if(macros.length == 0){
+if(macros.size() == 0){
     $expand: string_part, param_insert_part, eol_part, insert_macro_part $
 }
 $end: none $
@@ -1464,7 +1556,7 @@ $end: before_first $
 $comment: ========== after_last ========== $
 
 $macro: after_last $
-if(i == macros.length){
+if(i == macros.size()){
     $expand: string_part, param_insert_part, eol_part, insert_macro_part $
 }
 $end: after_last $

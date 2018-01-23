@@ -72,9 +72,13 @@ public class MNewDirective {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java
     sb.append("        StringBuilder sb");
     sb.append(rIndexBuilder());
     sb.append(" = new StringBuilder();");
+=======
+    sb.append("if(macros.size() == 0){");
+>>>>>>> Removed in constructor initialization and add lazy initialization:src/org/sablecc/objectmacro/codegeneration/java/macro/MNone.java
     sb.append(System.getProperty("line.separator"));
     for(Object oStringPart_ParamInsertPart_EolPart_InsertMacroPart : this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart) {
       sb.append(oStringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());

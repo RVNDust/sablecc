@@ -24,6 +24,7 @@ public class MParamMacroField {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    private final List<Macro> list_");
     sb.append(rName());
     sb.append(";");
@@ -32,6 +33,11 @@ public class MParamMacroField {
     sb.append(rName());
     sb.append("[];");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("    private List<Macro> list_");
+    sb.append(rName());
+    sb.append(";");
+>>>>>>> Removed in constructor initialization and add lazy initialization
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

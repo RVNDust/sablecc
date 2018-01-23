@@ -2,12 +2,12 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
-public class MMacroParam {
+public class MListMacroParam {
 
   private final String pName;
-  private final MMacroParam mMacroParam = this;
+  private final MListMacroParam mListMacroParam = this;
 
-  public MMacroParam(String pName) {
+  public MListMacroParam(String pName) {
     if(pName == null) throw new NullPointerException();
     this.pName = pName;
   }
@@ -17,13 +17,13 @@ public class MMacroParam {
   }
 
   private String rName() {
-    return this.mMacroParam.pName();
+    return this.mListMacroParam.pName();
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("Macro p");
+    sb.append("List<Macro> p");
     sb.append(rName());
     return sb.toString();
   }

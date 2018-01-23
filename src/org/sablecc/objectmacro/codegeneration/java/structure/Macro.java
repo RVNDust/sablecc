@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Removed in constructor initialization and add lazy initialization
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -16,8 +19,11 @@
  * limitations under the License.
  */
 
+<<<<<<< HEAD
 =======
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+>>>>>>> Removed in constructor initialization and add lazy initialization
 package org.sablecc.objectmacro.codegeneration.java.structure;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
@@ -28,10 +34,13 @@ import java.util.*;
 =======
 import java.util.List;
 
+<<<<<<< HEAD
 /**
  * Created by lam on 17/11/17.
  */
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+>>>>>>> Removed in constructor initialization and add lazy initialization
 public class Macro {
 
     private final MMacro macro;
