@@ -2,25 +2,36 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+<<<<<<< HEAD
 import java.util.*;
 
+=======
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 public class MInitInternalsCall {
 
   private final String pParamName;
   private final MInitInternalsCall mInitInternalsCall = this;
+<<<<<<< HEAD
   private final List<Object> eContextArg = new LinkedList<Object>();
 
   MInitInternalsCall(String pParamName) {
+=======
+
+  public MInitInternalsCall(String pParamName) {
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     if(pParamName == null) throw new NullPointerException();
     this.pParamName = pParamName;
   }
 
+<<<<<<< HEAD
   public MContextArg newContextArg() {
     MContextArg lContextArg = new MContextArg();
     this.eContextArg.add(lContextArg);
     return lContextArg;
   }
 
+=======
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
   String pParamName() {
     return this.pParamName;
   }
@@ -32,6 +43,7 @@ public class MInitInternalsCall {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append("        init");
     sb.append(rParamName());
     sb.append("Internals(");
@@ -44,6 +56,12 @@ public class MInitInternalsCall {
     sb.append(");");
     sb.append(System.getProperty("line.separator"));
     sb.append("        ");
+=======
+    sb.append("init");
+    sb.append(rParamName());
+    sb.append("Internals();");
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     return sb.toString();
   }
 

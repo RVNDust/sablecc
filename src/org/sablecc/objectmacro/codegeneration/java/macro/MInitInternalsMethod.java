@@ -34,7 +34,11 @@ public class MInitInternalsMethod {
     StringBuilder sb = new StringBuilder();
     sb.append("    private void init");
     sb.append(rName());
+<<<<<<< HEAD
     sb.append("Internals(Context context){");
+=======
+    sb.append("Internals(){");
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     sb.append(System.getProperty("line.separator"));
     sb.append("        for(Macro macro : this.list_");
     sb.append(rName());

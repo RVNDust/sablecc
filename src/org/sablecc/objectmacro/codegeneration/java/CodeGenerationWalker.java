@@ -29,7 +29,6 @@ import java.util.Map;
 
 import org.sablecc.exception.*;
 import org.sablecc.objectmacro.codegeneration.*;
-import org.sablecc.objectmacro.codegeneration.c.macro.MParam;
 import org.sablecc.objectmacro.codegeneration.java.macro.*;
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
 <<<<<<< HEAD
@@ -38,7 +37,6 @@ import org.sablecc.objectmacro.exception.*;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 import org.sablecc.objectmacro.intermediate.syntax3.analysis.*;
 import org.sablecc.objectmacro.intermediate.syntax3.node.*;
-import org.sablecc.objectmacro.syntax3.node.PStringPart;
 import org.sablecc.objectmacro.util.Utils;
 
 public class CodeGenerationWalker
@@ -205,15 +203,21 @@ public class CodeGenerationWalker
 
     private MMacroBuilder currentMacroBuilder;
 
+    //Macro inside init_internals_method
     private MApplyInternalsInitializer currentApplyInitializer;
 
+    //Macro in add and addAll to only do type verification
+    private MApplyInternalsInitializer currentEmptyApplyInitializer;
+
     private MRedefinedInternalsSetter currentRedefinedInternalsSetter;
+
+    private MRedefinedInternalsSetter currentEmptyRedefinedInternalsSetter;
 
     private Integer indexBuilder = 0;
 
     private Integer indexInsert = 0;
 
-    private String currentMacroName;
+    private String currentMacroRefName;
 
     private final Map<String, Macro> macros;
 
@@ -402,6 +406,8 @@ public class CodeGenerationWalker
         MIncorrectType mIncorrectType = new MIncorrectType();
         MObjectMacroErrorHead mObjectMacroErrorHead = new MObjectMacroErrorHead();
         MMacroNullInList mMacroNullInList = new MMacroNullInList();
+        MCyclicReference mCyclicReference = new MCyclicReference();
+        MCannotModify mCannotModify = new MCannotModify();
         MObjectMacroException mObjectMacroException = new MObjectMacroException();
 
         if(!this.ir.getDestinationPackage().equals("")){
@@ -410,6 +416,8 @@ public class CodeGenerationWalker
             mParameterNull.newPackageDeclaration(destinationPackage);
             mObjectMacroErrorHead.newPackageDeclaration(destinationPackage);
             mMacroNullInList.newPackageDeclaration(destinationPackage);
+            mCyclicReference.newPackageDeclaration(destinationPackage);
+            mCannotModify.newPackageDeclaration(destinationPackage);
             mObjectMacroException.newPackageDeclaration(destinationPackage);
 
         }
@@ -418,6 +426,8 @@ public class CodeGenerationWalker
         writeFile("MParameterNull.java", mParameterNull.toString());
         writeFile("MObjectMacroErrorHead.java", mObjectMacroErrorHead.toString());
         writeFile("MMacroNullInList.java", mMacroNullInList.toString());
+        writeFile("MCyclicReference.java", mCyclicReference.toString());
+        writeFile("MCannotModify.java", mCannotModify.toString());
         writeFile("ObjectMacroException.java", mObjectMacroException.toString());
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     }
@@ -486,13 +496,14 @@ public class CodeGenerationWalker
         this.mInternalsInitializer.newParentInternalsSetter(macroName);
         this.currentMacroToBuild.newRedefinedApplyInitializer(macroName);
 
-//TODO to remove in frontEnd
-//        for(TString string : node.getInitOrder()){
-//            String param_name = Utils.toCamelCase(string(string));
-//            if(this.currentMacro.getParameters().contains(param_name)){
-//                this.currentConstructor.newSetParam(param_name).newParamArg(param_name);
-//            }
-//        }
+        for(TString string : node.getInitOrder()){
+            String param_name = Utils.toCamelCase(string(string));
+            //Verify if parameter exist
+            if(this.currentMacro.getParameters().contains(param_name)){
+                this.currentMacroBuilder.newInitInternalsCall(param_name);
+            }
+        }
+
         this.currentMacroToBuild.newImportJavaUtil();
 
         if(node.getInternals().size() > 0){
@@ -507,7 +518,11 @@ public class CodeGenerationWalker
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
             this.currentMacroToBuild.newEmptyBuilderWithContext();
+<<<<<<< HEAD
 >>>>>>> Now macro without internals has a builder with context that only return build
+=======
+            this.currentMacroBuilder.newBuildVerification(macroName);
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
         }
     }
 
@@ -724,13 +739,17 @@ public class CodeGenerationWalker
             this.currentContext = paramName.concat(CONTEXT_STRING);
             this.indexBuilder = 0;
 
-            MParamMacroSetter mParamMacroSetter = this.currentMacroToBuild.newParamMacroSetter(paramName);
-            mParamMacroSetter.newParamArg(paramName);
-            mParamMacroSetter.newListMacroParam(paramName);
+            MParamMacroSetter mParamMacroSetter = this.currentMacroToBuild.newParamMacroSetter(paramName, this.currentMacro.getName());
 
-            this.currentApplyInitializer = mParamMacroSetter.newApplyInternalsInitializer(paramName);
+            this.currentEmptyApplyInitializer = mParamMacroSetter.newApplyInternalsInitializer(paramName);
+            this.currentApplyInitializer = this.currentMacroToBuild.newInitInternalsMethod(paramName)
+                            .newApplyInternalsInitializer(paramName);
             this.contextNames.add(currentContext);
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            this.currentConstructor.newInitMacroParam(paramName);
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
         }
         else{
             throw new InternalException("case unhandled");
@@ -767,6 +786,7 @@ public class CodeGenerationWalker
 
         this.currentContext = null;
         this.currentApplyInitializer = null;
+        this.currentEmptyApplyInitializer = null;
         this.indexBuilder = 0;
         this.indexInsert = 0;
 <<<<<<< HEAD
@@ -867,6 +887,7 @@ public class CodeGenerationWalker
             AMacroRef node) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         String macro_ref_name = this.currentMacroRefName = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(this.currentContextName != null){
@@ -890,6 +911,20 @@ public class CodeGenerationWalker
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
+=======
+        this.currentMacroRefName = buildNameCamelCase(node.getNames());
+
+        if(this.currentContext != null){
+            this.currentRedefinedInternalsSetter =
+                    this.currentApplyInitializer.newRedefinedInternalsSetter(
+                            currentMacroRefName);
+        }
+
+        if(this.currentEmptyApplyInitializer != null){
+            this.currentEmptyRedefinedInternalsSetter =
+                    this.currentEmptyApplyInitializer.newRedefinedInternalsSetter(
+                            currentMacroRefName);
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
         }
 >>>>>>> Clean up code, add comments
     }
@@ -899,6 +934,7 @@ public class CodeGenerationWalker
             AMacroRef node) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.currentMacroRefName = null;
     }
 
@@ -906,6 +942,9 @@ public class CodeGenerationWalker
     public void caseAStringValue(
 =======
         this.currentMacroName = null;
+=======
+        this.currentMacroRefName = null;
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     }
 
     @Override
@@ -929,6 +968,7 @@ public class CodeGenerationWalker
             this.currentRedefinedInternalsSetter.newInitStringBuilder(index_builder);
 
             this.currentRedefinedInternalsSetter.newSetInternal(
+<<<<<<< HEAD
 <<<<<<< HEAD
                     this.currentMacroRefName,
                     GenerationUtils.buildNameCamelCase(node.getParamName()),
@@ -967,6 +1007,9 @@ public class CodeGenerationWalker
                     "null").newStringBuilderBuild(index_builder);
 =======
                     this.currentMacroName,
+=======
+                    this.currentMacroRefName,
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
                     buildNameCamelCase(node.getParamName()),
                     this.currentContext).newStringBuilderBuild(index_builder);
 
@@ -1329,7 +1372,7 @@ public class CodeGenerationWalker
         this.createdInserts.add(this.indexInsert);
 
         String tempContext = this.currentContext;
-        String tempMacroName = this.currentMacroName;
+        String tempMacroName = this.currentMacroRefName;
         Integer tempIndex = this.indexBuilder;
         Integer tempIndexInsert = this.indexInsert;
         this.currentContext = null;
@@ -1348,8 +1391,12 @@ public class CodeGenerationWalker
         this.indexInsert = tempIndexInsert;
 >>>>>>> indexInsert could be modified in the children nodes of stringValue
         this.currentContext = tempContext;
+<<<<<<< HEAD
         this.currentMacroName = tempMacroName;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        this.currentMacroRefName = tempMacroName;
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
         this.currentInsertMacroPart = tempInsertMacroPart;
 
     }
@@ -1390,8 +1437,9 @@ public class CodeGenerationWalker
 
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
         if(this.currentContext != null){
+
             MParamRef paramRef = this.currentRedefinedInternalsSetter.newSetInternal(
-                    this.currentMacroName,
+                    this.currentMacroRefName,
                     buildNameCamelCase(node.getParamName()),
                     this.currentContext)
                         .newParamRef(var_name);

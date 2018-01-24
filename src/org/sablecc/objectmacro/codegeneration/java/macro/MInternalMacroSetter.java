@@ -24,13 +24,13 @@ import java.util.*;
 
 public class MInternalMacroSetter {
 
-  private final String pName;
+  private final String pParamName;
   private final MInternalMacroSetter mInternalMacroSetter = this;
   private final List<Object> eApplyInternalsInitializer = new LinkedList<Object>();
 
-  public MInternalMacroSetter(String pName) {
-    if(pName == null) throw new NullPointerException();
-    this.pName = pName;
+  public MInternalMacroSetter(String pParamName) {
+    if(pParamName == null) throw new NullPointerException();
+    this.pParamName = pParamName;
   }
 
   public MApplyInternalsInitializer newApplyInternalsInitializer(String pParamName) {
@@ -39,13 +39,18 @@ public class MInternalMacroSetter {
     return lApplyInternalsInitializer;
   }
 
-  String pName() {
-    return this.pName;
+  String pParamName() {
+    return this.pParamName;
   }
 
+<<<<<<< HEAD
   private String rName() {
     return this.mInternalMacroSetter.pName();
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+  private String rParamName() {
+    return this.mInternalMacroSetter.pParamName();
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
   }
 
   @Override
@@ -53,10 +58,14 @@ public class MInternalMacroSetter {
     StringBuilder sb = new StringBuilder();
     sb.append("    void set");
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append(rParamName());
 =======
     sb.append(rName());
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append(rParamName());
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     sb.append("(");
     sb.append(System.getProperty("line.separator"));
     sb.append("            Context context,");
@@ -78,14 +87,12 @@ public class MInternalMacroSetter {
     sb.append(System.getProperty("line.separator"));
     sb.append("        if(macros == null){");
     sb.append(System.getProperty("line.separator"));
-    sb.append("            throw new RuntimeException(\"macros provided to ");
-    sb.append(rName());
-    sb.append(" cannot be null\");");
+    sb.append("            throw new RuntimeException(\"macros cannot be null\");");
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("        List<Macro> tempMacros = new ArrayList<>();");
+    sb.append("        final List<Macro> tempMacros = new ArrayList<>();");
     sb.append(System.getProperty("line.separator"));
     sb.append("        int i = 0;");
     sb.append(System.getProperty("line.separator"));
@@ -95,9 +102,7 @@ public class MInternalMacroSetter {
     sb.append(System.getProperty("line.separator"));
     sb.append("            if(macro == null){");
     sb.append(System.getProperty("line.separator"));
-    sb.append("                throw ObjectMacroException.macroNull(i, \"");
-    sb.append(rName());
-    sb.append("\");");
+    sb.append("                throw ObjectMacroException.macroNull(i, \"param_name\");");
     sb.append(System.getProperty("line.separator"));
     sb.append("            }");
     sb.append(System.getProperty("line.separator"));
@@ -119,10 +124,14 @@ public class MInternalMacroSetter {
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.list_");
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append(rParamName());
     sb.append(".put(context, internal_value);");
 =======
     sb.append(rName());
+=======
+    sb.append(rParamName());
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     sb.append(".put(context, tempMacros);");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append(System.getProperty("line.separator"));

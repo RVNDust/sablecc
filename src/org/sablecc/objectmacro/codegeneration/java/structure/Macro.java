@@ -46,6 +46,7 @@ public class Macro {
     private final MMacro macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private final String name;
 
     private final List<String> parametersName;
@@ -79,6 +80,10 @@ public class Macro {
     public String getName(){
         return this.name;
 =======
+=======
+    private final String name;
+
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     private final List<String> parameters;
 
     private final List<String> internals;
@@ -86,26 +91,33 @@ public class Macro {
     public Macro(
             MMacro macro,
             List<String> parameters,
-            List<String> internals){
+            List<String> internals,
+            String name){
 
         this.macro = macro;
         this.parameters = parameters;
         this.internals = internals;
+        this.name = name;
     }
 
     public List<String> getInternals() {
-
-        return internals;
+        return this.internals;
     }
 
     public List<String> getParameters() {
-
-        return parameters;
+        return this.parameters;
     }
 
     public MMacro getMacro() {
+        return this.macro;
+    }
 
+<<<<<<< HEAD
         return macro;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+    public String getName(){
+        return this.name;
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     }
 }

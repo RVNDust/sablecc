@@ -152,7 +152,7 @@ public class MacroCollector
 
         String macro_name = buildNameCamelCase(node.getNames());
         this.macros.put(macro_name,
-                new Macro(new MMacro(macro_name), this.currentParameters, this.currentInternals));
+                new Macro(new MMacro(macro_name), this.currentParameters, this.currentInternals, macro_name));
 
     }
 

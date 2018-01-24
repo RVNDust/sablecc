@@ -13,6 +13,7 @@ public class MConstructor {
   private final List<Object> eStringParam = new LinkedList<Object>();
   private final List<Object> eSetParam = new LinkedList<Object>();
   private final List<Object> eInitMacroParam_InitMacroInternal_InitStringInternal = new LinkedList<Object>();
+<<<<<<< HEAD
   private final List<Object> eInitInternalValue = new LinkedList<Object>();
 =======
   private final List<Object> eStringParam_MacroParam = new LinkedList<Object>();
@@ -22,6 +23,8 @@ public class MConstructor {
   private final List<Object> eSetParam = new LinkedList<Object>();
   private final List<Object> eInitMacroInternal_InitStringInternal = new LinkedList<Object>();
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 
   public MConstructor(String pName) {
     if(pName == null) throw new NullPointerException();
@@ -61,12 +64,16 @@ public class MConstructor {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
   public MInitMacroParam newInitMacroParam(String pName) {
     MInitMacroParam lInitMacroParam = new MInitMacroParam(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroParam);
     return lInitMacroParam;
   }
 
+<<<<<<< HEAD
   public MInitMacroInternal newInitMacroInternal(String pName) {
     MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroInternal);
@@ -75,11 +82,17 @@ public class MConstructor {
     MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
     this.eInitMacroInternal_InitStringInternal.add(lInitMacroInternal);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+  public MInitMacroInternal newInitMacroInternal(String pName) {
+    MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
+    this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroInternal);
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     return lInitMacroInternal;
   }
 
   public MInitStringInternal newInitStringInternal(String pName) {
     MInitStringInternal lInitStringInternal = new MInitStringInternal(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitStringInternal);
     return lInitStringInternal;
@@ -93,6 +106,9 @@ public class MConstructor {
 
 =======
     this.eInitMacroInternal_InitStringInternal.add(lInitStringInternal);
+=======
+    this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitStringInternal);
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     return lInitStringInternal;
   }
 
@@ -148,6 +164,7 @@ public class MConstructor {
       sb.append(oSetParam.toString());
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(this.eInitMacroParam_InitMacroInternal_InitStringInternal.size() > 0) {
       sb.append(System.getProperty("line.separator"));
     }
@@ -166,6 +183,13 @@ public class MConstructor {
     for(Object oInitMacroInternal_InitStringInternal : this.eInitMacroInternal_InitStringInternal) {
       sb.append(oInitMacroInternal_InitStringInternal.toString());
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    if(this.eInitMacroParam_InitMacroInternal_InitStringInternal.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oInitMacroParam_InitMacroInternal_InitStringInternal : this.eInitMacroParam_InitMacroInternal_InitStringInternal) {
+      sb.append(oInitMacroParam_InitMacroInternal_InitStringInternal.toString());
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     }
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));

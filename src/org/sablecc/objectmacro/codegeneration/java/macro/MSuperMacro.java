@@ -56,6 +56,9 @@ public class MSuperMacro {
     sb.append("    public String expansion;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+    sb.append("    public boolean built = false;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
     sb.append("    public Map<Context, String> expansions = new LinkedHashMap<>();");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
     sb.append(System.getProperty("line.separator"));

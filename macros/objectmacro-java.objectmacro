@@ -107,6 +107,8 @@ public abstract class Macro {
 
     public String expansion;
 
+    public boolean built = false;
+
     public Map<Context, String> expansions = new LinkedHashMap<>();
 
     public String build(){
@@ -301,6 +303,7 @@ $expand: constructor, before_first="\n" $
 $expand: param_string_setter, param_macro_setter, internal_string_setter, internal_macro_setter, before_first="\n", separator="\n" $
 $expand: param_string_ref_builder, param_macro_ref_builder, separator="\n", before_first="\n" $
 $expand: param_string_ref, param_macro_ref, separator="\n", before_first="\n" $
+$expand: init_internals_method, separator="\n" $
 
 $expand: redefined_apply_initializer $
 $expand: macro_builder, before_first="\n" $
@@ -343,9 +346,17 @@ $end: constructor $
 
 $comment: ========== init_macro_internal =========== $
 
+<<<<<<< HEAD
 $macro: init_macro_internal(name) $
     this.list_$name = new LinkedHashMap<>();
 $end: init_macro_internal $
+=======
+        $expand: build_verification $
+
+        $expand: init_internals_call $
+
+        StringBuilder sb0 = new StringBuilder();
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 
 $comment: ========== init_macro_param =========== $
 
@@ -354,8 +365,20 @@ $macro: init_macro_param(name) $
 $end: init_macro_param $
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $comment: ========== init_string_internal =========== $
 =======
+=======
+$comment: ============ build_verification ============ $
+
+$macro: build_verification(macro_name) $
+        if(this.built){
+            throw ObjectMacroException.cyclicReference("$macro_name");
+        }
+        this.built = true;
+$end: build_verification $
+
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 $comment: ============ empty_builder_with_context ============ $
 
 $macro: empty_builder_with_context $
@@ -399,7 +422,27 @@ $macro: add_all(param_name) $
         }
         $expand: is_built$
 
+<<<<<<< HEAD
         int i = 0;
+=======
+$comment: ========= init_internals_method ======== $
+
+$macro: init_internals_method(name) $
+    private void init$(name)Internals(){
+        for(Macro macro : this.list_$name){
+            $expand: apply_internals_initializer $
+        }
+    }
+$end: init_internals_method $
+
+$comment: =========== init_internals_call ======== $
+
+$macro: init_internals_call(param_name) $
+init$(param_name)Internals();
+$end: init_internals_call $
+
+$comment: ========== param_macro_field ========== $
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 
 <<<<<<< HEAD
         for(Macro macro : macros){
@@ -408,7 +451,7 @@ $macro: add_all(param_name) $
             }
 =======
 $macro: param_macro_field(name) $
-    private List<Macro> list_$name;
+    private final List<Macro> list_$name;
 $end: param_macro_field $
 >>>>>>> Removed in constructor initialization and add lazy initialization
 
@@ -458,8 +501,12 @@ $macro: param_string_ref_builder(name) $
 $macro: constructor(name) $
     public M$name($expand: string_param, separator=", "$){
 $expand: set_param, before_first="\n" $
+<<<<<<< HEAD
 $expand: init_macro_internal, init_string_internal, before_first="\n" $
 >>>>>>> Removed in constructor initialization and add lazy initialization
+=======
+$expand: init_macro_param, init_macro_internal, init_string_internal, before_first="\n" $
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     }
 $end: param_string_ref_builder $
 
@@ -1195,6 +1242,7 @@ $macro: class_before_first $
 $insert: header $
 $expand: package_declaration, before_first="\n" $
 
+<<<<<<< HEAD
 class DBeforeFirst
         extends Directive {
 =======
@@ -1202,18 +1250,33 @@ $macro: param_macro_setter(name) $
     public void setP$name($expand: list_macro_param $){
         if($expand: param_arg $ == null){
             throw ObjectMacroException.parameterNull("$name");
+=======
+$macro: param_macro_setter(param_name, macro_name) $
+    public void addAllP$param_name(List<Macro> macros){
+        if(macros == null){
+            throw ObjectMacroException.parameterNull("$param_name");
+        }
+        if(this.built){
+            throw ObjectMacroException.cannotModify("$macro_name");
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
         }
 
-        List<Macro> macros = $expand: param_arg $;
-        this.list_$name = new ArrayList<>();
         int i = 0;
 >>>>>>> Removed in constructor initialization and add lazy initialization
 
+<<<<<<< HEAD
     DBeforeFirst(String value) {
+=======
+        for(Macro macro : macros){
+            if(macro == null){
+                throw ObjectMacroException.macroNull(i, "$param_name");
+            }
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 
         super(value);
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     @Override
     String apply(
@@ -1228,22 +1291,29 @@ $macro: param_macro_setter(name) $
 =======
             this.list_$name.add(macro);
 
+=======
+            this.list_$param_name.add(macro);
+            i++;
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
         }
     }
 
-    public void addP$name(Macro macro){
+    public void addP$param_name(Macro macro){
         if(macro == null){
-            throw ObjectMacroException.parameterNull("$name");
+            throw ObjectMacroException.parameterNull("$param_name");
         }
-
-        if(this.list_$name == null){
-            this.list_$name = new ArrayList<>();
+        if(this.built){
+            throw ObjectMacroException.cannotModify("$macro_name");
         }
 
         $expand: apply_internals_initializer $
 
+<<<<<<< HEAD
         this.list_$name.add(macro);
 >>>>>>> Removed in constructor initialization and add lazy initialization
+=======
+        this.list_$param_name.add(macro);
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     }
 }
 
@@ -1252,6 +1322,7 @@ $end: class_before_first $
 <<<<<<< HEAD
 $comment: ========== class_after_last ========== $
 
+<<<<<<< HEAD
 $macro: class_after_last $
 $insert: header $
 $expand: package_declaration, before_first="\n" $
@@ -1261,21 +1332,31 @@ class DAfterLast
 =======
 $macro: internal_macro_setter(name) $
     void set$name(
+=======
+$macro: internal_macro_setter(param_name) $
+    void set$param_name(
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
             Context context,
             List<Macro> macros) {
 
         if(macros == null){
-            throw new RuntimeException("macros provided to $name cannot be null");
+            throw new RuntimeException("macros cannot be null");
         }
 
-        List<Macro> tempMacros = new ArrayList<>();
+        final List<Macro> tempMacros = new ArrayList<>();
         int i = 0;
 >>>>>>> Removed in constructor initialization and add lazy initialization
 
     DAfterLast(String value) {
 
+<<<<<<< HEAD
         super(value);
     }
+=======
+            if(macro == null){
+                throw ObjectMacroException.macroNull(i, "param_name");
+            }
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 
     @Override
     String apply(
@@ -1290,7 +1371,12 @@ $macro: internal_macro_setter(name) $
             tempMacros.add(macro);
 >>>>>>> Removed in constructor initialization and add lazy initialization
         }
+<<<<<<< HEAD
         return macro;
+=======
+
+        this.list_$param_name.put(context, tempMacros);
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     }
 }
 $end: class_after_last $
@@ -1619,6 +1705,12 @@ $macro: init_macro_internal(name) $
     this.list_$name = new LinkedHashMap<>();
 $end: init_macro_internal $
 
+$comment: ========== init_macro_param =========== $
+
+$macro: init_macro_param(name) $
+    this.list_$name = new ArrayList<>();
+$end: init_macro_param $
+
 $comment: ========== init_string_internal =========== $
 
 $macro: init_string_internal(name) $
@@ -1686,6 +1778,18 @@ public class ObjectMacroException
             String paramName){
 
         return new ObjectMacroException(new MParameterNull(paramName).toString());
+    }
+
+    static ObjectMacroException cyclicReference(
+            String macroName){
+
+        return new ObjectMacroException(new MCyclicReference(macroName).toString());
+    }
+
+    static ObjectMacroException cannotModify(
+            String macroName){
+
+        return new ObjectMacroException(new MCannotModify(macroName).toString());
     }
 
 }
@@ -1851,6 +1955,9 @@ public class MMacroNullInList {
 }
 $end: macro_null_in_list $
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
 
 $comment: ============ cannot_modify ============ $
 
@@ -1929,5 +2036,8 @@ public class MCyclicReference {
 
 }
 $end: cyclic_reference $
+<<<<<<< HEAD
 =======
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Init internals before building the macro instead at the add or addAll methods

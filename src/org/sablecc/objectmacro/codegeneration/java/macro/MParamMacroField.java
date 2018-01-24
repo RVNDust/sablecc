@@ -25,6 +25,7 @@ public class MParamMacroField {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    private final List<Macro> list_");
     sb.append(rName());
     sb.append(";");
@@ -35,6 +36,9 @@ public class MParamMacroField {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
     sb.append("    private List<Macro> list_");
+=======
+    sb.append("    private final List<Macro> list_");
+>>>>>>> Init internals before building the macro instead at the add or addAll methods
     sb.append(rName());
     sb.append(";");
 >>>>>>> Removed in constructor initialization and add lazy initialization

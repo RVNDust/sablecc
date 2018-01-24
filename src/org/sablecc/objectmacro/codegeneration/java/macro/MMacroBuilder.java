@@ -36,6 +36,8 @@ public class MMacroBuilder {
   private final List<Object> ePublic = new LinkedList<Object>();
   private final List<Object> eContextParam = new LinkedList<Object>();
   private final List<Object> eContextExpansion = new LinkedList<Object>();
+  private final List<Object> eBuildVerification = new LinkedList<Object>();
+  private final List<Object> eInitInternalsCall = new LinkedList<Object>();
   private final List<Object> eStringPart_ParamInsertPart_EolPart_InsertMacroPart = new LinkedList<Object>();
   private final List<Object> eNewContextExpansion = new LinkedList<Object>();
 
@@ -72,6 +74,18 @@ public class MMacroBuilder {
     this.eContextExpansion.add(lContextExpansion);
     return lContextExpansion;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+  }
+
+  public MBuildVerification newBuildVerification(String pMacroName) {
+    MBuildVerification lBuildVerification = new MBuildVerification(pMacroName);
+    this.eBuildVerification.add(lBuildVerification);
+    return lBuildVerification;
+  }
+
+  public MInitInternalsCall newInitInternalsCall(String pParamName) {
+    MInitInternalsCall lInitInternalsCall = new MInitInternalsCall(pParamName);
+    this.eInitInternalsCall.add(lInitInternalsCall);
+    return lInitInternalsCall;
   }
 
   public MStringPart newStringPart(String pString, String pIndexBuilder) {
@@ -206,6 +220,16 @@ public class MMacroBuilder {
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        ");
+    for(Object oBuildVerification : this.eBuildVerification) {
+      sb.append(oBuildVerification.toString());
+    }
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        ");
+    for(Object oInitInternalsCall : this.eInitInternalsCall) {
+      sb.append(oInitInternalsCall.toString());
+    }
     sb.append(System.getProperty("line.separator"));
     sb.append("        StringBuilder sb0 = new StringBuilder();");
     sb.append(System.getProperty("line.separator"));
