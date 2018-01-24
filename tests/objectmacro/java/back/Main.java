@@ -37,6 +37,7 @@ public class Main {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         System.out.print("======== Main Test ===========\n");
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
@@ -68,6 +69,9 @@ public class Main {
             macros[0] = new  MC();
 >>>>>>> Add back end tests
 =======
+=======
+        System.out.print("======== Main Test ===========\n");
+>>>>>>> Add test for dynamic cyclic reference verification
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
         macros.add(new MB("First argument in MB0"));
@@ -75,11 +79,14 @@ public class Main {
         macros.add(new MB("First argument in MB2"));
 
         try{
-            //Z must be added before Y because Y depends on Z
             ma.addPZ(new MC());
+            ma.addAllPY(macros);
             ma.addPZ(new MC());
+<<<<<<< HEAD
             ma.setPY(macros);
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+>>>>>>> Add test for dynamic cyclic reference verification
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){

@@ -63,8 +63,12 @@ public class ParameterNull {
 
         try{
             ma.addPZ(null);
+<<<<<<< HEAD
             ma.setPY(macros);
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+            ma.addAllPY(macros);
+>>>>>>> Add test for dynamic cyclic reference verification
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

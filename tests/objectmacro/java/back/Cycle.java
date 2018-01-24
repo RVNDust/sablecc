@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -15,10 +16,18 @@
  * limitations under the License.
  */
 
+=======
+>>>>>>> Add test for dynamic cyclic reference verification
 package back;
 
 import back.macro.*;
 
+<<<<<<< HEAD
+=======
+/**
+ * Created by lam on 24/01/18.
+ */
+>>>>>>> Add test for dynamic cyclic reference verification
 public class Cycle {
 
     public static void main(String args[]){
@@ -27,10 +36,17 @@ public class Cycle {
         MF f = new MF();
         MG g = new MG();
         MH h = new MH();
+<<<<<<< HEAD
         f.addY(h);
         f.addX(g);
         f.addX(g);
         h.addLala(f);
+=======
+        f.addPY(h);
+        f.addPX(g);
+        f.addPX(g);
+        h.addPLala(f);
+>>>>>>> Add test for dynamic cyclic reference verification
 
         try{
             System.out.print(f.build());

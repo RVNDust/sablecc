@@ -63,9 +63,14 @@ public class IncorrectType {
 
         try{
             MA ma = new MA("First argument of MA");
+<<<<<<< HEAD
             ma.setPZ(macros);
             ma.setPY(macros);
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+            ma.addAllPZ(macros);
+            ma.addAllPY(macros);
+>>>>>>> Add test for dynamic cyclic reference verification
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);
