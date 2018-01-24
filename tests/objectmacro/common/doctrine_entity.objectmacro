@@ -14,14 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Macro package_declaration:java
+Macro package_declaration:doctrine
     Param
         package_name : String;
 {Begin}
-package {package_name};
+namespace {package_name};
+
+use Doctrine\ORM\Mapping as ORM;
 {End}
 
-Macro entity:java
+Macro entity:doctrine
     Param
         name : String;
         package : package_declaration;
@@ -31,62 +33,64 @@ Macro entity:java
 {Begin}
 {package}
 
-@Entity
 {Insert: annotation_table(name)}
 public class {name} {
-{Indent value="    "}
-{attributes}
-{relationships}
-{accessors}
-{EndIndent}
+    {attributes}
+    {relationships}
+    {accessors}
 }
 {End}
 
-Macro annotation_table:java
+Macro annotation_table
     Internal
         name : String;
 {Begin}
-@Table(name="{name}")
+/**
+  * @ORM\Entity(repositoryClass="App\Repository\{name}Repository")
+  * /
 {End}
 
-Macro column:java
+Macro column
     Internal
         options : option, separator=", ";
 {Begin}
-@Column({options})
+* @ORM\Column({options})
 {End}
 
-Macro attribute:java
+Macro attribute
     Param
         name : String;
         type : String;
+        options : option;
         id : primary_key, id_incrementation_strategy, separator="\n";
         not_null : not_null;
 {Begin}
 {id}
 {not_null}
-{Insert: column(name)}
-private {type} {name};
+/**
+{Insert: column(options)}
+*/
+private {name};
 {End}
 
-Macro primary_key:java
+Macro primary_key
 {Begin}
 @Id
 {End}
 
-Macro id_incrementation_strategy:java
+Macro id_incrementation_strategy
     Param
         strategy : String;
 {Begin}
 @GeneratedValue(strategy=GenerationType.{strategy})
 {End}
 
-Macro not_null:java
+Macro not_null
 {Begin}
 @NotNull
 {End}
 
-Macro setter:java
+Macro setter
     Param
         name : String;
         type : String;
@@ -96,7 +100,7 @@ public void set{name}({type} {name}){
 }
 {End}
 
-Macro getter:java
+Macro getter
     Param
         name : String;
         type : String;
@@ -106,7 +110,7 @@ public {type} set{name}(){
 }
 {End}
 
-Macro relationship:java
+Macro relationship
     Param
         name : String;
         fetch_type : String;
@@ -119,14 +123,14 @@ Macro relationship:java
 private {attribute_type} {name};
 {End}
 
-Macro list:java
+Macro list
     Internal
         entity_name : String;
 {Begin}
 List<{entity_name}>
 {End}
 
-Macro one_to_one:java
+Macro one_to_one
     Param
         fetch_type : String;
         column : String;
@@ -138,7 +142,7 @@ Macro one_to_one:java
 {join_column}
 {End}
 
-Macro many_to_many:java
+Macro many_to_many
     Param
         fetch_type : String;
     Internal
@@ -147,7 +151,7 @@ Macro many_to_many:java
 @ManyToMany({directives})
 {End}
 
-Macro many_to_one:java
+Macro many_to_one
     Param
         fetch_type : String;
     Internal
@@ -156,7 +160,7 @@ Macro many_to_one:java
 @ManyToOne({directives})
 {End}
 
-Macro one_to_many:java
+Macro one_to_many
     Param
         fetch_type : String;
     Internal
@@ -165,42 +169,42 @@ Macro one_to_many:java
 @OneToMany({directives})
 {End}
 
-Macro fetch_strategy:java
+Macro fetch_strategy
     Internal
         fetch_type : String;
 {Begin}
 fetch=FetchType.{fetch_type}
 {End}
 
-Macro join_column:java
+Macro join_column
     Internal
         column_name : String;
 {Begin}
 @JoinColumn(name="{column_name}")
 {End}
 
-Macro mapped_by:java
+Macro mapped_by
     Param
         parameter_name : String;
 {Begin}
 mappedBy="{parameter_name}"
 {End}
 
-Macro cascade:java
+Macro cascade
     Param
         types : cascade_type, separator=", ";
 {Begin}
 cascade={{ {types} }
 {End}
 
-Macro cascade_type:java
+Macro cascade_type
     Param
         type_name : String;
 {Begin}
 CascadeType.{type_name}
 {End}
 
-Macro option:java
+Macro option:doctrine
     Param
         name : String;
         value : String;

@@ -1,0 +1,64 @@
+Macro package
+    Param
+        name : String;
+{Begin}
+package {name};
+{End}
+
+Macro class
+    members : enum;
+{Begin}
+{members}
+{End}
+
+Macro enum:java4
+    Param
+        names : string, separator="\n";
+{Begin}
+C
+{End}
+
+Macro constant:java4
+    Param
+        name : String;
+        index : String;
+{Begin}
+public static final int MyEnum_{name} = {index};
+{End}
+
+Macro enum:java5
+    Param
+        names : string, separator=", ";
+{Begin}
+public enum MyEnum = {{ {names} };
+{End}
+
+Macro string
+    Param
+        string : String;
+{Begin}
+{string}
+{End}
+
+Macro hello:fr
+    Param
+        name : String;
+{Begin}
+Bonjour {name}!
+{End}
+
+Macro hello:eng
+    Param
+        name : String;
+{Begin}
+Hello {name}!
+{End}
+
+Macro enum:java4
+    Param
+        names : constant, separator=", ";
+{Begin}
+{names}
+{End}
+
+
