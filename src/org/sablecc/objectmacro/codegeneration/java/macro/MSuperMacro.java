@@ -42,6 +42,7 @@ public class MSuperMacro {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    final static String LINE_SEPARATOR = System.getProperty(\"line.separator\");");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -51,16 +52,23 @@ public class MSuperMacro {
     sb.append("    final Map<Context, BuildState> build_states = new LinkedHashMap<>();");
 =======
     sb.append("    public final static String LINE_SEPARATOR = System.getProperty(\"line.separator\");");
+=======
+    sb.append("    final static String LINE_SEPARATOR = System.getProperty(\"line.separator\");");
+>>>>>>> Remove public to prevent user to access to supermacro attributes
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("    public String expansion;");
+    sb.append("    String expansion;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("    public boolean built = false;");
+    sb.append("    boolean built = false;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("    public Map<Context, String> expansions = new LinkedHashMap<>();");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("    Map<Context, String> expansions = new LinkedHashMap<>();");
+>>>>>>> Remove public to prevent user to access to supermacro attributes
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    public String build(){");

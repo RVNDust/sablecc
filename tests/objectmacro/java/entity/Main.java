@@ -151,12 +151,15 @@ public class Main {
         mEntity.addPAccessors(setter);
         mEntity.addPAccessors(getter);
 
+<<<<<<< HEAD
         mEntity.setPRelationships(new ArrayList<>());
 
 <<<<<<< HEAD
         return new MEntity(entity_name, new MPackageDeclaration[]{mPackageDeclaration}, attributes, new MRelationship[0], accessors);
 >>>>>>> Add refused, accepted tests
 =======
+=======
+>>>>>>> Remove public to prevent user to access to supermacro attributes
         return mEntity;
 >>>>>>> Update tests to be adapted to the lazy initialization
     }
@@ -238,15 +241,15 @@ public class Main {
         if(notNull) {
             mAttribute.addPNotNull(new MNotNull());
         }
-        else {
-            mAttribute.setPNotNull(new ArrayList<>());
-        }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         return new MAttribute(name, type, new Macro[0], new Macro[]{new MNotNull()});
 >>>>>>> Add refused, accepted tests
 =======
         mAttribute.setPId(new ArrayList<>());
+=======
+>>>>>>> Remove public to prevent user to access to supermacro attributes
         return mAttribute;
 >>>>>>> Update tests to be adapted to the lazy initialization
     }

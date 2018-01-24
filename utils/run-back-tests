@@ -40,6 +40,9 @@ java -cp classes/ back.IncorrectType
 java -cp classes/ back.MacroNullIndex
 java -cp classes/ back.ParameterNull
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Remove public to prevent user to access to supermacro attributes
 java -cp classes/ back.Cycle
 
 # Accepted tests

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Remove public to prevent user to access to supermacro attributes
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -16,18 +19,24 @@
  * limitations under the License.
  */
 
+<<<<<<< HEAD
 =======
 >>>>>>> Add test for dynamic cyclic reference verification
+=======
+>>>>>>> Remove public to prevent user to access to supermacro attributes
 package back;
 
 import back.macro.*;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 /**
  * Created by lam on 24/01/18.
  */
 >>>>>>> Add test for dynamic cyclic reference verification
+=======
+>>>>>>> Remove public to prevent user to access to supermacro attributes
 public class Cycle {
 
     public static void main(String args[]){
