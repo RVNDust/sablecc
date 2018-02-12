@@ -52,6 +52,7 @@ public class UtilsGenerationWalker
         MCyclicReference mCyclicReference = new MCyclicReference();
         MCannotModify mCannotModify = new MCannotModify();
         MObjectMacroException mObjectMacroException = new MObjectMacroException();
+<<<<<<< HEAD
         MClassInternalValue mClassInternalValue = new MClassInternalValue();
         mClassInternalValue.newImportJavaUtil();
         MClassBuildState mClassBuildState = new MClassBuildState();
@@ -61,6 +62,8 @@ public class UtilsGenerationWalker
         MClassBeforeFirst mClassBeforeFirst = new MClassBeforeFirst();
         MClassNone mClassNone = new MClassNone();
         MClassSeparator mClassSeparator = new MClassSeparator();
+=======
+>>>>>>> Moved utils files for generation to another walker
 
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
@@ -72,6 +75,7 @@ public class UtilsGenerationWalker
             mCyclicReference.newPackageDeclaration(destinationPackage);
             mCannotModify.newPackageDeclaration(destinationPackage);
             mObjectMacroException.newPackageDeclaration(destinationPackage);
+<<<<<<< HEAD
             mClassInternalValue.newPackageDeclaration(destinationPackage);
             mSuperDirective.newPackageDeclaration(destinationPackage);
             mClassAfterLast.newPackageDeclaration(destinationPackage);
@@ -79,6 +83,8 @@ public class UtilsGenerationWalker
             mClassNone.newPackageDeclaration(destinationPackage);
             mClassSeparator.newPackageDeclaration(destinationPackage);
             mClassBuildState.newPackageDeclaration(destinationPackage);
+=======
+>>>>>>> Moved utils files for generation to another walker
         }
 
         GenerationUtils.writeFile(this.packageDirectory,"Context.java", mContext.toString());
@@ -91,6 +97,7 @@ public class UtilsGenerationWalker
         GenerationUtils.writeFile(this.packageDirectory,"MCannotModify.java", mCannotModify.toString());
         GenerationUtils
                 .writeFile(this.packageDirectory,"ObjectMacroException.java", mObjectMacroException.toString());
+<<<<<<< HEAD
         GenerationUtils.writeFile(this.packageDirectory, "InternalValue.java", mClassInternalValue.toString());
         GenerationUtils.writeFile(this.packageDirectory, "Directive.java", mSuperDirective.toString());
         GenerationUtils.writeFile(this.packageDirectory, "DAfterLast.java", mClassAfterLast.toString());
@@ -99,5 +106,8 @@ public class UtilsGenerationWalker
         GenerationUtils.writeFile(this.packageDirectory, "DSeparator.java", mClassSeparator.toString());
 
         GenerationUtils.writeFile(this.packageDirectory, "BuildState.java", mClassBuildState.toString());
+=======
+
+>>>>>>> Moved utils files for generation to another walker
     }
 }

@@ -98,6 +98,7 @@ public class JavaCodeGenerator
         CodeGenerationWalker walker = new CodeGenerationWalker(getIr(),
                 packageDirectory, macros);
 <<<<<<< HEAD
+<<<<<<< HEAD
         UtilsGenerationWalker utilsGenerationWalker = new UtilsGenerationWalker(getIr(), packageDirectory);
 
         getIr().getAST().apply(walker);
@@ -110,5 +111,11 @@ public class JavaCodeGenerator
 =======
         getIr().getAST().apply(walker);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        UtilsGenerationWalker utilsGenerationWalker = new UtilsGenerationWalker(getIr(), packageDirectory);
+
+        getIr().getAST().apply(walker);
+        getIr().getAST().apply(utilsGenerationWalker);
+>>>>>>> Moved utils files for generation to another walker
     }
 }

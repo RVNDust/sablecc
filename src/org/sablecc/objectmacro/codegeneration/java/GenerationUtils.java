@@ -20,7 +20,10 @@ package org.sablecc.objectmacro.codegeneration.java;
 import org.sablecc.exception.InternalException;
 import org.sablecc.objectmacro.exception.CompilerException;
 import org.sablecc.objectmacro.intermediate.syntax3.node.TString;
+<<<<<<< HEAD
 import org.sablecc.objectmacro.util.Utils;
+=======
+>>>>>>> Moved utils files for generation to another walker
 
 import java.io.File;
 import java.io.FileWriter;
@@ -33,6 +36,7 @@ class GenerationUtils {
 
     static final String INSERT_VAR_NAME = "insert_";
 
+<<<<<<< HEAD
     static final String SEPARATOR_DIRECTIVE = "Separator";
 
     static final String AFTER_LAST_DIRECTIVE = "AfterLast";
@@ -40,6 +44,21 @@ class GenerationUtils {
     static final String NONE_DIRECTIVE = "None";
 
     static final String BEFORE_FIRST_DIRECTIVE = "BeforeFirst";
+=======
+    static final String SEPARATOR_DIRECTIVE = "separator";
+
+    static final String AFTER_LAST_DIRECTIVE = "afterlast";
+
+    static final String NONE_DIRECTIVE = "none";
+
+    static final String BEFORE_FIRST_DIRECTIVE = "beforefirst";
+
+    /**
+     * Example : SetInternal needs a macroName, but adder does not need a macro because the parameter is always macro
+     * Therefore instead of macroName we give to set internal 'acro' to form 'macro'
+     */
+    static final String MACRO_NAME_FOR_ADDER = "acro";
+>>>>>>> Moved utils files for generation to another walker
 
     static String string(
             TString tString) {
@@ -94,7 +113,11 @@ class GenerationUtils {
 
         StringBuilder macroName = new StringBuilder();
         for(TString partName : name_parts){
+<<<<<<< HEAD
             macroName.append(Utils.toCamelCase(string(partName)));
+=======
+            macroName.append(org.sablecc.objectmacro.util.Utils.toCamelCase(string(partName)));
+>>>>>>> Moved utils files for generation to another walker
         }
 
         return macroName.toString();
@@ -127,10 +150,13 @@ class GenerationUtils {
             throw CompilerException.outputError(destination.toString(), e);
         }
     }
+<<<<<<< HEAD
 
     static String getLetterFromInteger(
             Integer i){
 
         return i > 0 && i < 27 ? String.valueOf((char) (i + 64)) : null;
     }
+=======
+>>>>>>> Moved utils files for generation to another walker
 }
