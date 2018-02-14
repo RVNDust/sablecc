@@ -125,6 +125,7 @@ public class ParamReferenceCollector
 
     @Override
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void inAInternal(
             AInternal node) {
 
@@ -144,5 +145,19 @@ public class ParamReferenceCollector
         this.currentMacro.setParamToString(
                 this.currentParam.getNameDeclaration());
 >>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
+=======
+    public void inAInternal(
+            AInternal node) {
+
+        this.currentParam = this.currentMacro
+                .getParam(node.getName());
+    }
+
+    @Override
+    public void outAInternal(
+            AInternal node) {
+
+        this.currentParam = null;
+>>>>>>> Remove arguments in macro references in internal declaration
     }
 }

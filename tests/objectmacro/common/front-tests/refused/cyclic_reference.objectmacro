@@ -37,10 +37,14 @@ Macro c
         zzz : c(l);
     Internal
 <<<<<<< HEAD
+<<<<<<< HEAD
         l : b;
 =======
         l : b("a {zzz}");
 >>>>>>> Add refused and accepted tests for objectmacro
+=======
+        l : b;
+>>>>>>> Remove arguments in macro references in internal declaration
 {Begin}
 {zzz}e
 {l}

@@ -44,6 +44,7 @@ public class Macro{
     private final AMacro declaration;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private final Set<External> allParams = new LinkedHashSet<>();
 
     private final Map<String, External> namedParams = new HashMap<>();
@@ -55,12 +56,15 @@ public class Macro{
     private ComponentFinder<Param> paramsComponentFinder;
 =======
     private final Set<Param> allParams = new LinkedHashSet<>();
+=======
+    private final Set<External> allParams = new LinkedHashSet<>();
+>>>>>>> Remove arguments in macro references in internal declaration
 
-    private final Map<String, Param> namedParams = new HashMap<>();
+    private final Map<String, External> namedParams = new HashMap<>();
 
-    private final Set<Param> allInternals = new LinkedHashSet<>();
+    private final Set<Internal> allInternals = new LinkedHashSet<>();
 
-    private final Map<String, Param> namedInternals = new HashMap<>();
+    private final Map<String, Internal> namedInternals = new HashMap<>();
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -112,6 +116,7 @@ public class Macro{
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
         }
 
+<<<<<<< HEAD
         this.namedParams.put(stringName, newParam);
         this.allParams.add(newParam);
 
@@ -131,6 +136,9 @@ public class Macro{
 =======
         Param newParam = new Param(param, this, this.globalIndex);
 >>>>>>> Verification macro existence when adding a new macro reference
+=======
+        External newParam = new External(param, this, this.globalIndex);
+>>>>>>> Remove arguments in macro references in internal declaration
         this.namedParams.put(stringName, newParam);
         this.allParams.add(newParam);
 
@@ -138,6 +146,7 @@ public class Macro{
     }
 
     public Param newInternal(
+<<<<<<< HEAD
 <<<<<<< HEAD
             AInternal param){
 
@@ -204,6 +213,9 @@ public class Macro{
 =======
 >>>>>>> Rename Context by Internal
             AParam param){
+=======
+            AInternal param){
+>>>>>>> Remove arguments in macro references in internal declaration
 
         if(param == null){
             throw new InternalException("AParam should not be null");
@@ -217,7 +229,7 @@ public class Macro{
             throw CompilerException.duplicateDeclaration(name, duplicateDeclaration.getNameDeclaration());
         }
 
-        Param newInternal = new Param(param, this, this.globalIndex);
+        Internal newInternal = new Internal(param, this, this.globalIndex);
         this.allInternals.add(newInternal);
         this.namedInternals.put(stringName, newInternal);
 
@@ -361,11 +373,11 @@ public class Macro{
         return this.declaration.getName().getText();
     }
 
-    public Set<Param> getAllParams(){
+    public Set<External> getAllParams(){
         return this.allParams;
     }
 
-    public Set<Param> getAllInternals(){
+    public Set<Internal> getAllInternals(){
         return this.allInternals;
     }
 

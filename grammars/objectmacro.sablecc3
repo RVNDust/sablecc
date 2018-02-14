@@ -332,6 +332,7 @@ Productions
   macro_definition
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         {-> macro_kw identifier [params]:param* [internals]:internal* }
     =
       macro_kw identifier macro_parameters
@@ -344,6 +345,9 @@ Productions
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
         {-> macro_kw identifier [params]:param* [internals]:param* }
+=======
+        {-> macro_kw identifier [params]:param* [internals]:internal* }
+>>>>>>> Remove arguments in macro references in internal declaration
     =
       macro_kw identifier macro_parameters
         {-> macro_kw identifier [macro_parameters.params] [macro_parameters.internals] }
@@ -459,7 +463,7 @@ Productions
     ;
 
   macro_parameters
-        {-> [params]:param* [internals]:param*}
+        {-> [params]:param* [internals]:internal*}
     =
       [params]:external_args? [internals]:internal_args?
         {-> [params.params] [internals.params] }
@@ -472,16 +476,22 @@ Productions
         {-> [params.param]};
 
   internal_args
-        {-> [params]:param*}
+        {-> [params]:internal*}
     =
-      internal_kw [params]:param+
-        {-> [params.param]}
+      internal_kw [params]:internal+
+        {-> [params.internal]}
     ;
 
   param
     =
       [name]:identifier colon type [directives]:directive* semi_colon
         {-> New param(name, type, [directives])}
+    ;
+
+  internal
+    =
+      [name]:identifier colon internal_type semi_colon
+        {-> New internal(name, internal_type)}
     ;
 
   directive
@@ -507,10 +517,27 @@ Productions
   type
     =
       {string} string_kw
-        {-> New type.string(string_kw)}|
+        {-> New type.string(string_kw)}
+    |
       {macros} macro_reference [additional_macros_reference]:additional_macro_reference*
         {-> New type.macros([macro_reference, additional_macros_reference.macro_reference])}
 >>>>>>> New grammar for intermediate representation and objectmacro
+    ;
+
+  internal_type
+    =
+      {string} string_kw
+        {-> New internal_type.string(string_kw)}
+    |
+      {identifiers} identifier [additionals]:additional_identifier*
+        {-> New internal_type.identifiers([identifier, additionals.identifier])}
+    ;
+
+  additional_identifier
+        {-> identifier}
+    =
+      comma identifier
+        {-> identifier}
     ;
 
   additional_macro_reference
@@ -591,6 +618,7 @@ Abstract Syntax Tree
   macro =
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       macro_kw [name]:identifier [params]:param* [internals]:internal* begin [macro_body_parts]:macro_body_part*;
 
   macro_body_part =
@@ -600,6 +628,9 @@ Abstract Syntax Tree
 =======
       macro_kw [name]:identifier [params]:param* [internals]:param* begin [macro_body_parts]:macro_body_part*;
 >>>>>>> Rename Context by Internal
+=======
+      macro_kw [name]:identifier [params]:param* [internals]:internal* begin [macro_body_parts]:macro_body_part*;
+>>>>>>> Remove arguments in macro references in internal declaration
 
   macro_body_part =
 <<<<<<< HEAD
@@ -617,6 +648,9 @@ Abstract Syntax Tree
       [name]:identifier type [directives]:directive*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Remove arguments in macro references in internal declaration
   internal =
       [name]:identifier [type]:internal_type;
 
@@ -644,7 +678,11 @@ Abstract Syntax Tree
 
   type =
       {string} string_kw |
-      {macros} macro_reference+;
+      {macros} [macros]:macro_reference+;
+
+  internal_type =
+      {string} string_kw |
+      {identifiers} [macros]:identifier+;
 
   call =
       [static_values]:static_value+;

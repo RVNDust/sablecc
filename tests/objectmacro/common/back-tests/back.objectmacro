@@ -32,10 +32,14 @@ empty
 Macro semicolon_separator
     Internal
 <<<<<<< HEAD
+<<<<<<< HEAD
         x : empty_macro;
 =======
         x : empty_macro, separator="; ";
 >>>>>>> Add back end tests
+=======
+        x : empty_macro;
+>>>>>>> Remove arguments in macro references in internal declaration
 {Begin}
 Le corps de C : {x}
 {End}
@@ -49,9 +53,13 @@ Macro a
         z : c("first argument of c in a", x);
 {Begin}
 <<<<<<< HEAD
+<<<<<<< HEAD
 ============= A ===============
 Y : {y}
 =======
+=======
+============= A ===============
+>>>>>>> Remove arguments in macro references in internal declaration
 {y}
 >>>>>>> Add back end tests
 {End}
@@ -62,6 +70,7 @@ Macro b
 <<<<<<< HEAD
         o : String;
         s : c(o, o);
+<<<<<<< HEAD
     Internal
         p : c;
 {Begin}
@@ -73,15 +82,23 @@ S : {s}
 =======
         o : String;
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+>>>>>>> Remove arguments in macro references in internal declaration
     Internal
-        p : c("first argument of c in b", o), separator="\n";
+        p : c;
 {Begin}
+<<<<<<< HEAD
 <<<<<<< HEAD
 {y}
 >>>>>>> Add back end tests
 =======
 {p}
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+============== B ===============
+{p}
+{s}
+>>>>>>> Remove arguments in macro references in internal declaration
 {End}
 
 Macro c
@@ -104,8 +121,14 @@ R : {r}
         q : String;
         r : String;
 {Begin}
+<<<<<<< HEAD
 {q} {r}
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+=============== C ==============
+{q}
+{r}
+>>>>>>> Remove arguments in macro references in internal declaration
 {End}
 
 Macro d
@@ -216,7 +239,7 @@ Macro f
 
 Macro g
     Internal
-        z : h("lala");
+        z : h;
 {Begin}
 {z}
 {End}
@@ -230,4 +253,33 @@ Macro h
 {la}
 {lala}
 {End}
+<<<<<<< HEAD
 >>>>>>> Add test for dynamic cyclic reference verification
+=======
+
+#=========== Example =========
+
+Macro i
+    Param
+        y : j(z);
+        z : k("On est dans i");
+{Begin}
+{y}
+{End}
+
+Macro j
+    Internal
+        y : k;
+{Begin}
+{y}
+{End}
+
+Macro k
+    Internal
+        a : String;
+{Begin}
+{a}
+{End}
+
+
+>>>>>>> Remove arguments in macro references in internal declaration

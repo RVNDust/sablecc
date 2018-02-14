@@ -144,6 +144,7 @@ List<{entity_name}>
 Macro one_to_one
     Param
 <<<<<<< HEAD
+<<<<<<< HEAD
         column : String;
         join_column : join_column(column);
     Internal
@@ -155,6 +156,12 @@ Macro one_to_one
     Internal
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Add refused, accepted tests
+=======
+        column : String;
+        join_column : join_column(column);
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Remove arguments in macro references in internal declaration
 {Begin}
 @OneToOne({directives})
 {join_column}
@@ -162,6 +169,7 @@ Macro one_to_one
 
 Macro many_to_many
 <<<<<<< HEAD
+<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -170,25 +178,16 @@ Macro many_to_many
     Internal
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Add refused, accepted tests
+=======
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Remove arguments in macro references in internal declaration
 {Begin}
 @ManyToMany({directives})
 {End}
 
 Macro many_to_one
 <<<<<<< HEAD
-    Internal
-        directives : fetch_strategy, mapped_by;
-=======
-    Param
-        fetch_type : String;
-    Internal
-        directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
->>>>>>> Add refused, accepted tests
-{Begin}
-@ManyToOne({directives})
-{End}
-
-Macro one_to_many
 <<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
@@ -198,6 +197,29 @@ Macro one_to_many
     Internal
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Add refused, accepted tests
+=======
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Remove arguments in macro references in internal declaration
+{Begin}
+@ManyToOne({directives})
+{End}
+
+Macro one_to_many
+<<<<<<< HEAD
+<<<<<<< HEAD
+    Internal
+        directives : fetch_strategy, mapped_by;
+=======
+    Param
+        fetch_type : String;
+    Internal
+        directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
+>>>>>>> Add refused, accepted tests
+=======
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Remove arguments in macro references in internal declaration
 {Begin}
 @OneToMany({directives})
 {End}
