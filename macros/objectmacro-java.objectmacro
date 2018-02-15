@@ -289,6 +289,45 @@ class BuildState {
 
 $end: class_build_state $
 
+$comment: =============== class_macros_list_value ========= $
+
+$macro: class_macros_list_value $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+$expand: import_java_util, before_first="\n" $
+
+class MacrosValue {
+
+    private final List<Macro> macros;
+
+    private final Context context;
+
+    MacrosValue(
+            List<Macro> macros,
+            Context context){
+
+        this.macros = macros;
+        this.context = context;
+    }
+
+    String build(){
+
+        StringBuilder sb = new StringBuilder();
+
+        for(Macro macro : this.macros){
+            sb.append(macro.build(this.context));
+        }
+
+        return sb.toString();
+    }
+
+    List<Macro> getMacros(){
+        return this.macros;
+    }
+}
+
+$end: class_macros_list_value $
+
 $comment: ========== macro ========== $
 
 $macro: macro(name) $
@@ -492,8 +531,13 @@ $end: is_built $
 
 $comment: =========== param_string_ref_builder ============= $
 
+<<<<<<< HEAD
 $macro: param_string_ref_builder(name) $
     private String build$name($expand: context_param$){
+=======
+$comment: =========== param_macros_value_field ======== $
+$comment: ========== constructor ========== $
+>>>>>>> Add param macro list values in OM 1
 
 <<<<<<< HEAD
         return this.field_$(name)$expand: get_internal_tail $;
@@ -510,7 +554,14 @@ $expand: init_macro_param, init_macro_internal, init_string_internal, before_fir
     }
 $end: param_string_ref_builder $
 
+<<<<<<< HEAD
 $comment: ========== param_macro_ref_builder ================== $
+=======
+$macro: param_macros_value_field(param_name) $
+    private final MacrosValue $param_nameValue;
+$end: param_macros_value_field $
+$comment: ========== string_param ========== $
+>>>>>>> Add param macro list values in OM 1
 
 $macro: param_macro_ref_builder(name, index_builder) $
     private String build$name(){
