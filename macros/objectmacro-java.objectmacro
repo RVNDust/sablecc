@@ -367,12 +367,42 @@ $end: macro $
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $comment$
 ======================================================
 ===================== CONSTRUCTOR ====================
 ======================================================
 $end$
 =======
+=======
+$comment$
+================================================================
+===================== MACRO FUNCTIONS ==========================
+================================================================
+$end$
+
+$comment: ========== constructor ========== $
+
+$macro: constructor(name) $
+    public M$name($expand: string_param, separator=", "$){
+$expand: set_param, before_first="\n" $
+$expand: init_macro_param, init_macro_internal, init_string_internal, init_param_value, before_first="\n" $
+    }
+$end: constructor $
+
+$comment: =========== param_string_setter ========= $
+
+$macro: param_string_setter(name) $
+    private void setP$name($expand: string_param $){
+        if($expand: param_arg $ == null){
+            throw ObjectMacroException.parameterNull("$name");
+        }
+
+        this.field_$name = $expand: param_arg $;
+    }
+$end: param_string_setter $
+
+>>>>>>> Moved macros to get a better reading of the file
 $comment: ========= add_all =========== $
 
 $macro: add_all(param_name) $
@@ -412,6 +442,93 @@ $macro: single_add(macro_name, param_name) $
         this.list_$param_name.add(macro);
     }
 $end: single_add $
+
+$comment: ========== param_macro_ref_builder ================== $
+
+$macro: param_macro_ref_builder(name, index_builder) $
+    private String build$name($expand: context_param $){
+
+        StringBuilder sb$index_builder = new StringBuilder();
+        Context local_context = $expand: context_name, none="context"$;
+        List<Macro> macros = this.list_$(name)$expand: get_internal_tail $;
+        $expand: none $
+        boolean first = true;
+        int i = 0;
+
+        for(Macro macro : macros){
+            $expand: before_first $
+            $expand: separator $
+
+            sb$index_builder.append(macro.build(local_context));
+            i++;
+
+            $expand: after_last $
+        }
+
+        return sb$index_builder.toString();
+    }
+$end: param_macro_ref_builder $
+
+$comment: ========= internal_macro_setter ========= $
+
+$macro: internal_macro_setter(param_name) $
+    void set$param_name(
+            Context context,
+            List<Macro> macros) {
+
+        if(macros == null){
+            throw new RuntimeException("macros cannot be null");
+        }
+
+        this.list_$param_name.put(context, macros);
+    }
+$end: internal_macro_setter $
+
+$comment: ========== param_macro_ref ============== $
+
+$macro: param_macro_ref(name) $
+    private List<Macro> get$name($expand: context_param $){
+
+        return this.list_$(name)$expand: get_internal_tail $;
+    }
+$end: param_macro_ref $
+
+$comment: ========== param_string_ref ============== $
+
+$macro: param_string_ref(name) $
+    private String get$name($expand: context_param $){
+
+        return this.field_$(name)$expand: get_internal_tail $;
+    }
+$end: param_string_ref $
+
+$comment: ========= internal_string_setter ========= $
+
+$macro: internal_string_setter(name) $
+    void set$name(
+            Context context,
+            String value) {
+
+        if(value == null){
+            throw new RuntimeException("value cannot be null here");
+        }
+
+        this.field_$name.put(context, value);
+    }
+$end: internal_string_setter $
+
+$comment$
+============================================
+============== MACRO BUILDER ===============
+============================================
+$end$
+
+$comment: ========= public ============= $
+
+$macro: public $
+public$no_eol$
+$end: public $
+
 $comment: ========== macro_builder ======= $
 >>>>>>> AddAll and single adds with static overloads
 
@@ -467,6 +584,7 @@ $macro: empty_builder_with_context $
     }
 $end: empty_builder_with_context$
 
+<<<<<<< HEAD
 $comment: ========= public ============= $
 >>>>>>> Now macro without internals has a builder with context that only return build
 
@@ -475,6 +593,9 @@ $macro: init_string_internal(name) $
 $end: init_string_internal $
 
 $comment: ========== init_internal_value ============ $
+=======
+$comment: ========== context_expansion ======= $
+>>>>>>> Moved macros to get a better reading of the file
 
 $macro: init_internal_value(param_name) $
     this.$(param_name)Value = new InternalValue(this.list_$param_name, this.$(param_name)Context, this.$(param_name)Directives);
@@ -502,6 +623,7 @@ $macro: add_all(param_name) $
         $expand: is_built$
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         int i = 0;
 =======
 $comment: ========= init_internals_method ======== $
@@ -519,6 +641,13 @@ $comment: =========== init_internals_call ======== $
 $macro: init_internals_call(param_name) $
 init$(param_name)Internals();
 $end: init_internals_call $
+=======
+$comment$
+===================================================
+================= MACRO FIELDS ====================
+===================================================
+$end$
+>>>>>>> Moved macros to get a better reading of the file
 
 $comment: ========== param_macro_field ========== $
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
@@ -576,6 +705,7 @@ $macro: param_string_ref_builder(name) $
     private String build$name($expand: context_param$){
 =======
 $comment: =========== param_macros_value_field ======== $
+<<<<<<< HEAD
 $comment: ========== constructor ========== $
 >>>>>>> Add param macro list values in OM 1
 
@@ -593,6 +723,8 @@ $expand: init_macro_param, init_macro_internal, init_string_internal, before_fir
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
     }
 $end: param_string_ref_builder $
+=======
+>>>>>>> Moved macros to get a better reading of the file
 
 <<<<<<< HEAD
 $comment: ========== param_macro_ref_builder ================== $
@@ -600,6 +732,7 @@ $comment: ========== param_macro_ref_builder ================== $
 $macro: param_macros_value_field(param_name) $
     private final MacrosValue $param_nameValue;
 $end: param_macros_value_field $
+<<<<<<< HEAD
 $comment: ========== string_param ========== $
 >>>>>>> Add param macro list values in OM 1
 
@@ -621,13 +754,18 @@ $macro: param_macro_ref_builder(name, index_builder) $
         $end: apply_none_directive $
 =======
 $comment: ========== list_macro_param ========== $
+=======
 
-$macro: list_macro_param(name) $
-List<Macro> p$(name)$no_eol$
-$end: list_macro_param $
+$comment: ========== init_macro_internal =========== $
+>>>>>>> Moved macros to get a better reading of the file
 
-$comment: ========== macro_param ========== $
+$macro: init_macro_internal(name) $
+    this.list_$name = new LinkedHashMap<>();
+$end: init_macro_internal $
 
+$comment: ========== init_macro_param =========== $
+
+<<<<<<< HEAD
 $macro: macro_param(name) $
 Macro p$(name)$no_eol$
 $end: macro_param $
@@ -1367,6 +1505,18 @@ $macro: param_macro_setter(param_name, macro_name) $
 
         super(value);
     }
+=======
+$macro: init_macro_param(name) $
+    this.list_$name = new ArrayList<>();
+$end: init_macro_param $
+
+$comment: ========== init_string_internal =========== $
+
+$macro: init_string_internal(name) $
+    this.field_$name = new LinkedHashMap<>();
+$end: init_string_internal $
+
+>>>>>>> Moved macros to get a better reading of the file
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1393,12 +1543,23 @@ $macro: param_macro_setter(param_name, macro_name) $
 
 
 
+$comment: ========== string_param ========== $
 
+$macro: string_param(name) $
+String p$(name)$no_eol$
+$end: string_param $
 
+<<<<<<< HEAD
 >>>>>>> AddAll and single adds with static overloads
+=======
+$comment: =========== is_built =========== $
+>>>>>>> Moved macros to get a better reading of the file
 
+$macro: is_built(macro_name) $
+        if(this.isBuilt){
             throw ObjectMacroException.cannotModify("$macro_name");
         }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         $expand: apply_internals_initializer $
@@ -1480,6 +1641,9 @@ $macro: internal_macro_setter(param_name) $
 $end: class_after_last $
 
 $comment: ======== class_separator =========== $
+=======
+$end: is_built $
+>>>>>>> Moved macros to get a better reading of the file
 
 $macro: class_separator $
 $insert: header $
@@ -1562,10 +1726,18 @@ public class ObjectMacroException
             throw new RuntimeException("message may not be null");
         }
 
+<<<<<<< HEAD
         if (cause == null) {
             throw new RuntimeException("cause may not be null");
         }
     }
+=======
+===================================================
+=============== MACRO / TEXT PARTS ================
+===================================================
+
+$comment: ========= string_part ================= $
+>>>>>>> Moved macros to get a better reading of the file
 
     static ObjectMacroException incorrectType(
             String type,
@@ -1584,6 +1756,7 @@ public class ObjectMacroException
                 new MMacroNullInList(String.valueOf(index), paramName).toString());
     }
 
+<<<<<<< HEAD
     static ObjectMacroException parameterNull(
             String paramName){
 
@@ -1592,12 +1765,25 @@ public class ObjectMacroException
 
     static ObjectMacroException cyclicReference(
             String macroName){
+=======
+$comment: ========== insert_macro_part =============== $
+>>>>>>> Moved macros to get a better reading of the file
 
         return new ObjectMacroException(new MCyclicReference(macroName).toString());
     }
 
+<<<<<<< HEAD
     static ObjectMacroException cannotModify(
             String macroName){
+=======
+$comment: ========= init_string_builder ========= $
+
+$macro: init_string_builder(index_builder) $
+        StringBuilder sb$index_builder = new StringBuilder();
+$end: init_string_builder $
+
+$comment: ========== set_internal ================== $
+>>>>>>> Moved macros to get a better reading of the file
 
 <<<<<<< HEAD
         return new ObjectMacroException(new MCannotModify(macroName).toString());
@@ -1618,6 +1804,7 @@ $expand: package_declaration, before_first="\n" $
 <<<<<<< HEAD
 public class MIncorrectType {
 
+<<<<<<< HEAD
   private final String pType;
   private final String pParamName;
   private final MIncorrectType mIncorrectType = this;
@@ -1705,6 +1892,8 @@ $macro: param_string_ref(name) $
     }
 $end: param_string_ref $
 
+=======
+>>>>>>> Moved macros to get a better reading of the file
 $comment: =========== param_ref =========== $
 
 $macro: param_ref(name) $
@@ -1781,39 +1970,6 @@ $comment: ========= context_arg ============ $
 $macro: context_arg $
 context$no_eol$
 $end: context_arg $
-
-$comment: ========= internal_string_setter ========= $
-
-$macro: internal_string_setter(name) $
-    void set$name(
-            Context context,
-            String value) {
-
-        if(value == null){
-            throw new RuntimeException("value cannot be null here");
-        }
-
-        this.field_$name.put(context, value);
-    }
-$end: internal_string_setter $
-
-$comment: ========== init_macro_internal =========== $
-
-$macro: init_macro_internal(name) $
-    this.list_$name = new LinkedHashMap<>();
-$end: init_macro_internal $
-
-$comment: ========== init_macro_param =========== $
-
-$macro: init_macro_param(name) $
-    this.list_$name = new ArrayList<>();
-$end: init_macro_param $
-
-$comment: ========== init_string_internal =========== $
-
-$macro: init_string_internal(name) $
-    this.field_$name = new LinkedHashMap<>();
-$end: init_string_internal $
 
 $comment$
 =========================================================
