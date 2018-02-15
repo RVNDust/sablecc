@@ -39,7 +39,11 @@ public class MAddAll {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append("    public void addAll");
+=======
+    sb.append("    public void addAllP");
+>>>>>>> AddAll and single adds with static overloads
     sb.append(rParamName());
     sb.append("(List<Macro> macros){");
     sb.append(System.getProperty("line.separator"));

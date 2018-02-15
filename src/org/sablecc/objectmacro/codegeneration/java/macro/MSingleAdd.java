@@ -10,6 +10,11 @@ public class MSingleAdd {
   private final String pParamName;
   private final MSingleAdd mSingleAdd = this;
   private final List<Object> eIsBuilt = new LinkedList<Object>();
+<<<<<<< HEAD
+=======
+  private final List<Object> eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart = new LinkedList<Object>();
+  private final List<Object> eSetInternal = new LinkedList<Object>();
+>>>>>>> AddAll and single adds with static overloads
 
   public MSingleAdd(String pMacroName, String pParamName) {
     if(pMacroName == null) throw new NullPointerException();
@@ -24,6 +29,45 @@ public class MSingleAdd {
     return lIsBuilt;
   }
 
+<<<<<<< HEAD
+=======
+  public MInitStringBuilder newInitStringBuilder(String pIndexBuilder) {
+    MInitStringBuilder lInitStringBuilder = new MInitStringBuilder(pIndexBuilder);
+    this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lInitStringBuilder);
+    return lInitStringBuilder;
+  }
+
+  public MStringPart newStringPart(String pString, String pIndexBuilder) {
+    MStringPart lStringPart = new MStringPart(pString, pIndexBuilder);
+    this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lStringPart);
+    return lStringPart;
+  }
+
+  public MParamInsertPart newParamInsertPart(String pParamName, String pIndexBuilder) {
+    MParamInsertPart lParamInsertPart = new MParamInsertPart(pParamName, pIndexBuilder);
+    this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lParamInsertPart);
+    return lParamInsertPart;
+  }
+
+  public MEolPart newEolPart(String pIndexBuilder) {
+    MEolPart lEolPart = new MEolPart(pIndexBuilder);
+    this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lEolPart);
+    return lEolPart;
+  }
+
+  public MInsertMacroPart newInsertMacroPart(String pName, String pIndexBuilder, String pIndexInsert) {
+    MInsertMacroPart lInsertMacroPart = new MInsertMacroPart(pName, pIndexBuilder, pIndexInsert);
+    this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.add(lInsertMacroPart);
+    return lInsertMacroPart;
+  }
+
+  public MSetInternal newSetInternal(String pMacroName, String pParamName, String pContext) {
+    MSetInternal lSetInternal = new MSetInternal(pMacroName, pParamName, pContext);
+    this.eSetInternal.add(lSetInternal);
+    return lSetInternal;
+  }
+
+>>>>>>> AddAll and single adds with static overloads
   String pMacroName() {
     return this.pMacroName;
   }
@@ -43,7 +87,11 @@ public class MSingleAdd {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append("    public void add");
+=======
+    sb.append("    public void addP");
+>>>>>>> AddAll and single adds with static overloads
     sb.append(rParamName());
     sb.append("(M");
     sb.append(rMacroName());
@@ -57,10 +105,34 @@ public class MSingleAdd {
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
+=======
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> AddAll and single adds with static overloads
     sb.append("        ");
     for(Object oIsBuilt : this.eIsBuilt) {
       sb.append(oIsBuilt.toString());
     }
+<<<<<<< HEAD
+=======
+    sb.append("        ");
+    {
+      boolean first = true;
+      for(Object oInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart : this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart) {
+        if(first) {
+          first = false;
+        }
+        else {
+          sb.append(System.getProperty("line.separator"));
+        }
+        sb.append(oInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());
+      }
+    }
+    sb.append("        ");
+    for(Object oSetInternal : this.eSetInternal) {
+      sb.append(oSetInternal.toString());
+    }
+>>>>>>> AddAll and single adds with static overloads
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.list_");
     sb.append(rParamName());
