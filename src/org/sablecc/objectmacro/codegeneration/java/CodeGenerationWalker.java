@@ -216,7 +216,6 @@ public class CodeGenerationWalker
 
     private MRedefinedInternalsSetter currentRedefinedInternalsSetter;
 
-
     private Integer indexBuilder = 0;
 
     private Integer indexInsert = 0;
@@ -252,6 +251,9 @@ public class CodeGenerationWalker
 
     //Used only to check whether its a parameter or an internal, for parameter its set but for internal its null
     private String currentParamName;
+
+    private boolean currentMacroHasInternals;
+
     public CodeGenerationWalker(
             IntermediateRepresentation ir,
             File packageDirectory,
@@ -493,8 +495,9 @@ public class CodeGenerationWalker
         this.currentMacroToBuild.newRedefinedApplyInitializer(macroName);
 
         this.currentMacroToBuild.newImportJavaUtil();
+        this.currentMacroHasInternals = node.getInternals().size() > 0;
 
-        if(node.getInternals().size() > 0){
+        if(this.currentMacroHasInternals){
             //method build is package protected so a context parameter to build the current macro
             this.currentMacroBuilder.newContextParam();
             this.currentMacroBuilder.newContextExpansion();
@@ -699,6 +702,11 @@ public class CodeGenerationWalker
             this.currentMacroToBuild.newParamMacroField(paramName);
             this.currentMacroToBuild.newContextField(paramName);
             this.currentMacroToBuild.newInternalMacrosValueField(paramName);
+            MInitInternalsCall mInitInternalsCall = this.currentMacroBuilder.newInitInternalsCall(paramName);
+
+            if(this.currentMacroHasInternals){
+                mInitInternalsCall.newContextArg();
+            }
 
             this.currentParamMacroRefBuilder = this.currentMacroToBuild.newParamMacroRefBuilder(
                     paramName, String.valueOf(this.indexBuilder));

@@ -35,10 +35,14 @@ public class MInitInternalsMethod {
     sb.append("    private void init");
     sb.append(rName());
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("Internals(Context context){");
 =======
     sb.append("Internals(){");
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+    sb.append("Internals(Context context){");
+>>>>>>> Lazy initialization in build method instead of eager initialization in add methods
     sb.append(System.getProperty("line.separator"));
     sb.append("        for(Macro macro : this.list_");
     sb.append(rName());
