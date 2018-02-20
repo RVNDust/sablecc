@@ -21,10 +21,14 @@ import back.macro.*;
 public class Inserts {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add inserts test in back-tests
     public static void main(
             String[] args){
 
         System.out.print("======== Inserts Test ===========\n");
+<<<<<<< HEAD
         Macro d = new MD();
         System.out.println(d.build());
 =======
@@ -32,6 +36,10 @@ public class Inserts {
         Macro d = new MD();
         d.build();
 >>>>>>> Add back end tests
+=======
+        Macro d = new MD();
+        System.out.println(d.build());
+>>>>>>> Add inserts test in back-tests
     }
 
 }
