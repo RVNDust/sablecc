@@ -341,12 +341,17 @@ public class MMacro {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   public MMacroBuilder newMacroBuilder(String pMacroName) {
     MMacroBuilder lMacroBuilder = new MMacroBuilder(pMacroName);
 =======
   public MMacroBuilder newMacroBuilder() {
     MMacroBuilder lMacroBuilder = new MMacroBuilder();
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+  public MMacroBuilder newMacroBuilder(String pMacroName) {
+    MMacroBuilder lMacroBuilder = new MMacroBuilder(pMacroName);
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     this.eMacroBuilder.add(lMacroBuilder);
     return lMacroBuilder;
   }

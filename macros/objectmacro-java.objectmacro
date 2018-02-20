@@ -105,11 +105,9 @@ public abstract class Macro {
 
     final static String LINE_SEPARATOR = System.getProperty("line.separator");
 
-    String expansion;
+    BuildState build_state = null;
 
-    boolean built = false;
-
-    Map<Context, String> expansions = new LinkedHashMap<>();
+    final Map<Context, BuildState> build_states = new LinkedHashMap<>();
 
     public String build(){
 
@@ -328,6 +326,29 @@ class InternalValue {
 
 $end: class_internal_value $
 
+$comment: =============== class_build_state ========= $
+
+$macro: class_build_state $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+
+class BuildState {
+
+    private String expansion = null;
+
+    public String getExpansion() {
+        return expansion;
+    }
+
+    public void setExpansion(
+            String expansion) {
+
+        this.expansion = expansion;
+    }
+}
+
+$end: class_build_state $
+
 $comment: ========== macro ========== $
 
 $macro: macro(name) $
@@ -460,6 +481,7 @@ $macro: single_add(macro_name, param_name) $
         if(macro == null){
             throw ObjectMacroException.parameterNull("$param_name");
         }
+        $expand: is_built $
 
         this.list_$param_name.add(macro);
     }
@@ -603,6 +625,7 @@ $end: public $
 $comment: ========== macro_builder ======= $
 >>>>>>> AddAll and single adds with static overloads
 
+<<<<<<< HEAD
 $comment: ========== constructor ========== $
 
 $macro: constructor(name) $
@@ -621,6 +644,24 @@ $macro: init_macro_internal(name) $
 $end: init_macro_internal $
 =======
         $expand: build_verification $
+=======
+$macro: macro_builder(macro_name) $
+    @Override
+    $expand: public $ String build($expand: context_param $){
+
+        BuildState buildState = $expand: context_build_state, none="this.build_state"$;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("$macro_name");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        $expand: new_build_state, none="this.build_state = buildState" $;
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
 
         $expand: init_internals_call $
 
@@ -629,6 +670,7 @@ $end: init_macro_internal $
 
 $comment: ========== init_macro_param =========== $
 
+<<<<<<< HEAD
 $macro: init_macro_param(name) $
     this.list_$name = new ArrayList<>();
 $end: init_macro_param $
@@ -648,6 +690,13 @@ $macro: build_verification(macro_name) $
 $end: build_verification $
 
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+$end: macro_builder $
+
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
 $comment: ============ empty_builder_with_context ============ $
 
 $macro: empty_builder_with_context $
@@ -657,6 +706,7 @@ $macro: empty_builder_with_context $
     }
 $end: empty_builder_with_context$
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========= public ============= $
 >>>>>>> Now macro without internals has a builder with context that only return build
@@ -679,6 +729,19 @@ $comment: ========== set_param ========== $
 $macro: set_param(name) $
         this.setP$name($expand: param_arg$);
 $end: set_param $
+=======
+$comment: ========== context_build_state ======= $
+
+$macro: context_build_state $
+this.build_states.get(context)$no_eol$
+$end: context_build_state $
+
+$comment: ========== new_build_state ========= $
+
+$macro: new_build_state $
+this.build_states.put(context, buildState)$no_eol$
+$end: new_build_state $
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
 
 $comment$
 ================================================================
@@ -1645,7 +1708,7 @@ $comment: =========== is_built =========== $
 >>>>>>> Moved macros to get a better reading of the file
 
 $macro: is_built(macro_name) $
-        if(this.isBuilt){
+        if(this.build_state != null){
             throw ObjectMacroException.cannotModify("$macro_name");
         }
 <<<<<<< HEAD

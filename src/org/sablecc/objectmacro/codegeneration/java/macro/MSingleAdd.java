@@ -2,11 +2,14 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+import java.util.*;
+
 public class MSingleAdd {
 
   private final String pMacroName;
   private final String pParamName;
   private final MSingleAdd mSingleAdd = this;
+<<<<<<< HEAD
 <<<<<<< HEAD
   private final List<Object> eIsBuilt = new LinkedList<Object>();
 <<<<<<< HEAD
@@ -16,6 +19,9 @@ public class MSingleAdd {
 >>>>>>> AddAll and single adds with static overloads
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+  private final List<Object> eIsBuilt = new LinkedList<Object>();
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
 
   public MSingleAdd(String pMacroName, String pParamName) {
     if(pMacroName == null) throw new NullPointerException();
@@ -25,12 +31,16 @@ public class MSingleAdd {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   public MIsBuilt newIsBuilt(String pMacroName) {
     MIsBuilt lIsBuilt = new MIsBuilt(pMacroName);
     this.eIsBuilt.add(lIsBuilt);
     return lIsBuilt;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   public MInitStringBuilder newInitStringBuilder(String pIndexBuilder) {
@@ -72,6 +82,8 @@ public class MSingleAdd {
 >>>>>>> AddAll and single adds with static overloads
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   String pMacroName() {
     return this.pMacroName;
   }
@@ -110,14 +122,18 @@ public class MSingleAdd {
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 >>>>>>> AddAll and single adds with static overloads
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     sb.append("        ");
     for(Object oIsBuilt : this.eIsBuilt) {
       sb.append(oIsBuilt.toString());
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     sb.append("        ");
@@ -138,6 +154,8 @@ public class MSingleAdd {
       sb.append(oSetInternal.toString());
     }
 >>>>>>> AddAll and single adds with static overloads
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     sb.append(System.getProperty("line.separator"));
 =======
 >>>>>>> Add structure which contains list of macros and the context associated

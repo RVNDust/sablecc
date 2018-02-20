@@ -74,19 +74,27 @@ public class Main {
 >>>>>>> Add test for dynamic cyclic reference verification
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
-        macros.add(new MB("First argument in MB0"));
+        MB mb = new MB("la");
+        MB mb2 = new MB("First argument in MB0");
+        macros.add(mb2);
         macros.add(new MB("First argument in MB1"));
         macros.add(new MB("First argument in MB2"));
 
         try{
+            mb.addPS(new MC());
             ma.addPZ(new MC());
             ma.addAllPY(macros);
+            ma.addPY(mb);
             ma.addPZ(new MC());
+<<<<<<< HEAD
 <<<<<<< HEAD
             ma.setPY(macros);
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 >>>>>>> Add test for dynamic cyclic reference verification
+=======
+            mb2.addPS(new MC());
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){

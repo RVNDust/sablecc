@@ -53,6 +53,7 @@ class GenerationUtils {
 
     static final String BEFORE_FIRST_DIRECTIVE = "beforefirst";
 
+<<<<<<< HEAD
     /**
      * Example : SetInternal needs a macroName, but adder does not need a macro because the parameter is always macro
      * Therefore instead of macroName we give to set internal 'acro' to form 'macro'
@@ -60,6 +61,8 @@ class GenerationUtils {
     static final String MACRO_NAME_FOR_ADDER = "acro";
 >>>>>>> Moved utils files for generation to another walker
 
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     static String string(
             TString tString) {
 

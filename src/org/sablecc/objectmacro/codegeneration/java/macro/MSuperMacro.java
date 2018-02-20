@@ -47,6 +47,7 @@ public class MSuperMacro {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    BuildState build_state = null;");
+<<<<<<< HEAD
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    final Map<Context, BuildState> build_states = new LinkedHashMap<>();");
@@ -69,6 +70,11 @@ public class MSuperMacro {
 =======
     sb.append("    Map<Context, String> expansions = new LinkedHashMap<>();");
 >>>>>>> Remove public to prevent user to access to supermacro attributes
+=======
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    final Map<Context, BuildState> build_states = new LinkedHashMap<>();");
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    public String build(){");

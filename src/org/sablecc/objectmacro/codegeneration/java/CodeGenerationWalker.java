@@ -451,6 +451,7 @@ public class CodeGenerationWalker
 
         this.currentConstructor = this.currentMacroToBuild.newConstructor(macroName);
         this.currentMacroBuilder = this.currentMacroToBuild.newMacroBuilder(macroName);
+<<<<<<< HEAD
 
         this.mInternalsInitializer.newParentInternalsSetter(macroName);
         this.currentMacroToBuild.newRedefinedApplyInitializer(macroName);
@@ -490,6 +491,8 @@ public class CodeGenerationWalker
 
         this.currentConstructor = this.currentMacroToBuild.newConstructor(macroName);
         this.currentMacroBuilder = this.currentMacroToBuild.newMacroBuilder();
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
 
         this.mInternalsInitializer.newParentInternalsSetter(macroName);
         this.currentMacroToBuild.newRedefinedApplyInitializer(macroName);
@@ -500,8 +503,8 @@ public class CodeGenerationWalker
         if(this.currentMacroHasInternals){
             //method build is package protected so a context parameter to build the current macro
             this.currentMacroBuilder.newContextParam();
-            this.currentMacroBuilder.newContextExpansion();
-            this.currentMacroBuilder.newNewContextExpansion();
+            this.currentMacroBuilder.newContextBuildState();
+            this.currentMacroBuilder.newNewBuildState();
         }
         else{
             this.currentMacroBuilder.newPublic();
@@ -510,10 +513,13 @@ public class CodeGenerationWalker
 =======
             this.currentMacroToBuild.newEmptyBuilderWithContext();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Now macro without internals has a builder with context that only return build
 =======
             this.currentMacroBuilder.newBuildVerification(macroName);
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
         }
     }
 
@@ -704,10 +710,6 @@ public class CodeGenerationWalker
             this.currentMacroToBuild.newInternalMacrosValueField(paramName);
             MInitInternalsCall mInitInternalsCall = this.currentMacroBuilder.newInitInternalsCall(paramName);
 
-            if(this.currentMacroHasInternals){
-                mInitInternalsCall.newContextArg();
-            }
-
             this.currentParamMacroRefBuilder = this.currentMacroToBuild.newParamMacroRefBuilder(
                     paramName, String.valueOf(this.indexBuilder));
 <<<<<<< HEAD
@@ -780,7 +782,17 @@ public class CodeGenerationWalker
             this.contextNames.add(currentContextName);
             this.currentConstructor.newInitMacroParam(paramName);
             this.currentConstructor.newInitInternalValue(paramName);
+<<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+
+            if(this.currentMacroHasInternals){
+                mInitInternalsCall.newContextArg();
+            }
+            else{
+                mAddAll.newIsBuilt(this.currentMacro.getName());
+            }
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
         }
         else{
             throw new InternalException("case unhandled");
@@ -971,6 +983,7 @@ public class CodeGenerationWalker
                     this.currentApplyInitializer.newRedefinedInternalsSetter(macro_ref_name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(this.currentEmptyApplyInitializer != null){
             this.currentEmptyRedefinedInternalsSetter =
                     this.currentEmptyApplyInitializer.newRedefinedInternalsSetter(
@@ -978,6 +991,13 @@ public class CodeGenerationWalker
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
 =======
             this.currentMacroToBuild.newSingleAdd(macro_ref_name, this.currentParamName);
+=======
+            MSingleAdd mSingleAdd = this.currentMacroToBuild.newSingleAdd(macro_ref_name, this.currentParamName);
+            if(!this.currentMacroHasInternals){
+                mSingleAdd.newIsBuilt(this.currentMacro.getName());
+            }
+
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
             this.currentAddAllApplyInitializer.newRedefinedInternalsSetter(macro_ref_name);
 >>>>>>> Add structure which contains list of macros and the context associated
         }
@@ -1624,6 +1644,7 @@ public class CodeGenerationWalker
         this.currentMacroToBuild = null;
         this.currentConstructor = null;
         this.currentMacro = null;
+        this.currentMacroHasInternals = false;
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.util.*;
 public class MMacroBuilder {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   private final String pMacroName;
   private final MMacroBuilder mMacroBuilder = this;
   private final List<Object> ePublic = new LinkedList<Object>();
@@ -33,16 +34,25 @@ public class MMacroBuilder {
     this.eInitInternalsCall.add(lInitInternalsCall);
     return lInitInternalsCall;
 =======
+=======
+  private final String pMacroName;
+  private final MMacroBuilder mMacroBuilder = this;
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   private final List<Object> ePublic = new LinkedList<Object>();
   private final List<Object> eContextParam = new LinkedList<Object>();
-  private final List<Object> eContextExpansion = new LinkedList<Object>();
-  private final List<Object> eBuildVerification = new LinkedList<Object>();
+  private final List<Object> eContextBuildState = new LinkedList<Object>();
+  private final List<Object> eNewBuildState = new LinkedList<Object>();
   private final List<Object> eInitInternalsCall = new LinkedList<Object>();
   private final List<Object> eStringPart_ParamInsertPart_EolPart_InsertMacroPart = new LinkedList<Object>();
-  private final List<Object> eNewContextExpansion = new LinkedList<Object>();
 
+<<<<<<< HEAD
   public MMacroBuilder() {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+  public MMacroBuilder(String pMacroName) {
+    if(pMacroName == null) throw new NullPointerException();
+    this.pMacroName = pMacroName;
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   }
 
   public MPublic newPublic() {
@@ -58,10 +68,14 @@ public class MMacroBuilder {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   public MContextBuildState newContextBuildState() {
     MContextBuildState lContextBuildState = new MContextBuildState();
     this.eContextBuildState.add(lContextBuildState);
     return lContextBuildState;
+<<<<<<< HEAD
   }
 
   public MNewBuildState newNewBuildState() {
@@ -74,12 +88,14 @@ public class MMacroBuilder {
     this.eContextExpansion.add(lContextExpansion);
     return lContextExpansion;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   }
 
-  public MBuildVerification newBuildVerification(String pMacroName) {
-    MBuildVerification lBuildVerification = new MBuildVerification(pMacroName);
-    this.eBuildVerification.add(lBuildVerification);
-    return lBuildVerification;
+  public MNewBuildState newNewBuildState() {
+    MNewBuildState lNewBuildState = new MNewBuildState();
+    this.eNewBuildState.add(lNewBuildState);
+    return lNewBuildState;
   }
 
   public MInitInternalsCall newInitInternalsCall(String pParamName) {
@@ -113,18 +129,24 @@ public class MMacroBuilder {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   String pMacroName() {
     return this.pMacroName;
   }
 
   private String rMacroName() {
     return this.mMacroBuilder.pMacroName();
+<<<<<<< HEAD
 =======
   public MNewContextExpansion newNewContextExpansion() {
     MNewContextExpansion lNewContextExpansion = new MNewContextExpansion();
     this.eNewContextExpansion.add(lNewContextExpansion);
     return lNewContextExpansion;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
   }
 
   @Override
@@ -143,6 +165,7 @@ public class MMacroBuilder {
     sb.append("){");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 <<<<<<< HEAD
     sb.append("        BuildState buildState = ");
     if(this.eContextBuildState.size() == 0) {
@@ -189,10 +212,19 @@ public class MMacroBuilder {
     }
     for(Object oNewBuildState : this.eNewBuildState) {
       sb.append(oNewBuildState.toString());
+=======
+    sb.append("        BuildState buildState = ");
+    if(this.eContextBuildState.size() == 0) {
+      sb.append("this.build_state");
+    }
+    for(Object oContextBuildState : this.eContextBuildState) {
+      sb.append(oContextBuildState.toString());
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     }
     sb.append(";");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        ");
     for(Object oInitDirectivesCall : this.eInitDirectivesCall) {
       sb.append(oInitDirectivesCall.toString());
@@ -215,16 +247,37 @@ public class MMacroBuilder {
     sb.append("        return sb0.toString();");
 =======
     sb.append("        if(local_expansion != null){");
+=======
+    sb.append("        if(buildState == null){");
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     sb.append(System.getProperty("line.separator"));
-    sb.append("            return local_expansion;");
+    sb.append("            buildState = new BuildState();");
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
+    sb.append("        else if(buildState.getExpansion() == null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            throw ObjectMacroException.cyclicReference(\"");
+    sb.append(rMacroName());
+    sb.append("\");");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        else{");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            return buildState.getExpansion();");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append("        ");
-    for(Object oBuildVerification : this.eBuildVerification) {
-      sb.append(oBuildVerification.toString());
+    if(this.eNewBuildState.size() == 0) {
+      sb.append("this.build_state = buildState");
     }
+    for(Object oNewBuildState : this.eNewBuildState) {
+      sb.append(oNewBuildState.toString());
+    }
+    sb.append(";");
+    sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        ");
     for(Object oInitInternalsCall : this.eInitInternalsCall) {
@@ -238,19 +291,14 @@ public class MMacroBuilder {
       sb.append(oStringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());
     }
     sb.append(System.getProperty("line.separator"));
-    sb.append("        local_expansion = sb0.toString();");
+    sb.append("        buildState.setExpansion(sb0.toString());");
     sb.append(System.getProperty("line.separator"));
-    sb.append("        ");
-    if(this.eNewContextExpansion.size() == 0) {
-      sb.append("this.expansion = local_expansion");
-    }
-    for(Object oNewContextExpansion : this.eNewContextExpansion) {
-      sb.append(oNewContextExpansion.toString());
-    }
-    sb.append(";");
-    sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        return local_expansion;");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append("        return sb0.toString();");
+>>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
