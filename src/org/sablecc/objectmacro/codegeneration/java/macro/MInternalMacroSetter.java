@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MInternalMacroSetter {
 
   private final String pParamName;
@@ -22,21 +23,16 @@ public class MInternalMacroSetter {
 =======
 import java.util.*;
 
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
 public class MInternalMacroSetter {
 
   private final String pParamName;
   private final MInternalMacroSetter mInternalMacroSetter = this;
-  private final List<Object> eApplyInternalsInitializer = new LinkedList<Object>();
 
   public MInternalMacroSetter(String pParamName) {
     if(pParamName == null) throw new NullPointerException();
     this.pParamName = pParamName;
-  }
-
-  public MApplyInternalsInitializer newApplyInternalsInitializer(String pParamName) {
-    MApplyInternalsInitializer lApplyInternalsInitializer = new MApplyInternalsInitializer(pParamName);
-    this.eApplyInternalsInitializer.add(lApplyInternalsInitializer);
-    return lApplyInternalsInitializer;
   }
 
   String pParamName() {
@@ -72,6 +68,7 @@ public class MInternalMacroSetter {
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("            InternalValue internal_value) {");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -83,15 +80,19 @@ public class MInternalMacroSetter {
 =======
     sb.append("            List<Macro> macros) {");
 >>>>>>> Removed in constructor initialization and add lazy initialization
+=======
+    sb.append("            InternalValue internal_value) {");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("        if(macros == null){");
+    sb.append("        if(internal_value == null){");
     sb.append(System.getProperty("line.separator"));
     sb.append("            throw new RuntimeException(\"macros cannot be null\");");
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        final List<Macro> tempMacros = new ArrayList<>();");
     sb.append(System.getProperty("line.separator"));
     sb.append("        int i = 0;");
@@ -122,6 +123,8 @@ public class MInternalMacroSetter {
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append("        this.list_");
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -131,9 +134,13 @@ public class MInternalMacroSetter {
     sb.append(rName());
 =======
     sb.append(rParamName());
+<<<<<<< HEAD
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
     sb.append(".put(context, tempMacros);");
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    sb.append(".put(context, internal_value);");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));

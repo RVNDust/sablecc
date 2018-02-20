@@ -59,9 +59,13 @@ Y : {y}
 =======
 =======
 ============= A ===============
+<<<<<<< HEAD
 >>>>>>> Remove arguments in macro references in internal declaration
 {y}
 >>>>>>> Add back end tests
+=======
+Y : {y}
+>>>>>>> Add structure which contains list of macros and the context associated
 {End}
 
 Macro b
@@ -96,9 +100,14 @@ S : {s}
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 ============== B ===============
+<<<<<<< HEAD
 {p}
 {s}
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+P : {p}
+S : {s}
+>>>>>>> Add structure which contains list of macros and the context associated
 {End}
 
 Macro c
@@ -111,6 +120,7 @@ Macro c
 =============== C ==============
 Q : {q}
 R : {r}
+<<<<<<< HEAD
 =======
         y : String;
         z : String;
@@ -129,6 +139,8 @@ R : {r}
 {q}
 {r}
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
 {End}
 
 Macro d
@@ -261,10 +273,11 @@ Macro h
 
 Macro i
     Param
-        y : j(z);
-        z : k("On est dans i");
+        y : k("lala");
+        z : k("On est dans i"), j(y);
 {Begin}
 {y}
+{z}
 {End}
 
 Macro j

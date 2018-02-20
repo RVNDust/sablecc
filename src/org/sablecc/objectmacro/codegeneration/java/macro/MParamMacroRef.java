@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MParamMacroRef {
 
   private final String pName;
@@ -14,18 +15,19 @@ public class MParamMacroRef {
 =======
 import java.util.*;
 
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
 public class MParamMacroRef {
 
   private final String pName;
   private final MParamMacroRef mParamMacroRef = this;
-  private final List<Object> eContextParam = new LinkedList<Object>();
-  private final List<Object> eGetInternalTail = new LinkedList<Object>();
 
   public MParamMacroRef(String pName) {
     if(pName == null) throw new NullPointerException();
     this.pName = pName;
   }
 
+<<<<<<< HEAD
   public MContextParam newContextParam() {
     MContextParam lContextParam = new MContextParam();
     this.eContextParam.add(lContextParam);
@@ -66,6 +68,8 @@ public class MParamMacroRef {
 
 =======
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
   String pName() {
     return this.pName;
   }
@@ -106,21 +110,13 @@ public class MParamMacroRef {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("    private List<Macro> get");
+    sb.append("    private InternalValue get");
     sb.append(rName());
-    sb.append("(");
-    for(Object oContextParam : this.eContextParam) {
-      sb.append(oContextParam.toString());
-    }
-    sb.append("){");
+    sb.append("(){");
     sb.append(System.getProperty("line.separator"));
-    sb.append(System.getProperty("line.separator"));
-    sb.append("        return this.list_");
+    sb.append("        return this.");
     sb.append(rName());
-    for(Object oGetInternalTail : this.eGetInternalTail) {
-      sb.append(oGetInternalTail.toString());
-    }
-    sb.append(";");
+    sb.append("Value;");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
     sb.append("        ");

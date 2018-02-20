@@ -27,11 +27,17 @@ public class MInitInternalValue {
     sb.append(rParamName());
     sb.append("Value = new InternalValue(this.list_");
     sb.append(rParamName());
+<<<<<<< HEAD
     sb.append(", this.");
     sb.append(rParamName());
     sb.append("Context, this.");
     sb.append(rParamName());
     sb.append("Directives);");
+=======
+    sb.append(", ");
+    sb.append(rParamName());
+    sb.append("Context);");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

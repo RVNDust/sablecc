@@ -10,12 +10,14 @@ public class MParamMacroRefBuilder {
   private final String pIndexBuilder;
   private final MParamMacroRefBuilder mParamMacroRefBuilder = this;
 <<<<<<< HEAD
+<<<<<<< HEAD
   private final List<Object> eContextName = new LinkedList<Object>();
   private final List<Object> eApplyNoneDirective = new LinkedList<Object>();
 =======
   private final List<Object> eContextParam = new LinkedList<Object>();
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
   private final List<Object> eContextName = new LinkedList<Object>();
-  private final List<Object> eGetInternalTail = new LinkedList<Object>();
   private final List<Object> eNone = new LinkedList<Object>();
   private final List<Object> eBeforeFirst = new LinkedList<Object>();
   private final List<Object> eSeparator = new LinkedList<Object>();
@@ -30,6 +32,7 @@ public class MParamMacroRefBuilder {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   public MApplyNoneDirective newApplyNoneDirective() {
     MApplyNoneDirective lApplyNoneDirective = new MApplyNoneDirective(mParamMacroRefBuilder);
     this.eApplyNoneDirective.add(lApplyNoneDirective);
@@ -42,12 +45,15 @@ public class MParamMacroRefBuilder {
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
   }
 
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
   public MContextName newContextName(String pContextName) {
     MContextName lContextName = new MContextName(pContextName);
     this.eContextName.add(lContextName);
     return lContextName;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   public MGetInternalTail newGetInternalTail() {
@@ -56,6 +62,8 @@ public class MParamMacroRefBuilder {
     return lGetInternalTail;
   }
 
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
   public MNone newNone() {
     MNone lNone = new MNone();
     this.eNone.add(lNone);
@@ -103,6 +111,7 @@ public class MParamMacroRefBuilder {
     sb.append("    private String build");
     sb.append(rName());
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("(){");
 =======
     sb.append("(");
@@ -110,6 +119,9 @@ public class MParamMacroRefBuilder {
       sb.append(oContextParam.toString());
     }
     sb.append("){");
+=======
+    sb.append("(){");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append(System.getProperty("line.separator"));
@@ -170,9 +182,6 @@ public class MParamMacroRefBuilder {
     sb.append("        List<Macro> macros = this.list_");
 >>>>>>> Removed in constructor initialization and add lazy initialization
     sb.append(rName());
-    for(Object oGetInternalTail : this.eGetInternalTail) {
-      sb.append(oGetInternalTail.toString());
-    }
     sb.append(";");
     sb.append(System.getProperty("line.separator"));
     sb.append("        ");

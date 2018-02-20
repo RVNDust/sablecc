@@ -14,6 +14,7 @@ public class MConstructor {
   private final List<Object> eSetParam = new LinkedList<Object>();
   private final List<Object> eInitMacroParam_InitMacroInternal_InitStringInternal = new LinkedList<Object>();
 <<<<<<< HEAD
+<<<<<<< HEAD
   private final List<Object> eInitInternalValue = new LinkedList<Object>();
 =======
   private final List<Object> eStringParam_MacroParam = new LinkedList<Object>();
@@ -25,6 +26,9 @@ public class MConstructor {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+  private final List<Object> eInitInternalValue = new LinkedList<Object>();
+>>>>>>> Add structure which contains list of macros and the context associated
 
   public MConstructor(String pName) {
     if(pName == null) throw new NullPointerException();
@@ -112,7 +116,16 @@ public class MConstructor {
     return lInitStringInternal;
   }
 
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+  public MInitInternalValue newInitInternalValue(String pParamName) {
+    MInitInternalValue lInitInternalValue = new MInitInternalValue(pParamName);
+    this.eInitInternalValue.add(lInitInternalValue);
+    return lInitInternalValue;
+  }
+
+>>>>>>> Add structure which contains list of macros and the context associated
   String pName() {
     return this.pName;
   }
@@ -190,6 +203,12 @@ public class MConstructor {
     for(Object oInitMacroParam_InitMacroInternal_InitStringInternal : this.eInitMacroParam_InitMacroInternal_InitStringInternal) {
       sb.append(oInitMacroParam_InitMacroInternal_InitStringInternal.toString());
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+    }
+    if(this.eInitInternalValue.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oInitInternalValue : this.eInitInternalValue) {
+      sb.append(oInitInternalValue.toString());
     }
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));

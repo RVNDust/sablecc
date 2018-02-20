@@ -25,6 +25,7 @@ public class MInternalMacroField {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    private Map<Context, InternalValue> list_");
 =======
     sb.append("    private Map<Context, Macro[]> list_");
@@ -32,6 +33,9 @@ public class MInternalMacroField {
 =======
     sb.append("    private Map<Context, List<Macro>> list_");
 >>>>>>> Removed in constructor initialization and add lazy initialization
+=======
+    sb.append("    private Map<Context, InternalValue> list_");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(rName());
     sb.append(" = new LinkedHashMap<>();");
     sb.append(System.getProperty("line.separator"));

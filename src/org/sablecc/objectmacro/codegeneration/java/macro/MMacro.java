@@ -11,6 +11,7 @@ public class MMacro {
   private final List<Object> ePackageDeclaration = new LinkedList<Object>();
   private final List<Object> eImportJavaUtil = new LinkedList<Object>();
 <<<<<<< HEAD
+<<<<<<< HEAD
   private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField = new LinkedList<Object>();
   private final List<Object> eContextField = new LinkedList<Object>();
   private final List<Object> eConstructor = new LinkedList<Object>();
@@ -24,11 +25,15 @@ public class MMacro {
   private final List<Object> eEmptyBuilderWithContext = new LinkedList<Object>();
 =======
   private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField = new LinkedList<Object>();
+=======
+  private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField = new LinkedList<Object>();
+>>>>>>> Add structure which contains list of macros and the context associated
   private final List<Object> eContextField = new LinkedList<Object>();
   private final List<Object> eConstructor = new LinkedList<Object>();
   private final List<Object> eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter = new LinkedList<Object>();
-  private final List<Object> eParamStringRefBuilder_ParamMacroRefBuilder = new LinkedList<Object>();
-  private final List<Object> eParamStringRef_ParamMacroRef = new LinkedList<Object>();
+  private final List<Object> eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder = new LinkedList<Object>();
+  private final List<Object> eParamStringRef_ParamMacroRef_InternalMacroRef = new LinkedList<Object>();
+  private final List<Object> eInitInternalsMethod = new LinkedList<Object>();
   private final List<Object> eRedefinedApplyInitializer = new LinkedList<Object>();
   private final List<Object> eMacroBuilder = new LinkedList<Object>();
 <<<<<<< HEAD
@@ -57,35 +62,48 @@ public class MMacro {
   public MParamMacroField newParamMacroField(String pName) {
     MParamMacroField lParamMacroField = new MParamMacroField(pName);
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamMacroField);
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lParamMacroField);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lParamMacroField);
+>>>>>>> Add structure which contains list of macros and the context associated
     return lParamMacroField;
   }
 
   public MParamStringField newParamStringField(String pName) {
     MParamStringField lParamStringField = new MParamStringField(pName);
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamStringField);
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lParamStringField);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lParamStringField);
+>>>>>>> Add structure which contains list of macros and the context associated
     return lParamStringField;
   }
 
   public MInternalMacroField newInternalMacroField(String pName) {
     MInternalMacroField lInternalMacroField = new MInternalMacroField(pName);
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalMacroField);
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lInternalMacroField);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lInternalMacroField);
+>>>>>>> Add structure which contains list of macros and the context associated
     return lInternalMacroField;
   }
 
   public MInternalStringField newInternalStringField(String pName) {
     MInternalStringField lInternalStringField = new MInternalStringField(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalStringField);
     return lInternalStringField;
@@ -115,6 +133,18 @@ public class MMacro {
   }
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lInternalStringField);
+    return lInternalStringField;
+  }
+
+  public MInternalMacrosValueField newInternalMacrosValueField(String pParamName) {
+    MInternalMacrosValueField lInternalMacrosValueField = new MInternalMacrosValueField(pParamName);
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lInternalMacrosValueField);
+    return lInternalMacrosValueField;
+  }
+
+>>>>>>> Add structure which contains list of macros and the context associated
   public MContextField newContextField(String pName) {
     MContextField lContextField = new MContextField(pName);
     this.eContextField.add(lContextField);
@@ -251,41 +281,59 @@ public class MMacro {
 
   public MParamStringRefBuilder newParamStringRefBuilder(String pName) {
     MParamStringRefBuilder lParamStringRefBuilder = new MParamStringRefBuilder(pName);
-    this.eParamStringRefBuilder_ParamMacroRefBuilder.add(lParamStringRefBuilder);
+    this.eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder.add(lParamStringRefBuilder);
     return lParamStringRefBuilder;
   }
 
   public MParamMacroRefBuilder newParamMacroRefBuilder(String pName, String pIndexBuilder) {
     MParamMacroRefBuilder lParamMacroRefBuilder = new MParamMacroRefBuilder(pName, pIndexBuilder);
-    this.eParamStringRefBuilder_ParamMacroRefBuilder.add(lParamMacroRefBuilder);
+    this.eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder.add(lParamMacroRefBuilder);
     return lParamMacroRefBuilder;
+  }
+
+  public MInternalMacroRefBuilder newInternalMacroRefBuilder(String pInternalName) {
+    MInternalMacroRefBuilder lInternalMacroRefBuilder = new MInternalMacroRefBuilder(pInternalName);
+    this.eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder.add(lInternalMacroRefBuilder);
+    return lInternalMacroRefBuilder;
   }
 
   public MParamStringRef newParamStringRef(String pName) {
     MParamStringRef lParamStringRef = new MParamStringRef(pName);
-    this.eParamStringRef_ParamMacroRef.add(lParamStringRef);
+    this.eParamStringRef_ParamMacroRef_InternalMacroRef.add(lParamStringRef);
     return lParamStringRef;
   }
 
   public MParamMacroRef newParamMacroRef(String pName) {
     MParamMacroRef lParamMacroRef = new MParamMacroRef(pName);
-    this.eParamStringRef_ParamMacroRef.add(lParamMacroRef);
+    this.eParamStringRef_ParamMacroRef_InternalMacroRef.add(lParamMacroRef);
     return lParamMacroRef;
   }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
+=======
+  public MInternalMacroRef newInternalMacroRef(String pParamName) {
+    MInternalMacroRef lInternalMacroRef = new MInternalMacroRef(pParamName);
+    this.eParamStringRef_ParamMacroRef_InternalMacroRef.add(lInternalMacroRef);
+    return lInternalMacroRef;
+  }
+
+>>>>>>> Add structure which contains list of macros and the context associated
   public MInitInternalsMethod newInitInternalsMethod(String pName) {
     MInitInternalsMethod lInitInternalsMethod = new MInitInternalsMethod(pName);
     this.eInitInternalsMethod.add(lInitInternalsMethod);
     return lInitInternalsMethod;
   }
 
+<<<<<<< HEAD
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
 =======
 >>>>>>> AddAll and single adds with static overloads
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
   public MRedefinedApplyInitializer newRedefinedApplyInitializer(String pName) {
     MRedefinedApplyInitializer lRedefinedApplyInitializer = new MRedefinedApplyInitializer(pName);
     this.eRedefinedApplyInitializer.add(lRedefinedApplyInitializer);
@@ -348,19 +396,27 @@ public class MMacro {
     sb.append(" extends Macro{");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.size() > 0) {
 =======
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.size() > 0) {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.size() > 0) {
+>>>>>>> Add structure which contains list of macros and the context associated
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
       for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField) {
 =======
       for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField) {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+      for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField) {
+>>>>>>> Add structure which contains list of macros and the context associated
         if(first) {
           first = false;
         }
@@ -368,10 +424,14 @@ public class MMacro {
           sb.append(System.getProperty("line.separator"));
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.toString());
 =======
         sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField.toString());
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.toString());
+>>>>>>> Add structure which contains list of macros and the context associated
       }
     }
     if(this.eContextField.size() > 0) {
@@ -416,6 +476,7 @@ public class MMacro {
       }
     }
     if(this.eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder.size() > 0) {
+<<<<<<< HEAD
       sb.append(System.getProperty("line.separator"));
     }
     {
@@ -499,33 +560,47 @@ public class MMacro {
       }
     }
     if(this.eParamStringRefBuilder_ParamMacroRefBuilder.size() > 0) {
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
-      for(Object oParamStringRefBuilder_ParamMacroRefBuilder : this.eParamStringRefBuilder_ParamMacroRefBuilder) {
+      for(Object oParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder : this.eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder) {
         if(first) {
           first = false;
         }
         else {
           sb.append(System.getProperty("line.separator"));
         }
-        sb.append(oParamStringRefBuilder_ParamMacroRefBuilder.toString());
+        sb.append(oParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder.toString());
       }
     }
-    if(this.eParamStringRef_ParamMacroRef.size() > 0) {
+    if(this.eParamStringRef_ParamMacroRef_InternalMacroRef.size() > 0) {
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
-      for(Object oParamStringRef_ParamMacroRef : this.eParamStringRef_ParamMacroRef) {
+      for(Object oParamStringRef_ParamMacroRef_InternalMacroRef : this.eParamStringRef_ParamMacroRef_InternalMacroRef) {
         if(first) {
           first = false;
         }
         else {
           sb.append(System.getProperty("line.separator"));
         }
-        sb.append(oParamStringRef_ParamMacroRef.toString());
+        sb.append(oParamStringRef_ParamMacroRef_InternalMacroRef.toString());
+      }
+    }
+    {
+      boolean first = true;
+      for(Object oInitInternalsMethod : this.eInitInternalsMethod) {
+        if(first) {
+          first = false;
+        }
+        else {
+          sb.append(System.getProperty("line.separator"));
+        }
+        sb.append(oInitInternalsMethod.toString());
       }
     }
     sb.append(System.getProperty("line.separator"));

@@ -47,6 +47,7 @@ public class MClassInternalValue {
     sb.append("    private final List<Macro> macros;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("    private final List<Directive> directives;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -59,27 +60,40 @@ public class MClassInternalValue {
     sb.append("    private String cache;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+=======
+    sb.append("    private final Context context;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append("    InternalValue(");
     sb.append(System.getProperty("line.separator"));
     sb.append("            List<Macro> macros,");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("            Context context,");
     sb.append(System.getProperty("line.separator"));
     sb.append("            List<Directive> directives){");
+=======
+    sb.append("            Context context){");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.macros = macros;");
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.context = context;");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        this.directives = directives;");
     sb.append(System.getProperty("line.separator"));
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    String build(){");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        if(this.cache != null){");
     sb.append(System.getProperty("line.separator"));
     sb.append("            return this.cache;");
@@ -115,13 +129,25 @@ public class MClassInternalValue {
     sb.append("            sb.append(expansion);");
     sb.append(System.getProperty("line.separator"));
     sb.append("            i++;");
+=======
+    sb.append("        StringBuilder sb = new StringBuilder();");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        for(Macro macro : this.macros){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            sb.append(macro.build(this.context));");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        this.cache = sb.toString();");
     sb.append(System.getProperty("line.separator"));
     sb.append("        return this.cache;");
+=======
+    sb.append("        return sb.toString();");
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
@@ -132,6 +158,7 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append(System.getProperty("line.separator"));
     sb.append("    void setNone(DNone none){");
     sb.append(System.getProperty("line.separator"));
@@ -139,6 +166,8 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append("}");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));

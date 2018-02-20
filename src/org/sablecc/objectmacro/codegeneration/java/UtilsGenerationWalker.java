@@ -53,6 +53,7 @@ public class UtilsGenerationWalker
         MCannotModify mCannotModify = new MCannotModify();
         MObjectMacroException mObjectMacroException = new MObjectMacroException();
 <<<<<<< HEAD
+<<<<<<< HEAD
         MClassInternalValue mClassInternalValue = new MClassInternalValue();
         mClassInternalValue.newImportJavaUtil();
         MClassBuildState mClassBuildState = new MClassBuildState();
@@ -64,6 +65,10 @@ public class UtilsGenerationWalker
         MClassSeparator mClassSeparator = new MClassSeparator();
 =======
 >>>>>>> Moved utils files for generation to another walker
+=======
+        MClassInternalValue mClassInternalValue = new MClassInternalValue();
+        mClassInternalValue.newImportJavaUtil();
+>>>>>>> Add structure which contains list of macros and the context associated
 
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
@@ -76,6 +81,7 @@ public class UtilsGenerationWalker
             mCannotModify.newPackageDeclaration(destinationPackage);
             mObjectMacroException.newPackageDeclaration(destinationPackage);
 <<<<<<< HEAD
+<<<<<<< HEAD
             mClassInternalValue.newPackageDeclaration(destinationPackage);
             mSuperDirective.newPackageDeclaration(destinationPackage);
             mClassAfterLast.newPackageDeclaration(destinationPackage);
@@ -85,6 +91,9 @@ public class UtilsGenerationWalker
             mClassBuildState.newPackageDeclaration(destinationPackage);
 =======
 >>>>>>> Moved utils files for generation to another walker
+=======
+            mClassInternalValue.newPackageDeclaration(destinationPackage);
+>>>>>>> Add structure which contains list of macros and the context associated
         }
 
         GenerationUtils.writeFile(this.packageDirectory,"Context.java", mContext.toString());
@@ -98,6 +107,7 @@ public class UtilsGenerationWalker
         GenerationUtils
                 .writeFile(this.packageDirectory,"ObjectMacroException.java", mObjectMacroException.toString());
 <<<<<<< HEAD
+<<<<<<< HEAD
         GenerationUtils.writeFile(this.packageDirectory, "InternalValue.java", mClassInternalValue.toString());
         GenerationUtils.writeFile(this.packageDirectory, "Directive.java", mSuperDirective.toString());
         GenerationUtils.writeFile(this.packageDirectory, "DAfterLast.java", mClassAfterLast.toString());
@@ -107,6 +117,9 @@ public class UtilsGenerationWalker
 
         GenerationUtils.writeFile(this.packageDirectory, "BuildState.java", mClassBuildState.toString());
 =======
+=======
+        GenerationUtils.writeFile(this.packageDirectory, "InternalValue.java", mClassInternalValue.toString());
+>>>>>>> Add structure which contains list of macros and the context associated
 
 >>>>>>> Moved utils files for generation to another walker
     }

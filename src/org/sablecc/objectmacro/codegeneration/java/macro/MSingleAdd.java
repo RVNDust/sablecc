@@ -2,19 +2,20 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
-import java.util.*;
-
 public class MSingleAdd {
 
   private final String pMacroName;
   private final String pParamName;
   private final MSingleAdd mSingleAdd = this;
+<<<<<<< HEAD
   private final List<Object> eIsBuilt = new LinkedList<Object>();
 <<<<<<< HEAD
 =======
   private final List<Object> eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart = new LinkedList<Object>();
   private final List<Object> eSetInternal = new LinkedList<Object>();
 >>>>>>> AddAll and single adds with static overloads
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
 
   public MSingleAdd(String pMacroName, String pParamName) {
     if(pMacroName == null) throw new NullPointerException();
@@ -23,6 +24,7 @@ public class MSingleAdd {
     this.pParamName = pParamName;
   }
 
+<<<<<<< HEAD
   public MIsBuilt newIsBuilt(String pMacroName) {
     MIsBuilt lIsBuilt = new MIsBuilt(pMacroName);
     this.eIsBuilt.add(lIsBuilt);
@@ -68,6 +70,8 @@ public class MSingleAdd {
   }
 
 >>>>>>> AddAll and single adds with static overloads
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
   String pMacroName() {
     return this.pMacroName;
   }
@@ -108,6 +112,7 @@ public class MSingleAdd {
 <<<<<<< HEAD
 =======
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 >>>>>>> AddAll and single adds with static overloads
     sb.append("        ");
     for(Object oIsBuilt : this.eIsBuilt) {
@@ -134,6 +139,8 @@ public class MSingleAdd {
     }
 >>>>>>> AddAll and single adds with static overloads
     sb.append(System.getProperty("line.separator"));
+=======
+>>>>>>> Add structure which contains list of macros and the context associated
     sb.append("        this.list_");
     sb.append(rParamName());
     sb.append(".add(macro);");
