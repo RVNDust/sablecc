@@ -21,6 +21,7 @@ public class MInitInternalsCall {
   private final List<Object> eContextArg = new LinkedList<Object>();
 
   MInitInternalsCall(String pParamName) {
+<<<<<<< HEAD
 =======
 
   public MInitInternalsCall(String pParamName) {
@@ -30,6 +31,8 @@ public class MInitInternalsCall {
 
   public MInitInternalsCall(String pParamName) {
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     if(pParamName == null) throw new NullPointerException();
     this.pParamName = pParamName;
   }
@@ -62,10 +65,14 @@ public class MInitInternalsCall {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("        init");
 =======
     sb.append("init");
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
+=======
+    sb.append("        init");
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append(rParamName());
     sb.append("Internals(");
     if(this.eContextArg.size() == 0) {
@@ -77,6 +84,7 @@ public class MInitInternalsCall {
     sb.append(");");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("        ");
 =======
     sb.append("init");
@@ -86,6 +94,9 @@ public class MInitInternalsCall {
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
 =======
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
+=======
+    sb.append("        ");
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     return sb.toString();
   }
 

@@ -14,6 +14,7 @@ public class MMacroBuilder {
   private final List<Object> eContextParam = new LinkedList<Object>();
   private final List<Object> eContextBuildState = new LinkedList<Object>();
   private final List<Object> eNewBuildState = new LinkedList<Object>();
+<<<<<<< HEAD
   private final List<Object> eStringPart_ParamInsertPart_EolPart_InsertMacroPart = new LinkedList<Object>();
   private final List<Object> eInitDirectivesCall = new LinkedList<Object>();
   private final List<Object> eInitInternalsCall = new LinkedList<Object>();
@@ -43,7 +44,11 @@ public class MMacroBuilder {
   private final List<Object> eContextBuildState = new LinkedList<Object>();
   private final List<Object> eNewBuildState = new LinkedList<Object>();
   private final List<Object> eInitInternalsCall = new LinkedList<Object>();
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
   private final List<Object> eStringPart_ParamInsertPart_EolPart_InsertMacroPart = new LinkedList<Object>();
+  private final List<Object> eInitDirectivesCall = new LinkedList<Object>();
+  private final List<Object> eInitInternalsCall = new LinkedList<Object>();
 
 <<<<<<< HEAD
   public MMacroBuilder() {
@@ -53,6 +58,18 @@ public class MMacroBuilder {
     if(pMacroName == null) throw new NullPointerException();
     this.pMacroName = pMacroName;
 >>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
+  }
+
+  public MInitDirectivesCall newInitDirectivesCall(String pParamName) {
+    MInitDirectivesCall lInitDirectivesCall = new MInitDirectivesCall(pParamName);
+    this.eInitDirectivesCall.add(lInitDirectivesCall);
+    return lInitDirectivesCall;
+  }
+
+  public MInitInternalsCall newInitInternalsCall(String pParamName) {
+    MInitInternalsCall lInitInternalsCall = new MInitInternalsCall(pParamName);
+    this.eInitInternalsCall.add(lInitInternalsCall);
+    return lInitInternalsCall;
   }
 
   public MPublic newPublic() {
@@ -96,12 +113,6 @@ public class MMacroBuilder {
     MNewBuildState lNewBuildState = new MNewBuildState();
     this.eNewBuildState.add(lNewBuildState);
     return lNewBuildState;
-  }
-
-  public MInitInternalsCall newInitInternalsCall(String pParamName) {
-    MInitInternalsCall lInitInternalsCall = new MInitInternalsCall(pParamName);
-    this.eInitInternalsCall.add(lInitInternalsCall);
-    return lInitInternalsCall;
   }
 
   public MStringPart newStringPart(String pString, String pIndexBuilder) {
@@ -278,6 +289,11 @@ public class MMacroBuilder {
     }
     sb.append(";");
     sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        ");
+    for(Object oInitDirectivesCall : this.eInitDirectivesCall) {
+      sb.append(oInitDirectivesCall.toString());
+    }
     sb.append(System.getProperty("line.separator"));
     sb.append("        ");
     for(Object oInitInternalsCall : this.eInitInternalsCall) {

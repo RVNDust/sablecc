@@ -21,9 +21,13 @@ import org.sablecc.exception.InternalException;
 import org.sablecc.objectmacro.exception.CompilerException;
 import org.sablecc.objectmacro.intermediate.syntax3.node.TString;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.objectmacro.util.Utils;
 =======
 >>>>>>> Moved utils files for generation to another walker
+=======
+import org.sablecc.objectmacro.util.Utils;
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
 import java.io.File;
 import java.io.FileWriter;
@@ -37,6 +41,7 @@ class GenerationUtils {
     static final String INSERT_VAR_NAME = "insert_";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     static final String SEPARATOR_DIRECTIVE = "Separator";
 
     static final String AFTER_LAST_DIRECTIVE = "AfterLast";
@@ -46,12 +51,15 @@ class GenerationUtils {
     static final String BEFORE_FIRST_DIRECTIVE = "BeforeFirst";
 =======
     static final String SEPARATOR_DIRECTIVE = "separator";
+=======
+    static final String SEPARATOR_DIRECTIVE = "Separator";
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
-    static final String AFTER_LAST_DIRECTIVE = "afterlast";
+    static final String AFTER_LAST_DIRECTIVE = "AfterLast";
 
-    static final String NONE_DIRECTIVE = "none";
+    static final String NONE_DIRECTIVE = "None";
 
-    static final String BEFORE_FIRST_DIRECTIVE = "beforefirst";
+    static final String BEFORE_FIRST_DIRECTIVE = "BeforeFirst";
 
 <<<<<<< HEAD
     /**
@@ -117,10 +125,14 @@ class GenerationUtils {
         StringBuilder macroName = new StringBuilder();
         for(TString partName : name_parts){
 <<<<<<< HEAD
+<<<<<<< HEAD
             macroName.append(Utils.toCamelCase(string(partName)));
 =======
             macroName.append(org.sablecc.objectmacro.util.Utils.toCamelCase(string(partName)));
 >>>>>>> Moved utils files for generation to another walker
+=======
+            macroName.append(Utils.toCamelCase(string(partName)));
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
         }
 
         return macroName.toString();
@@ -154,12 +166,18 @@ class GenerationUtils {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
     static String getLetterFromInteger(
             Integer i){
 
         return i > 0 && i < 27 ? String.valueOf((char) (i + 64)) : null;
     }
+<<<<<<< HEAD
 =======
 >>>>>>> Moved utils files for generation to another walker
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 }

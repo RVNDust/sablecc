@@ -48,12 +48,16 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append("    private final List<Directive> directives;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    private DNone dNone;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("    private final Context context;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -61,6 +65,8 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 =======
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append("    private final Context context;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -70,12 +76,18 @@ public class MClassInternalValue {
     sb.append("            List<Macro> macros,");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("            Context context,");
     sb.append(System.getProperty("line.separator"));
     sb.append("            List<Directive> directives){");
 =======
     sb.append("            Context context){");
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    sb.append("            Context context,");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            List<Directive> directives){");
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.macros = macros;");
@@ -83,10 +95,15 @@ public class MClassInternalValue {
     sb.append("        this.context = context;");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("        this.directives = directives;");
     sb.append(System.getProperty("line.separator"));
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    sb.append("        this.directives = directives;");
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -132,11 +149,37 @@ public class MClassInternalValue {
 =======
     sb.append("        StringBuilder sb = new StringBuilder();");
     sb.append(System.getProperty("line.separator"));
+    sb.append("        int i = 0;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        int nb_macros = this.macros.size();");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        if(this.dNone != null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            sb.append(this.dNone.apply(i, \"\", nb_macros));");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        }");
+    sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        for(Macro macro : this.macros){");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("            sb.append(macro.build(this.context));");
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    sb.append("            String expansion = macro.build(this.context);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            for(Directive directive : this.directives){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("                expansion = directive.apply(i, expansion, nb_macros);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            sb.append(expansion);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            i++;");
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
@@ -159,6 +202,9 @@ public class MClassInternalValue {
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append(System.getProperty("line.separator"));
     sb.append("    void setNone(DNone none){");
     sb.append(System.getProperty("line.separator"));
@@ -166,8 +212,11 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append("}");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));

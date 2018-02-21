@@ -73,6 +73,12 @@ public class UtilsGenerationWalker
 =======
 >>>>>>> Generate class BuildState.java
 
+        MSuperDirective mSuperDirective = new MSuperDirective();
+        MClassAfterLast mClassAfterLast = new MClassAfterLast();
+        MClassBeforeFirst mClassBeforeFirst = new MClassBeforeFirst();
+        MClassNone mClassNone = new MClassNone();
+        MClassSeparator mClassSeparator = new MClassSeparator();
+
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
             mContext.newPackageDeclaration(destinationPackage);
@@ -97,8 +103,16 @@ public class UtilsGenerationWalker
 >>>>>>> Moved utils files for generation to another walker
 =======
             mClassInternalValue.newPackageDeclaration(destinationPackage);
+<<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
+=======
+            mSuperDirective.newPackageDeclaration(destinationPackage);
+            mClassAfterLast.newPackageDeclaration(destinationPackage);
+            mClassBeforeFirst.newPackageDeclaration(destinationPackage);
+            mClassNone.newPackageDeclaration(destinationPackage);
+            mClassSeparator.newPackageDeclaration(destinationPackage);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
             mClassBuildState.newPackageDeclaration(destinationPackage);
 >>>>>>> Generate class BuildState.java
         }
@@ -126,7 +140,15 @@ public class UtilsGenerationWalker
 =======
 =======
         GenerationUtils.writeFile(this.packageDirectory, "InternalValue.java", mClassInternalValue.toString());
+<<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+        GenerationUtils.writeFile(this.packageDirectory, "Directive.java", mSuperDirective.toString());
+        GenerationUtils.writeFile(this.packageDirectory, "DAfterLast.java", mClassAfterLast.toString());
+        GenerationUtils.writeFile(this.packageDirectory, "DBeforeFirst.java", mClassBeforeFirst.toString());
+        GenerationUtils.writeFile(this.packageDirectory, "DNone.java", mClassNone.toString());
+        GenerationUtils.writeFile(this.packageDirectory, "DSeparator.java", mClassSeparator.toString());
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
 <<<<<<< HEAD
 >>>>>>> Moved utils files for generation to another walker

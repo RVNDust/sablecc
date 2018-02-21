@@ -28,6 +28,7 @@ public class MInitInternalValue {
     sb.append("Value = new InternalValue(this.list_");
     sb.append(rParamName());
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append(", this.");
     sb.append(rParamName());
     sb.append("Context, this.");
@@ -38,6 +39,13 @@ public class MInitInternalValue {
     sb.append(rParamName());
     sb.append("Context);");
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    sb.append(", this.");
+    sb.append(rParamName());
+    sb.append("Context, this.");
+    sb.append(rParamName());
+    sb.append("Directives);");
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

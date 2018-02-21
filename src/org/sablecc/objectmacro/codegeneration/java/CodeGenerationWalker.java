@@ -234,20 +234,22 @@ public class CodeGenerationWalker
 
     private List<Integer> createdInserts = new ArrayList<>();
 
-    private MSeparator currentSeparator;
+    private MParamMacroRefBuilder currentParamMacroRefBuilder;
 
-    private MAfterLast currentAfterLast;
+    private MInitDirectives currentInitDirectives;
 
-    private MBeforeFirst currentBeforeFirst;
+    private MNewDirective currentDirective;
 
-    private MNone currentNone;
-
+<<<<<<< HEAD
 <<<<<<< HEAD
     private MParamMacroRef currentParamMacroRef;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
     private MParamMacroRefBuilder currentParamMacroRefBuilder;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+    private MSetNoneDirective mSetNoneDirective;
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
     //Used only to check whether its a parameter or an internal, for parameter its set but for internal its null
     private String currentParamName;
@@ -272,6 +274,7 @@ public class CodeGenerationWalker
         this.macros = macros;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -341,6 +344,8 @@ public class CodeGenerationWalker
     }
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     @Override
     public void inAIntermediateRepresentation(
             AIntermediateRepresentation node) {
@@ -581,11 +586,6 @@ public class CodeGenerationWalker
             this.currentMacroToBuild.newInternalMacroRefBuilder(paramName);
             this.currentMacroToBuild.newInternalMacroRef(paramName);
 
-            //Initialize directives before type because of conflicts with stringBuilder
-            for (PDirective directive : node.getDirectives()) {
-                directive.apply(this);
-            }
-
             this.indexBuilder = 0;
 <<<<<<< HEAD
 
@@ -707,8 +707,8 @@ public class CodeGenerationWalker
 
             this.currentMacroToBuild.newParamMacroField(paramName);
             this.currentMacroToBuild.newContextField(paramName);
+            this.currentMacroToBuild.newDirectivesField(paramName);
             this.currentMacroToBuild.newInternalMacrosValueField(paramName);
-            MInitInternalsCall mInitInternalsCall = this.currentMacroBuilder.newInitInternalsCall(paramName);
 
             this.currentParamMacroRefBuilder = this.currentMacroToBuild.newParamMacroRefBuilder(
                     paramName, String.valueOf(this.indexBuilder));
@@ -724,6 +724,8 @@ public class CodeGenerationWalker
 >>>>>>> Add structure which contains list of macros and the context associated
             this.currentMacroToBuild.newParamMacroRef(paramName);
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+
+            this.currentInitDirectives = this.currentMacroToBuild.newInitDirectives(paramName);
 
             for (PDirective directive : node.getDirectives()) {
                 directive.apply(this);
@@ -743,6 +745,7 @@ public class CodeGenerationWalker
                                                 .newApplyInternalsInitializer(paramName);
 
             this.contextNames.add(this.currentContextName);
+<<<<<<< HEAD
             this.currentConstructor.newInitMacroParam(paramName);
             this.currentConstructor.newInitInternalValue(paramName);
             this.currentMacroBuilder.newInitDirectivesCall(paramName);
@@ -785,6 +788,11 @@ public class CodeGenerationWalker
 <<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
+=======
+            this.currentConstructor.newInitMacroParam(paramName);
+            this.currentConstructor.newInitInternalValue(paramName);
+            this.currentMacroBuilder.newInitDirectivesCall(paramName);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
             if(this.currentMacroHasInternals){
                 mInitInternalsCall.newContextArg();
@@ -825,6 +833,7 @@ public class CodeGenerationWalker
         this.createdInserts = new ArrayList<>();
         this.currentParamMacroRefBuilder = null;
         this.currentInitDirectives = null;
+<<<<<<< HEAD
 =======
     public void outAParam(AParam node) {
 =======
@@ -853,12 +862,15 @@ public class CodeGenerationWalker
 >>>>>>> Fix index inserts when creating 2 inserts in 2 different stringValue of a same macro reference
         this.currentParamMacroRefBuilder = null;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     }
 
     @Override
     public void inADirective(
             ADirective node) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         String directive_name = GenerationUtils.buildNameCamelCase(node.getNames());
@@ -919,6 +931,19 @@ public class CodeGenerationWalker
             default:
                 throw new InternalException("case unhandled");
 >>>>>>> Clean up code, add comments
+=======
+        String directive_name = GenerationUtils.buildNameCamelCase(node.getNames());
+
+        if(directive_name.equals(GenerationUtils.NONE_DIRECTIVE)){
+            this.currentMacroToBuild.newNoneDirectiveField(this.currentParamName);
+            this.currentParamMacroRefBuilder.newApplyNoneDirective();
+            this.mSetNoneDirective = this.currentInitDirectives
+                    .newSetNoneDirective(this.currentParamName, this.indexBuilder.toString());
+        }
+        else{
+            this.currentDirective = this.currentInitDirectives
+                    .newNewDirective(this.currentParamName, directive_name, this.indexBuilder.toString());
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
         }
     }
 
@@ -926,6 +951,7 @@ public class CodeGenerationWalker
     public void outADirective(
             ADirective node) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         this.indexBuilder++;
         this.currentDirective = null;
@@ -936,6 +962,11 @@ public class CodeGenerationWalker
         this.currentBeforeFirst = null;
         this.currentNone = null;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+        this.indexBuilder++;
+        this.currentDirective = null;
+        this.mSetNoneDirective = null;
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     }
 
     @Override
@@ -1059,6 +1090,7 @@ public class CodeGenerationWalker
         }
         else{
             index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+<<<<<<< HEAD
 
             //Avoid declaring stringbuilder of the same name
             while(this.createdBuilders.contains(index_builder)){
@@ -1103,11 +1135,13 @@ public class CodeGenerationWalker
         }
         else{
             index_builder = getLetterFromInteger(this.indexBuilder);
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
             //Avoid declaring stringbuilder of the same name
             while(this.createdBuilders.contains(index_builder)){
                 this.indexBuilder++;
-                index_builder = getLetterFromInteger(this.indexBuilder);
+                index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
             }
 
             this.currentInsertMacroPart.newInitStringBuilder(index_builder);
@@ -1175,12 +1209,17 @@ public class CodeGenerationWalker
             String string = GenerationUtils.escapedString(node.getString());
 
             if(this.currentInsertMacroPart != null){
+<<<<<<< HEAD
                 index_builder = getLetterFromInteger(this.indexBuilder);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+                index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                 this.currentInsertMacroPart.newStringPart(
                         string,
                         index_builder);
             }
+<<<<<<< HEAD
 <<<<<<< HEAD
             else if(this.currentDirective != null){
                 this.currentDirective.newStringPart(
@@ -1208,6 +1247,15 @@ public class CodeGenerationWalker
             else if(this.currentSeparator != null){
                 this.currentSeparator.newStringPart(
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            else if(this.currentDirective != null){
+                this.currentDirective.newStringPart(
+                        string,
+                        index_builder);
+            }
+            else if(this.mSetNoneDirective != null){
+                this.mSetNoneDirective.newStringPart(
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                         string,
                         index_builder);
             }
@@ -1233,6 +1281,7 @@ public class CodeGenerationWalker
         else {
             if(this.currentInsertMacroPart != null){
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+<<<<<<< HEAD
 =======
 
 =======
@@ -1253,10 +1302,13 @@ public class CodeGenerationWalker
             if(this.currentInsertMacroPart != null){
                 index_builder = getLetterFromInteger(this.indexBuilder);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                 this.currentInsertMacroPart.newParamInsertPart(
                         param_name,
                         index_builder);
             }
+<<<<<<< HEAD
 <<<<<<< HEAD
             else if(this.currentDirective != null){
                 this.currentDirective.newParamInsertPart(
@@ -1284,6 +1336,15 @@ public class CodeGenerationWalker
             else if(this.currentSeparator != null){
                 this.currentSeparator.newParamInsertPart(
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            else if(this.currentDirective != null){
+                this.currentDirective.newParamInsertPart(
+                        param_name,
+                        index_builder);
+            }
+            else if(this.mSetNoneDirective != null){
+                this.mSetNoneDirective.newParamInsertPart(
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                         param_name,
                         index_builder);
             }
@@ -1320,6 +1381,7 @@ public class CodeGenerationWalker
 
             if(this.currentInsertMacroPart != null){
 <<<<<<< HEAD
+<<<<<<< HEAD
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
                 this.currentInsertMacroPart.newEolPart(
                         index_builder);
@@ -1331,21 +1393,26 @@ public class CodeGenerationWalker
                 this.mSetNoneDirective.newEolPart(index_builder);
 =======
                 index_builder = getLetterFromInteger(this.indexBuilder);
+=======
+                index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                 this.currentInsertMacroPart.newEolPart(
                         index_builder);
             }
-            else if(this.currentNone != null){
-                this.currentNone.newEolPart(index_builder);
+            else if(this.currentDirective != null){
+                this.currentDirective.newEolPart(index_builder);
             }
-            else if(this.currentBeforeFirst != null){
-                this.currentBeforeFirst.newEolPart(index_builder);
-            }
+<<<<<<< HEAD
             else if(this.currentAfterLast != null){
                 this.currentAfterLast.newEolPart(index_builder);
             }
             else if(this.currentSeparator != null){
                 this.currentSeparator.newEolPart(index_builder);
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            else if(this.mSetNoneDirective != null){
+                this.mSetNoneDirective.newEolPart(index_builder);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
             }
         }
     }
@@ -1403,6 +1470,7 @@ public class CodeGenerationWalker
         else{
             if(tempInsertMacroPart != null){
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+<<<<<<< HEAD
 
 =======
 
@@ -1416,6 +1484,8 @@ public class CodeGenerationWalker
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
                 index_builder = getLetterFromInteger(this.indexBuilder);
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 
 >>>>>>> fix creating same string builder in macro body
                 this.currentInsertMacroPart =
@@ -1428,6 +1498,7 @@ public class CodeGenerationWalker
 
             }
             else if(this.currentDirective != null){
+<<<<<<< HEAD
                 this.currentInsertMacroPart =
                     this.currentDirective.newInsertMacroPart(macro_name,
                             index_builder,
@@ -1454,31 +1525,19 @@ public class CodeGenerationWalker
 >>>>>>> fix creating same string builder in macro body
             }
             else if(this.currentNone != null){
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                 this.currentInsertMacroPart =
-                    this.currentNone.newInsertMacroPart(macro_name,
+                    this.currentDirective.newInsertMacroPart(macro_name,
                             index_builder,
                             index_insert);
 
             }
-            else if(this.currentBeforeFirst != null){
+            else if(this.mSetNoneDirective != null){
                 this.currentInsertMacroPart =
-                        this.currentBeforeFirst.newInsertMacroPart(macro_name,
-                            index_builder,
-                            index_insert);
-
-            }
-            else if(this.currentAfterLast != null){
-                this.currentInsertMacroPart =
-                    this.currentAfterLast.newInsertMacroPart(macro_name,
-                            index_builder,
-                            index_insert);
-
-            }
-            else if(this.currentSeparator != null){
-                this.currentInsertMacroPart =
-                    this.currentSeparator.newInsertMacroPart(macro_name,
-                            index_builder,
-                            index_insert);
+                        this.mSetNoneDirective.newInsertMacroPart(macro_name,
+                                index_builder,
+                                index_insert);
             }
         }
         this.createdInserts.add(this.indexInsert);

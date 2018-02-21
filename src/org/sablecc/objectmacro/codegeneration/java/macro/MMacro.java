@@ -12,6 +12,7 @@ public class MMacro {
   private final List<Object> eImportJavaUtil = new LinkedList<Object>();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField = new LinkedList<Object>();
   private final List<Object> eContextField = new LinkedList<Object>();
   private final List<Object> eConstructor = new LinkedList<Object>();
@@ -28,12 +29,16 @@ public class MMacro {
 =======
   private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField = new LinkedList<Object>();
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+  private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField = new LinkedList<Object>();
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
   private final List<Object> eContextField = new LinkedList<Object>();
   private final List<Object> eConstructor = new LinkedList<Object>();
   private final List<Object> eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter = new LinkedList<Object>();
   private final List<Object> eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder = new LinkedList<Object>();
   private final List<Object> eParamStringRef_ParamMacroRef_InternalMacroRef = new LinkedList<Object>();
   private final List<Object> eInitInternalsMethod = new LinkedList<Object>();
+  private final List<Object> eInitDirectives = new LinkedList<Object>();
   private final List<Object> eRedefinedApplyInitializer = new LinkedList<Object>();
   private final List<Object> eMacroBuilder = new LinkedList<Object>();
 <<<<<<< HEAD
@@ -63,6 +68,7 @@ public class MMacro {
     MParamMacroField lParamMacroField = new MParamMacroField(pName);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamMacroField);
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lParamMacroField);
@@ -70,11 +76,15 @@ public class MMacro {
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lParamMacroField);
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamMacroField);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     return lParamMacroField;
   }
 
   public MParamStringField newParamStringField(String pName) {
     MParamStringField lParamStringField = new MParamStringField(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamStringField);
@@ -84,11 +94,15 @@ public class MMacro {
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lParamStringField);
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamStringField);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     return lParamStringField;
   }
 
   public MInternalMacroField newInternalMacroField(String pName) {
     MInternalMacroField lInternalMacroField = new MInternalMacroField(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalMacroField);
@@ -98,11 +112,15 @@ public class MMacro {
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lInternalMacroField);
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalMacroField);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     return lInternalMacroField;
   }
 
   public MInternalStringField newInternalStringField(String pName) {
     MInternalStringField lInternalStringField = new MInternalStringField(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalStringField);
@@ -135,16 +153,34 @@ public class MMacro {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lInternalStringField);
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalStringField);
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     return lInternalStringField;
   }
 
   public MInternalMacrosValueField newInternalMacrosValueField(String pParamName) {
     MInternalMacrosValueField lInternalMacrosValueField = new MInternalMacrosValueField(pParamName);
-    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.add(lInternalMacrosValueField);
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalMacrosValueField);
     return lInternalMacrosValueField;
   }
 
+<<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+  public MDirectivesField newDirectivesField(String pParamName) {
+    MDirectivesField lDirectivesField = new MDirectivesField(pParamName);
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lDirectivesField);
+    return lDirectivesField;
+  }
+
+  public MNoneDirectiveField newNoneDirectiveField(String pParamName) {
+    MNoneDirectiveField lNoneDirectiveField = new MNoneDirectiveField(pParamName);
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lNoneDirectiveField);
+    return lNoneDirectiveField;
+  }
+
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
   public MContextField newContextField(String pName) {
     MContextField lContextField = new MContextField(pName);
     this.eContextField.add(lContextField);
@@ -265,6 +301,7 @@ public class MMacro {
     return lInitDirectives;
   }
 
+<<<<<<< HEAD
 =======
     this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.add(lInternalStringSetter);
 =======
@@ -334,6 +371,8 @@ public class MMacro {
 >>>>>>> AddAll and single adds with static overloads
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
   public MRedefinedApplyInitializer newRedefinedApplyInitializer(String pName) {
     MRedefinedApplyInitializer lRedefinedApplyInitializer = new MRedefinedApplyInitializer(pName);
     this.eRedefinedApplyInitializer.add(lRedefinedApplyInitializer);
@@ -402,6 +441,7 @@ public class MMacro {
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.size() > 0) {
 =======
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.size() > 0) {
@@ -409,10 +449,14 @@ public class MMacro {
 =======
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.size() > 0) {
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.size() > 0) {
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField) {
@@ -422,12 +466,16 @@ public class MMacro {
 =======
       for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField) {
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+      for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField) {
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
         if(first) {
           first = false;
         }
         else {
           sb.append(System.getProperty("line.separator"));
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.toString());
@@ -437,6 +485,9 @@ public class MMacro {
 =======
         sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField.toString());
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+        sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.toString());
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
       }
     }
     if(this.eContextField.size() > 0) {
@@ -608,7 +659,21 @@ public class MMacro {
         sb.append(oInitInternalsMethod.toString());
       }
     }
-    sb.append(System.getProperty("line.separator"));
+    if(this.eInitDirectives.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    {
+      boolean first = true;
+      for(Object oInitDirectives : this.eInitDirectives) {
+        if(first) {
+          first = false;
+        }
+        else {
+          sb.append(System.getProperty("line.separator"));
+        }
+        sb.append(oInitDirectives.toString());
+      }
+    }
     for(Object oRedefinedApplyInitializer : this.eRedefinedApplyInitializer) {
       sb.append(oRedefinedApplyInitializer.toString());
     }

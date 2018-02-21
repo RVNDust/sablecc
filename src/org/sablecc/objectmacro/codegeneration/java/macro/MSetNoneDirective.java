@@ -62,12 +62,18 @@ public class MSetNoneDirective {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MSetNoneDirective.java
+<<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MSetNoneDirective.java
     sb.append("        StringBuilder sb");
     sb.append(rIndexBuilder());
     sb.append(" = new StringBuilder();");
 =======
     sb.append("if(i == macros.size()){");
 >>>>>>> Removed in constructor initialization and add lazy initialization:src/org/sablecc/objectmacro/codegeneration/java/macro/MAfterLast.java
+=======
+    sb.append("        StringBuilder sb");
+    sb.append(rIndexBuilder());
+    sb.append(" = new StringBuilder();");
+>>>>>>> Add directives into InternalValue and update directives in order to easily add new directives:src/org/sablecc/objectmacro/codegeneration/java/macro/MSetNoneDirective.java
     sb.append(System.getProperty("line.separator"));
     for(Object oStringPart_ParamInsertPart_EolPart_InsertMacroPart : this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart) {
       sb.append(oStringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());
