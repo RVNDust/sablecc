@@ -57,6 +57,7 @@ public class UtilsGenerationWalker
         MClassInternalValue mClassInternalValue = new MClassInternalValue();
         mClassInternalValue.newImportJavaUtil();
         MClassBuildState mClassBuildState = new MClassBuildState();
+<<<<<<< HEAD
 
         MSuperDirective mSuperDirective = new MSuperDirective();
         MClassAfterLast mClassAfterLast = new MClassAfterLast();
@@ -69,6 +70,8 @@ public class UtilsGenerationWalker
         MClassInternalValue mClassInternalValue = new MClassInternalValue();
         mClassInternalValue.newImportJavaUtil();
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Generate class BuildState.java
 
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
@@ -83,6 +86,7 @@ public class UtilsGenerationWalker
 <<<<<<< HEAD
 <<<<<<< HEAD
             mClassInternalValue.newPackageDeclaration(destinationPackage);
+<<<<<<< HEAD
             mSuperDirective.newPackageDeclaration(destinationPackage);
             mClassAfterLast.newPackageDeclaration(destinationPackage);
             mClassBeforeFirst.newPackageDeclaration(destinationPackage);
@@ -94,6 +98,9 @@ public class UtilsGenerationWalker
 =======
             mClassInternalValue.newPackageDeclaration(destinationPackage);
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+            mClassBuildState.newPackageDeclaration(destinationPackage);
+>>>>>>> Generate class BuildState.java
         }
 
         GenerationUtils.writeFile(this.packageDirectory,"Context.java", mContext.toString());
@@ -121,6 +128,10 @@ public class UtilsGenerationWalker
         GenerationUtils.writeFile(this.packageDirectory, "InternalValue.java", mClassInternalValue.toString());
 >>>>>>> Add structure which contains list of macros and the context associated
 
+<<<<<<< HEAD
 >>>>>>> Moved utils files for generation to another walker
+=======
+        GenerationUtils.writeFile(this.packageDirectory, "BuildState.java", mClassBuildState.toString());
+>>>>>>> Generate class BuildState.java
     }
 }
