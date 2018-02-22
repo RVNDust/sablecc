@@ -104,10 +104,14 @@ public class MSingleAdd {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    public void add");
 =======
     sb.append("    public void addP");
 >>>>>>> AddAll and single adds with static overloads
+=======
+    sb.append("    public void add");
+>>>>>>> Removed letter P from add and addAll methods name
     sb.append(rParamName());
     sb.append("(M");
     sb.append(rMacroName());

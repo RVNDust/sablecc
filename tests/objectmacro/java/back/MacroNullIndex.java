@@ -74,10 +74,16 @@ public class MacroNullIndex {
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
             MC mc = new MC();
+<<<<<<< HEAD
             ma.addPZ(mc);
             ma.addPZ(mc);
             ma.addAllPY(macros);
 >>>>>>> Add test for dynamic cyclic reference verification
+=======
+            ma.addZ(mc);
+            ma.addZ(mc);
+            ma.addAllY(macros);
+>>>>>>> Removed letter P from add and addAll methods name
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

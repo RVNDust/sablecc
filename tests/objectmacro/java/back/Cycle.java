@@ -46,16 +46,22 @@ public class Cycle {
         MG g = new MG();
         MH h = new MH();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Removed letter P from add and addAll methods name
         f.addY(h);
         f.addX(g);
         f.addX(g);
         h.addLala(f);
+<<<<<<< HEAD
 =======
         f.addPY(h);
         f.addPX(g);
         f.addPX(g);
         h.addPLala(f);
 >>>>>>> Add test for dynamic cyclic reference verification
+=======
+>>>>>>> Removed letter P from add and addAll methods name
 
         try{
             System.out.print(f.build());

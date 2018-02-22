@@ -40,10 +40,14 @@ public class MAddAll {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    public void addAll");
 =======
     sb.append("    public void addAllP");
 >>>>>>> AddAll and single adds with static overloads
+=======
+    sb.append("    public void addAll");
+>>>>>>> Removed letter P from add and addAll methods name
     sb.append(rParamName());
     sb.append("(List<Macro> macros){");
     sb.append(System.getProperty("line.separator"));

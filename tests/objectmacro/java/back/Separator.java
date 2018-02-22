@@ -46,10 +46,16 @@ public class Separator {
 >>>>>>> Add back end tests
 =======
         MCommaSeparator mCommaSeparator = new MCommaSeparator();
+<<<<<<< HEAD
         mCommaSeparator.addPX(mEmptyMacro);
         mCommaSeparator.addPX(mEmptyMacro);
         mCommaSeparator.addPX(mEmptyMacro);
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+        mCommaSeparator.addX(mEmptyMacro);
+        mCommaSeparator.addX(mEmptyMacro);
+        mCommaSeparator.addX(mEmptyMacro);
+>>>>>>> Removed letter P from add and addAll methods name
         System.out.println(mCommaSeparator.build());
     }
 

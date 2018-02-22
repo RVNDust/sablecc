@@ -62,6 +62,7 @@ public class ParameterNull {
 =======
 
         try{
+<<<<<<< HEAD
             ma.addPZ(null);
 <<<<<<< HEAD
             ma.setPY(macros);
@@ -69,6 +70,10 @@ public class ParameterNull {
 =======
             ma.addAllPY(macros);
 >>>>>>> Add test for dynamic cyclic reference verification
+=======
+            ma.addZ(null);
+            ma.addAllY(macros);
+>>>>>>> Removed letter P from add and addAll methods name
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

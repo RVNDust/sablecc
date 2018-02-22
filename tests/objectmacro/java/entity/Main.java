@@ -130,26 +130,30 @@ public class Main {
         attributes[0] = createId("id_" + entity_name.toLowerCase(), "AUTO");
 =======
         MEntity mEntity = new MEntity(entity_name);
+<<<<<<< HEAD
         mEntity.addPPackage(new MPackageDeclaration("entities"));
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+        mEntity.addPackage(new MPackageDeclaration("entities"));
+>>>>>>> Removed letter P from add and addAll methods name
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
         MGetter getter = new MGetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
 
-        mEntity.addPAttributes(createId("id_" + entity_name.toLowerCase(), "AUTO"));
-        mEntity.addPAccessors(setter);
-        mEntity.addPAccessors(getter);
+        mEntity.addAttributes(createId("id_" + entity_name.toLowerCase(), "AUTO"));
+        mEntity.addAccessors(setter);
+        mEntity.addAccessors(getter);
 
-        mEntity.addPAttributes(createAttribute("A", Integer.class.getSimpleName(), false));
+        mEntity.addAttributes(createAttribute("A", Integer.class.getSimpleName(), false));
         setter = new MSetter("A", Integer.class.getSimpleName());
         getter = new MGetter("A", Integer.class.getSimpleName());
-        mEntity.addPAccessors(setter);
-        mEntity.addPAccessors(getter);
+        mEntity.addAccessors(setter);
+        mEntity.addAccessors(getter);
 
-        mEntity.addPAttributes(createAttribute("B", String.class.getSimpleName(), true));
+        mEntity.addAttributes(createAttribute("B", String.class.getSimpleName(), true));
         setter = new MSetter("B", String.class.getSimpleName());
         getter = new MGetter("B", String.class.getSimpleName());
-        mEntity.addPAccessors(setter);
-        mEntity.addPAccessors(getter);
+        mEntity.addAccessors(setter);
+        mEntity.addAccessors(getter);
 
 <<<<<<< HEAD
         mEntity.setPRelationships(new ArrayList<>());
@@ -184,6 +188,7 @@ public class Main {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         mAttribute.addNotNull(new MNotNull());
 
         if (mIdIncrementationStrategy == null) {
@@ -199,14 +204,17 @@ public class Main {
         Macro[] id_related;
 =======
         mAttribute.addPNotNull(new MNotNull());
+=======
+        mAttribute.addNotNull(new MNotNull());
+>>>>>>> Removed letter P from add and addAll methods name
 
 >>>>>>> Update tests to be adapted to the lazy initialization
         if (mIdIncrementationStrategy == null) {
-            mAttribute.addPId(mPrimaryKey);
+            mAttribute.addId(mPrimaryKey);
         }
         else{
-            mAttribute.addPId(mPrimaryKey);
-            mAttribute.addPId(mIdIncrementationStrategy);
+            mAttribute.addId(mPrimaryKey);
+            mAttribute.addId(mIdIncrementationStrategy);
         }
 
 <<<<<<< HEAD
@@ -239,7 +247,7 @@ public class Main {
 
         MAttribute mAttribute = new MAttribute(name, type);
         if(notNull) {
-            mAttribute.addPNotNull(new MNotNull());
+            mAttribute.addNotNull(new MNotNull());
         }
 
 <<<<<<< HEAD

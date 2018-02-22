@@ -81,6 +81,7 @@ public class Main {
         macros.add(new MB("First argument in MB2"));
 
         try{
+<<<<<<< HEAD
             mb.addPS(new MC());
             ma.addPZ(new MC());
             ma.addAllPY(macros);
@@ -95,6 +96,14 @@ public class Main {
 =======
             mb2.addPS(new MC());
 >>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
+=======
+            mb.addS(new MC());
+            ma.addZ(new MC());
+            ma.addAllY(macros);
+            ma.addY(mb);
+            ma.addZ(new MC());
+            mb2.addS(new MC());
+>>>>>>> Removed letter P from add and addAll methods name
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){
