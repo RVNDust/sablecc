@@ -33,6 +33,7 @@ Macro semicolon_separator
     Internal
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         x : empty_macro;
 =======
         x : empty_macro, separator="; ";
@@ -40,6 +41,9 @@ Macro semicolon_separator
 =======
         x : empty_macro;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+        x : empty_macro, separator="; ";
+>>>>>>> Changement Objectmacro-back
 {Begin}
 Le corps de C : {x}
 {End}
@@ -54,6 +58,7 @@ Macro a
 {Begin}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ============= A ===============
 Y : {y}
 =======
@@ -66,10 +71,14 @@ Y : {y}
 =======
 Y : {y}
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+{y}
+>>>>>>> Changement Objectmacro-back
 {End}
 
 Macro b
     Param
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         o : String;
@@ -88,9 +97,13 @@ S : {s}
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+        x : String;
+>>>>>>> Changement Objectmacro-back
     Internal
-        p : c;
+        y : c("first argument of c in b", x), separator="\n";
 {Begin}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 {y}
@@ -108,10 +121,14 @@ S : {s}
 P : {p}
 S : {s}
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+{y}
+>>>>>>> Changement Objectmacro-back
 {End}
 
 Macro c
     Internal
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         q : String;
@@ -141,6 +158,12 @@ R : {r}
 >>>>>>> Remove arguments in macro references in internal declaration
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+        y : String;
+        z : String;
+{Begin}
+{y} {z}
+>>>>>>> Changement Objectmacro-back
 {End}
 
 Macro d
@@ -154,6 +177,7 @@ Macro d
 
 Macro e
     Internal
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         s : String;
@@ -275,11 +299,18 @@ Macro i
     Param
         y : k("lala");
         z : k("On est dans i"), j(y);
+=======
+        x : String;
+        y : String;
+        z : String;
+>>>>>>> Changement Objectmacro-back
 {Begin}
+{x}
 {y}
 {z}
 {End}
 
+<<<<<<< HEAD
 Macro j
     Internal
         y : k;
@@ -296,3 +327,6 @@ Macro k
 
 
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+#{Insert: c("y2 ", "")}
+>>>>>>> Changement Objectmacro-back

@@ -37,6 +37,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 /sablecc.org.iml
+<<<<<<< HEAD
 /tests/objectmacro/java/*/macro/
 /tests/objectmacro/common/intermediate/
 <<<<<<< HEAD
@@ -47,3 +48,5 @@
 >>>>>>> Add sablecc.org.iml to gitignore
 =======
 >>>>>>> Git now ignores macro files in tests directory and intermediate files
+=======
+>>>>>>> Changement Objectmacro-back

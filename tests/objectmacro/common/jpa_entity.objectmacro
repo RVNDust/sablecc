@@ -145,6 +145,7 @@ Macro one_to_one
     Param
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         column : String;
         join_column : join_column(column);
     Internal
@@ -162,6 +163,13 @@ Macro one_to_one
     Internal
         directives : fetch_strategy, mapped_by;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+        fetch_type : String;
+        column : String;
+        join_column : join_column(column);
+    Internal
+        directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
+>>>>>>> Changement Objectmacro-back
 {Begin}
 @OneToOne({directives})
 {join_column}
@@ -170,6 +178,7 @@ Macro one_to_one
 Macro many_to_many
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -182,6 +191,12 @@ Macro many_to_many
     Internal
         directives : fetch_strategy, mapped_by;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+    Param
+        fetch_type : String;
+    Internal
+        directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
+>>>>>>> Changement Objectmacro-back
 {Begin}
 @ManyToMany({directives})
 {End}
@@ -189,6 +204,7 @@ Macro many_to_many
 Macro many_to_one
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -201,6 +217,12 @@ Macro many_to_one
     Internal
         directives : fetch_strategy, mapped_by;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+    Param
+        fetch_type : String;
+    Internal
+        directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
+>>>>>>> Changement Objectmacro-back
 {Begin}
 @ManyToOne({directives})
 {End}
@@ -208,6 +230,7 @@ Macro many_to_one
 Macro one_to_many
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -220,6 +243,12 @@ Macro one_to_many
     Internal
         directives : fetch_strategy, mapped_by;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+    Param
+        fetch_type : String;
+    Internal
+        directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
+>>>>>>> Changement Objectmacro-back
 {Begin}
 @OneToMany({directives})
 {End}

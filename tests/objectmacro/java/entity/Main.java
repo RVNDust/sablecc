@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
 /* This file is part of SableCC ( http://sablecc.org ).
@@ -20,12 +21,15 @@
  */
 
 <<<<<<< HEAD
+=======
+>>>>>>> Changement Objectmacro-back
 package entity;
 
 import entity.macro.*;
 
 import java.io.File;
 import java.io.FileWriter;
+<<<<<<< HEAD
 import java.util.ArrayList;
 =======
 =======
@@ -42,6 +46,9 @@ import java.io.IOException;
 =======
 import java.util.ArrayList;
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+import java.io.IOException;
+>>>>>>> Changement Objectmacro-back
 
 public class Main {
 
@@ -100,6 +107,7 @@ public class Main {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         MEntity mEntity = new MEntity(entity_name);
         mEntity.addPackage(new MPackageDeclaration("entities"));
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
@@ -123,11 +131,14 @@ public class Main {
 
         return mEntity;
 =======
+=======
+>>>>>>> Changement Objectmacro-back
         MPackageDeclaration mPackageDeclaration = new MPackageDeclaration("entities");
         MAttribute[] attributes = new MAttribute[3];
         Macro[] accessors = new Macro[6];
 
         attributes[0] = createId("id_" + entity_name.toLowerCase(), "AUTO");
+<<<<<<< HEAD
 =======
         MEntity mEntity = new MEntity(entity_name);
 <<<<<<< HEAD
@@ -136,25 +147,26 @@ public class Main {
 =======
         mEntity.addPackage(new MPackageDeclaration("entities"));
 >>>>>>> Removed letter P from add and addAll methods name
+=======
+>>>>>>> Changement Objectmacro-back
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
         MGetter getter = new MGetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
+        accessors[0] = setter;
+        accessors[1] = getter;
 
-        mEntity.addAttributes(createId("id_" + entity_name.toLowerCase(), "AUTO"));
-        mEntity.addAccessors(setter);
-        mEntity.addAccessors(getter);
-
-        mEntity.addAttributes(createAttribute("A", Integer.class.getSimpleName(), false));
+        attributes[1] = createAttribute("A", Integer.class.getSimpleName());
         setter = new MSetter("A", Integer.class.getSimpleName());
         getter = new MGetter("A", Integer.class.getSimpleName());
-        mEntity.addAccessors(setter);
-        mEntity.addAccessors(getter);
+        accessors[2] = setter;
+        accessors[3] = getter;
 
-        mEntity.addAttributes(createAttribute("B", String.class.getSimpleName(), true));
+        attributes[2] = createAttribute("B", String.class.getSimpleName());
         setter = new MSetter("B", String.class.getSimpleName());
         getter = new MGetter("B", String.class.getSimpleName());
-        mEntity.addAccessors(setter);
-        mEntity.addAccessors(getter);
+        accessors[4] = setter;
+        accessors[5] = getter;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         mEntity.setPRelationships(new ArrayList<>());
 
@@ -166,6 +178,9 @@ public class Main {
 >>>>>>> Remove public to prevent user to access to supermacro attributes
         return mEntity;
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+        return new MEntity(entity_name, new MPackageDeclaration[]{mPackageDeclaration}, attributes, new MRelationship[0], accessors);
+>>>>>>> Changement Objectmacro-back
     }
 
     private static MAttribute createId(
@@ -174,18 +189,22 @@ public class Main {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         MAttribute mAttribute = new MAttribute(name, "Integer");
 =======
 >>>>>>> Add refused, accepted tests
 =======
         MAttribute mAttribute = new MAttribute(name, "Integer");
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+>>>>>>> Changement Objectmacro-back
         MPrimaryKey mPrimaryKey = new MPrimaryKey();
         MIdIncrementationStrategy mIdIncrementationStrategy = null;
         if(!generation_strategy.equals("")){
             mIdIncrementationStrategy = new MIdIncrementationStrategy(generation_strategy);
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -209,24 +228,31 @@ public class Main {
 >>>>>>> Removed letter P from add and addAll methods name
 
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+        Macro[] id_related;
+>>>>>>> Changement Objectmacro-back
         if (mIdIncrementationStrategy == null) {
-            mAttribute.addId(mPrimaryKey);
+            id_related = new Macro[]{mPrimaryKey};
         }
         else{
-            mAttribute.addId(mPrimaryKey);
-            mAttribute.addId(mIdIncrementationStrategy);
+            id_related = new Macro[]{mPrimaryKey, mIdIncrementationStrategy};
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         return new MAttribute(name, "Integer", id_related, new Macro[0]);
 >>>>>>> Add refused, accepted tests
 =======
         return mAttribute;
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+        return new MAttribute(name, "Integer", id_related, new Macro[0]);
+>>>>>>> Changement Objectmacro-back
     }
 
     private static MAttribute createAttribute(
             String name,
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             String type,
@@ -244,12 +270,12 @@ public class Main {
             String type,
             boolean notNull){
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+            String type){
+>>>>>>> Changement Objectmacro-back
 
-        MAttribute mAttribute = new MAttribute(name, type);
-        if(notNull) {
-            mAttribute.addNotNull(new MNotNull());
-        }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         return new MAttribute(name, type, new Macro[0], new Macro[]{new MNotNull()});
@@ -260,6 +286,9 @@ public class Main {
 >>>>>>> Remove public to prevent user to access to supermacro attributes
         return mAttribute;
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+        return new MAttribute(name, type, new Macro[0], new Macro[]{new MNotNull()});
+>>>>>>> Changement Objectmacro-back
     }
 
 }

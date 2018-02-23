@@ -22,6 +22,7 @@ public class Inserts {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add inserts test in back-tests
     public static void main(
@@ -40,6 +41,11 @@ public class Inserts {
         Macro d = new MD();
         System.out.println(d.build());
 >>>>>>> Add inserts test in back-tests
+=======
+    public static void main(String[] args){
+        Macro d = new MD();
+        d.build();
+>>>>>>> Changement Objectmacro-back
     }
 
 }

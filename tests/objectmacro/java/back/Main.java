@@ -20,6 +20,7 @@ import back.macro.*;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +31,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+>>>>>>> Changement Objectmacro-back
 public class Main {
 
     public static void main(
             String[] args){
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -55,6 +59,8 @@ public class Main {
             ma.addZ(new MC());
             mb2.addS(new MC());
 =======
+=======
+>>>>>>> Changement Objectmacro-back
         Macro[] macros = new Macro[3];
         macros[0] = new MB("First argument in MB0");
         macros[1] = new MB("First argument in MB1");
@@ -63,6 +69,7 @@ public class Main {
         Macro[] macros1 = new Macro[2];
         macros1[0] = new MC();
         macros1[1] = new MC();
+<<<<<<< HEAD
 
         try{
             MA ma = new MA("First argument of MA", macros, macros1);
@@ -104,6 +111,12 @@ public class Main {
             ma.addZ(new MC());
             mb2.addS(new MC());
 >>>>>>> Removed letter P from add and addAll methods name
+=======
+
+        try{
+            MA ma = new MA("First argument of MA", macros, macros1);
+            macros[0] = new  MC();
+>>>>>>> Changement Objectmacro-back
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){

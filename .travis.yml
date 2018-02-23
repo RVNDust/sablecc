@@ -1,6 +1,7 @@
 language: java
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add travis support to run all tests
 before_install:
@@ -19,6 +20,8 @@ install:
 >>>>>>> Add travis to fork
 =======
 >>>>>>> Add travis support to run all tests
+=======
+>>>>>>> Changement Objectmacro-back
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -31,6 +34,7 @@ cache:
 script:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   - ./utils/run-all-tests
 =======
   - ant -f ant-files/build.xml
@@ -38,3 +42,6 @@ script:
 =======
   - ./utils/run-all-tests
 >>>>>>> Add travis support to run all tests
+=======
+  - ant -f ant-files/build.xml
+>>>>>>> Changement Objectmacro-back

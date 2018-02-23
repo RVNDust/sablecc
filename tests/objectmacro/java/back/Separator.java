@@ -16,12 +16,15 @@
  */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Add back end tests
 =======
 
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+>>>>>>> Changement Objectmacro-back
 package back;
 
 import back.macro.MCommaSeparator;
@@ -34,6 +37,7 @@ public class Separator {
                 String[] args){
 
         MEmptyMacro mEmptyMacro = new MEmptyMacro();
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         MCommaSeparator mCommaSeparator = new MCommaSeparator();
@@ -56,6 +60,10 @@ public class Separator {
         mCommaSeparator.addX(mEmptyMacro);
         mCommaSeparator.addX(mEmptyMacro);
 >>>>>>> Removed letter P from add and addAll methods name
+=======
+        MCommaSeparator mCommaSeparator = new MCommaSeparator(new Macro[]{mEmptyMacro, mEmptyMacro, mEmptyMacro});
+
+>>>>>>> Changement Objectmacro-back
         System.out.println(mCommaSeparator.build());
     }
 

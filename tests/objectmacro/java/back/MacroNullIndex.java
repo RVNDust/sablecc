@@ -20,6 +20,7 @@ import back.macro.*;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +31,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+>>>>>>> Changement Objectmacro-back
 public class MacroNullIndex {
 
     public static void main(
             String[] args){
 
         System.out.println("---------- Macro null at a certain index ----------");
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -53,6 +57,8 @@ public class MacroNullIndex {
             ma.addZ(mc);
             ma.addAllY(macros);
 =======
+=======
+>>>>>>> Changement Objectmacro-back
 
         Macro[] macros = new Macro[3];
         macros[0] = new MB("First argument in MB0");
@@ -61,6 +67,7 @@ public class MacroNullIndex {
 
         Macro[] macros1 = new Macro[1];
         macros1[0] = new MC();
+<<<<<<< HEAD
 
         try{
             MA ma = new MA("First argument of MA", macros, macros1);
@@ -84,6 +91,11 @@ public class MacroNullIndex {
             ma.addZ(mc);
             ma.addAllY(macros);
 >>>>>>> Removed letter P from add and addAll methods name
+=======
+
+        try{
+            MA ma = new MA("First argument of MA", macros, macros1);
+>>>>>>> Changement Objectmacro-back
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

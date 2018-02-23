@@ -92,10 +92,13 @@ public class JavaCodeGenerator
         Map<String, Macro> macros = new LinkedHashMap<>();
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 
-        MacroCollector macroCollector = new MacroCollector(macros);
-        getIr().getAST().apply(macroCollector);
+        /*MacroCollector macroCollector = new MacroCollector(macros);
+        getIr().getAST().apply(macroCollector);*/
 
+        /*CodeGenerationWalker walker = new CodeGenerationWalker(getIr(),
+                packageDirectory, macros);*/
         CodeGenerationWalker walker = new CodeGenerationWalker(getIr(),
+<<<<<<< HEAD
                 packageDirectory, macros);
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -117,5 +120,10 @@ public class JavaCodeGenerator
         getIr().getAST().apply(walker);
         getIr().getAST().apply(utilsGenerationWalker);
 >>>>>>> Moved utils files for generation to another walker
+=======
+                packageDirectory);
+        /*MyWalker walker = new MyWalker(getIr());*/
+        getIr().getAST().apply(walker);
+>>>>>>> Changement Objectmacro-back
     }
 }

@@ -17,15 +17,25 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+<<<<<<< HEAD
  */
 <<<<<<< HEAD
+=======
+ *//*
+
+>>>>>>> Changement Objectmacro-back
 package org.sablecc.objectmacro.codegeneration.java;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
 import org.sablecc.objectmacro.intermediate.syntax3.analysis.DepthFirstAdapter;
-import org.sablecc.objectmacro.intermediate.syntax3.node.*;
+import org.sablecc.objectmacro.intermediate.syntax3.node.AInternal;
+import org.sablecc.objectmacro.intermediate.syntax3.node.AMacro;
+import org.sablecc.objectmacro.intermediate.syntax3.node.AParam;
+import org.sablecc.objectmacro.intermediate.syntax3.node.TString;
+import org.sablecc.objectmacro.util.Utils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +87,7 @@ public class MacroCollector
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Override
     public void inAMacro(
             AMacro node) {
@@ -112,6 +123,8 @@ public class MacroCollector
     }
 
 =======
+=======
+>>>>>>> Changement Objectmacro-back
     private String string(
             TString tString) {
 
@@ -131,8 +144,11 @@ public class MacroCollector
         return paramName.toString();
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> Moved utils files for generation to another walker
+=======
+>>>>>>> Changement Objectmacro-back
     @Override
     public void inAMacro(
             AMacro node) {
@@ -148,9 +164,9 @@ public class MacroCollector
     public void outAMacro(
             AMacro node) {
 
-        String macro_name = GenerationUtils.buildNameCamelCase(node.getNames());
+        String macro_name = buildNameCamelCase(node.getNames());
         this.macros.put(macro_name,
-                new Macro(new MMacro(macro_name), this.currentParameters, this.currentInternals, macro_name));
+                new Macro(new MMacro(macro_name), this.currentParameters, this.currentInternals));
 
     }
 
@@ -158,7 +174,7 @@ public class MacroCollector
     public void caseAParam(
             AParam node) {
 
-        String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
+        String param_name = buildNameCamelCase(node.getNames());
         this.currentParameters.add(param_name);
     }
 
@@ -166,9 +182,10 @@ public class MacroCollector
     public void caseAInternal(
             AInternal node) {
 
-        String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
+        String param_name = buildNameCamelCase(node.getNames());
         this.currentInternals.add(param_name);
     }
 
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 }
+*/

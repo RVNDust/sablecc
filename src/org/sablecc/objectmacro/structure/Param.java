@@ -20,6 +20,7 @@ package org.sablecc.objectmacro.structure;
 import org.sablecc.exception.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.objectmacro.exception.*;
 =======
 import org.sablecc.objectmacro.exception.CompilerException;
@@ -27,6 +28,9 @@ import org.sablecc.objectmacro.exception.CompilerException;
 =======
 import org.sablecc.objectmacro.exception.*;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+import org.sablecc.objectmacro.exception.CompilerException;
+>>>>>>> Changement Objectmacro-back
 import org.sablecc.objectmacro.syntax3.node.*;
 <<<<<<< HEAD
 
@@ -50,6 +54,7 @@ public class Param {
 >>>>>>> Remove arguments in macro references in internal declaration
     private final Macro parent;
 
+<<<<<<< HEAD
     private final Set<AMacroReference> macroReferences = new LinkedHashSet<>();
 
 <<<<<<< HEAD
@@ -57,6 +62,10 @@ public class Param {
 
     private final Map<String, Param> paramReferences = new LinkedHashMap<>();
 =======
+=======
+    private final AParam declaration;
+
+>>>>>>> Changement Objectmacro-back
     private final Macro parent;
 
     private final Set<AMacroReference> macroReferences = new LinkedHashSet<>();
@@ -66,6 +75,7 @@ public class Param {
     private final Map<String, Param> paramReferences = new LinkedHashMap<>();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private final Map<String, Directive> directives = new HashMap<>();
 
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
@@ -73,11 +83,18 @@ public class Param {
 
 =======
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+    private final Map<String, Directive> directives = new HashMap<>();
+
+    private final Set<Directive> allDirectives = new LinkedHashSet<>();
+
+>>>>>>> Changement Objectmacro-back
     private boolean isUsed;
 
     private boolean isString;
 
     Param(
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             Macro macro,
@@ -90,6 +107,9 @@ public class Param {
 =======
 =======
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+            AParam declaration,
+>>>>>>> Changement Objectmacro-back
             Macro macro,
             GlobalIndex globalIndex) {
 >>>>>>> Verification macro existence when adding a new macro reference
@@ -104,11 +124,18 @@ public class Param {
             throw new InternalException("globalIndex may not be null");
         }
 
+<<<<<<< HEAD
         this.parent = macro;
         this.globalIndex = globalIndex;
 =======
 =======
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+        if (declaration == null) {
+            throw new InternalException("declaration may not be null");
+        }
+
+>>>>>>> Changement Objectmacro-back
         if (macro == null) {
             throw new InternalException("scope may not be null");
         }
@@ -117,8 +144,26 @@ public class Param {
             throw new InternalException("globalIndex may not be null");
         }
 
+        this.declaration = declaration;
         this.parent = macro;
         this.globalIndex = globalIndex;
+    }
+
+    public Directive newDirective(
+            ADirective directive) {
+
+        String optionName = directive.getName().getText();
+        if (this.directives.containsKey(optionName)) {
+            throw CompilerException.duplicateOption(
+                    directive, this.directives.get(optionName).getDeclaration());
+        }
+
+        Directive newDirective = new Directive(directive, this);
+        this.directives.put(
+                optionName, newDirective);
+        this.allDirectives.add(newDirective);
+
+        return newDirective;
     }
 
     public void addMacroReference(
@@ -135,11 +180,12 @@ public class Param {
         }
 
         if(this.macroReferencesName.containsKey(identifier.getText())){
-            throw CompilerException.duplicateMacroRef(macroRef.getName(), getNameDeclaration());
+            throw CompilerException.duplicateMacroRef(macroRef.getName(), getDeclaration().getName());
         }
 
         this.macroReferences.add(macroRef);
         this.macroReferencesName.put(identifier.getText(), macroRef);
+
     }
 
     public void addParamReference(
@@ -160,6 +206,10 @@ public class Param {
         }
 
         this.paramReferences.put(name, newParamRef);
+    }
+
+    public Set<Directive> getAllDirectives(){
+        return this.allDirectives;
     }
 
     public Set<AMacroReference> getMacroReferences(){
@@ -224,6 +274,7 @@ public class Param {
         return this.macroReferences;
     }
 
+<<<<<<< HEAD
     public TIdentifier getNameDeclaration(){
         return null;
 =======
@@ -240,11 +291,19 @@ public class Param {
     public String getName() {
         return null;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+    public TIdentifier getNameDeclaration() {
+        return this.declaration.getName();
+>>>>>>> Changement Objectmacro-back
     }
 
 <<<<<<< HEAD
     public String getName() {
-        return null;
+        return this.declaration.getName().getText();
+    }
+
+    public AParam getDeclaration(){
+        return this.declaration;
     }
 
 =======

@@ -2,6 +2,7 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+<<<<<<< HEAD
 public class MInternalMacroField {
 
   private final String pName;
@@ -41,5 +42,64 @@ public class MInternalMacroField {
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+=======
+public class MInternalMacroField extends Macro{
+>>>>>>> Changement Objectmacro-back
 
+    private String field_Name;
+
+    public MInternalMacroField(String pName){
+
+        this.setPName(pName);
+    }
+
+    private void setPName(String pName){
+        if(pName == null){
+            throw ObjectMacroException.parameterNull("Name");
+        }
+
+        this.field_Name = pName;
+    }
+
+    private String buildName(){
+
+        return this.field_Name;
+    }
+
+    private String getName(){
+
+        return this.field_Name;
+    }
+
+    @Override
+    void apply(
+            InternalsInitializer internalsInitializer){
+
+        internalsInitializer.setInternalMacroField(this);
+    }
+
+    @Override
+    public String build(){
+
+        String local_expansion = this.expansion;
+
+        if(local_expansion != null){
+            return local_expansion;
+        }
+
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("    private Map<Context, Macro[]> list_");
+        sb0.append(buildName());
+        sb0.append(" = new LinkedHashMap<>();");
+
+        local_expansion = sb0.toString();
+        this.expansion = local_expansion;
+        return local_expansion;
+    }
+
+    @Override
+    String build(Context context) {
+        return build();
+    }
 }

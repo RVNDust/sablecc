@@ -38,6 +38,7 @@ Macro c
     Internal
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         l : b;
 =======
         l : b("a {zzz}");
@@ -45,6 +46,9 @@ Macro c
 =======
         l : b;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+        l : b("a {zzz}");
+>>>>>>> Changement Objectmacro-back
 {Begin}
 {zzz}e
 {l}

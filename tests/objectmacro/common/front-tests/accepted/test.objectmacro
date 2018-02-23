@@ -54,6 +54,7 @@ Macro macro_internals
     Internal
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         a : text_internals;
 =======
         a : text_internals("a", "b");
@@ -61,6 +62,9 @@ Macro macro_internals
 =======
         a : text_internals;
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+        a : text_internals("a", "b");
+>>>>>>> Changement Objectmacro-back
         b : text_params;
 {Begin}
     {a} {b}
