@@ -64,6 +64,7 @@ public class MClassInternalValue {
     sb.append("    private String cache;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
@@ -71,6 +72,8 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Add cache to InternalsValue
     sb.append("    InternalValue(");
     sb.append(System.getProperty("line.separator"));
     sb.append("            List<Macro> macros,");
@@ -111,6 +114,9 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add cache to InternalsValue
     sb.append("        if(this.cache != null){");
     sb.append(System.getProperty("line.separator"));
     sb.append("            return this.cache;");
@@ -118,6 +124,7 @@ public class MClassInternalValue {
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        StringBuilder sb = new StringBuilder();");
     sb.append(System.getProperty("line.separator"));
     sb.append("        int i = 0;");
@@ -147,6 +154,8 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append("            i++;");
 =======
+=======
+>>>>>>> Add cache to InternalsValue
     sb.append("        StringBuilder sb = new StringBuilder();");
     sb.append(System.getProperty("line.separator"));
     sb.append("        int i = 0;");
@@ -185,12 +194,18 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("        this.cache = sb.toString();");
     sb.append(System.getProperty("line.separator"));
     sb.append("        return this.cache;");
 =======
     sb.append("        return sb.toString();");
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    sb.append("        this.cache = sb.toString();");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        return this.cache;");
+>>>>>>> Add cache to InternalsValue
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
