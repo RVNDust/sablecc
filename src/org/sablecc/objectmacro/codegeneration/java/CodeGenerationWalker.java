@@ -95,6 +95,9 @@ public class CodeGenerationWalker
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add comments and updated notice
     /**
      * List of macros in the file
      */
@@ -176,6 +179,7 @@ public class CodeGenerationWalker
      * Name of the current macro which is referenced
      */
     private String currentMacroRefName;
+<<<<<<< HEAD
 
     /**
      * Name of the current context
@@ -252,15 +256,30 @@ public class CodeGenerationWalker
     private String currentContext;
 
     private MInsertMacroPart currentInsertMacroPart;
+=======
 
+    /**
+     * Name of the current context
+     */
+    private String currentContextName;
+>>>>>>> Add comments and updated notice
+
+    /**
+     * Names of all contexts created for the current Macro
+     */
     private List<String> contextNames = new ArrayList<>();
 
-    private List<String> createdBuilders = new ArrayList<>();
+    /**
+     * Macro representing an insert in a macro body
+     */
+    private MInsertMacroPart currentInsertMacroPart;
 
-    private List<Integer> createdInserts = new ArrayList<>();
-
+    /**
+     * Macro representing a parameter's builder
+     */
     private MParamMacroRefBuilder currentParamMacroRefBuilder;
 
+<<<<<<< HEAD
     private MPackageDeclaration packageDeclaration;
 
     private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> currentParamList = new ArrayList<>();
@@ -278,12 +297,28 @@ public class CodeGenerationWalker
     private MParamMacroRefBuilder currentParamMacroRefBuilder;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
+=======
+    /**
+     * Macro representing the method to initialize directives
+     */
+    private MInitDirectives currentInitDirectives;
+
+    /**
+     * Macro representing the creation of an object Directive
+     */
+    private MNewDirective currentDirective;
+
+    /**
+     * Macro representing the creation of an object of the directive None
+     */
+>>>>>>> Add comments and updated notice
     private MSetNoneDirective mSetNoneDirective;
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 =======
     private MRedefinedApplyInitializer currentRedefinedApplyInitializer;
 >>>>>>> Changement Objectmacro-back
 
+<<<<<<< HEAD
     private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> currentParamSet;
 
     private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> currentContextParam = new ArrayList<>();
@@ -304,6 +339,12 @@ public class CodeGenerationWalker
     private MStringParam currentStringParam;
 
     private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> currentListRedefinedInternalSetter = new ArrayList<>();
+=======
+    /**
+     * Boolean to test whether the macro has or does not have internals
+     */
+    private boolean currentMacroHasInternals;
+>>>>>>> Add comments and updated notice
 
     public CodeGenerationWalker(
             IntermediateRepresentation ir,

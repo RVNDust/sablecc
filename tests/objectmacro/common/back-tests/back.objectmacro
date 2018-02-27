@@ -195,6 +195,7 @@ Macro f
     Param
         x : g(y);
         y : h;
+<<<<<<< HEAD
 {Begin}
 {y} {x}
 {End}
@@ -269,6 +270,8 @@ Macro f
     Param
         x : g(y);
         y : h("a");
+=======
+>>>>>>> Add comments and updated notice
 {Begin}
 {y} {x}
 {End}
@@ -283,10 +286,7 @@ Macro g
 Macro h
     Param
         lala : f;
-    Internal
-        la : String;
 {Begin}
-{la}
 {lala}
 {End}
 <<<<<<< HEAD
