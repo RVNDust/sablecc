@@ -8,11 +8,11 @@ import java.util.*;
 public class MParamMacroRefBuilder {
 
   private final String pName;
-  private final String pIndexBuilder;
   private final MParamMacroRefBuilder mParamMacroRefBuilder = this;
 <<<<<<< HEAD
 <<<<<<< HEAD
   private final List<Object> eContextName = new LinkedList<Object>();
+<<<<<<< HEAD
   private final List<Object> eApplyNoneDirective = new LinkedList<Object>();
 =======
   private final List<Object> eContextParam = new LinkedList<Object>();
@@ -28,10 +28,13 @@ public class MParamMacroRefBuilder {
 =======
   private final List<Object> eApplyNoneDirective = new LinkedList<Object>();
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
 
-  public MParamMacroRefBuilder(String pName, String pIndexBuilder) {
+  public MParamMacroRefBuilder(String pName) {
     if(pName == null) throw new NullPointerException();
     this.pName = pName;
+<<<<<<< HEAD
     if(pIndexBuilder == null) throw new NullPointerException();
     this.pIndexBuilder = pIndexBuilder;
   }
@@ -57,6 +60,8 @@ public class MParamMacroRefBuilder {
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
   }
 
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
@@ -109,16 +114,8 @@ public class MParamMacroRefBuilder {
     return this.pName;
   }
 
-  String pIndexBuilder() {
-    return this.pIndexBuilder;
-  }
-
   private String rName() {
     return this.mParamMacroRefBuilder.pName();
-  }
-
-  private String rIndexBuilder() {
-    return this.mParamMacroRefBuilder.pIndexBuilder();
   }
 
   @Override
@@ -140,6 +137,7 @@ public class MParamMacroRefBuilder {
 >>>>>>> Add structure which contains list of macros and the context associated
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
     sb.append(System.getProperty("line.separator"));
 =======
@@ -147,6 +145,9 @@ public class MParamMacroRefBuilder {
     sb.append("        StringBuilder sb");
     sb.append(rIndexBuilder());
     sb.append(" = new StringBuilder();");
+=======
+    sb.append("        StringBuilder sb = new StringBuilder();");
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     sb.append(System.getProperty("line.separator"));
     sb.append("        Context local_context = ");
     if(this.eContextName.size() == 0) {
@@ -211,27 +212,56 @@ public class MParamMacroRefBuilder {
     sb.append("        String expansion = null;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("        ");
-    for(Object oApplyNoneDirective : this.eApplyNoneDirective) {
-      sb.append(oApplyNoneDirective.toString());
-    }
+    sb.append("        if(this.");
+    sb.append(rName());
+    sb.append("None != null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            sb.append(this.");
+    sb.append(rName());
+    sb.append("None.apply(i, \"\", nb_macros));");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        }");
+    sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        for(Macro macro : macros){");
     sb.append(System.getProperty("line.separator"));
     sb.append("            expansion = macro.build(local_context);");
     sb.append(System.getProperty("line.separator"));
-    sb.append("            for(Directive directive : this.");
-    sb.append(rName());
-    sb.append("Directives){");
     sb.append(System.getProperty("line.separator"));
-    sb.append("                expansion = directive.apply(i, expansion, nb_macros);");
+    sb.append("            if(this.");
+    sb.append(rName());
+    sb.append("BeforeFirst != null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("                expansion = this.");
+    sb.append(rName());
+    sb.append("BeforeFirst.apply(i, expansion, nb_macros);");
     sb.append(System.getProperty("line.separator"));
     sb.append("            }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("            sb");
-    sb.append(rIndexBuilder());
-    sb.append(".append(expansion);");
+    sb.append("            if(this.");
+    sb.append(rName());
+    sb.append("AfterLast != null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("                expansion = this.");
+    sb.append(rName());
+    sb.append("AfterLast.apply(i, expansion, nb_macros);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            if(this.");
+    sb.append(rName());
+    sb.append("Separator != null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("                expansion = this.");
+    sb.append(rName());
+    sb.append("Separator.apply(i, expansion, nb_macros);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            sb.append(expansion);");
     sb.append(System.getProperty("line.separator"));
     sb.append("            i++;");
     sb.append(System.getProperty("line.separator"));
@@ -247,9 +277,7 @@ public class MParamMacroRefBuilder {
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("        return sb");
-    sb.append(rIndexBuilder());
-    sb.append(".toString();");
+    sb.append("        return sb.toString();");
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));

@@ -14,7 +14,11 @@ public class MMacro {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField = new LinkedList<Object>();
+=======
+  private final List<Object> eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields = new LinkedList<Object>();
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
   private final List<Object> eContextField = new LinkedList<Object>();
   private final List<Object> eConstructor = new LinkedList<Object>();
   private final List<Object> eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter = new LinkedList<Object>();
@@ -70,6 +74,7 @@ public class MMacro {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamMacroField);
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.add(lParamMacroField);
@@ -80,11 +85,15 @@ public class MMacro {
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamMacroField);
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.add(lParamMacroField);
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     return lParamMacroField;
   }
 
   public MParamStringField newParamStringField(String pName) {
     MParamStringField lParamStringField = new MParamStringField(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -98,11 +107,15 @@ public class MMacro {
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lParamStringField);
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.add(lParamStringField);
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     return lParamStringField;
   }
 
   public MInternalMacroField newInternalMacroField(String pName) {
     MInternalMacroField lInternalMacroField = new MInternalMacroField(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -116,11 +129,15 @@ public class MMacro {
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalMacroField);
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.add(lInternalMacroField);
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     return lInternalMacroField;
   }
 
   public MInternalStringField newInternalStringField(String pName) {
     MInternalStringField lInternalStringField = new MInternalStringField(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -157,15 +174,19 @@ public class MMacro {
 =======
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalStringField);
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.add(lInternalStringField);
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     return lInternalStringField;
   }
 
   public MInternalMacrosValueField newInternalMacrosValueField(String pParamName) {
     MInternalMacrosValueField lInternalMacrosValueField = new MInternalMacrosValueField(pParamName);
-    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lInternalMacrosValueField);
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.add(lInternalMacrosValueField);
     return lInternalMacrosValueField;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
@@ -179,6 +200,12 @@ public class MMacro {
     MNoneDirectiveField lNoneDirectiveField = new MNoneDirectiveField(pParamName);
     this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.add(lNoneDirectiveField);
     return lNoneDirectiveField;
+=======
+  public MDirectiveFields newDirectiveFields(String pParamName) {
+    MDirectiveFields lDirectiveFields = new MDirectiveFields(pParamName);
+    this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.add(lDirectiveFields);
+    return lDirectiveFields;
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
   }
 
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
@@ -260,8 +287,8 @@ public class MMacro {
     return lParamStringRefBuilder;
   }
 
-  public MParamMacroRefBuilder newParamMacroRefBuilder(String pName, String pIndexBuilder) {
-    MParamMacroRefBuilder lParamMacroRefBuilder = new MParamMacroRefBuilder(pName, pIndexBuilder);
+  public MParamMacroRefBuilder newParamMacroRefBuilder(String pName) {
+    MParamMacroRefBuilder lParamMacroRefBuilder = new MParamMacroRefBuilder(pName);
     this.eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder.add(lParamMacroRefBuilder);
     return lParamMacroRefBuilder;
   }
@@ -443,6 +470,7 @@ public class MMacro {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.size() > 0) {
 =======
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField.size() > 0) {
@@ -453,10 +481,14 @@ public class MMacro {
 =======
     if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.size() > 0) {
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    if(this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.size() > 0) {
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -470,12 +502,16 @@ public class MMacro {
 =======
       for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField) {
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+      for(Object oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields : this.eParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields) {
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
         if(first) {
           first = false;
         }
         else {
           sb.append(System.getProperty("line.separator"));
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -489,6 +525,9 @@ public class MMacro {
 =======
         sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectivesField_NoneDirectiveField.toString());
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+        sb.append(oParamMacroField_ParamStringField_InternalMacroField_InternalStringField_InternalMacrosValueField_DirectiveFields.toString());
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
       }
     }
     if(this.eContextField.size() > 0) {

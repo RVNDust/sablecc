@@ -309,6 +309,7 @@ public class CodeGenerationWalker
     private MNewDirective currentDirective;
 
     /**
+<<<<<<< HEAD
      * Macro representing the creation of an object of the directive None
      */
 >>>>>>> Add comments and updated notice
@@ -341,6 +342,8 @@ public class CodeGenerationWalker
     private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> currentListRedefinedInternalSetter = new ArrayList<>();
 =======
     /**
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
      * Boolean to test whether the macro has or does not have internals
      */
     private boolean currentMacroHasInternals;
@@ -1000,9 +1003,10 @@ public class CodeGenerationWalker
 
             this.currentMacroToBuild.newParamMacroField(paramName);
             this.currentMacroToBuild.newContextField(paramName);
-            this.currentMacroToBuild.newDirectivesField(paramName);
+            this.currentMacroToBuild.newDirectiveFields(paramName);
             this.currentMacroToBuild.newInternalMacrosValueField(paramName);
 
+<<<<<<< HEAD
             this.currentParamMacroRefBuilder = this.currentMacroToBuild.newParamMacroRefBuilder(
                     paramName, String.valueOf(this.indexBuilder));
 <<<<<<< HEAD
@@ -1012,6 +1016,9 @@ public class CodeGenerationWalker
 =======
             this.currentParamMacroRefBuilder.newContextName(paramName.concat(CONTEXT_STRING));
 =======
+=======
+            this.currentParamMacroRefBuilder = this.currentMacroToBuild.newParamMacroRefBuilder(paramName);
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
             this.currentParamMacroRefBuilder.newContextName(paramName.concat(
                     GenerationUtils.CONTEXT_STRING));
 >>>>>>> Add structure which contains list of macros and the context associated
@@ -1290,6 +1297,7 @@ public class CodeGenerationWalker
 =======
         String directive_name = GenerationUtils.buildNameCamelCase(node.getNames());
 
+<<<<<<< HEAD
         if(directive_name.equals(GenerationUtils.NONE_DIRECTIVE)){
             this.currentMacroToBuild.newNoneDirectiveField(this.currentParamName);
             this.currentParamMacroRefBuilder.newApplyNoneDirective();
@@ -1304,6 +1312,10 @@ public class CodeGenerationWalker
 =======
         }*/
 >>>>>>> Changement Objectmacro-back
+=======
+        this.currentDirective = this.currentInitDirectives
+                .newNewDirective(directive_name, this.indexBuilder.toString());
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     }
 
     @Override
@@ -1325,6 +1337,7 @@ public class CodeGenerationWalker
 =======
         this.indexBuilder++;
         this.currentDirective = null;
+<<<<<<< HEAD
         this.mSetNoneDirective = null;
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 =======
@@ -1333,6 +1346,8 @@ public class CodeGenerationWalker
         this.currentBeforeFirst = null;
         this.currentNone = null;*/
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     }
 
     @Override
@@ -1673,6 +1688,7 @@ public class CodeGenerationWalker
                         string,
                         index_builder);
             }
+<<<<<<< HEAD
             else if(this.mSetNoneDirective != null){
                 this.mSetNoneDirective.newStringPart(
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
@@ -1695,6 +1711,8 @@ public class CodeGenerationWalker
                 this.currentSeparators.add(new MSeparator(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[] {new MStringPart(string, index_builder)}));
 >>>>>>> Changement Objectmacro-back
             }
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
         }
     }
 
@@ -1798,6 +1816,7 @@ public class CodeGenerationWalker
                         param_name,
                         index_builder);
             }
+<<<<<<< HEAD
             else if(this.mSetNoneDirective != null){
                 this.mSetNoneDirective.newParamInsertPart(
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
@@ -1820,6 +1839,8 @@ public class CodeGenerationWalker
                 this.currentSeparators.add(new MSeparator(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[] {mParamInsertPart}));
 >>>>>>> Changement Objectmacro-back
             }
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
         }
     }
 
@@ -1897,6 +1918,7 @@ public class CodeGenerationWalker
                 this.currentDirective.newEolPart(index_builder);
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             else if(this.currentAfterLast != null){
                 this.currentAfterLast.newEolPart(index_builder);
             }
@@ -1915,6 +1937,8 @@ public class CodeGenerationWalker
                 this.currentSeparators.add(new MSeparator(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[] {mEolPart}));
 >>>>>>> Changement Objectmacro-back
             }
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
         }
     }
 
@@ -2074,12 +2098,6 @@ public class CodeGenerationWalker
                             index_builder,
                             index_insert);
 
-            }
-            else if(this.mSetNoneDirective != null){
-                this.currentInsertMacroPart =
-                        this.mSetNoneDirective.newInsertMacroPart(macro_name,
-                                index_builder,
-                                index_insert);
             }
         }
         this.createdInserts.add(this.indexInsert);

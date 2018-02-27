@@ -31,6 +31,7 @@ public class MInitInternalValue {
 <<<<<<< HEAD
     sb.append(", this.");
     sb.append(rParamName());
+<<<<<<< HEAD
     sb.append("Context, this.");
     sb.append(rParamName());
     sb.append("Directives);");
@@ -46,6 +47,9 @@ public class MInitInternalValue {
     sb.append(rParamName());
     sb.append("Directives);");
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    sb.append("Context);");
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

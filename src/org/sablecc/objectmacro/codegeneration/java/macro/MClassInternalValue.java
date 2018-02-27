@@ -49,9 +49,19 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append("    private final List<Directive> directives;");
+=======
+    sb.append("    private DAfterLast dAfterLast;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    private DBeforeFirst dBeforeFirst;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    private DSeparator dSeparator;");
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    private DNone dNone;");
@@ -80,6 +90,7 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("            Context context,");
     sb.append(System.getProperty("line.separator"));
     sb.append("            List<Directive> directives){");
@@ -91,12 +102,16 @@ public class MClassInternalValue {
     sb.append(System.getProperty("line.separator"));
     sb.append("            List<Directive> directives){");
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    sb.append("            Context context){");
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.macros = macros;");
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.context = context;");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     sb.append("        this.directives = directives;");
@@ -107,6 +122,8 @@ public class MClassInternalValue {
     sb.append("        this.directives = directives;");
     sb.append(System.getProperty("line.separator"));
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+>>>>>>> Remove abstraction on directives when building a macro or a parameter
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
@@ -144,11 +161,26 @@ public class MClassInternalValue {
     sb.append("            String expansion = macro.build(this.context);");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("            for(Directive directive : this.directives){");
+    sb.append("            if(this.dBeforeFirst != null){");
     sb.append(System.getProperty("line.separator"));
-    sb.append("                expansion = directive.apply(i, expansion, nb_macros);");
+    sb.append("                expansion = dBeforeFirst.apply(i, expansion, nb_macros);");
     sb.append(System.getProperty("line.separator"));
     sb.append("            }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            if(dAfterLast != null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("                expansion = dAfterLast.apply(i, expansion, nb_macros);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            if(this.dSeparator != null){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("                expansion = dSeparator.apply(i, expansion, nb_macros);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            }");
+    sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("            sb.append(expansion);");
     sb.append(System.getProperty("line.separator"));
@@ -210,9 +242,12 @@ public class MClassInternalValue {
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
-    sb.append("    List<Macro> getMacros(){");
+    sb.append("    void setNone(");
     sb.append(System.getProperty("line.separator"));
-    sb.append("        return this.macros;");
+    sb.append("                DNone none){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        this.dNone = none;");
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
@@ -221,9 +256,32 @@ public class MClassInternalValue {
 =======
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
     sb.append(System.getProperty("line.separator"));
-    sb.append("    void setNone(DNone none){");
+    sb.append("    void setBeforeFirst(");
     sb.append(System.getProperty("line.separator"));
-    sb.append("        this.dNone = none;");
+    sb.append("            DBeforeFirst dBeforeFirst){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        this.dBeforeFirst = dBeforeFirst;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    void setAfterLast(");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            DAfterLast dAfterLast){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        this.dAfterLast = dAfterLast;");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    }");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    void setSeparator(");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("            DSeparator dSeparator){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        this.dSeparator = dSeparator;");
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
