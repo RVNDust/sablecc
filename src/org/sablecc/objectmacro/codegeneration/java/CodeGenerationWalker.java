@@ -144,11 +144,6 @@ public class CodeGenerationWalker
     private MApplyInternalsInitializer currentApplyInitializer;
 
     /**
-     * Macro representing the apply internal initializer inside the method addAll
-     */
-    private MApplyInternalsInitializer currentAddAllApplyInitializer;
-
-    /**
      * Macro representing the redefined internals setter inside in apply initializer
      */
     private MRedefinedInternalsSetter currentRedefinedInternalsSetter;
@@ -1077,9 +1072,12 @@ public class CodeGenerationWalker
 >>>>>>> Add structure which contains list of macros and the context associated
             this.indexBuilder = 0;
 
+<<<<<<< HEAD
             MAddAll mAddAll = this.currentMacroToBuild.newAddAll(paramName);
+=======
+            MInitInternalsCall mInitInternalsCall = this.currentMacroBuilder.newInitInternalsCall(paramName);
+>>>>>>> Removed add all function to keep only the static overload
 
-            this.currentAddAllApplyInitializer = mAddAll.newApplyInternalsInitializer(paramName);
             this.currentApplyInitializer = this.currentMacroToBuild.newInitInternalsMethod(paramName)
 <<<<<<< HEAD
                             .newApplyInternalsInitializer(paramName);
@@ -1107,6 +1105,7 @@ public class CodeGenerationWalker
             if(this.currentMacroHasInternals){
                 mInitInternalsCall.newContextArg();
             }
+<<<<<<< HEAD
             else{
                 mAddAll.newIsBuilt(this.currentMacro.getName());
             }
@@ -1121,6 +1120,8 @@ public class CodeGenerationWalker
             this.currentMacro.getBuilder().add(paramMacroRefStruct.mParamMacroRefBuilder);
             this.currentMacro.getSetter().add(paramMacroRefStruct.mParamMacroSetter);
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Removed add all function to keep only the static overload
         }
         else{
             throw new InternalException("case unhandled");
@@ -1369,8 +1370,6 @@ public class CodeGenerationWalker
             if(!this.currentMacroHasInternals){
                 mSingleAdd.newIsBuilt(this.currentMacro.getName());
             }
-
-            this.currentAddAllApplyInitializer.newRedefinedInternalsSetter(macro_ref_name);
         }
 =======
         this.currentMacroName = buildNameCamelCase(node.getNames());

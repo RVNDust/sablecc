@@ -45,7 +45,7 @@ public class MacroNullIndex {
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
         MA ma = new MA("First argument of MA");
-        List<Macro> macros = new ArrayList<>();
+        List<MB> macros = new ArrayList<>();
         macros.add(new MB("First argument in MB0"));
         macros.add(null);
         macros.add(new MB("First argument in MB2"));
@@ -55,6 +55,7 @@ public class MacroNullIndex {
             MC mc = new MC();
             ma.addZ(mc);
             ma.addZ(mc);
+<<<<<<< HEAD
             ma.addAllY(macros);
 =======
 =======
@@ -96,6 +97,12 @@ public class MacroNullIndex {
         try{
             MA ma = new MA("First argument of MA", macros, macros1);
 >>>>>>> Changement Objectmacro-back
+=======
+            for(MB mb : macros){
+                ma.addY(mb);
+            }
+
+>>>>>>> Removed add all function to keep only the static overload
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

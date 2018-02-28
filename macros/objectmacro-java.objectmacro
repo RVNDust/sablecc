@@ -422,7 +422,7 @@ public class M$name extends Macro{
 $expand: param_macro_field, param_string_field, internal_macro_field, internal_string_field, internal_macros_value_field, directive_fields, separator="\n", before_first="\n" $
 $expand: context_field, before_first="\n" $
 $expand: constructor, before_first="\n" $
-$expand: param_string_setter, add_all, single_add, internal_string_setter, internal_macro_setter, before_first="\n", separator="\n" $
+$expand: param_string_setter, single_add, internal_string_setter, internal_macro_setter, before_first="\n", separator="\n" $
 $expand: param_string_ref_builder, param_macro_ref_builder, internal_macro_ref_builder, separator="\n", before_first="\n" $
 $expand: param_string_ref, param_macro_ref, internal_macro_ref, separator="\n", before_first="\n" $
 $expand: init_internals_method, separator="\n" $
@@ -511,6 +511,7 @@ $comment$
 ================================================================
 $end$
 
+<<<<<<< HEAD
 >>>>>>> Moved macros to get a better reading of the file
 $comment: ========= add_all =========== $
 
@@ -536,6 +537,8 @@ $macro: add_all(param_name) $
     }
 $end: add_all $
 
+=======
+>>>>>>> Removed add all function to keep only the static overload
 $comment: ========= single_add =========== $
 
 $macro: single_add(macro_name, param_name) $

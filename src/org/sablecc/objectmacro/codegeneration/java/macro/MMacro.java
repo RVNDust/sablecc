@@ -21,7 +21,7 @@ public class MMacro {
 >>>>>>> Remove abstraction on directives when building a macro or a parameter
   private final List<Object> eContextField = new LinkedList<Object>();
   private final List<Object> eConstructor = new LinkedList<Object>();
-  private final List<Object> eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter = new LinkedList<Object>();
+  private final List<Object> eParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter = new LinkedList<Object>();
   private final List<Object> eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder = new LinkedList<Object>();
   private final List<Object> eParamStringRef_ParamMacroRef_InternalMacroRef = new LinkedList<Object>();
   private final List<Object> eInitInternalsMethod = new LinkedList<Object>();
@@ -225,6 +225,7 @@ public class MMacro {
     MParamStringSetter lParamStringSetter = new MParamStringSetter(pName);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lParamStringSetter);
     return lParamStringSetter;
   }
@@ -251,18 +252,15 @@ public class MMacro {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
     this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lParamStringSetter);
+=======
+    this.eParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lParamStringSetter);
+>>>>>>> Removed add all function to keep only the static overload
     return lParamStringSetter;
-  }
-
-  public MAddAll newAddAll(String pParamName) {
-    MAddAll lAddAll = new MAddAll(pParamName);
-    this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lAddAll);
-    return lAddAll;
   }
 
   public MSingleAdd newSingleAdd(String pMacroName, String pParamName) {
     MSingleAdd lSingleAdd = new MSingleAdd(pMacroName, pParamName);
-    this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lSingleAdd);
+    this.eParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lSingleAdd);
     return lSingleAdd;
 >>>>>>> AddAll and single adds with static overloads
   }
@@ -271,13 +269,17 @@ public class MMacro {
     MInternalStringSetter lInternalStringSetter = new MInternalStringSetter(pName);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lInternalStringSetter);
+=======
+    this.eParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lInternalStringSetter);
+>>>>>>> Removed add all function to keep only the static overload
     return lInternalStringSetter;
   }
 
   public MInternalMacroSetter newInternalMacroSetter(String pParamName) {
     MInternalMacroSetter lInternalMacroSetter = new MInternalMacroSetter(pParamName);
-    this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lInternalMacroSetter);
+    this.eParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter.add(lInternalMacroSetter);
     return lInternalMacroSetter;
   }
 
@@ -544,6 +546,7 @@ public class MMacro {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.size() > 0) {
 =======
     if(this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter.size() > 0) {
@@ -551,16 +554,23 @@ public class MMacro {
 =======
     if(this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.size() > 0) {
 >>>>>>> AddAll and single adds with static overloads
+=======
+    if(this.eParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter.size() > 0) {
+>>>>>>> Removed add all function to keep only the static overload
       sb.append(System.getProperty("line.separator"));
     }
     {
       boolean first = true;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       for(Object oParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter : this.eParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter) {
 =======
       for(Object oParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter : this.eParamStringSetter_ParamMacroSetter_InternalStringSetter_InternalMacroSetter) {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+      for(Object oParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter : this.eParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter) {
+>>>>>>> Removed add all function to keep only the static overload
         if(first) {
           first = false;
         }
@@ -568,7 +578,11 @@ public class MMacro {
           sb.append(System.getProperty("line.separator"));
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         sb.append(oParamStringSetter_AddAll_SingleAdd_InternalStringSetter_InternalMacroSetter.toString());
+=======
+        sb.append(oParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter.toString());
+>>>>>>> Removed add all function to keep only the static overload
       }
     }
     if(this.eParamStringRefBuilder_ParamMacroRefBuilder_InternalMacroRefBuilder.size() > 0) {

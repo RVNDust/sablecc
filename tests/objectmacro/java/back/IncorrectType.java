@@ -42,9 +42,13 @@ public class IncorrectType {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
         List<Macro> macros = new ArrayList<>();
+=======
+        List<MB> macros = new ArrayList<>();
+>>>>>>> Removed add all function to keep only the static overload
         macros.add(new MB("First argument in MB0"));
         macros.add(new MB("First argument in MB1"));
         macros.add(new MB("First argument in MB2"));
@@ -72,6 +76,7 @@ public class IncorrectType {
             MA ma = new MA("First argument of MA");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             ma.setPZ(macros);
             ma.setPY(macros);
 >>>>>>> Update tests to be adapted to the lazy initialization
@@ -88,6 +93,12 @@ public class IncorrectType {
         try{
             MA ma = new MA("First argument of MA", macros, macros);
 >>>>>>> Changement Objectmacro-back
+=======
+            for(MB macro : macros){
+                ma.addY(macro);
+            }
+
+>>>>>>> Removed add all function to keep only the static overload
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

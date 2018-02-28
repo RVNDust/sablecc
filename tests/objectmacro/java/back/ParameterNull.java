@@ -45,6 +45,7 @@ public class ParameterNull {
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
         MA ma = new MA("First argument of MA");
+<<<<<<< HEAD
         List<Macro> macros = new ArrayList<>();
         macros.add(new MB("First argument in MB0"));
         macros.add(new MB("First argument in MB1"));
@@ -87,6 +88,11 @@ public class ParameterNull {
             MA ma = new MA("First argument of MA", macros, null);
 >>>>>>> Changement Objectmacro-back
             ma.build();
+=======
+
+        try{
+            ma.addZ(null);
+>>>>>>> Removed add all function to keep only the static overload
             System.err.println("It should throw an exception here");
             System.exit(1);
         }
