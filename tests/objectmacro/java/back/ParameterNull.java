@@ -21,6 +21,7 @@ import back.macro.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,11 @@ import java.util.List;
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> Revert "Changement Objectmacro-back"
 public class ParameterNull {
 
     public static void main(
@@ -42,14 +48,19 @@ public class ParameterNull {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
         MA ma = new MA("First argument of MA");
 <<<<<<< HEAD
+=======
+        MA ma = new MA("First argument of MA");
+>>>>>>> Revert "Changement Objectmacro-back"
         List<Macro> macros = new ArrayList<>();
         macros.add(new MB("First argument in MB0"));
         macros.add(new MB("First argument in MB1"));
         macros.add(new MB("First argument in MB2"));
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         try{
@@ -87,6 +98,12 @@ public class ParameterNull {
         try{
             MA ma = new MA("First argument of MA", macros, null);
 >>>>>>> Changement Objectmacro-back
+=======
+
+        try{
+            ma.addZ(null);
+            ma.addAllY(macros);
+>>>>>>> Revert "Changement Objectmacro-back"
             ma.build();
 =======
 

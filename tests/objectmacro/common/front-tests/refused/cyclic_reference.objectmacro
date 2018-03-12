@@ -39,6 +39,7 @@ Macro c
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         l : b;
 =======
         l : b("a {zzz}");
@@ -49,6 +50,9 @@ Macro c
 =======
         l : b("a {zzz}");
 >>>>>>> Changement Objectmacro-back
+=======
+        l : b;
+>>>>>>> Revert "Changement Objectmacro-back"
 {Begin}
 {zzz}e
 {l}

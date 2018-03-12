@@ -17,6 +17,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Add back end tests
@@ -25,6 +26,9 @@
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+
+>>>>>>> Revert "Changement Objectmacro-back"
 package back;
 
 import back.macro.MCommaSeparator;
@@ -40,10 +44,14 @@ public class Separator {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
         MCommaSeparator mCommaSeparator = new MCommaSeparator();
         mCommaSeparator.addX(mEmptyMacro);
         mCommaSeparator.addX(mEmptyMacro);
         mCommaSeparator.addX(mEmptyMacro);
+<<<<<<< HEAD
 =======
         MCommaSeparator mCommaSeparator = new MCommaSeparator(new Macro[]{mEmptyMacro, mEmptyMacro, mEmptyMacro});
 
@@ -64,6 +72,8 @@ public class Separator {
         MCommaSeparator mCommaSeparator = new MCommaSeparator(new Macro[]{mEmptyMacro, mEmptyMacro, mEmptyMacro});
 
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
         System.out.println(mCommaSeparator.build());
     }
 

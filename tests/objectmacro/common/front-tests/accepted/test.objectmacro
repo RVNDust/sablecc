@@ -55,6 +55,7 @@ Macro macro_internals
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         a : text_internals;
 =======
         a : text_internals("a", "b");
@@ -65,6 +66,9 @@ Macro macro_internals
 =======
         a : text_internals("a", "b");
 >>>>>>> Changement Objectmacro-back
+=======
+        a : text_internals;
+>>>>>>> Revert "Changement Objectmacro-back"
         b : text_params;
 {Begin}
     {a} {b}

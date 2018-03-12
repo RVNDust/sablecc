@@ -23,12 +23,16 @@ public class Inserts {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add inserts test in back-tests
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
     public static void main(
             String[] args){
 
         System.out.print("======== Inserts Test ===========\n");
+<<<<<<< HEAD
 <<<<<<< HEAD
         Macro d = new MD();
         System.out.println(d.build());
@@ -46,6 +50,10 @@ public class Inserts {
         Macro d = new MD();
         d.build();
 >>>>>>> Changement Objectmacro-back
+=======
+        Macro d = new MD();
+        System.out.println(d.build());
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 
 }

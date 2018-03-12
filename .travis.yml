@@ -2,8 +2,11 @@ language: java
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add travis support to run all tests
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 before_install:
     - wget --no-check-certificate https://www.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.gz
     - tar -xzvf apache-ant-1.10.2-bin.tar.gz
@@ -16,12 +19,15 @@ install:
   - unzip sablecc-3.7.zip
   - mv sablecc-3.7/lib/sablecc.jar $ANT_HOME/lib
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add travis to fork
 =======
 >>>>>>> Add travis support to run all tests
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -35,6 +41,7 @@ script:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   - ./utils/run-all-tests
 =======
   - ant -f ant-files/build.xml
@@ -45,3 +52,6 @@ script:
 =======
   - ant -f ant-files/build.xml
 >>>>>>> Changement Objectmacro-back
+=======
+  - ./utils/run-all-tests
+>>>>>>> Revert "Changement Objectmacro-back"

@@ -1674,6 +1674,7 @@ $end: string_arg $
 
 $comment: ========== param_arg ========== $
 
+<<<<<<< HEAD
 $macro: param_arg(name) $
 p$(name)$no_eol$
 $end: param_arg $
@@ -1690,6 +1691,13 @@ $macro: param_macro_ref(name, index_builder) $
         $expand: none $
         boolean first = true;
         int i = 0;
+=======
+    final static String LINE_SEPARATOR = System.getProperty("line.separator");
+
+    BuildState build_state = null;
+
+    final Map<Context, BuildState> build_states = new LinkedHashMap<>();
+>>>>>>> Revert "Changement Objectmacro-back"
 
 <<<<<<< HEAD
         for(Macro macro : macros){
@@ -1716,12 +1724,121 @@ $end: context_name $
 <<<<<<< HEAD
 $comment: ======== context_param ============ $
 
+<<<<<<< HEAD
 $macro: context_param $
 Context context$no_eol$
 $end: context_param $
+=======
+$comment: =============== super_directive ============== $
+
+$macro: super_directive $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+
+abstract class Directive {
+
+    final String value;
+
+    Directive(
+            String value) {
+
+        this.value = value;
+    }
+
+    abstract String apply(Integer index, String macro, Integer list_size);
+}
+$end: super_directive $
+
+$comment: =============== class_internal_value ========= $
+
+$macro: class_internal_value $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+$expand: import_java_util, before_first="\n" $
+
+class InternalValue {
+
+    private final List<Macro> macros;
+
+    private final List<Directive> directives;
+
+    private DNone dNone;
+
+    private final Context context;
+
+    InternalValue(
+            List<Macro> macros,
+            Context context,
+            List<Directive> directives){
+
+        this.macros = macros;
+        this.context = context;
+        this.directives = directives;
+    }
+
+    String build(){
+
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        int nb_macros = this.macros.size();
+
+        if(this.dNone != null){
+            sb.append(this.dNone.apply(i, "", nb_macros));
+        }
+
+        for(Macro macro : this.macros){
+            String expansion = macro.build(this.context);
+
+            for(Directive directive : this.directives){
+                expansion = directive.apply(i, expansion, nb_macros);
+            }
+            sb.append(expansion);
+            i++;
+        }
+
+        return sb.toString();
+    }
+
+    List<Macro> getMacros(){
+        return this.macros;
+    }
+
+    void setNone(DNone none){
+        this.dNone = none;
+    }
+}
+
+$end: class_internal_value $
+
+$comment: =============== class_build_state ========= $
+
+$macro: class_build_state $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+
+class BuildState {
+
+    private String expansion = null;
+
+    public String getExpansion() {
+        return expansion;
+    }
+
+    public void setExpansion(
+            String expansion) {
+
+        this.expansion = expansion;
+    }
+}
+
+$end: class_build_state $
+
+$comment: ========== macro ========== $
+>>>>>>> Revert "Changement Objectmacro-back"
 
 $comment: ========= context_arg ============ $
 
+<<<<<<< HEAD
 $macro: context_arg $
 context$no_eol$
 $end: context_arg $
@@ -1743,13 +1860,331 @@ $comment: =========== class_none ============ $
 $macro: class_none $
 $insert: header $
 $expand: package_declaration, before_first="\n" $
+=======
+public class M$name extends Macro{
+$expand: param_macro_field, param_string_field, internal_macro_field, internal_string_field, internal_macros_value_field, directives_field, none_directive_field, separator="\n", before_first="\n" $
+$expand: context_field, before_first="\n" $
+$expand: constructor, before_first="\n" $
+$expand: param_string_setter, add_all, single_add, internal_string_setter, internal_macro_setter, before_first="\n", separator="\n" $
+$expand: param_string_ref_builder, param_macro_ref_builder, internal_macro_ref_builder, separator="\n", before_first="\n" $
+$expand: param_string_ref, param_macro_ref, internal_macro_ref, separator="\n", before_first="\n" $
+$expand: init_internals_method, separator="\n" $
+$expand: init_directives, separator="\n", before_first="\n"$
+$expand: redefined_apply_initializer $
+$expand: macro_builder, before_first="\n" $
+$expand: empty_builder_with_context, before_first="\n"$
+}
+$end: macro $
+
+$comment$
+======================================================
+===================== CONSTRUCTOR ====================
+======================================================
+$end$
+
+$comment: ========== constructor ========== $
+
+$macro: constructor(name) $
+    public M$name($expand: string_param, separator=", "$){
+$expand: set_param, before_first="\n" $
+$expand: init_macro_param, init_macro_internal, init_string_internal, before_first="\n" $
+$expand: init_internal_value, before_first="\n"$
+    }
+$end: constructor $
+
+$comment: ========== init_macro_internal =========== $
+
+$macro: init_macro_internal(name) $
+    this.list_$name = new LinkedHashMap<>();
+$end: init_macro_internal $
+
+$comment: ========== init_macro_param =========== $
+
+$macro: init_macro_param(name) $
+    this.list_$name = new ArrayList<>();
+$end: init_macro_param $
+
+$comment: ========== init_string_internal =========== $
+
+$macro: init_string_internal(name) $
+    this.field_$name = new LinkedHashMap<>();
+$end: init_string_internal $
+
+$comment: ========== init_internal_value ============ $
+
+$macro: init_internal_value(param_name) $
+    this.$(param_name)Value = new InternalValue(this.list_$param_name, this.$(param_name)Context, this.$(param_name)Directives);
+$end: init_internal_value $
+
+$comment: ========== set_param ========== $
+
+$macro: set_param(name) $
+        this.setP$name($expand: param_arg$);
+$end: set_param $
+
+$comment$
+================================================================
+===================== MACRO FUNCTIONS ==========================
+================================================================
+$end$
+
+$comment: ========= add_all =========== $
+
+$macro: add_all(param_name) $
+    public void addAll$param_name(List<Macro> macros){
+        if(macros == null){
+            throw ObjectMacroException.parameterNull("$param_name");
+        }
+        $expand: is_built$
+
+        int i = 0;
+
+        for(Macro macro : macros){
+            if(macro == null){
+                throw ObjectMacroException.macroNull(i, "$param_name");
+            }
+
+            $expand: apply_internals_initializer $
+
+            this.list_$param_name.add(macro);
+            i++;
+        }
+    }
+$end: add_all $
+
+$comment: ========= single_add =========== $
+
+$macro: single_add(macro_name, param_name) $
+    public void add$param_name(M$macro_name macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("$param_name");
+        }
+        $expand: is_built $
+
+        this.list_$param_name.add(macro);
+    }
+$end: single_add $
+
+$comment: =========== is_built =========== $
+
+$macro: is_built(macro_name) $
+        if(this.build_state != null){
+            throw ObjectMacroException.cannotModify("$macro_name");
+        }
+$end: is_built $
+
+$comment: =========== param_string_ref_builder ============= $
+
+$macro: param_string_ref_builder(name) $
+    private String build$name($expand: context_param$){
+
+        return this.field_$(name)$expand: get_internal_tail $;
+    }
+$end: param_string_ref_builder $
+
+$comment: ========== param_macro_ref_builder ================== $
+
+$macro: param_macro_ref_builder(name, index_builder) $
+    private String build$name(){
+        StringBuilder sb$index_builder = new StringBuilder();
+        Context local_context = $expand: context_name, none="context"$;
+        List<Macro> macros = this.list_$name;
+
+        int i = 0;
+        int nb_macros = macros.size();
+        String expansion = null;
+
+        $macro: apply_none_directive $
+        if(this.$(name)None != null){
+            sb$index_builder.append(this.$(name)None.apply(i, "", nb_macros));
+        }
+        $end: apply_none_directive $
+
+        for(Macro macro : macros){
+            expansion = macro.build(local_context);
+            for(Directive directive : this.$(name)Directives){
+                expansion = directive.apply(i, expansion, nb_macros);
+            }
+
+            sb$index_builder.append(expansion);
+            i++;
+        }
+
+        return sb$index_builder.toString();
+    }
+$end: param_macro_ref_builder $
+
+$comment: =========== internal_macro_ref_builder ================ $
+
+$macro: internal_macro_ref_builder(internal_name) $
+    private String build$internal_name(Context context){
+
+        InternalValue macros = this.list_$(internal_name).get(context);
+        return macros.build();
+    }
+$end: internal_macro_ref_builder $
+
+$comment: ========= internal_macro_setter ========= $
+
+$macro: internal_macro_setter(param_name) $
+    void set$param_name(
+            Context context,
+            InternalValue internal_value) {
+
+        if(internal_value == null){
+            throw new RuntimeException("macros cannot be null");
+        }
+
+        this.list_$param_name.put(context, internal_value);
+    }
+$end: internal_macro_setter $
+
+$comment: =========== param_string_setter ========= $
+
+$macro: param_string_setter(name) $
+    private void setP$name($expand: string_param $){
+        if($expand: param_arg $ == null){
+            throw ObjectMacroException.parameterNull("$name");
+        }
+
+        this.field_$name = $expand: param_arg $;
+    }
+$end: param_string_setter $
+
+$comment: ========== param_macro_ref ============== $
+
+$macro: param_macro_ref(name) $
+    private InternalValue get$name(){
+        return this.$(name)Value;
+    }
+$end: param_macro_ref $
+
+$comment: ========== internal_macro_ref =========== $
+
+$macro: internal_macro_ref(param_name) $
+    private InternalValue get$param_name(Context context){
+        return this.list_$(param_name).get(context);
+    }
+$end: internal_macro_ref $
+
+$comment: ========== param_string_ref ============== $
+
+$macro: param_string_ref(name) $
+    private String get$name($expand: context_param $){
+
+        return this.field_$(name)$expand: get_internal_tail $;
+    }
+$end: param_string_ref $
+
+$comment: ========= internal_string_setter ========= $
+
+$macro: internal_string_setter(name) $
+    void set$name(
+            Context context,
+            String value) {
+
+        if(value == null){
+            throw new RuntimeException("value cannot be null here");
+        }
+
+        this.field_$name.put(context, value);
+    }
+$end: internal_string_setter $
+
+$comment: ========= init_internals_method ======== $
+
+$macro: init_internals_method(name) $
+    private void init$(name)Internals(Context context){
+        for(Macro macro : this.list_$name){
+            $expand: apply_internals_initializer $
+        }
+    }
+$end: init_internals_method $
+
+$comment: ========== context_verifier ============ $
+
+$macro: context_verifier $
+        if(context == null){
+            throw new RuntimeException("context cannot be null here");
+        }
+$end: context_verifier $
+
+$comment: =========== init_directives =========== $
+
+$macro: init_directives(param_name) $
+    private void init$(param_name)Directives(){
+        $expand: new_directive, set_none_directive $
+    }
+$end: init_directives $
+
+$comment: =========== new_directive ============ $
+
+$macro: new_directive(param_name, directive_name, index_builder) $
+        StringBuilder sb$index_builder = new StringBuilder();
+$expand: string_part, param_insert_part, eol_part, insert_macro_part $
+        this.$(param_name)Directives.add(new D$(directive_name)(sb$index_builder.toString()));
+$end: new_directive $
+
+$comment: =========== set_none_directive ======== $
+
+$macro: set_none_directive(param_name, index_builder) $
+        StringBuilder sb$index_builder = new StringBuilder();
+$expand: string_part, param_insert_part, eol_part, insert_macro_part $
+        this.$(param_name)Value.setNone(new DNone(sb$index_builder.toString()));
+        this.$(param_name)None = new DNone(sb$index_builder.toString());
+$end: set_none_directive $
+
+$comment$
+============================================
+============== MACRO BUILDER ===============
+============================================
+$end$
+
+$comment: ========= public ============= $
+
+$macro: public $
+public$no_eol$
+$end: public $
+
+$comment: ========== macro_builder ======= $
+
+$macro: macro_builder(macro_name) $
+    @Override
+    $expand: public $ String build($expand: context_param $){
+
+        BuildState buildState = $expand: context_build_state, none="this.build_state"$;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("$macro_name");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        $expand: new_build_state, none="this.build_state = buildState" $;
+
+        $macro: init_directives_call(param_name) $
+        init$(param_name)Directives();
+        $end: init_directives_call $
+
+        $macro: init_internals_call(param_name) $
+        init$(param_name)Internals($expand: context_arg, none="null"$);
+        $end: init_internals_call $
+>>>>>>> Revert "Changement Objectmacro-back"
 
 class DNone
         extends Directive{
 
     DNone(String value) {
 
+<<<<<<< HEAD
         super(value);
+=======
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 
     @Override
@@ -1767,6 +2202,7 @@ class DNone
 }
 $end: class_none $
 
+<<<<<<< HEAD
 $comment: ========== class_before_first ========= $
 
 $macro: class_before_first $
@@ -1810,6 +2246,19 @@ $macro: param_macro_setter(param_name, macro_name) $
 $macro: init_macro_param(name) $
     this.list_$name = new ArrayList<>();
 $end: init_macro_param $
+=======
+$comment: ========== context_build_state ======= $
+
+$macro: context_build_state $
+this.build_states.get(context)$no_eol$
+$end: context_build_state $
+
+$comment: ========== new_build_state ========= $
+
+$macro: new_build_state $
+this.build_states.put(context, buildState)$no_eol$
+$end: new_build_state $
+>>>>>>> Revert "Changement Objectmacro-back"
 
 $comment: ========== init_string_internal =========== $
 
@@ -1842,6 +2291,7 @@ $end: init_string_internal $
     }
 =======
 
+<<<<<<< HEAD
 =======
 $comment: =========== internal_macros_value_field ======== $
 >>>>>>> Add structure which contains list of macros and the context associated
@@ -1849,6 +2299,19 @@ $comment: =========== internal_macros_value_field ======== $
 $macro: internal_macros_value_field(param_name) $
     private final InternalValue $(param_name)Value;
 $end: internal_macros_value_field $
+=======
+$comment$
+===================================================
+================= MACRO FIELDS ====================
+===================================================
+$end$
+
+$comment: ========== param_macro_field ========== $
+
+$macro: param_macro_field(name) $
+    private final List<Macro> list_$name;
+$end: param_macro_field $
+>>>>>>> Revert "Changement Objectmacro-back"
 
 $comment: ========== string_param ========== $
 
@@ -1863,11 +2326,17 @@ $end: string_param $
 $comment: =========== is_built =========== $
 >>>>>>> Moved macros to get a better reading of the file
 
+<<<<<<< HEAD
 $macro: is_built(macro_name) $
         if(this.build_state != null){
             throw ObjectMacroException.cannotModify("$macro_name");
         }
 <<<<<<< HEAD
+=======
+$macro: internal_macro_field(name) $
+    private Map<Context, InternalValue> list_$name = new LinkedHashMap<>();
+$end: internal_macro_field $
+>>>>>>> Revert "Changement Objectmacro-back"
 
 <<<<<<< HEAD
         $expand: apply_internals_initializer $
@@ -1907,6 +2376,7 @@ $macro: internal_macro_setter(param_name) $
             Context context,
             List<Macro> macros) {
 
+<<<<<<< HEAD
         if(macros == null){
             throw new RuntimeException("macros cannot be null");
         }
@@ -1920,11 +2390,19 @@ $expand: init_macro_internal, init_string_internal, before_first="\n" $
     }
 $end: constructor $
 >>>>>>> Changement Objectmacro-back
+=======
+$comment: =========== internal_macros_value_field ======== $
+
+$macro: internal_macros_value_field(param_name) $
+    private final InternalValue $(param_name)Value;
+$end: internal_macros_value_field $
+>>>>>>> Revert "Changement Objectmacro-back"
 
         final List<Macro> tempMacros = new ArrayList<>();
         int i = 0;
 >>>>>>> Removed in constructor initialization and add lazy initialization
 
+<<<<<<< HEAD
     DAfterLast(String value) {
 
 <<<<<<< HEAD
@@ -2044,25 +2522,39 @@ $macro: directive_fields(param_name) $
     private DNone $(param_name)None;
 $end: directive_fields $
 >>>>>>> Remove abstraction on directives when building a macro or a parameter
+=======
+$macro: string_param(name) $
+String p$(name)$no_eol$
+$end: string_param $
 
-            $expand: apply_internals_initializer $
+$comment: ========== directives_field ========= $
+>>>>>>> Revert "Changement Objectmacro-back"
 
-            tempMacros[i++] = macro;
-        }
+$macro: directives_field(param_name) $
+    private final List<Directive> $(param_name)Directives = new ArrayList<>();
+$end: directives_field $
 
-        this.list_$name.put(context, tempMacros);
-    }
-$end: internal_macro_setter $
+$comment: ========== none_directive_field ========= $
+
+$macro: none_directive_field(param_name) $
+    private DNone $(param_name)None;
+$end: none_directive_field $
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 $comment$
 ============================================
 ========== ADAPTER TO SET INTERNALS ========
 ============================================
 $end$
+<<<<<<< HEAD
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 
 $macro: class_separator $
 $insert: header $
@@ -2153,6 +2645,7 @@ $comment: ========== param_arg ========== $
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (cause == null) {
             throw new RuntimeException("cause may not be null");
         }
@@ -2163,10 +2656,14 @@ $comment: ========== param_arg ========== $
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 $comment$
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+$comment$
+>>>>>>> Revert "Changement Objectmacro-back"
 ===================================================
 =============== MACRO / TEXT PARTS ================
 ===================================================
 $end$
+<<<<<<< HEAD
 =======
 $comment: ========== string_value ======== $
 
@@ -2198,6 +2695,8 @@ $macro: param_arg(name) $
 p$(name)$no_eol$
 $end: param_arg $
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 
 $comment: ========= string_part ================= $
 >>>>>>> Moved macros to get a better reading of the file
@@ -2227,6 +2726,7 @@ $comment: ========= string_part ================= $
         return new ObjectMacroException(new MParameterNull(paramName).toString());
     }
 
+<<<<<<< HEAD
     static ObjectMacroException cyclicReference(
             String macroName){
 =======
@@ -2238,6 +2738,8 @@ $macro: init_string_builder(index_builder) $
 $end: init_string_builder $
 
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 $comment: ========== insert_macro_part =============== $
 >>>>>>> Moved macros to get a better reading of the file
 
@@ -2255,8 +2757,17 @@ $macro: init_string_builder(index_builder) $
         StringBuilder sb$index_builder = new StringBuilder();
 $end: init_string_builder $
 
+<<<<<<< HEAD
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+$comment: ========= init_string_builder ========= $
+
+$macro: init_string_builder(index_builder) $
+        StringBuilder sb$index_builder = new StringBuilder();
+$end: init_string_builder $
+
+>>>>>>> Revert "Changement Objectmacro-back"
 $comment: ========== set_internal ================== $
 >>>>>>> Moved macros to get a better reading of the file
 
@@ -2361,6 +2872,7 @@ $end: param_macro_ref $
 
 $comment: ========== param_string_ref ============== $
 
+<<<<<<< HEAD
 $macro: param_string_ref(name) $
     private String get$name($expand: context_param $){
 
@@ -2384,36 +2896,39 @@ $end$
 =======
 $comment: ========== param_macro_ref_builder ================== $
 >>>>>>> Changement Objectmacro-back
+=======
+$comment: =========== param_ref =========== $
+>>>>>>> Revert "Changement Objectmacro-back"
 
-$macro: param_macro_ref_builder(name, index_builder) $
-    private String build$name($expand: context_param $){
+$macro: param_ref(name) $
+get$name($expand: context_arg, context_name$)$no_eol$
+$end: param_ref $
 
-        StringBuilder sb$index_builder = new StringBuilder();
-        Context local_context = $expand: context_name, none="context"$;
-        Macro macros[] = this.list_$(name)$expand: get_internal_tail $;
-        $expand: none $
-        boolean first = true;
-        int i = 0;
+$comment$
+===================================================
+===================== OTHER =======================
+===================================================
+$end$
 
-        for(Macro macro : macros){
-            $expand: before_first $
-            $expand: separator $
+$comment: ========== string_value ======== $
 
-            sb$index_builder.append(macro.build(local_context));
-            i++;
+$macro: string_value(string) $
+"$string"$no_eol$
+$end: string_value $
 
-            $expand: after_last $
-        }
+$comment: =========== macro_arg ========== $
 
-        return sb$index_builder.toString();
-    }
-$end: param_macro_ref_builder $
+$macro: macro_arg(name) $
+list_$(name)$no_eol$
+$end: macro_arg $
 
-$comment: =========== param_string_ref_builder ============= $
+$comment: =========== string_arg ========= $
 
-$macro: param_string_ref_builder(name) $
-    private String build$name($expand: context_param$){
+$macro: string_arg(name) $
+field_$(name)$no_eol$
+$end: string_arg $
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 $comment: =========== context_name ============= $
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
@@ -2433,17 +2948,27 @@ $comment: ======== context_param ============ $
         return this.field_$(name)$expand: get_internal_tail $;
     }
 $end: param_string_ref_builder $
+=======
+$comment: ========== param_arg ========== $
+>>>>>>> Revert "Changement Objectmacro-back"
 
-$comment: ========== param_macro_ref ============== $
+$macro: param_arg(name) $
+p$(name)$no_eol$
+$end: param_arg $
 
+<<<<<<< HEAD
 $macro: param_macro_ref(name) $
     private Macro[] get$name($expand: context_param $){
 >>>>>>> Changement Objectmacro-back
+=======
+$comment: =========== context_name ============= $
+>>>>>>> Revert "Changement Objectmacro-back"
 
-        return this.list_$(name)$expand: get_internal_tail $;
-    }
-$end: param_macro_ref $
+$macro: context_name(context_name) $
+$(context_name)$no_eol$
+$end: context_name $
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========== param_string_ref ============== $
 =======
@@ -2460,77 +2985,9 @@ $comment$
 ===================================================
 $end$
 >>>>>>> Remove abstraction on directives when building a macro or a parameter
-
-$macro: param_string_ref(name) $
-    private String get$name($expand: context_param $){
-
-        return this.field_$(name)$expand: get_internal_tail $;
-    }
-$end: param_string_ref $
-
-$comment: =========== param_ref =========== $
-
-$macro: param_ref(name) $
-get$name($expand: context_arg, context_name$)$no_eol$
-$end: param_ref $
-
-$comment: =========== context_name ============= $
-
-$macro: context_name(context_name) $
-$(context_name)$no_eol$
-$end: context_name $
-
-$comment: =========== none ============ $
-
-$macro: none $
-if(macros.length == 0){
-    $expand: string_part, param_insert_part, eol_part, insert_macro_part $
-}
-$end: none $
-
-$comment: ========== before_first ========= $
-
-$macro: before_first $
-if(first){
-    $expand: string_part, param_insert_part, eol_part, insert_macro_part $
-    first = false;
-}
-$end: before_first $
-
-$comment: ========== after_last ========== $
-
-$macro: after_last $
-if(i == macros.length){
-    $expand: string_part, param_insert_part, eol_part, insert_macro_part $
-}
-$end: after_last $
-
-$comment: ======== separator =========== $
-
-$macro: separator $
-if(first) {
-  first = false;
-}
-else {
-   $expand: string_part, param_insert_part, eol_part, insert_macro_part $
-}
-$end: separator $
-
-$comment: =========== get_internal_tail ============ $
-
-$macro: get_internal_tail $
-.get(context)$no_eol$
-$end: get_internal_tail $
-
-$comment: ========== context_verifier ============ $
-
-$macro: context_verifier $
-        if(context == null){
-            throw new RuntimeException("context cannot be null here");
-        }
-$end: context_verifier $
-
+=======
 $comment: ======== context_param ============ $
+>>>>>>> Revert "Changement Objectmacro-back"
 
 $macro: context_param $
 Context context$no_eol$
@@ -2542,23 +2999,107 @@ $macro: context_arg $
 context$no_eol$
 $end: context_arg $
 
-$comment: ========= internal_string_setter ========= $
+$comment: =========== get_internal_tail ============ $
 
-$macro: internal_string_setter(name) $
-    void set$name(
-            Context context,
-            String value) {
+$macro: get_internal_tail $
+.get(context)$no_eol$
+$end: get_internal_tail $
 
-        if(value == null){
-            throw new RuntimeException("value cannot be null here");
+$comment$
+===================================================
+===================== DIRECTIVES ==================
+===================================================
+$end$
+
+$comment: =========== class_none ============ $
+
+$macro: class_none $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+
+class DNone
+        extends Directive{
+
+    DNone(String value) {
+
+        super(value);
+    }
+
+    @Override
+    String apply(
+            Integer index,
+            String macro,
+            Integer list_size) {
+
+        if(list_size == 0){
+            return this.value;
         }
 
-        this.field_$name.put(context, value);
+        return macro;
     }
-$end: internal_string_setter $
+}
+$end: class_none $
 
-$comment: ========== init_macro_internal =========== $
+$comment: ========== class_before_first ========= $
 
+$macro: class_before_first $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+
+class DBeforeFirst
+        extends Directive {
+
+    DBeforeFirst(String value) {
+
+        super(value);
+    }
+
+    @Override
+    String apply(
+            Integer index,
+            String macro,
+            Integer list_size) {
+
+        if(index == 0){
+            return this.value.concat(macro);
+        }
+        return macro;
+    }
+}
+
+$end: class_before_first $
+
+$comment: ========== class_after_last ========== $
+
+$macro: class_after_last $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+
+class DAfterLast
+        extends Directive {
+
+    DAfterLast(String value) {
+
+        super(value);
+    }
+
+    @Override
+    String apply(
+            Integer index,
+            String macro,
+            Integer list_size) {
+
+        if(index == list_size - 1){
+            return macro.concat(this.value);
+        }
+        return macro;
+    }
+}
+$end: class_after_last $
+
+$comment: ======== class_separator =========== $
+
+<<<<<<< HEAD
 <<<<<<< HEAD
 $macro: init_macro_internal(name) $
     this.list_$name = new LinkedHashMap<>();
@@ -2568,12 +3109,34 @@ $end: init_macro_internal $
             return macro;
         }
 >>>>>>> Remove abstraction on directives when building a macro or a parameter
+=======
+$macro: class_separator $
+$insert: header $
+$expand: package_declaration, before_first="\n" $
+>>>>>>> Revert "Changement Objectmacro-back"
 
-$comment: ========== init_string_internal =========== $
+class DSeparator
+        extends Directive {
 
-$macro: init_string_internal(name) $
-    this.field_$name = new LinkedHashMap<>();
-$end: init_string_internal $
+    DSeparator(String value) {
+
+        super(value);
+    }
+
+    @Override
+    String apply(
+            Integer index,
+            String macro,
+            Integer list_size) {
+
+        if(list_size == 0 || index == list_size - 1){
+            return macro;
+        }
+
+        return macro.concat(this.value);
+    }
+}
+$end: class_separator $
 
 $comment$
 =========================================================
@@ -2636,6 +3199,18 @@ public class ObjectMacroException
             String paramName){
 
         return new ObjectMacroException(new MParameterNull(paramName).toString());
+    }
+
+    static ObjectMacroException cyclicReference(
+            String macroName){
+
+        return new ObjectMacroException(new MCyclicReference(macroName).toString());
+    }
+
+    static ObjectMacroException cannotModify(
+            String macroName){
+
+        return new ObjectMacroException(new MCannotModify(macroName).toString());
     }
 
 }
@@ -2803,8 +3378,11 @@ $end: macro_null_in_list $
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 
 $comment: ============ cannot_modify ============ $
 
@@ -2884,9 +3462,12 @@ public class MCyclicReference {
 }
 $end: cyclic_reference $
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"

@@ -5,6 +5,9 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 public class MInternalMacroSetter {
 
   private final String pParamName;
@@ -21,6 +24,7 @@ public class MInternalMacroSetter {
 
   private String rParamName() {
     return this.mInternalMacroSetter.pParamName();
+<<<<<<< HEAD
 =======
 import java.util.*;
 
@@ -48,12 +52,15 @@ public class MInternalMacroSetter {
   private String rParamName() {
     return this.mInternalMacroSetter.pParamName();
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("    void set");
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     sb.append(rParamName());
@@ -63,10 +70,14 @@ public class MInternalMacroSetter {
 =======
     sb.append(rParamName());
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+    sb.append(rParamName());
+>>>>>>> Revert "Changement Objectmacro-back"
     sb.append("(");
     sb.append(System.getProperty("line.separator"));
     sb.append("            Context context,");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -84,6 +95,9 @@ public class MInternalMacroSetter {
 =======
     sb.append("            InternalValue internal_value) {");
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    sb.append("            InternalValue internal_value) {");
+>>>>>>> Revert "Changement Objectmacro-back"
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        if(internal_value == null){");
@@ -93,6 +107,7 @@ public class MInternalMacroSetter {
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 <<<<<<< HEAD
     sb.append("        final List<Macro> tempMacros = new ArrayList<>();");
     sb.append(System.getProperty("line.separator"));
@@ -142,171 +157,21 @@ public class MInternalMacroSetter {
 =======
     sb.append(".put(context, internal_value);");
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+    sb.append("        this.list_");
+    sb.append(rParamName());
+    sb.append(".put(context, internal_value);");
+>>>>>>> Revert "Changement Objectmacro-back"
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+<<<<<<< HEAD
 =======
 public class MInternalMacroSetter extends Macro{
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 
-    private String field_Name;
-
-    private Macro list_ListApplyInternalsInitializer[];
-
-    private final Context ListApplyInternalsInitializerContext = new Context();
-
-    public MInternalMacroSetter(String pName, Macro pListApplyInternalsInitializer[]){
-
-        this.setPName(pName);
-        this.setPListApplyInternalsInitializer(pListApplyInternalsInitializer);
-    }
-
-    private void setPName(String pName){
-        if(pName == null){
-            throw ObjectMacroException.parameterNull("Name");
-        }
-
-        this.field_Name = pName;
-    }
-
-    private void setPListApplyInternalsInitializer(Macro pListApplyInternalsInitializer[]){
-        if(pListApplyInternalsInitializer == null){
-            throw ObjectMacroException.parameterNull("ListApplyInternalsInitializer");
-        }
-
-        Macro macros[] = pListApplyInternalsInitializer;
-        this.list_ListApplyInternalsInitializer = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ListApplyInternalsInitializer");
-            }
-
-            macro.apply(new InternalsInitializer("ListApplyInternalsInitializer"){
-@Override
-void setApplyInternalsInitializer(MApplyInternalsInitializer mApplyInternalsInitializer){
-
-        }
-});
-
-            this.list_ListApplyInternalsInitializer[i++] = macro;
-
-        }
-    }
-
-    private String buildName(){
-
-        return this.field_Name;
-    }
-
-    private String buildListApplyInternalsInitializer(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = ListApplyInternalsInitializerContext;
-        Macro macros[] = this.list_ListApplyInternalsInitializer;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-                        
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
-    }
-
-    private String getName(){
-
-        return this.field_Name;
-    }
-
-    private Macro[] getListApplyInternalsInitializer(){
-
-        return this.list_ListApplyInternalsInitializer;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setInternalMacroSetter(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    void set");
-        sb0.append(buildName());
-        sb0.append("(");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            Context context,");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            Macro macros[]) ");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        if(macros == null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            throw new RuntimeException(\"macros cannot be null here\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        Macro[] tempMacros = new Macro[macros.length];");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        int i = 0;");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        for(Macro macro : macros)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            if(macro == null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("                throw ObjectMacroException.macroNull(i, \"");
-        sb0.append(buildName());
-        sb0.append("\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            ");
-        sb0.append(buildListApplyInternalsInitializer());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            tempMacros[i++] = macro;");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        this.list_");
-        sb0.append(buildName());
-        sb0.append(".put(context, tempMacros);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

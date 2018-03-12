@@ -3,12 +3,16 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 import java.util.*;
 
 public class MConstructor {
 
   private final String pName;
   private final MConstructor mConstructor = this;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   private final List<Object> eStringParam = new LinkedList<Object>();
@@ -30,6 +34,12 @@ public class MConstructor {
 =======
   private final List<Object> eInitInternalValue = new LinkedList<Object>();
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+  private final List<Object> eStringParam = new LinkedList<Object>();
+  private final List<Object> eSetParam = new LinkedList<Object>();
+  private final List<Object> eInitMacroParam_InitMacroInternal_InitStringInternal = new LinkedList<Object>();
+  private final List<Object> eInitInternalValue = new LinkedList<Object>();
+>>>>>>> Revert "Changement Objectmacro-back"
 
   public MConstructor(String pName) {
     if(pName == null) throw new NullPointerException();
@@ -38,6 +48,7 @@ public class MConstructor {
 
   public MStringParam newStringParam(String pName) {
     MStringParam lStringParam = new MStringParam(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     this.eStringParam.add(lStringParam);
@@ -57,11 +68,16 @@ public class MConstructor {
 
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
     this.eStringParam.add(lStringParam);
     return lStringParam;
   }
 
+<<<<<<< HEAD
 >>>>>>> Removed in constructor initialization and add lazy initialization
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
   public MSetParam newSetParam(String pName) {
     MSetParam lSetParam = new MSetParam(pName);
     this.eSetParam.add(lSetParam);
@@ -70,14 +86,18 @@ public class MConstructor {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
   public MInitMacroParam newInitMacroParam(String pName) {
     MInitMacroParam lInitMacroParam = new MInitMacroParam(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroParam);
     return lInitMacroParam;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   public MInitMacroInternal newInitMacroInternal(String pName) {
     MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
@@ -92,11 +112,17 @@ public class MConstructor {
     MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroInternal);
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+  public MInitMacroInternal newInitMacroInternal(String pName) {
+    MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
+    this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroInternal);
+>>>>>>> Revert "Changement Objectmacro-back"
     return lInitMacroInternal;
   }
 
   public MInitStringInternal newInitStringInternal(String pName) {
     MInitStringInternal lInitStringInternal = new MInitStringInternal(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitStringInternal);
@@ -120,13 +146,22 @@ public class MConstructor {
 <<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
+=======
+    this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitStringInternal);
+    return lInitStringInternal;
+  }
+
+>>>>>>> Revert "Changement Objectmacro-back"
   public MInitInternalValue newInitInternalValue(String pParamName) {
     MInitInternalValue lInitInternalValue = new MInitInternalValue(pParamName);
     this.eInitInternalValue.add(lInitInternalValue);
     return lInitInternalValue;
   }
 
+<<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
   String pName() {
     return this.pName;
   }
@@ -143,6 +178,7 @@ public class MConstructor {
     sb.append("(");
     {
       boolean first = true;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       for(Object oStringParam : this.eStringParam) {
@@ -181,95 +217,16 @@ public class MConstructor extends Macro{
         if(pName == null){
             throw ObjectMacroException.parameterNull("Name");
 >>>>>>> Changement Objectmacro-back
+=======
+      for(Object oStringParam : this.eStringParam) {
+        if(first) {
+          first = false;
+>>>>>>> Revert "Changement Objectmacro-back"
         }
-
-        this.field_Name = pName;
-    }
-
-    private void setPListSetParam(Macro pListSetParam[]){
-        if(pListSetParam == null){
-            throw ObjectMacroException.parameterNull("ListSetParam");
+        else {
+          sb.append(", ");
         }
-
-        Macro macros[] = pListSetParam;
-        this.list_ListSetParam = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ListSetParam");
-            }
-
-            macro.apply(new InternalsInitializer("ListSetParam"){
-@Override
-void setSetParam(MSetParam mSetParam){
-
-        }
-});
-
-            this.list_ListSetParam[i++] = macro;
-
-        }
-    }
-
-    private void setPListParam(Macro pListParam[]){
-        if(pListParam == null){
-            throw ObjectMacroException.parameterNull("ListParam");
-        }
-
-        Macro macros[] = pListParam;
-        this.list_ListParam = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ListParam");
-            }
-
-            macro.apply(new InternalsInitializer("ListParam"){
-@Override
-void setStringParam(MStringParam mStringParam){
-
-        }
-@Override
-void setMacroParam(MMacroParam mMacroParam){
-
-        }
-});
-
-            this.list_ListParam[i++] = macro;
-
-        }
-    }
-
-    private void setPListInternal(Macro pListInternal[]){
-        if(pListInternal == null){
-            throw ObjectMacroException.parameterNull("ListInternal");
-        }
-
-        Macro macros[] = pListInternal;
-        this.list_ListInternal = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ListInternal");
-            }
-
-            macro.apply(new InternalsInitializer("ListInternal"){
-@Override
-void setInitMacroInternal(MInitMacroInternal mInitMacroInternal){
-
-        }
-@Override
-void setInitStringInternal(MInitStringInternal mInitStringInternal){
-
-        }
-});
-
-            this.list_ListInternal[i++] = macro;
-
-        }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -283,34 +240,20 @@ void setInitStringInternal(MInitStringInternal mInitStringInternal){
       }
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+        sb.append(oStringParam.toString());
+      }
+>>>>>>> Revert "Changement Objectmacro-back"
     }
-
-    private String buildName(){
-
-        return this.field_Name;
+    sb.append("){");
+    sb.append(System.getProperty("line.separator"));
+    if(this.eSetParam.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
     }
-
-    private String buildListSetParam(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = ListSetParamContext;
-        Macro macros[] = this.list_ListSetParam;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(first){
-            sb0.append(LINE_SEPARATOR);
-    first = false;
-}
-            
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
+    for(Object oSetParam : this.eSetParam) {
+      sb.append(oSetParam.toString());
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -386,66 +329,23 @@ else {
 
         return sb0.toString();
 >>>>>>> Changement Objectmacro-back
+=======
+    if(this.eInitMacroParam_InitMacroInternal_InitStringInternal.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
     }
-
-    private String getName(){
-
-        return this.field_Name;
+    for(Object oInitMacroParam_InitMacroInternal_InitStringInternal : this.eInitMacroParam_InitMacroInternal_InitStringInternal) {
+      sb.append(oInitMacroParam_InitMacroInternal_InitStringInternal.toString());
+>>>>>>> Revert "Changement Objectmacro-back"
     }
-
-    private Macro[] getListSetParam(){
-
-        return this.list_ListSetParam;
+    if(this.eInitInternalValue.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
     }
-
-    private Macro[] getListParam(){
-
-        return this.list_ListParam;
+    for(Object oInitInternalValue : this.eInitInternalValue) {
+      sb.append(oInitInternalValue.toString());
     }
+    sb.append("    }");
+    sb.append(System.getProperty("line.separator"));
+    return sb.toString();
+  }
 
-    private Macro[] getListInternal(){
-
-        return this.list_ListInternal;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setConstructor(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    public M");
-        sb0.append(buildName());
-        sb0.append("(");
-        sb0.append(buildListParam());
-        sb0.append(")");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(buildListSetParam());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(buildListInternal());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

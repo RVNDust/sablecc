@@ -21,6 +21,7 @@ import back.macro.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,11 @@ import java.util.List;
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> Revert "Changement Objectmacro-back"
 public class Main {
 
     public static void main(
@@ -42,6 +48,9 @@ public class Main {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
         System.out.print("======== Main Test ===========\n");
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
@@ -50,6 +59,7 @@ public class Main {
         macros.add(mb2);
         macros.add(new MB("First argument in MB1"));
         macros.add(new MB("First argument in MB2"));
+<<<<<<< HEAD
 
         try{
             mb.addS(new MC());
@@ -117,6 +127,16 @@ public class Main {
             MA ma = new MA("First argument of MA", macros, macros1);
             macros[0] = new  MC();
 >>>>>>> Changement Objectmacro-back
+=======
+
+        try{
+            mb.addS(new MC());
+            ma.addZ(new MC());
+            ma.addAllY(macros);
+            ma.addY(mb);
+            ma.addZ(new MC());
+            mb2.addS(new MC());
+>>>>>>> Revert "Changement Objectmacro-back"
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){

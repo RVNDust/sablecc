@@ -1,8 +1,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Removed in constructor initialization and add lazy initialization
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -21,16 +24,20 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
 >>>>>>> Removed in constructor initialization and add lazy initialization
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 package org.sablecc.objectmacro.codegeneration.java.structure;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -57,19 +64,20 @@ import java.util.List;
  * Created by lam on 17/11/17.
  */
 >>>>>>> Changement Objectmacro-back
+=======
+import java.util.*;
+
+>>>>>>> Revert "Changement Objectmacro-back"
 public class Macro {
 
-    private MMacro macro;
-
-    private final List<String> parameters;
-
-    private final List<String> internals;
+    private final MMacro macro;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
     private final String name;
 
     private final List<String> parametersName;
+<<<<<<< HEAD
 
     private final List<String> internalsName;
 
@@ -131,60 +139,36 @@ public class Macro {
     public ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> getSetter() {return this.list_ListSetter; }
     public void setSetter(ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> listSetter) {this.list_ListSetter = listSetter;}
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 
-    private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> list_ListBuilder = new ArrayList<>();
-    public ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> getBuilder() {return this.list_ListBuilder; }
-    public void setBuilder(ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> listBuilder) {this.list_ListBuilder = listBuilder;}
-
-    private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> list_ListRef = new ArrayList<>();
-    public ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> getRef() {return this.list_ListRef; }
-    public void setRef(ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> listRef) {this.list_ListRef = listRef;}
-
-    private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> list_ListRedefinedApplyInitializer = new ArrayList<>();
-    public ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> getRedefinedApplyInitializer() {return this.list_ListRedefinedApplyInitializer; }
-    public void setRedefinedApplyInitializer(ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> listRedefinedApplyInitializer) {this.list_ListRedefinedApplyInitializer = listRedefinedApplyInitializer;}
-
-    private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> list_ListMacroBuilder = new ArrayList<>();
-    public ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> getMacroBuilder() {return this.list_ListMacroBuilder; }
-    public void setMacroBuilder(ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> listMacroBuilder) {this.list_ListMacroBuilder = listMacroBuilder;}
-
-    private ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> list_ListEmptyBuilderWithContext = new ArrayList<>();
-    public ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> getEmptyBuilderWithContext() {return this.list_ListEmptyBuilderWithContext; }
-    public void setEmptyBuilderWithContext(ArrayList<org.sablecc.objectmacro.codegeneration.java.macro.Macro> listEmptyBuilderWithContext) {this.list_ListEmptyBuilderWithContext = listEmptyBuilderWithContext;}
+    private final List<String> internalsName;
 
     public Macro(
-            String name,
-            List<String> parameters,
-            List<String> internals){
+            MMacro macro,
+            List<String> parametersName,
+            List<String> internalsName,
+            String name){
+
+        this.macro = macro;
+        this.parametersName = parametersName;
+        this.internalsName = internalsName;
         this.name = name;
-        this.parameters = parameters;
-        this.internals = internals;
     }
 
-    public List<String> getInternals() {
-
-        return internals;
+    public List<String> getInternalsName() {
+        return this.internalsName;
     }
 
-    public List<String> getParameters() {
-
-        return parameters;
+    public List<String> getParametersName() {
+        return this.parametersName;
     }
 
-    private void buildMacro() {
-        this.macro = new MMacro(name,
-                list_ListPackage.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListPackage.size()]),
-                list_ListField.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListField.size()]),
-                list_ListContextField.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListContextField.size()]),
-                list_ListConstructor.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListConstructor.size()]),
-                list_ListSetter.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListSetter.size()]),
-                list_ListBuilder.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListBuilder.size()]),
-                list_ListRef.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListRef.size()]),
-                list_ListRedefinedApplyInitializer.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListRedefinedApplyInitializer.size()]),
-                list_ListMacroBuilder.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListMacroBuilder.size()]),
-                list_ListEmptyBuilderWithContext.toArray(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[list_ListEmptyBuilderWithContext.size()]) );
+    public MMacro getMacro() {
+        return this.macro;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         return macro;
@@ -198,5 +182,9 @@ public class Macro {
         buildMacro();
         return macro;
 >>>>>>> Changement Objectmacro-back
+=======
+    public String getName(){
+        return this.name;
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 }

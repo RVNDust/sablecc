@@ -5,6 +5,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MParamMacroRef {
 
   private final String pName;
@@ -18,6 +19,8 @@ import java.util.*;
 
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 public class MParamMacroRef {
 
   private final String pName;
@@ -28,6 +31,7 @@ public class MParamMacroRef {
     this.pName = pName;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   public MContextParam newContextParam() {
     MContextParam lContextParam = new MContextParam();
@@ -71,10 +75,13 @@ public class MParamMacroRef {
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
   String pName() {
     return this.pName;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -85,12 +92,17 @@ public class MParamMacroRef {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
   private String rName() {
     return this.mParamMacroRef.pName();
   }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -101,6 +113,7 @@ public class MParamMacroRef {
     sb.append("        return this.");
     sb.append(rName());
     sb.append("Value;");
+<<<<<<< HEAD
 =======
   private String rIndexBuilder() {
     return this.mParamMacroRef.pIndexBuilder();
@@ -161,186 +174,18 @@ public class MParamMacroRef {
     sb.append(System.getProperty("line.separator"));
 =======
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Revert "Changement Objectmacro-back"
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+<<<<<<< HEAD
 =======
 public class MParamMacroRef extends Macro{
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 
-    private String field_Name;
-
-    private Macro list_ListContextParam[];
-
-    private Macro list_ListGetInternalTail[];
-
-    private final Context ListContextParamContext = new Context();
-    private final Context ListGetInternalTailContext = new Context();
-
-    public MParamMacroRef(String pName, Macro pListContextParam[], Macro pListGetInternalTail[]){
-
-        this.setPName(pName);
-        this.setPListContextParam(pListContextParam);
-        this.setPListGetInternalTail(pListGetInternalTail);
-    }
-
-    private void setPName(String pName){
-        if(pName == null){
-            throw ObjectMacroException.parameterNull("Name");
-        }
-
-        this.field_Name = pName;
-    }
-
-    private void setPListContextParam(Macro pListContextParam[]){
-        if(pListContextParam == null){
-            throw ObjectMacroException.parameterNull("ListContextParam");
-        }
-
-        Macro macros[] = pListContextParam;
-        this.list_ListContextParam = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ListContextParam");
-            }
-
-            macro.apply(new InternalsInitializer("ListContextParam"){
-@Override
-void setContextParam(MContextParam mContextParam){
-
-        }
-});
-
-            this.list_ListContextParam[i++] = macro;
-
-        }
-    }
-
-    private void setPListGetInternalTail(Macro pListGetInternalTail[]){
-        if(pListGetInternalTail == null){
-            throw ObjectMacroException.parameterNull("ListGetInternalTail");
-        }
-
-        Macro macros[] = pListGetInternalTail;
-        this.list_ListGetInternalTail = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ListGetInternalTail");
-            }
-
-            macro.apply(new InternalsInitializer("ListGetInternalTail"){
-@Override
-void setGetInternalTail(MGetInternalTail mGetInternalTail){
-
-        }
-});
-
-            this.list_ListGetInternalTail[i++] = macro;
-
-        }
-    }
-
-    private String buildName(){
-
-        return this.field_Name;
-    }
-
-    private String buildListContextParam(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = ListContextParamContext;
-        Macro macros[] = this.list_ListContextParam;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-                        
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
-    }
-
-    private String buildListGetInternalTail(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = ListGetInternalTailContext;
-        Macro macros[] = this.list_ListGetInternalTail;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-                        
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
-    }
-
-    private String getName(){
-
-        return this.field_Name;
-    }
-
-    private Macro[] getListContextParam(){
-
-        return this.list_ListContextParam;
-    }
-
-    private Macro[] getListGetInternalTail(){
-
-        return this.list_ListGetInternalTail;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setParamMacroRef(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    private Macro[] get");
-        sb0.append(buildName());
-        sb0.append("(");
-        sb0.append(buildListContextParam());
-        sb0.append(")");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        return this.list_");
-        sb0.append(buildName());
-        sb0.append(buildListGetInternalTail());
-        sb0.append(";");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

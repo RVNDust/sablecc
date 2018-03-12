@@ -3,6 +3,9 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 import java.util.*;
 
 public class MRedefinedInternalsSetter {
@@ -66,6 +69,7 @@ public class MRedefinedInternalsSetter {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("@Override");
     sb.append(System.getProperty("line.separator"));
     sb.append("void set");
@@ -79,6 +83,11 @@ public class MRedefinedInternalsSetter {
     sb.append(System.getProperty("line.separator"));
     sb.append("void set");
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+    sb.append("@Override");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("void set");
+>>>>>>> Revert "Changement Objectmacro-back"
     sb.append(rName());
     sb.append("(M");
     sb.append(rName());
@@ -89,6 +98,7 @@ public class MRedefinedInternalsSetter {
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    ");
 =======
     sb.append("        ");
@@ -96,11 +106,15 @@ public class MRedefinedInternalsSetter {
 =======
     sb.append("    ");
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+    sb.append("    ");
+>>>>>>> Revert "Changement Objectmacro-back"
     {
       boolean first = true;
       for(Object oInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart : this.eInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart) {
         if(first) {
           first = false;
+<<<<<<< HEAD
 =======
 public class MRedefinedInternalsSetter extends Macro{
 
@@ -151,51 +165,16 @@ void setInitStringBuilder(MInitStringBuilder mInitStringBuilder){
 void setStringPart(MStringPart mStringPart){
 
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
         }
-@Override
-void setParamInsertPart(MParamInsertPart mParamInsertPart){
-
+        else {
+          sb.append(System.getProperty("line.separator"));
         }
-@Override
-void setEolPart(MEolPart mEolPart){
-
-        }
-@Override
-void setInsertMacroPart(MInsertMacroPart mInsertMacroPart){
-
-        }
-});
-
-            this.list_ListPart[i++] = macro;
-
-        }
+        sb.append(oInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());
+      }
     }
-
-    private void setPListSetInternal(Macro pListSetInternal[]){
-        if(pListSetInternal == null){
-            throw ObjectMacroException.parameterNull("ListSetInternal");
-        }
-
-        Macro macros[] = pListSetInternal;
-        this.list_ListSetInternal = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ListSetInternal");
-            }
-
-            macro.apply(new InternalsInitializer("ListSetInternal"){
-@Override
-void setSetInternal(MSetInternal mSetInternal){
-
-        }
-});
-
-            this.list_ListSetInternal[i++] = macro;
-
-        }
-    }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -292,45 +271,15 @@ else {
         internalsInitializer.setRedefinedInternalsSetter(this);
     }
 >>>>>>> Changement Objectmacro-back
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("@Override");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("void set");
-        sb0.append(buildName());
-        sb0.append("(M");
-        sb0.append(buildName());
-        sb0.append(" m");
-        sb0.append(buildName());
-        sb0.append(")");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    ");
-        sb0.append(buildListPart());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    ");
-        sb0.append(buildListSetInternal());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("}");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
+=======
+    sb.append("    ");
+    for(Object oSetInternal : this.eSetInternal) {
+      sb.append(oSetInternal.toString());
     }
+    sb.append("}");
+    sb.append(System.getProperty("line.separator"));
+    return sb.toString();
+  }
+>>>>>>> Revert "Changement Objectmacro-back"
 
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

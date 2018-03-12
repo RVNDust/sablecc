@@ -38,6 +38,7 @@
 <<<<<<< HEAD
 /sablecc.org.iml
 <<<<<<< HEAD
+<<<<<<< HEAD
 /tests/objectmacro/java/*/macro/
 /tests/objectmacro/common/intermediate/
 <<<<<<< HEAD
@@ -50,3 +51,7 @@
 >>>>>>> Git now ignores macro files in tests directory and intermediate files
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+/tests/objectmacro/java/*/macro/
+/tests/objectmacro/common/intermediate/
+>>>>>>> Revert "Changement Objectmacro-back"

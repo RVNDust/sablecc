@@ -42,13 +42,17 @@ java -cp classes/ back.ParameterNull
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Remove public to prevent user to access to supermacro attributes
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 java -cp classes/ back.Cycle
 
 # Accepted tests
 java -cp classes/ back.Main
 java -cp classes/ back.Inserts
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -62,5 +66,7 @@ java -cp classes/ back.Main
 # Accepted tests
 java -cp classes/ back.Main
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 java -cp classes/ back.Separator
 

@@ -21,6 +21,7 @@ import org.sablecc.exception.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.objectmacro.exception.*;
 =======
 import org.sablecc.objectmacro.exception.CompilerException;
@@ -31,6 +32,9 @@ import org.sablecc.objectmacro.exception.*;
 =======
 import org.sablecc.objectmacro.exception.CompilerException;
 >>>>>>> Changement Objectmacro-back
+=======
+import org.sablecc.objectmacro.exception.*;
+>>>>>>> Revert "Changement Objectmacro-back"
 import org.sablecc.objectmacro.syntax3.node.*;
 <<<<<<< HEAD
 
@@ -47,11 +51,14 @@ public class Param {
 =======
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private final AParam declaration;
 >>>>>>> Verification macro existence when adding a new macro reference
 
 =======
 >>>>>>> Remove arguments in macro references in internal declaration
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
     private final Macro parent;
 
 <<<<<<< HEAD
@@ -81,6 +88,7 @@ public class Param {
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 
+<<<<<<< HEAD
 =======
 >>>>>>> Remove arguments in macro references in internal declaration
 =======
@@ -89,11 +97,14 @@ public class Param {
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
 
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
     private boolean isUsed;
 
     private boolean isString;
 
     Param(
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -110,10 +121,13 @@ public class Param {
 =======
             AParam declaration,
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
             Macro macro,
             GlobalIndex globalIndex) {
 >>>>>>> Verification macro existence when adding a new macro reference
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         if (macro == null) {
             throw new InternalException("scope may not be null");
@@ -136,6 +150,8 @@ public class Param {
         }
 
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
         if (macro == null) {
             throw new InternalException("scope may not be null");
         }
@@ -144,26 +160,8 @@ public class Param {
             throw new InternalException("globalIndex may not be null");
         }
 
-        this.declaration = declaration;
         this.parent = macro;
         this.globalIndex = globalIndex;
-    }
-
-    public Directive newDirective(
-            ADirective directive) {
-
-        String optionName = directive.getName().getText();
-        if (this.directives.containsKey(optionName)) {
-            throw CompilerException.duplicateOption(
-                    directive, this.directives.get(optionName).getDeclaration());
-        }
-
-        Directive newDirective = new Directive(directive, this);
-        this.directives.put(
-                optionName, newDirective);
-        this.allDirectives.add(newDirective);
-
-        return newDirective;
     }
 
     public void addMacroReference(
@@ -180,12 +178,11 @@ public class Param {
         }
 
         if(this.macroReferencesName.containsKey(identifier.getText())){
-            throw CompilerException.duplicateMacroRef(macroRef.getName(), getDeclaration().getName());
+            throw CompilerException.duplicateMacroRef(macroRef.getName(), getNameDeclaration());
         }
 
         this.macroReferences.add(macroRef);
         this.macroReferencesName.put(identifier.getText(), macroRef);
-
     }
 
     public void addParamReference(
@@ -208,15 +205,12 @@ public class Param {
         this.paramReferences.put(name, newParamRef);
     }
 
-    public Set<Directive> getAllDirectives(){
-        return this.allDirectives;
-    }
-
     public Set<AMacroReference> getMacroReferences(){
         return this.macroReferences;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     public void addMacroReference(
@@ -295,15 +289,15 @@ public class Param {
     public TIdentifier getNameDeclaration() {
         return this.declaration.getName();
 >>>>>>> Changement Objectmacro-back
+=======
+    public TIdentifier getNameDeclaration(){
+        return null;
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 
 <<<<<<< HEAD
     public String getName() {
-        return this.declaration.getName().getText();
-    }
-
-    public AParam getDeclaration(){
-        return this.declaration;
+        return null;
     }
 
 =======

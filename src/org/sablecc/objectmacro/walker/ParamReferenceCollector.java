@@ -127,6 +127,7 @@ public class ParamReferenceCollector
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void inAInternal(
             AInternal node) {
 
@@ -167,5 +168,19 @@ public class ParamReferenceCollector
         this.currentMacro.setParamToString(
                 this.currentParam.getNameDeclaration());
 >>>>>>> Changement Objectmacro-back
+=======
+    public void inAInternal(
+            AInternal node) {
+
+        this.currentParam = this.currentMacro
+                .getParam(node.getName());
+    }
+
+    @Override
+    public void outAInternal(
+            AInternal node) {
+
+        this.currentParam = null;
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 }

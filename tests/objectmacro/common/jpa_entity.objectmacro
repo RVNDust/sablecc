@@ -146,6 +146,7 @@ Macro one_to_one
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         column : String;
         join_column : join_column(column);
     Internal
@@ -170,6 +171,12 @@ Macro one_to_one
     Internal
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Changement Objectmacro-back
+=======
+        column : String;
+        join_column : join_column(column);
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Revert "Changement Objectmacro-back"
 {Begin}
 @OneToOne({directives})
 {join_column}
@@ -179,6 +186,7 @@ Macro many_to_many
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -197,6 +205,10 @@ Macro many_to_many
     Internal
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Changement Objectmacro-back
+=======
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Revert "Changement Objectmacro-back"
 {Begin}
 @ManyToMany({directives})
 {End}
@@ -205,6 +217,7 @@ Macro many_to_one
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -223,6 +236,10 @@ Macro many_to_one
     Internal
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Changement Objectmacro-back
+=======
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Revert "Changement Objectmacro-back"
 {Begin}
 @ManyToOne({directives})
 {End}
@@ -231,6 +248,7 @@ Macro one_to_many
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -249,6 +267,10 @@ Macro one_to_many
     Internal
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Changement Objectmacro-back
+=======
+    Internal
+        directives : fetch_strategy, mapped_by;
+>>>>>>> Revert "Changement Objectmacro-back"
 {Begin}
 @OneToMany({directives})
 {End}

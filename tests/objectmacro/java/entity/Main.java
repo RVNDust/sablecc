@@ -1,8 +1,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -21,14 +24,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+>>>>>>> Revert "Changement Objectmacro-back"
 package entity;
 
 import entity.macro.*;
 
 import java.io.File;
 import java.io.FileWriter;
+<<<<<<< HEAD
 <<<<<<< HEAD
 import java.util.ArrayList;
 =======
@@ -49,6 +56,9 @@ import java.util.ArrayList;
 =======
 import java.io.IOException;
 >>>>>>> Changement Objectmacro-back
+=======
+import java.util.ArrayList;
+>>>>>>> Revert "Changement Objectmacro-back"
 
 public class Main {
 
@@ -108,6 +118,7 @@ public class Main {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         MEntity mEntity = new MEntity(entity_name);
         mEntity.addPackage(new MPackageDeclaration("entities"));
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
@@ -149,23 +160,30 @@ public class Main {
 >>>>>>> Removed letter P from add and addAll methods name
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+        MEntity mEntity = new MEntity(entity_name);
+        mEntity.addPackage(new MPackageDeclaration("entities"));
+>>>>>>> Revert "Changement Objectmacro-back"
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
         MGetter getter = new MGetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
-        accessors[0] = setter;
-        accessors[1] = getter;
 
-        attributes[1] = createAttribute("A", Integer.class.getSimpleName());
+        mEntity.addAttributes(createId("id_" + entity_name.toLowerCase(), "AUTO"));
+        mEntity.addAccessors(setter);
+        mEntity.addAccessors(getter);
+
+        mEntity.addAttributes(createAttribute("A", Integer.class.getSimpleName(), false));
         setter = new MSetter("A", Integer.class.getSimpleName());
         getter = new MGetter("A", Integer.class.getSimpleName());
-        accessors[2] = setter;
-        accessors[3] = getter;
+        mEntity.addAccessors(setter);
+        mEntity.addAccessors(getter);
 
-        attributes[2] = createAttribute("B", String.class.getSimpleName());
+        mEntity.addAttributes(createAttribute("B", String.class.getSimpleName(), true));
         setter = new MSetter("B", String.class.getSimpleName());
         getter = new MGetter("B", String.class.getSimpleName());
-        accessors[4] = setter;
-        accessors[5] = getter;
+        mEntity.addAccessors(setter);
+        mEntity.addAccessors(getter);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         mEntity.setPRelationships(new ArrayList<>());
@@ -181,12 +199,16 @@ public class Main {
 =======
         return new MEntity(entity_name, new MPackageDeclaration[]{mPackageDeclaration}, attributes, new MRelationship[0], accessors);
 >>>>>>> Changement Objectmacro-back
+=======
+        return mEntity;
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 
     private static MAttribute createId(
             String name,
             String generation_strategy){
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -198,12 +220,16 @@ public class Main {
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 >>>>>>> Changement Objectmacro-back
+=======
+        MAttribute mAttribute = new MAttribute(name, "Integer");
+>>>>>>> Revert "Changement Objectmacro-back"
         MPrimaryKey mPrimaryKey = new MPrimaryKey();
         MIdIncrementationStrategy mIdIncrementationStrategy = null;
         if(!generation_strategy.equals("")){
             mIdIncrementationStrategy = new MIdIncrementationStrategy(generation_strategy);
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -231,13 +257,19 @@ public class Main {
 =======
         Macro[] id_related;
 >>>>>>> Changement Objectmacro-back
+=======
+        mAttribute.addNotNull(new MNotNull());
+
+>>>>>>> Revert "Changement Objectmacro-back"
         if (mIdIncrementationStrategy == null) {
-            id_related = new Macro[]{mPrimaryKey};
+            mAttribute.addId(mPrimaryKey);
         }
         else{
-            id_related = new Macro[]{mPrimaryKey, mIdIncrementationStrategy};
+            mAttribute.addId(mPrimaryKey);
+            mAttribute.addId(mIdIncrementationStrategy);
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         return new MAttribute(name, "Integer", id_related, new Macro[0]);
@@ -248,10 +280,14 @@ public class Main {
 =======
         return new MAttribute(name, "Integer", id_related, new Macro[0]);
 >>>>>>> Changement Objectmacro-back
+=======
+        return mAttribute;
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 
     private static MAttribute createAttribute(
             String name,
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -273,8 +309,17 @@ public class Main {
 =======
             String type){
 >>>>>>> Changement Objectmacro-back
+=======
+            String type,
+            boolean notNull){
+>>>>>>> Revert "Changement Objectmacro-back"
 
+        MAttribute mAttribute = new MAttribute(name, type);
+        if(notNull) {
+            mAttribute.addNotNull(new MNotNull());
+        }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -289,6 +334,9 @@ public class Main {
 =======
         return new MAttribute(name, type, new Macro[0], new Macro[]{new MNotNull()});
 >>>>>>> Changement Objectmacro-back
+=======
+        return mAttribute;
+>>>>>>> Revert "Changement Objectmacro-back"
     }
 
 }
