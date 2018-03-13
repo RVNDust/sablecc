@@ -4,6 +4,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 import java.util.*;
@@ -116,6 +117,8 @@ public class MRedefinedInternalsSetter {
           first = false;
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> MaJ Fichier de Macro + Generation
 public class MRedefinedInternalsSetter extends Macro{
 
     private String field_Name;
@@ -164,16 +167,58 @@ void setInitStringBuilder(MInitStringBuilder mInitStringBuilder){
 @Override
 void setStringPart(MStringPart mStringPart){
 
+<<<<<<< HEAD
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> MaJ Fichier de Macro + Generation
         }
-        else {
-          sb.append(System.getProperty("line.separator"));
+@Override
+void setParamInsertPart(MParamInsertPart mParamInsertPart){
+
         }
-        sb.append(oInitStringBuilder_StringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());
-      }
+@Override
+void setEolPart(MEolPart mEolPart){
+
+        }
+@Override
+void setInsertMacroPart(MInsertMacroPart mInsertMacroPart){
+
+        }
+});
+
+            this.list_ListPart[i++] = macro;
+
+        }
     }
+
+    private void setPListSetInternal(Macro pListSetInternal[]){
+        if(pListSetInternal == null){
+            throw ObjectMacroException.parameterNull("ListSetInternal");
+        }
+
+        Macro macros[] = pListSetInternal;
+        this.list_ListSetInternal = new Macro[macros.length];
+        int i = 0;
+
+        for(Macro macro : macros){
+            if(macro == null){
+                throw ObjectMacroException.macroNull(i, "ListSetInternal");
+            }
+
+            macro.apply(new InternalsInitializer("ListSetInternal"){
+@Override
+void setSetInternal(MSetInternal mSetInternal){
+
+        }
+});
+
+            this.list_ListSetInternal[i++] = macro;
+
+        }
+    }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -201,6 +246,8 @@ void setStringPart(MStringPart mStringPart){
     return sb.toString();
   }
 =======
+=======
+>>>>>>> MaJ Fichier de Macro + Generation
 
     private String buildName(){
 
@@ -269,6 +316,7 @@ else {
             InternalsInitializer internalsInitializer){
 
         internalsInitializer.setRedefinedInternalsSetter(this);
+<<<<<<< HEAD
     }
 >>>>>>> Changement Objectmacro-back
 =======
@@ -281,5 +329,48 @@ else {
     return sb.toString();
   }
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    }
+>>>>>>> MaJ Fichier de Macro + Generation
 
+    @Override
+    public String build(){
+
+        String local_expansion = this.expansion;
+
+        if(local_expansion != null){
+            return local_expansion;
+        }
+
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("@Override");
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("void set");
+        sb0.append(buildName());
+        sb0.append("(M");
+        sb0.append(buildName());
+        sb0.append(" m");
+        sb0.append(buildName());
+        sb0.append(")");
+        sb0.append("{");
+        sb0.append(LINE_SEPARATOR);
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("    ");
+        sb0.append(buildListPart());
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("    ");
+        sb0.append(buildListSetInternal());
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("}");
+
+        local_expansion = sb0.toString();
+        this.expansion = local_expansion;
+        return local_expansion;
+    }
+
+    @Override
+    String build(Context context) {
+        return build();
+    }
 }
