@@ -7,8 +7,11 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 public class MInternalMacroSetter {
 
   private final String pParamName;
@@ -25,6 +28,7 @@ public class MInternalMacroSetter {
 
   private String rParamName() {
     return this.mInternalMacroSetter.pParamName();
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 import java.util.*;
@@ -55,12 +59,15 @@ public class MInternalMacroSetter {
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("    void set");
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -74,6 +81,9 @@ public class MInternalMacroSetter {
 =======
     sb.append(rParamName());
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    sb.append(rParamName());
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("(");
     sb.append(System.getProperty("line.separator"));
     sb.append("            Context context,");
@@ -82,12 +92,16 @@ public class MInternalMacroSetter {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("            InternalValue internal_value) {");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        if(internal_value == null){");
     sb.append(System.getProperty("line.separator"));
     sb.append("            throw new RuntimeException(\"macros cannot be null\");");
+<<<<<<< HEAD
 =======
     sb.append("            Macro macros[]) {");
 =======
@@ -136,10 +150,13 @@ public class MInternalMacroSetter {
 =======
     sb.append("            tempMacros.add(macro);");
 >>>>>>> Removed in constructor initialization and add lazy initialization
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 =======
 >>>>>>> Add structure which contains list of macros and the context associated
     sb.append("        this.list_");
@@ -163,11 +180,17 @@ public class MInternalMacroSetter {
     sb.append(rParamName());
     sb.append(".put(context, internal_value);");
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    sb.append("        this.list_");
+    sb.append(rParamName());
+    sb.append(".put(context, internal_value);");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 public class MInternalMacroSetter extends Macro{
@@ -177,81 +200,7 @@ public class MInternalMacroSetter extends Macro{
 =======
 public class MInternalMacroSetter extends Macro{
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    private String field_ParamName;
-
-    public MInternalMacroSetter(String pParamName){
-
-        this.setPParamName(pParamName);
-    }
-
-    private void setPParamName(String pParamName){
-        if(pParamName == null){
-            throw ObjectMacroException.parameterNull("ParamName");
-        }
-
-        this.field_ParamName = pParamName;
-    }
-
-    private String buildParamName(){
-
-        return this.field_ParamName;
-    }
-
-    private String getParamName(){
-
-        return this.field_ParamName;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setInternalMacroSetter(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    void set");
-        sb0.append(buildParamName());
-        sb0.append("(");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("                Context context,");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("                InternalValue internal_value) ");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            if(internal_value == null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("                throw new RuntimeException(\"macros cannot be null\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            this.list_");
-        sb0.append(buildParamName());
-        sb0.append(".put(context, internal_value);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

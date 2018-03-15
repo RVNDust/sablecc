@@ -5,8 +5,11 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 public class MInternalStringSetter {
 
   private final String pName;
@@ -31,6 +34,7 @@ public class MInternalStringSetter {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    void set");
 =======
     sb.append("    public void set");
@@ -41,6 +45,9 @@ public class MInternalStringSetter {
 =======
     sb.append("    void set");
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    sb.append("    void set");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(rName());
     sb.append("(");
     sb.append(System.getProperty("line.separator"));
@@ -65,6 +72,7 @@ public class MInternalStringSetter {
     return sb.toString();
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 public class MInternalStringSetter extends Macro{
 >>>>>>> Changement Objectmacro-back
@@ -73,81 +81,7 @@ public class MInternalStringSetter extends Macro{
 =======
 public class MInternalStringSetter extends Macro{
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    private String field_Name;
-
-    public MInternalStringSetter(String pName){
-
-        this.setPName(pName);
-    }
-
-    private void setPName(String pName){
-        if(pName == null){
-            throw ObjectMacroException.parameterNull("Name");
-        }
-
-        this.field_Name = pName;
-    }
-
-    private String buildName(){
-
-        return this.field_Name;
-    }
-
-    private String getName(){
-
-        return this.field_Name;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setInternalStringSetter(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    void set");
-        sb0.append(buildName());
-        sb0.append("(");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            Context context,");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            String value) ");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        if(value == null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            throw new RuntimeException(\"value cannot be null here\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        this.field_");
-        sb0.append(buildName());
-        sb0.append(".put(context, value);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

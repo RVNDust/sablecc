@@ -7,6 +7,9 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 public class MParamMacroRef {
 
   private final String pName;
@@ -15,6 +18,7 @@ public class MParamMacroRef {
   public MParamMacroRef(String pName) {
     if(pName == null) throw new NullPointerException();
     this.pName = pName;
+<<<<<<< HEAD
 =======
 import java.util.*;
 
@@ -78,10 +82,15 @@ public class MParamMacroRef {
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+  }
+
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   String pName() {
     return this.pName;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -95,6 +104,8 @@ public class MParamMacroRef {
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   private String rName() {
     return this.mParamMacroRef.pName();
   }
@@ -102,8 +113,11 @@ public class MParamMacroRef {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -114,6 +128,7 @@ public class MParamMacroRef {
     sb.append("        return this.");
     sb.append(rName());
     sb.append("Value;");
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   private String rIndexBuilder() {
@@ -178,10 +193,14 @@ public class MParamMacroRef {
 =======
     sb.append(System.getProperty("line.separator"));
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 public class MParamMacroRef extends Macro{
@@ -191,68 +210,7 @@ public class MParamMacroRef extends Macro{
 =======
 public class MParamMacroRef extends Macro{
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    private String field_Name;
-
-    public MParamMacroRef(String pName){
-
-        this.setPName(pName);
-    }
-
-    private void setPName(String pName){
-        if(pName == null){
-            throw ObjectMacroException.parameterNull("Name");
-        }
-
-        this.field_Name = pName;
-    }
-
-    private String buildName(){
-
-        return this.field_Name;
-    }
-
-    private String getName(){
-
-        return this.field_Name;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setParamMacroRef(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    private InternalValue get");
-        sb0.append(buildName());
-        sb0.append("()");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        return this.");
-        sb0.append(buildName());
-        sb0.append("Value;");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

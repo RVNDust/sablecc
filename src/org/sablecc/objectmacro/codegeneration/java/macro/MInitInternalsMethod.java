@@ -3,6 +3,9 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 import java.util.*;
 
 public class MInitInternalsMethod {
@@ -37,6 +40,7 @@ public class MInitInternalsMethod {
     sb.append(rName());
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("Internals(Context context){");
 =======
     sb.append("Internals(){");
@@ -44,6 +48,9 @@ public class MInitInternalsMethod {
 =======
     sb.append("Internals(Context context){");
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
+=======
+    sb.append("Internals(Context context){");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(System.getProperty("line.separator"));
     sb.append("        for(Macro macro : this.list_");
     sb.append(rName());
@@ -59,131 +66,11 @@ public class MInitInternalsMethod {
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+<<<<<<< HEAD
 =======
 public class MInitInternalsMethod extends Macro{
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    private String field_Name;
-
-    private Macro list_ApplyInternalsInitializer[];
-
-    private final Context ApplyInternalsInitializerContext = new Context();
-
-    public MInitInternalsMethod(String pName, Macro pApplyInternalsInitializer[]){
-
-        this.setPName(pName);
-        this.setPApplyInternalsInitializer(pApplyInternalsInitializer);
-    }
-
-    private void setPName(String pName){
-        if(pName == null){
-            throw ObjectMacroException.parameterNull("Name");
-        }
-
-        this.field_Name = pName;
-    }
-
-    private void setPApplyInternalsInitializer(Macro pApplyInternalsInitializer[]){
-        if(pApplyInternalsInitializer == null){
-            throw ObjectMacroException.parameterNull("ApplyInternalsInitializer");
-        }
-
-        Macro macros[] = pApplyInternalsInitializer;
-        this.list_ApplyInternalsInitializer = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ApplyInternalsInitializer");
-            }
-
-            macro.apply(new InternalsInitializer("ApplyInternalsInitializer"){
-@Override
-void setApplyInternalsInitializer(MApplyInternalsInitializer mApplyInternalsInitializer){
-
-        }
-});
-
-            this.list_ApplyInternalsInitializer[i++] = macro;
-
-        }
-    }
-
-    private String buildName(){
-
-        return this.field_Name;
-    }
-
-    private String buildApplyInternalsInitializer(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = ApplyInternalsInitializerContext;
-        Macro macros[] = this.list_ApplyInternalsInitializer;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-                        
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
-    }
-
-    private String getName(){
-
-        return this.field_Name;
-    }
-
-    private Macro[] getApplyInternalsInitializer(){
-
-        return this.list_ApplyInternalsInitializer;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setInitInternalsMethod(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    private void init");
-        sb0.append(buildName());
-        sb0.append("Internals(Context context)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        for(Macro macro : this.list_");
-        sb0.append(buildName());
-        sb0.append(")");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            ");
-        sb0.append(buildApplyInternalsInitializer());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

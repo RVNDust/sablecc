@@ -5,6 +5,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.*;
 
 =======
@@ -13,10 +14,15 @@ import java.util.*;
 import java.util.*;
 
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
+=======
+import java.util.*;
+
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 public class MInitInternalsCall {
 
   private final String pParamName;
   private final MInitInternalsCall mInitInternalsCall = this;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   private final List<Object> eContextArg = new LinkedList<Object>();
@@ -34,14 +40,22 @@ public class MInitInternalsCall {
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
 =======
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+  private final List<Object> eContextArg = new LinkedList<Object>();
+
+  MInitInternalsCall(String pParamName) {
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     if(pParamName == null) throw new NullPointerException();
     this.pParamName = pParamName;
   }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   public MContextArg newContextArg() {
     MContextArg lContextArg = new MContextArg();
     this.eContextArg.add(lContextArg);
@@ -49,10 +63,13 @@ public class MInitInternalsCall {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
 =======
 >>>>>>> Lazy initialization in build method instead of eager initialization in add methods
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   String pParamName() {
     return this.pParamName;
   }
@@ -67,6 +84,7 @@ public class MInitInternalsCall {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("        init");
 =======
     sb.append("init");
@@ -74,6 +92,9 @@ public class MInitInternalsCall {
 =======
     sb.append("        init");
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+    sb.append("        init");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(rParamName());
     sb.append("Internals(");
     if(this.eContextArg.size() == 0) {
@@ -84,6 +105,7 @@ public class MInitInternalsCall {
     }
     sb.append(");");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     sb.append("        ");
@@ -103,120 +125,10 @@ public class MInitInternalsCall {
 =======
 public class MInitInternalsCall extends Macro{
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+    sb.append("        ");
+    return sb.toString();
+  }
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    private String field_ParamName;
-
-    private Macro list_ContextArg[];
-
-    private final Context ContextArgContext = new Context();
-
-    public MInitInternalsCall(String pParamName, Macro pContextArg[]){
-
-        this.setPParamName(pParamName);
-        this.setPContextArg(pContextArg);
-    }
-
-    private void setPParamName(String pParamName){
-        if(pParamName == null){
-            throw ObjectMacroException.parameterNull("ParamName");
-        }
-
-        this.field_ParamName = pParamName;
-    }
-
-    private void setPContextArg(Macro pContextArg[]){
-        if(pContextArg == null){
-            throw ObjectMacroException.parameterNull("ContextArg");
-        }
-
-        Macro macros[] = pContextArg;
-        this.list_ContextArg = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "ContextArg");
-            }
-
-            macro.apply(new InternalsInitializer("ContextArg"){
-@Override
-void setContextArg(MContextArg mContextArg){
-
-        }
-});
-
-            this.list_ContextArg[i++] = macro;
-
-        }
-    }
-
-    private String buildParamName(){
-
-        return this.field_ParamName;
-    }
-
-    private String buildContextArg(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = ContextArgContext;
-        Macro macros[] = this.list_ContextArg;
-        if(macros.length == 0){
-            sb0.append("null");
-}
-        boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-                        
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
-    }
-
-    private String getParamName(){
-
-        return this.field_ParamName;
-    }
-
-    private Macro[] getContextArg(){
-
-        return this.list_ContextArg;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setInitInternalsCall(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("init");
-        sb0.append(buildParamName());
-        sb0.append("Internals(");
-        sb0.append(buildContextArg());
-        sb0.append(");");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

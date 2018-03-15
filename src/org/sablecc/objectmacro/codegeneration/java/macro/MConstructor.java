@@ -5,14 +5,18 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 import java.util.*;
 
 public class MConstructor {
 
   private final String pName;
   private final MConstructor mConstructor = this;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -41,6 +45,12 @@ public class MConstructor {
   private final List<Object> eInitMacroParam_InitMacroInternal_InitStringInternal = new LinkedList<Object>();
   private final List<Object> eInitInternalValue = new LinkedList<Object>();
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+  private final List<Object> eStringParam = new LinkedList<Object>();
+  private final List<Object> eSetParam = new LinkedList<Object>();
+  private final List<Object> eInitMacroParam_InitMacroInternal_InitStringInternal = new LinkedList<Object>();
+  private final List<Object> eInitInternalValue = new LinkedList<Object>();
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
   public MConstructor(String pName) {
     if(pName == null) throw new NullPointerException();
@@ -49,6 +59,7 @@ public class MConstructor {
 
   public MStringParam newStringParam(String pName) {
     MStringParam lStringParam = new MStringParam(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -71,14 +82,19 @@ public class MConstructor {
 =======
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     this.eStringParam.add(lStringParam);
     return lStringParam;
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Removed in constructor initialization and add lazy initialization
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   public MSetParam newSetParam(String pName) {
     MSetParam lSetParam = new MSetParam(pName);
     this.eSetParam.add(lSetParam);
@@ -88,16 +104,20 @@ public class MConstructor {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   public MInitMacroParam newInitMacroParam(String pName) {
     MInitMacroParam lInitMacroParam = new MInitMacroParam(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroParam);
     return lInitMacroParam;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   public MInitMacroInternal newInitMacroInternal(String pName) {
@@ -118,11 +138,17 @@ public class MConstructor {
     MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroInternal);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+  public MInitMacroInternal newInitMacroInternal(String pName) {
+    MInitMacroInternal lInitMacroInternal = new MInitMacroInternal(pName);
+    this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitMacroInternal);
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     return lInitMacroInternal;
   }
 
   public MInitStringInternal newInitStringInternal(String pName) {
     MInitStringInternal lInitStringInternal = new MInitStringInternal(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -148,11 +174,16 @@ public class MConstructor {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
 =======
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     this.eInitMacroParam_InitMacroInternal_InitStringInternal.add(lInitStringInternal);
     return lInitStringInternal;
   }
 
+<<<<<<< HEAD
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   public MInitInternalValue newInitInternalValue(String pParamName) {
     MInitInternalValue lInitInternalValue = new MInitInternalValue(pParamName);
     this.eInitInternalValue.add(lInitInternalValue);
@@ -160,9 +191,12 @@ public class MConstructor {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   String pName() {
     return this.pName;
   }
@@ -179,6 +213,7 @@ public class MConstructor {
     sb.append("(");
     {
       boolean first = true;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -658,4 +693,41 @@ else {
     String build(Context context) {
         return build();
     }
+=======
+      for(Object oStringParam : this.eStringParam) {
+        if(first) {
+          first = false;
+        }
+        else {
+          sb.append(", ");
+        }
+        sb.append(oStringParam.toString());
+      }
+    }
+    sb.append("){");
+    sb.append(System.getProperty("line.separator"));
+    if(this.eSetParam.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oSetParam : this.eSetParam) {
+      sb.append(oSetParam.toString());
+    }
+    if(this.eInitMacroParam_InitMacroInternal_InitStringInternal.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oInitMacroParam_InitMacroInternal_InitStringInternal : this.eInitMacroParam_InitMacroInternal_InitStringInternal) {
+      sb.append(oInitMacroParam_InitMacroInternal_InitStringInternal.toString());
+    }
+    if(this.eInitInternalValue.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
+    }
+    for(Object oInitInternalValue : this.eInitInternalValue) {
+      sb.append(oInitInternalValue.toString());
+    }
+    sb.append("    }");
+    sb.append(System.getProperty("line.separator"));
+    return sb.toString();
+  }
+
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 }

@@ -3,6 +3,9 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 import java.util.*;
 
 public class MSingleAdd {
@@ -10,6 +13,7 @@ public class MSingleAdd {
   private final String pMacroName;
   private final String pParamName;
   private final MSingleAdd mSingleAdd = this;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   private final List<Object> eIsBuilt = new LinkedList<Object>();
@@ -23,6 +27,9 @@ public class MSingleAdd {
 =======
   private final List<Object> eIsBuilt = new LinkedList<Object>();
 >>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
+=======
+  private final List<Object> eIsBuilt = new LinkedList<Object>();
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
   public MSingleAdd(String pMacroName, String pParamName) {
     if(pMacroName == null) throw new NullPointerException();
@@ -33,14 +40,18 @@ public class MSingleAdd {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   public MIsBuilt newIsBuilt(String pMacroName) {
     MIsBuilt lIsBuilt = new MIsBuilt(pMacroName);
     this.eIsBuilt.add(lIsBuilt);
     return lIsBuilt;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -85,6 +96,8 @@ public class MSingleAdd {
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
 >>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   String pMacroName() {
     return this.pMacroName;
   }
@@ -106,6 +119,7 @@ public class MSingleAdd {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    public void add");
 =======
     sb.append("    public void addP");
@@ -113,6 +127,9 @@ public class MSingleAdd {
 =======
     sb.append("    public void add");
 >>>>>>> Removed letter P from add and addAll methods name
+=======
+    sb.append("    public void add");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(rParamName());
     sb.append("(M");
     sb.append(rMacroName());
@@ -126,6 +143,7 @@ public class MSingleAdd {
     sb.append(System.getProperty("line.separator"));
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -243,91 +261,20 @@ void setIsBuilt(MIsBuilt mIsBuilt){
         return this.field_ParamName;
     }
 >>>>>>> MaJ Fichier de Macro + Generation
-
-    private String buildIsBuilt(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = IsBuiltContext;
-        Macro macros[] = this.list_IsBuilt;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-                        
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
+=======
+    sb.append("        ");
+    for(Object oIsBuilt : this.eIsBuilt) {
+      sb.append(oIsBuilt.toString());
     }
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        this.list_");
+    sb.append(rParamName());
+    sb.append(".add(macro);");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    }");
+    sb.append(System.getProperty("line.separator"));
+    return sb.toString();
+  }
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    private String getMacroName(){
-
-        return this.field_MacroName;
-    }
-
-    private String getParamName(){
-
-        return this.field_ParamName;
-    }
-
-    private Macro[] getIsBuilt(){
-
-        return this.list_IsBuilt;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setSingleAdd(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    public void add");
-        sb0.append(buildParamName());
-        sb0.append("(M");
-        sb0.append(buildMacroName());
-        sb0.append(" macro)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        if(macro == null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            throw ObjectMacroException.parameterNull(\"");
-        sb0.append(buildParamName());
-        sb0.append("\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        ");
-        sb0.append(buildIsBuilt());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        this.list_");
-        sb0.append(buildParamName());
-        sb0.append(".add(macro);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

@@ -2,74 +2,49 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
-public class MSuperMacro extends Macro{
+import java.util.*;
 
-    private Macro list_PackageDeclaration[];
+public class MSuperMacro {
 
-    private final Context PackageDeclarationContext = new Context();
+  private final List<Object> ePackageDeclaration = new LinkedList<Object>();
+  private final List<Object> eImportJavaUtil = new LinkedList<Object>();
 
-    public MSuperMacro(Macro pPackageDeclaration[]){
+  public MSuperMacro() {
+  }
 
-        this.setPPackageDeclaration(pPackageDeclaration);
+  public MPackageDeclaration newPackageDeclaration(String pPackageName) {
+    MPackageDeclaration lPackageDeclaration = new MPackageDeclaration(pPackageName);
+    this.ePackageDeclaration.add(lPackageDeclaration);
+    return lPackageDeclaration;
+  }
+
+  public MImportJavaUtil newImportJavaUtil() {
+    MImportJavaUtil lImportJavaUtil = new MImportJavaUtil();
+    this.eImportJavaUtil.add(lImportJavaUtil);
+    return lImportJavaUtil;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(new MHeader().toString());
+    if(this.ePackageDeclaration.size() > 0) {
+      sb.append(System.getProperty("line.separator"));
     }
-
-    private void setPPackageDeclaration(Macro pPackageDeclaration[]){
-        if(pPackageDeclaration == null){
-            throw ObjectMacroException.parameterNull("PackageDeclaration");
-        }
-
-        Macro macros[] = pPackageDeclaration;
-        this.list_PackageDeclaration = new Macro[macros.length];
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(macro == null){
-                throw ObjectMacroException.macroNull(i, "PackageDeclaration");
-            }
-
-            macro.apply(new InternalsInitializer("PackageDeclaration"){
-@Override
-void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
-
-        }
-});
-
-            this.list_PackageDeclaration[i++] = macro;
-
-        }
+    for(Object oPackageDeclaration : this.ePackageDeclaration) {
+      sb.append(oPackageDeclaration.toString());
     }
-
-    private String buildPackageDeclaration(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = PackageDeclarationContext;
-        Macro macros[] = this.list_PackageDeclaration;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-            if(first){
-            sb0.append(LINE_SEPARATOR);
-    first = false;
-}
-            
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
+    for(Object oImportJavaUtil : this.eImportJavaUtil) {
+      sb.append(oImportJavaUtil.toString());
     }
-
-    private Macro[] getPackageDeclaration(){
-
-        return this.list_PackageDeclaration;
-    }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(System.getProperty("line.separator"));
     sb.append("public abstract class Macro {");
     sb.append(System.getProperty("line.separator"));
@@ -77,12 +52,16 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("    final static String LINE_SEPARATOR = System.getProperty(\"line.separator\");");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    BuildState build_state = null;");
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     sb.append(System.getProperty("line.separator"));
@@ -117,6 +96,11 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
     sb.append(System.getProperty("line.separator"));
     sb.append("    final Map<Context, BuildState> build_states = new LinkedHashMap<>();");
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    sb.append(System.getProperty("line.separator"));
+    sb.append(System.getProperty("line.separator"));
+    sb.append("    final Map<Context, BuildState> build_states = new LinkedHashMap<>();");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("    public String build(){");
@@ -152,93 +136,14 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
     return sb.toString();
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setSuperMacro(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        MHeader minsert_1 = new MHeader();
-                        sb0.append(minsert_1.build(null));
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(buildPackageDeclaration());
-        sb0.append(LINE_SEPARATOR);
-        MImportJavaUtil minsert_2 = new MImportJavaUtil();
-                        sb0.append(minsert_2.build(null));
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("public abstract class Macro ");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    final static String LINE_SEPARATOR = System.getProperty(\"line.separator\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    BuildState build_state = null;");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    final Map<Context, BuildState> build_states = new LinkedHashMap<>();");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    public String build()");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        throw new RuntimeException(\"build cannot be invoked here\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    String build(");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            Context context)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        throw new RuntimeException(\"build cannot be invoked here\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    void apply(");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            InternalsInitializer internalsInitializer)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        throw new RuntimeException(\"apply cannot be called here\");");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("}");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }

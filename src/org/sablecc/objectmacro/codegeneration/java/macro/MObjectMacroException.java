@@ -117,8 +117,11 @@ public class MObjectMacroException {
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("    static ObjectMacroException cyclicReference(");
     sb.append(System.getProperty("line.separator"));
     sb.append("            String macroName){");
@@ -140,10 +143,13 @@ public class MObjectMacroException {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
 >>>>>>> Init internals before building the macro instead at the add or addAll methods
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("}");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();

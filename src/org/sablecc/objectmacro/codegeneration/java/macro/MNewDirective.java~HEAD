@@ -5,6 +5,9 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 import java.util.*;
 
 <<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java~HEAD
+<<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java~HEAD
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation":src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java
 public class MNewDirective {
 
   private final String pDirectiveName;
@@ -70,6 +73,7 @@ public class MNewDirective {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java~HEAD
+<<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java~HEAD
 <<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java
 =======
     sb.append(System.getProperty("line.separator"));
@@ -80,10 +84,17 @@ public class MNewDirective {
 =======
     sb.append("if(macros.size() == 0){");
 >>>>>>> Removed in constructor initialization and add lazy initialization:src/org/sablecc/objectmacro/codegeneration/java/macro/MNone.java
+=======
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        StringBuilder sb");
+    sb.append(rIndexBuilder());
+    sb.append(" = new StringBuilder();");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation":src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java
     sb.append(System.getProperty("line.separator"));
     sb.append("        ");
     for(Object oStringPart_ParamInsertPart_EolPart_InsertMacroPart : this.eStringPart_ParamInsertPart_EolPart_InsertMacroPart) {
       sb.append(oStringPart_ParamInsertPart_EolPart_InsertMacroPart.toString());
+<<<<<<< HEAD:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java~HEAD
 =======
 public class MNewDirective extends Macro{
 
@@ -157,116 +168,29 @@ void setInsertMacroPart(MInsertMacroPart mInsertMacroPart){
 
         }
 >>>>>>> MaJ Fichier de Macro + Generation:src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation":src/org/sablecc/objectmacro/codegeneration/java/macro/MNewDirective.java
     }
+    sb.append("        this.");
+    sb.append(rParamName());
+    sb.append(rDirectiveName());
+    sb.append(" = new D");
+    sb.append(rDirectiveName());
+    sb.append("(sb");
+    sb.append(rIndexBuilder());
+    sb.append(".toString());");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        this.");
+    sb.append(rParamName());
+    sb.append("Value.set");
+    sb.append(rDirectiveName());
+    sb.append("(this.");
+    sb.append(rParamName());
+    sb.append(rDirectiveName());
+    sb.append(");");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        ");
+    return sb.toString();
+  }
 
-    void setParamName(
-            Context context,
-            String value) {
-
-        if(value == null){
-            throw new RuntimeException("value cannot be null here");
-        }
-
-        this.field_ParamName.put(context, value);
-    }
-
-    private String buildDirectiveName(){
-
-        return this.field_DirectiveName;
-    }
-
-    private String buildIndexBuilder(){
-
-        return this.field_IndexBuilder;
-    }
-
-    private String buildListParts(){
-
-        StringBuilder sb0 = new StringBuilder();
-        Context local_context = ListPartsContext;
-        Macro macros[] = this.list_ListParts;
-                boolean first = true;
-        int i = 0;
-
-        for(Macro macro : macros){
-                        
-            sb0.append(macro.build(local_context));
-            i++;
-
-                    }
-
-        return sb0.toString();
-    }
-
-    private String buildParamName(Context context){
-
-        return this.field_ParamName.get(context);
-    }
-
-    private String getDirectiveName(){
-
-        return this.field_DirectiveName;
-    }
-
-    private String getIndexBuilder(){
-
-        return this.field_IndexBuilder;
-    }
-
-    private Macro[] getListParts(){
-
-        return this.list_ListParts;
-    }
-
-    private String getParamName(Context context){
-
-        return this.field_ParamName.get(context);
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setNewDirective(this);
-    }
-
-    @Override
-     String build(Context context){
-
-        String local_expansion = this.expansions.get(context);
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("StringBuilder sb");
-        sb0.append(buildIndexBuilder());
-        sb0.append(" = new StringBuilder();");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(buildListParts());
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("this.");
-        sb0.append(buildParamName(context));
-        sb0.append(buildDirectiveName());
-        sb0.append(" = new D");
-        sb0.append(buildDirectiveName());
-        sb0.append("(sb");
-        sb0.append(buildIndexBuilder());
-        sb0.append(".toString());");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("this.");
-        sb0.append(buildParamName(context));
-        sb0.append("Value.set");
-        sb0.append(buildDirectiveName());
-        sb0.append("(this.");
-        sb0.append(buildParamName(context));
-        sb0.append(buildDirectiveName());
-        sb0.append(");");
-
-        local_expansion = sb0.toString();
-        this.expansions.put(context, local_expansion);
-        return local_expansion;
-    }
 }

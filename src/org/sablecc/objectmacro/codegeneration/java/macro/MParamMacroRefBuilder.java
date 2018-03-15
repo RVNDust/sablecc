@@ -5,13 +5,17 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 import java.util.*;
 
 public class MParamMacroRefBuilder {
 
   private final String pName;
+<<<<<<< HEAD
 <<<<<<< HEAD
   private final MParamMacroRefBuilder mParamMacroRefBuilder = this;
 <<<<<<< HEAD
@@ -35,10 +39,15 @@ public class MParamMacroRefBuilder {
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 =======
 >>>>>>> Remove abstraction on directives when building a macro or a parameter
+=======
+  private final MParamMacroRefBuilder mParamMacroRefBuilder = this;
+  private final List<Object> eContextName = new LinkedList<Object>();
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
   public MParamMacroRefBuilder(String pName) {
     if(pName == null) throw new NullPointerException();
     this.pName = pName;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   private final String pIndexBuilder;
@@ -88,12 +97,17 @@ public class MParamMacroRefBuilder {
   }
 
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+  }
+
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   public MContextName newContextName(String pContextName) {
     MContextName lContextName = new MContextName(pContextName);
     this.eContextName.add(lContextName);
     return lContextName;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -136,10 +150,13 @@ public class MParamMacroRefBuilder {
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   String pName() {
     return this.pName;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   String pIndexBuilder() {
@@ -147,10 +164,13 @@ public class MParamMacroRefBuilder {
   }
 
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   private String rName() {
     return this.mParamMacroRefBuilder.pName();
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   private String rIndexBuilder() {
@@ -158,11 +178,14 @@ public class MParamMacroRefBuilder {
   }
 
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("    private String build");
     sb.append(rName());
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -196,10 +219,16 @@ public class MParamMacroRefBuilder {
     sb.append(rIndexBuilder());
     sb.append(" = new StringBuilder();");
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    sb.append("(){");
+    sb.append(System.getProperty("line.separator"));
+    sb.append("        StringBuilder sb = new StringBuilder();");
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(System.getProperty("line.separator"));
     sb.append("        Context local_context = ");
     if(this.eContextName.size() == 0) {
       sb.append("context");
+<<<<<<< HEAD
 =======
 public class MParamMacroRefBuilder extends Macro{
 
@@ -274,12 +303,13 @@ void setContextName(MContextName mContextName){
 
         return sb0.toString();
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     }
-
-    private String getName(){
-
-        return this.field_Name;
+    for(Object oContextName : this.eContextName) {
+      sb.append(oContextName.toString());
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     sb.append(";");
     sb.append(System.getProperty("line.separator"));
@@ -288,6 +318,10 @@ void setContextName(MContextName mContextName){
 <<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    sb.append(";");
+    sb.append(System.getProperty("line.separator"));
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("        List<Macro> macros = this.list_");
     sb.append(rName());
     sb.append(";");
@@ -300,6 +334,7 @@ void setContextName(MContextName mContextName){
     sb.append("        String expansion = null;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+<<<<<<< HEAD
     sb.append("        ");
     for(Object oApplyNoneDirective : this.eApplyNoneDirective) {
       sb.append(oApplyNoneDirective.toString());
@@ -341,6 +376,8 @@ void setContextName(MContextName mContextName){
     sb.append("        String expansion = null;");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("        if(this.");
     sb.append(rName());
     sb.append("None != null){");
@@ -395,6 +432,7 @@ void setContextName(MContextName mContextName){
     sb.append("            i++;");
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append(System.getProperty("line.separator"));
     sb.append("            ");
     for(Object oAfterLast : this.eAfterLast) {
@@ -403,10 +441,13 @@ void setContextName(MContextName mContextName){
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("        return sb.toString();");
+<<<<<<< HEAD
 =======
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
@@ -415,11 +456,14 @@ void setContextName(MContextName mContextName){
     sb.append(rIndexBuilder());
     sb.append(".toString();");
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
     sb.append(System.getProperty("line.separator"));
     sb.append("    }");
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 public class MParamMacroRefBuilder extends Macro{
@@ -428,125 +472,7 @@ public class MParamMacroRefBuilder extends Macro{
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
 >>>>>>> MaJ Fichier de Macro + Generation
+=======
+>>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
-    private Macro[] getContextName(){
-
-        return this.list_ContextName;
-    }
-
-    @Override
-    void apply(
-            InternalsInitializer internalsInitializer){
-
-        internalsInitializer.setParamMacroRefBuilder(this);
-    }
-
-    @Override
-    public String build(){
-
-        String local_expansion = this.expansion;
-
-        if(local_expansion != null){
-            return local_expansion;
-        }
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("    private String build");
-        sb0.append(buildName());
-        sb0.append("()");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        StringBuilder sb = new StringBuilder();");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        Context local_context = ");
-        sb0.append(buildContextName());
-        sb0.append(";");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        List<Macro> macros = this.list_");
-        sb0.append(buildName());
-        sb0.append(";");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        int i = 0;");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        int nb_macros = macros.size();");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        String expansion = null;");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        if(this.");
-        sb0.append(buildName());
-        sb0.append("None != null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            sb.append(this.");
-        sb0.append(buildName());
-        sb0.append("None.apply(i, \"\", nb_macros));");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        for(Macro macro : macros)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            expansion = macro.build(local_context);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            if(this.");
-        sb0.append(buildName());
-        sb0.append("BeforeFirst != null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("                expansion = this.");
-        sb0.append(buildName());
-        sb0.append("BeforeFirst.apply(i, expansion, nb_macros);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            if(this.");
-        sb0.append(buildName());
-        sb0.append("AfterLast != null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("                expansion = this.");
-        sb0.append(buildName());
-        sb0.append("AfterLast.apply(i, expansion, nb_macros);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            if(this.");
-        sb0.append(buildName());
-        sb0.append("Separator != null)");
-        sb0.append("{");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("                expansion = this.");
-        sb0.append(buildName());
-        sb0.append("Separator.apply(i, expansion, nb_macros);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            sb.append(expansion);");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("            i++;");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        }");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("        return sb.toString();");
-        sb0.append(LINE_SEPARATOR);
-        sb0.append("    }");
-
-        local_expansion = sb0.toString();
-        this.expansion = local_expansion;
-        return local_expansion;
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
 }
