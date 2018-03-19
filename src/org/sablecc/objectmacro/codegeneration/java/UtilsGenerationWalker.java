@@ -45,6 +45,7 @@ public class UtilsGenerationWalker
 
         MContext mContext = new MContext();
 
+<<<<<<< HEAD
         MParameterNull mParameterNull = new MParameterNull();
         MIncorrectType mIncorrectType = new MIncorrectType();
         MObjectMacroErrorHead mObjectMacroErrorHead = new MObjectMacroErrorHead();
@@ -54,8 +55,16 @@ public class UtilsGenerationWalker
         MObjectMacroException mObjectMacroException = new MObjectMacroException();
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+        MExParameterNull mParameterNull = new MExParameterNull();
+        MExIncorrectType mIncorrectType = new MExIncorrectType();
+        MExObjectMacroErrorHead mObjectMacroErrorHead = new MExObjectMacroErrorHead();
+        MExMacroNullInList mMacroNullInList = new MExMacroNullInList();
+        MExCyclicReference mCyclicReference = new MExCyclicReference();
+        MExCannotModify mCannotModify = new MExCannotModify();
+        MExObjectMacroException mObjectMacroException = new MExObjectMacroException();
+>>>>>>> Mise à jour Visiteur - Build OK
         MClassInternalValue mClassInternalValue = new MClassInternalValue();
-        mClassInternalValue.newImportJavaUtil();
         MClassBuildState mClassBuildState = new MClassBuildState();
 <<<<<<< HEAD
 
@@ -81,6 +90,7 @@ public class UtilsGenerationWalker
 
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
+<<<<<<< HEAD
             mContext.newPackageDeclaration(destinationPackage);
             mIncorrectType.newPackageDeclaration(destinationPackage);
             mParameterNull.newPackageDeclaration(destinationPackage);
@@ -115,17 +125,36 @@ public class UtilsGenerationWalker
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
             mClassBuildState.newPackageDeclaration(destinationPackage);
 >>>>>>> Generate class BuildState.java
+=======
+            MPackageDeclaration mPackageDeclaration = new MPackageDeclaration(destinationPackage);
+            mContext.addPackageDeclaration(mPackageDeclaration);
+            mIncorrectType.addPackageDeclaration(mPackageDeclaration);
+            mParameterNull.addPackageDeclaration(mPackageDeclaration);
+            mObjectMacroErrorHead.addPackageDeclaration(mPackageDeclaration);
+            mMacroNullInList.addPackageDeclaration(mPackageDeclaration);
+            mCyclicReference.addPackageDeclaration(mPackageDeclaration);
+            mCannotModify.addPackageDeclaration(mPackageDeclaration);
+            mObjectMacroException.addPackageDeclaration(mPackageDeclaration);
+            mClassInternalValue.addPackageDeclaration(mPackageDeclaration);
+            mSuperDirective.addPackageDeclaration(mPackageDeclaration);
+            mClassAfterLast.addPackageDeclaration(mPackageDeclaration);
+            mClassBeforeFirst.addPackageDeclaration(mPackageDeclaration);
+            mClassNone.addPackageDeclaration(mPackageDeclaration);
+            mClassSeparator.addPackageDeclaration(mPackageDeclaration);
+            mClassBuildState.addPackageDeclaration(mPackageDeclaration);
+>>>>>>> Mise à jour Visiteur - Build OK
         }
 
-        GenerationUtils.writeFile(this.packageDirectory,"Context.java", mContext.toString());
-        GenerationUtils.writeFile(this.packageDirectory,"MIncorrectType.java", mIncorrectType.toString());
-        GenerationUtils.writeFile(this.packageDirectory,"MParameterNull.java", mParameterNull.toString());
+        GenerationUtils.writeFile(this.packageDirectory,"Context.java", mContext.build());
+        GenerationUtils.writeFile(this.packageDirectory,"MIncorrectType.java", mIncorrectType.build());
+        GenerationUtils.writeFile(this.packageDirectory,"MParameterNull.java", mParameterNull.build());
         GenerationUtils
-                .writeFile(this.packageDirectory,"MObjectMacroErrorHead.java", mObjectMacroErrorHead.toString());
-        GenerationUtils.writeFile(this.packageDirectory,"MMacroNullInList.java", mMacroNullInList.toString());
-        GenerationUtils.writeFile(this.packageDirectory,"MCyclicReference.java", mCyclicReference.toString());
-        GenerationUtils.writeFile(this.packageDirectory,"MCannotModify.java", mCannotModify.toString());
+                .writeFile(this.packageDirectory,"MObjectMacroErrorHead.java", mObjectMacroErrorHead.build());
+        GenerationUtils.writeFile(this.packageDirectory,"MMacroNullInList.java", mMacroNullInList.build());
+        GenerationUtils.writeFile(this.packageDirectory,"MCyclicReference.java", mCyclicReference.build());
+        GenerationUtils.writeFile(this.packageDirectory,"MCannotModify.java", mCannotModify.build());
         GenerationUtils
+<<<<<<< HEAD
                 .writeFile(this.packageDirectory,"ObjectMacroException.java", mObjectMacroException.toString());
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -155,5 +184,16 @@ public class UtilsGenerationWalker
 =======
         GenerationUtils.writeFile(this.packageDirectory, "BuildState.java", mClassBuildState.toString());
 >>>>>>> Generate class BuildState.java
+=======
+                .writeFile(this.packageDirectory,"ObjectMacroException.java", mObjectMacroException.build());
+        GenerationUtils.writeFile(this.packageDirectory, "InternalValue.java", mClassInternalValue.build());
+        GenerationUtils.writeFile(this.packageDirectory, "Directive.java", mSuperDirective.build());
+        GenerationUtils.writeFile(this.packageDirectory, "DAfterLast.java", mClassAfterLast.build());
+        GenerationUtils.writeFile(this.packageDirectory, "DBeforeFirst.java", mClassBeforeFirst.build());
+        GenerationUtils.writeFile(this.packageDirectory, "DNone.java", mClassNone.build());
+        GenerationUtils.writeFile(this.packageDirectory, "DSeparator.java", mClassSeparator.build());
+
+        GenerationUtils.writeFile(this.packageDirectory, "BuildState.java", mClassBuildState.build());
+>>>>>>> Mise à jour Visiteur - Build OK
     }
 }

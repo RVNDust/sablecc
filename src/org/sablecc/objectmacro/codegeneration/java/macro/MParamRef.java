@@ -4,6 +4,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 
 import java.util.*;
 
+<<<<<<< HEAD
 public class MParamRef {
 
   private final String pName;
@@ -48,4 +49,171 @@ public class MParamRef {
     return sb.toString();
   }
 
+=======
+public class MParamRef extends Macro{
+
+    private String field_Name;
+
+    private final List<Macro> list_ListContextArg;
+
+    private DSeparator ListContextArgSeparator;
+
+    private DBeforeFirst ListContextArgBeforeFirst;
+
+    private DAfterLast ListContextArgAfterLast;
+
+    private DNone ListContextArgNone;
+
+    private final InternalValue ListContextArgValue;
+
+    private final Context ListContextArgContext = new Context();
+
+    public MParamRef(String pName){
+
+        this.setPName(pName);
+
+    this.list_ListContextArg = new ArrayList<>();
+
+    this.ListContextArgValue = new InternalValue(this.list_ListContextArg, this.ListContextArgContext);
+    }
+
+    private void setPName(String pName){
+        if(pName == null){
+            throw ObjectMacroException.parameterNull("Name");
+        }
+
+        this.field_Name = pName;
+    }
+
+    public void addListContextArg(MContextArg macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("ListContextArg");
+        }
+                if(this.build_state != null){
+            throw ObjectMacroException.cannotModify("ParamRef");
+        }
+
+        this.list_ListContextArg.add(macro);
+    }
+
+    public void addListContextArg(MContextName macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("ListContextArg");
+        }
+                if(this.build_state != null){
+            throw ObjectMacroException.cannotModify("ParamRef");
+        }
+
+        this.list_ListContextArg.add(macro);
+    }
+
+    private String buildName(){
+
+        return this.field_Name;
+    }
+
+    private String buildListContextArg(){
+        StringBuilder sb = new StringBuilder();
+        Context local_context = ListContextArgContext;
+        List<Macro> macros = this.list_ListContextArg;
+
+        int i = 0;
+        int nb_macros = macros.size();
+        String expansion = null;
+
+        if(this.ListContextArgNone != null){
+            sb.append(this.ListContextArgNone.apply(i, "", nb_macros));
+        }
+
+        for(Macro macro : macros){
+            expansion = macro.build(local_context);
+
+            if(this.ListContextArgBeforeFirst != null){
+                expansion = this.ListContextArgBeforeFirst.apply(i, expansion, nb_macros);
+            }
+
+            if(this.ListContextArgAfterLast != null){
+                expansion = this.ListContextArgAfterLast.apply(i, expansion, nb_macros);
+            }
+
+            if(this.ListContextArgSeparator != null){
+                expansion = this.ListContextArgSeparator.apply(i, expansion, nb_macros);
+            }
+
+            sb.append(expansion);
+            i++;
+        }
+
+        return sb.toString();
+    }
+
+    private String getName(){
+
+        return this.field_Name;
+    }
+
+    private InternalValue getListContextArg(){
+        return this.ListContextArgValue;
+    }
+    private void initListContextArgInternals(Context context){
+        for(Macro macro : this.list_ListContextArg){
+            macro.apply(new InternalsInitializer("ListContextArg"){
+@Override
+void setContextArg(MContextArg mContextArg){
+
+        }
+@Override
+void setContextName(MContextName mContextName){
+
+        }
+});
+        }
+    }
+
+    private void initListContextArgDirectives(){
+            }
+    @Override
+    void apply(
+            InternalsInitializer internalsInitializer){
+
+        internalsInitializer.setParamRef(this);
+    }
+
+    @Override
+    public String build(){
+
+        BuildState buildState = this.build_state;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("ParamRef");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+
+                initListContextArgDirectives();
+        
+                initListContextArgInternals(null);
+        
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("get");
+        sb0.append(buildName());
+        sb0.append("(");
+        sb0.append(buildListContextArg());
+        sb0.append(")");
+
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+
+    @Override
+    String build(Context context) {
+        return build();
+    }
+>>>>>>> Mise à jour Visiteur - Build OK
 }

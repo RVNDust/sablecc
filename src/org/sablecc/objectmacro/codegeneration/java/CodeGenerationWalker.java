@@ -373,6 +373,11 @@ public class CodeGenerationWalker
 
     private boolean currentMacroHasInternals;
 
+    /**
+     * Macro representing the package to use in other Macro
+     */
+    private MPackageDeclaration currentPackageDeclaration;
+
     public CodeGenerationWalker(
             IntermediateRepresentation ir,
             File packageDirectory,
@@ -498,20 +503,23 @@ public class CodeGenerationWalker
 
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
+<<<<<<< HEAD
             this.superMacro.newPackageDeclaration(destinationPackage);
             this.mInternalsInitializer.newPackageDeclaration(destinationPackage);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+            this.currentPackageDeclaration = new MPackageDeclaration(destinationPackage);
+            this.superMacro.addPackageDeclaration(this.currentPackageDeclaration);
+            this.mInternalsInitializer.addPackageDeclaration(this.currentPackageDeclaration);
+>>>>>>> Mise à jour Visiteur - Build OK
         }
-
-        this.superMacro.newImportJavaUtil();
-        this.mInternalsInitializer.newImportJavaUtil();
-
     }
 
     @Override
     public void outAIntermediateRepresentation(
             AIntermediateRepresentation node) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -586,6 +594,11 @@ public class CodeGenerationWalker
         GenerationUtils
                 .writeFile(this.packageDirectory,"InternalsInitializer.java", this.mInternalsInitializer.toString());
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+        GenerationUtils.writeFile(this.packageDirectory, "Macro.java", this.superMacro.build());
+        GenerationUtils
+                .writeFile(this.packageDirectory,"InternalsInitializer.java", this.mInternalsInitializer.build());
+>>>>>>> Mise à jour Visiteur - Build OK
     }
 
     @Override
@@ -666,9 +679,10 @@ public class CodeGenerationWalker
         }
 
         if (!this.ir.getDestinationPackage().equals("")) {
-            this.currentMacroToBuild.newPackageDeclaration(this.ir.getDestinationPackage());
+            this.currentMacroToBuild.addPackageDeclaration(this.currentPackageDeclaration);
         }
 
+<<<<<<< HEAD
         this.currentConstructor = this.currentMacroToBuild.newConstructor(macroName);
         this.currentMacroBuilder = this.currentMacroToBuild.newMacroBuilder();
 =======
@@ -681,20 +695,26 @@ public class CodeGenerationWalker
         this.currentConstructor = this.currentMacroToBuild.newConstructor(macroName);
         this.currentMacroBuilder = this.currentMacroToBuild.newMacroBuilder(macroName);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+        this.currentConstructor = new MConstructor(macroName);
+        this.currentMacroToBuild.addListConstructor(this.currentConstructor);
+        this.currentMacroBuilder = new MMacroBuilder(macroName);
+        this.currentMacroToBuild.addListMacroBuilder(this.currentMacroBuilder);
+>>>>>>> Mise à jour Visiteur - Build OK
 
-        this.mInternalsInitializer.newParentInternalsSetter(macroName);
-        this.currentMacroToBuild.newRedefinedApplyInitializer(macroName);
+        this.mInternalsInitializer.addListParentInternalSetters(new MParentInternalsSetter(macroName));
+        this.currentMacroToBuild.addListRedefinedApplyInitializer(new MRedefinedApplyInitializer(macroName));
 
-        this.currentMacroToBuild.newImportJavaUtil();
         this.currentMacroHasInternals = node.getInternals().size() > 0;
 
         if(this.currentMacroHasInternals){
             //method build is package protected so a context parameter to build the current macro
-            this.currentMacroBuilder.newContextParam();
-            this.currentMacroBuilder.newContextBuildState();
-            this.currentMacroBuilder.newNewBuildState();
+            this.currentMacroBuilder.addListContextParam(new MContextParam());
+            this.currentMacroBuilder.addContextBuildState(new MContextBuildState());
+            this.currentMacroBuilder.addNewBuildState(new MNewBuildState());
         }
         else{
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             this.currentMacroBuilder.newPublic();
@@ -718,6 +738,9 @@ public class CodeGenerationWalker
             this.currentMacroBuilder.newPublic();
             this.currentMacroToBuild.newEmptyBuilderWithContext();
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+            this.currentMacroToBuild.addListEmptyBuilderWithContext(new MEmptyBuilderWithContext());
+>>>>>>> Mise à jour Visiteur - Build OK
         }
     }
 
@@ -766,19 +789,21 @@ public class CodeGenerationWalker
 >>>>>>> Revert "Changement Objectmacro-back"
 
         if(node.getType() instanceof AStringType){
-            this.currentMacroToBuild.newInternalStringField(paramName);
-            this.currentMacroToBuild.newInternalStringSetter(paramName);
+            this.currentMacroToBuild.addListField(new MInternalStringField(paramName));
+            this.currentMacroToBuild.addListSetter(new MInternalStringSetter(paramName));
 
-            MParamStringRefBuilder mParamStringRefBuilder = this.currentMacroToBuild
-                    .newParamStringRefBuilder(paramName);
-            mParamStringRefBuilder.newContextParam();
-            mParamStringRefBuilder.newGetInternalTail();
+            MParamStringRefBuilder mParamStringRefBuilder = new MParamStringRefBuilder(paramName);
+            this.currentMacroToBuild.addListBuilder(mParamStringRefBuilder);
+            mParamStringRefBuilder.addListContextParam(new MContextParam());
+            mParamStringRefBuilder.addListGetInternalTail(new MGetInternalTail());
 
-            MParamStringRef mParamStringRef = this.currentMacroToBuild.newParamStringRef(paramName);
-            mParamStringRef.newContextParam();
-            mParamStringRef.newGetInternalTail();
+            MParamStringRef mParamStringRef = new MParamStringRef(paramName);
+            this.currentMacroToBuild.addListRef(mParamStringRef);
+            mParamStringRef.addContextParam(new MContextParam());
+            mParamStringRef.addGetInternalTail(new MGetInternalTail());
         }
         else if(node.getType() instanceof AMacroRefsType){
+<<<<<<< HEAD
             this.currentMacroToBuild.newInternalMacroField(paramName);
 <<<<<<< HEAD
             this.currentMacroToBuild.newContextField(paramName);
@@ -789,11 +814,15 @@ public class CodeGenerationWalker
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+            this.currentMacroToBuild.addListField(new MInternalMacroField(paramName));
+>>>>>>> Mise à jour Visiteur - Build OK
 
-            this.currentMacroToBuild.newInternalMacroRefBuilder(paramName);
-            this.currentMacroToBuild.newInternalMacroRef(paramName);
+            this.currentMacroToBuild.addListBuilder(new MParamMacroRefBuilder(paramName));
+            this.currentMacroToBuild.addListRef(new MInternalMacroRef(paramName));
 
             this.indexBuilder = 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -823,6 +852,9 @@ public class CodeGenerationWalker
 =======
             this.currentMacroToBuild.newInternalMacroSetter(paramName);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+            this.currentMacroToBuild.addListSetter(new MInternalMacroSetter(paramName));
+>>>>>>> Mise à jour Visiteur - Build OK
         }
         else{
             throw new InternalException("case unhandled");
@@ -944,24 +976,28 @@ public class CodeGenerationWalker
 >>>>>>> Add structure which contains list of macros and the context associated
 
         if(node.getType() instanceof AStringType){
-            this.currentMacroToBuild.newParamStringField(paramName);
-            this.currentMacroToBuild.newParamStringRefBuilder(paramName);
-            this.currentMacroToBuild.newParamStringRef(paramName);
+            this.currentMacroToBuild.addListField(new MParamStringField(paramName));
+            this.currentMacroToBuild.addListBuilder(new MParamStringRefBuilder(paramName));
+            this.currentMacroToBuild.addListRef(new MParamStringRef(paramName));
 
-            MParamStringSetter mParamStringSetter = this.currentMacroToBuild.newParamStringSetter(paramName);
-            mParamStringSetter.newParamArg(paramName);
-            mParamStringSetter.newStringParam(paramName);
+            MParamStringSetter mParamStringSetter = new MParamStringSetter(paramName);
+            this.currentMacroToBuild.addListSetter(mParamStringSetter);
+            mParamStringSetter.addListParamArg(new MParamArg(paramName));
+            mParamStringSetter.addListStringParam(new MStringParam(paramName));
 
-            this.currentConstructor.newStringParam(paramName);
-            this.currentConstructor.newSetParam(paramName).newParamArg(paramName);
+            this.currentConstructor.addListStringParam(new MStringParam(paramName));
+            MSetParam mSetParam = new MSetParam(paramName);
+            this.currentConstructor.addListSetParam(mSetParam);
+            mSetParam.addListParamArg(new MParamArg(paramName));
         }
         else if(node.getType() instanceof AMacroRefsType){
 
-            this.currentMacroToBuild.newParamMacroField(paramName);
-            this.currentMacroToBuild.newContextField(paramName);
-            this.currentMacroToBuild.newDirectiveFields(paramName);
-            this.currentMacroToBuild.newInternalMacrosValueField(paramName);
+            this.currentMacroToBuild.addListField(new MParamMacroField(paramName));
+            this.currentMacroToBuild.addListContextField(new MContextField(paramName));
+            this.currentMacroToBuild.addListField(new MDirectiveFields(paramName));
+            this.currentMacroToBuild.addListField(new MInternalMacrosValueField(paramName));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             this.currentParamMacroRefBuilder = this.currentMacroToBuild.newParamMacroRefBuilder(
                     paramName, String.valueOf(this.indexBuilder));
@@ -988,6 +1024,16 @@ public class CodeGenerationWalker
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+            this.currentParamMacroRefBuilder = new MParamMacroRefBuilder(paramName);
+            this.currentMacroToBuild.addListBuilder(this.currentParamMacroRefBuilder);
+            this.currentParamMacroRefBuilder.addContextName(new MContextName(paramName.concat(
+                    GenerationUtils.CONTEXT_STRING)));
+            this.currentMacroToBuild.addListRef(new MParamMacroRef(paramName));
+
+            this.currentInitDirectives = new MInitDirectives(paramName);
+            this.currentMacroToBuild.addListInitDirectives(this.currentInitDirectives);
+>>>>>>> Mise à jour Visiteur - Build OK
 
             for (PDirective directive : node.getDirectives()) {
                 directive.apply(this);
@@ -1007,23 +1053,40 @@ public class CodeGenerationWalker
 >>>>>>> Revert "Changement Objectmacro-back"
             this.indexBuilder = 0;
 
+<<<<<<< HEAD
             MInitInternalsCall mInitInternalsCall = this.currentMacroBuilder.newInitInternalsCall(paramName);
             MAddAll mAddAll = this.currentMacroToBuild.newAddAll(paramName);
 
             this.currentAddAllApplyInitializer = mAddAll.newApplyInternalsInitializer(paramName);
             this.currentApplyInitializer = this.currentMacroToBuild.newInitInternalsMethod(paramName)
                                                 .newApplyInternalsInitializer(paramName);
+=======
+            MInitInternalsCall mInitInternalsCall = new MInitInternalsCall(paramName);
+            this.currentMacroBuilder.addInitInternalsCall(mInitInternalsCall);
+
+
+            this.currentApplyInitializer = new MApplyInternalsInitializer(paramName);
+            MInitInternalsMethod mInitInternalsMethod = new MInitInternalsMethod(paramName);
+            mInitInternalsMethod.addApplyInternalsInitializer(this.currentApplyInitializer);
+            this.currentMacroToBuild.addListInitInternalsMethod(mInitInternalsMethod);
+>>>>>>> Mise à jour Visiteur - Build OK
 
 <<<<<<< HEAD
 <<<<<<< HEAD
             this.contextNames.add(this.currentContextName);
 <<<<<<< HEAD
+<<<<<<< HEAD
             this.currentConstructor.newInitMacroParam(paramName);
             this.currentConstructor.newInitInternalValue(paramName);
             this.currentMacroBuilder.newInitDirectivesCall(paramName);
+=======
+            this.currentConstructor.addListInit(new MInitMacroParam(paramName));
+            this.currentConstructor.addListInternal(new MInitInternalValue(paramName));
+            this.currentMacroBuilder.addInitDirectiveCall(new MInitDirectiveCall(paramName));
+>>>>>>> Mise à jour Visiteur - Build OK
 
             if(this.currentMacroHasInternals){
-                mInitInternalsCall.newContextArg();
+                mInitInternalsCall.addContextArg(new MContextArg());
             }
             else{
                 mAddAll.newIsBuilt(this.currentMacro.getName());
@@ -1276,6 +1339,7 @@ public class CodeGenerationWalker
 =======
         String directive_name = GenerationUtils.buildNameCamelCase(node.getNames());
 
+<<<<<<< HEAD
 >>>>>>> Revert "Changement Objectmacro-back"
         if(directive_name.equals(GenerationUtils.NONE_DIRECTIVE)){
             this.currentMacroToBuild.newNoneDirectiveField(this.currentParamName);
@@ -1299,6 +1363,10 @@ public class CodeGenerationWalker
 =======
         }
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+        this.currentDirective = new MNewDirective(directive_name, this.indexBuilder.toString());
+        this.currentInitDirectives.addNewDirective(this.currentDirective);
+>>>>>>> Mise à jour Visiteur - Build OK
     }
 
     @Override
@@ -1355,12 +1423,13 @@ public class CodeGenerationWalker
         String macro_ref_name = this.currentMacroRefName = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if(this.currentContextName != null){
-            this.currentRedefinedInternalsSetter =
-                    this.currentApplyInitializer.newRedefinedInternalsSetter(macro_ref_name);
+            this.currentRedefinedInternalsSetter = new MRedefinedInternalsSetter(macro_ref_name);
+            this.currentApplyInitializer.addListRedefinedInternalsSetter(this.currentRedefinedInternalsSetter);
 
-            MSingleAdd mSingleAdd = this.currentMacroToBuild.newSingleAdd(macro_ref_name, this.currentParamName);
+            MSingleAdd mSingleAdd = new MSingleAdd(macro_ref_name, this.currentParamName);
+            this.currentMacroToBuild.addListSetter(mSingleAdd);
             if(!this.currentMacroHasInternals){
-                mSingleAdd.newIsBuilt(this.currentMacro.getName());
+                mSingleAdd.addIsBuilt(new MIsBuilt());
             }
 <<<<<<< HEAD
         }
@@ -1494,6 +1563,7 @@ public class CodeGenerationWalker
 =======
         if(anyContext){
 <<<<<<< HEAD
+<<<<<<< HEAD
             mSetInternal = new MSetInternal(this.currentMacroName
                     ,buildNameCamelCase(node.getParamName())
                     ,this.currentContext
@@ -1501,12 +1571,21 @@ public class CodeGenerationWalker
 >>>>>>> Changement Objectmacro-back
 =======
             this.currentRedefinedInternalsSetter.newInitStringBuilder(index_builder);
+=======
+            this.currentRedefinedInternalsSetter.addListPart(new MInitStringBuilder(index_builder));
+>>>>>>> Mise à jour Visiteur - Build OK
 
-            this.currentRedefinedInternalsSetter.newSetInternal(
+            MSetInternal mSetInternal = new MSetInternal(
                     this.currentMacroRefName,
                     GenerationUtils.buildNameCamelCase(node.getParamName()),
+<<<<<<< HEAD
                     this.currentContextName).newStringBuilderBuild(index_builder);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+                    this.currentContextName);
+            this.currentRedefinedInternalsSetter.addListSetInternal(mSetInternal);
+            mSetInternal.addListParam(new MStringBuilderBuild(index_builder));
+>>>>>>> Mise à jour Visiteur - Build OK
 
             for(PTextPart part : node.getParts()){
                 part.apply(this);
@@ -1531,7 +1610,7 @@ public class CodeGenerationWalker
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
             }
 
-            this.currentInsertMacroPart.newInitStringBuilder(index_builder);
+            this.currentInsertMacroPart.addListPart(new MInitStringBuilder(index_builder));
             this.createdBuilders.add(index_builder);
 
             //To avoid modification on indexes
@@ -1545,6 +1624,7 @@ public class CodeGenerationWalker
             this.indexBuilder = tempIndexBuilder;
             this.indexInsert = tempIndexInsert;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -1618,6 +1698,14 @@ public class CodeGenerationWalker
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+            MSetInternal mSetInternal = new MSetInternal(
+                    GenerationUtils.INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
+                    GenerationUtils.buildNameCamelCase(node.getParamName()),
+                    "null");
+            this.currentInsertMacroPart.addListSetInternal(mSetInternal);
+            mSetInternal.addListParam(new MStringBuilderBuild(index_builder));
+>>>>>>> Mise à jour Visiteur - Build OK
         }
     }
 
@@ -1660,9 +1748,9 @@ public class CodeGenerationWalker
 >>>>>>> Moved utils files for generation to another walker
                 && this.currentRedefinedInternalsSetter != null){
 
-            this.currentRedefinedInternalsSetter.newStringPart(
+            this.currentRedefinedInternalsSetter.addListPart(new MStringPart(
                     GenerationUtils.escapedString(node.getString()),
-                    String.valueOf(this.indexBuilder));
+                    String.valueOf(this.indexBuilder)));
         }
         else {
             String string = GenerationUtils.escapedString(node.getString());
@@ -1673,17 +1761,21 @@ public class CodeGenerationWalker
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+<<<<<<< HEAD
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                 this.currentInsertMacroPart.newStringPart(
+=======
+                this.currentInsertMacroPart.addListPart(new MStringPart(
+>>>>>>> Mise à jour Visiteur - Build OK
                         string,
-                        index_builder);
+                        index_builder));
             }
 <<<<<<< HEAD
 <<<<<<< HEAD
             else if(this.currentDirective != null){
-                this.currentDirective.newStringPart(
+                this.currentDirective.addListParts(new MStringPart(
                         string,
-                        index_builder);
+                        index_builder));
             }
             else if(this.mSetNoneDirective != null){
                 this.mSetNoneDirective.newStringPart(
@@ -1799,9 +1891,9 @@ public class CodeGenerationWalker
 >>>>>>> Moved utils files for generation to another walker
                 && this.currentRedefinedInternalsSetter != null){
 
-            this.currentRedefinedInternalsSetter.newParamInsertPart(
+            this.currentRedefinedInternalsSetter.addListPart(new MParamInsertPart(
                     param_name,
-                    index_builder);
+                    index_builder));
         }
         else {
             if(this.currentInsertMacroPart != null){
@@ -1861,15 +1953,19 @@ public class CodeGenerationWalker
                 this.currentNone.add(new MNone(new org.sablecc.objectmacro.codegeneration.java.macro.Macro[] {mParamInsertPart}));
 =======
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
-                this.currentInsertMacroPart.newParamInsertPart(
+                this.currentInsertMacroPart.addListPart(new MParamInsertPart(
                         param_name,
+<<<<<<< HEAD
                         index_builder);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+                        index_builder));
+>>>>>>> Mise à jour Visiteur - Build OK
             }
             else if(this.currentDirective != null){
-                this.currentDirective.newParamInsertPart(
+                this.currentDirective.addListParts(new MParamInsertPart(
                         param_name,
-                        index_builder);
+                        index_builder));
             }
 <<<<<<< HEAD
             else if(this.currentAfterLast != null){
@@ -1931,8 +2027,12 @@ public class CodeGenerationWalker
         if(this.currentContextName != null
                 && this.currentRedefinedInternalsSetter != null){
 
+<<<<<<< HEAD
             this.currentRedefinedInternalsSetter.newEolPart(index_builder);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+            this.currentRedefinedInternalsSetter.addListPart(new MEolPart(index_builder));
+>>>>>>> Mise à jour Visiteur - Build OK
         }
         else {
 
@@ -1968,12 +2068,17 @@ public class CodeGenerationWalker
                 index_builder = getLetterFromInteger(this.indexBuilder);
 =======
                 index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+<<<<<<< HEAD
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
                 this.currentInsertMacroPart.newEolPart(
                         index_builder);
+=======
+                this.currentInsertMacroPart.addListPart(new MEolPart(
+                        index_builder));
+>>>>>>> Mise à jour Visiteur - Build OK
             }
             else if(this.currentDirective != null){
-                this.currentDirective.newEolPart(index_builder);
+                this.currentDirective.addListParts(new MEolPart(index_builder));
             }
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -2035,6 +2140,7 @@ public class CodeGenerationWalker
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         String macro_name = buildNameCamelCase(macroRef.getNames());
 =======
@@ -2066,6 +2172,13 @@ public class CodeGenerationWalker
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+            this.currentInsertMacroPart = new MInsertMacroPart(
+                    macro_name,
+                    index_builder,
+                    index_insert);
+            this.currentRedefinedInternalsSetter.addListPart(this.currentInsertMacroPart);
+>>>>>>> Mise à jour Visiteur - Build OK
         }
         else{
             if(tempInsertMacroPart != null){
@@ -2074,6 +2187,7 @@ public class CodeGenerationWalker
 
 =======
 
+<<<<<<< HEAD
         }else{
 =======
         }
@@ -2114,11 +2228,18 @@ public class CodeGenerationWalker
                                 index_builder,
                                 index_insert);
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+                this.currentInsertMacroPart = new MInsertMacroPart(macro_name,
+                        index_builder,
+                        index_insert);
+                tempInsertMacroPart.addListPart(this.currentInsertMacroPart);
+>>>>>>> Mise à jour Visiteur - Build OK
 
             }
 <<<<<<< HEAD
 <<<<<<< HEAD
             else if(this.currentDirective != null){
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
             else if(this.currentDirective != null){
@@ -2127,6 +2248,12 @@ public class CodeGenerationWalker
                     this.currentDirective.newInsertMacroPart(macro_name,
                             index_builder,
                             index_insert);
+=======
+                this.currentInsertMacroPart = new MInsertMacroPart(macro_name,
+                        index_builder,
+                        index_insert);
+                this.currentDirective.addListParts(this.currentInsertMacroPart);
+>>>>>>> Mise à jour Visiteur - Build OK
 
 <<<<<<< HEAD
 =======
@@ -2248,26 +2375,38 @@ public class CodeGenerationWalker
 
         if(this.currentContextName != null){
 
+<<<<<<< HEAD
             MParamRef paramRef = this.currentRedefinedInternalsSetter.newSetInternal(
                         this.currentMacroRefName,
                         GenerationUtils.buildNameCamelCase(node.getParamName()),
                         this.currentContextName)
 <<<<<<< HEAD
                         .newParamRef(var_name);
+=======
+            MSetInternal mSetInternal = new MSetInternal(
+                    this.currentMacroRefName,
+                    GenerationUtils.buildNameCamelCase(node.getParamName()),
+                    this.currentContextName);
+            MParamRef paramRef =new MParamRef(var_name);
+            this.currentRedefinedInternalsSetter.addListSetInternal(mSetInternal);
+            mSetInternal.addListParam(paramRef);
+>>>>>>> Mise à jour Visiteur - Build OK
 
             if(this.currentMacro.getInternalsName().contains(var_name)){
-                paramRef.newContextName(GenerationUtils.CONTEXT_STRING.toLowerCase());
+                paramRef.addListContextArg(new MContextName(GenerationUtils.CONTEXT_STRING.toLowerCase()));
             }
         }
         else{
-            MParamRef mParamRef =
-                    this.currentInsertMacroPart.newSetInternal(
-                            GenerationUtils.INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
-                            GenerationUtils.buildNameCamelCase(node.getParamName()),
-                            "null").newParamRef(var_name);
+            MSetInternal mSetInternal = new MSetInternal(
+                    GenerationUtils.INSERT_VAR_NAME.concat(String.valueOf(this.indexInsert)),
+                    GenerationUtils.buildNameCamelCase(node.getParamName()),
+                    "null");
+            this.currentInsertMacroPart.addListSetInternal(mSetInternal);
+            MParamRef mParamRef = new MParamRef(var_name);
+            mSetInternal.addListParam(mParamRef);
 
             if(this.currentMacro.getInternalsName().contains(var_name)){
-                mParamRef.newContextArg();
+                mParamRef.addListContextArg(new MContextArg());
             }
 =======
 =======
@@ -2400,6 +2539,7 @@ public class CodeGenerationWalker
         writeFile("M" + macroName + ".java", this.currentMacroToBuild.toString());
 =======
         String macroName = GenerationUtils.buildNameCamelCase(node.getNames());
+<<<<<<< HEAD
         GenerationUtils.writeFile(this.packageDirectory, "M" + macroName + ".java", this.currentMacroToBuild.toString());
 >>>>>>> Moved utils files for generation to another walker
 =======
@@ -2429,6 +2569,9 @@ public class CodeGenerationWalker
         String macroName = GenerationUtils.buildNameCamelCase(node.getNames());
         GenerationUtils.writeFile(this.packageDirectory, "M" + macroName + ".java", this.currentMacroToBuild.toString());
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+        GenerationUtils.writeFile(this.packageDirectory, "M" + macroName + ".java", this.currentMacroToBuild.build());
+>>>>>>> Mise à jour Visiteur - Build OK
 
         this.contextNames = null;
         this.currentMacroToBuild = null;
@@ -2441,6 +2584,7 @@ public class CodeGenerationWalker
     public void caseAStringMacroPart(
             AStringMacroPart node) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         this.currentMacroBuilder.newStringPart(
@@ -2460,13 +2604,18 @@ public class CodeGenerationWalker
                 GenerationUtils.escapedString(node.getString()),
                 String.valueOf(indexBuilder));
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+        this.currentMacroBuilder.addListPart(new MStringPart(
+                GenerationUtils.escapedString(node.getString()),
+                String.valueOf(indexBuilder)));
+>>>>>>> Mise à jour Visiteur - Build OK
     }
 
     @Override
     public void outAEolMacroPart(
             AEolMacroPart node) {
 
-        this.currentMacroBuilder.newEolPart(String.valueOf(indexBuilder));
+        this.currentMacroBuilder.addListPart(new MEolPart(String.valueOf(indexBuilder)));
     }
 
     @Override
@@ -2490,9 +2639,9 @@ public class CodeGenerationWalker
 >>>>>>> Revert "Changement Objectmacro-back"
         this.indexInsert++;
 
-        this.currentInsertMacroPart =
-                this.currentMacroBuilder.newInsertMacroPart(
-                        macro_name, String.valueOf(indexBuilder), String.valueOf(indexInsert));
+        this.currentInsertMacroPart = new MInsertMacroPart(
+                macro_name, String.valueOf(indexBuilder), String.valueOf(indexInsert));
+        this.currentMacroBuilder.addListPart(this.currentInsertMacroPart);
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3115,6 +3264,7 @@ public class CodeGenerationWalker
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
         String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
+<<<<<<< HEAD
 >>>>>>> Moved utils files for generation to another walker
         MParamInsertPart mParamInsertPart =
                 this.currentMacroBuilder.newParamInsertPart(
@@ -3127,9 +3277,15 @@ public class CodeGenerationWalker
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+        MParamInsertPart mParamInsertPart = new MParamInsertPart(
+                param_name,
+                String.valueOf(indexBuilder));
+        this.currentMacroBuilder.addListPart(mParamInsertPart);
+>>>>>>> Mise à jour Visiteur - Build OK
 
         if(this.currentMacro.getInternalsName().contains(param_name)){
-            mParamInsertPart.newContextArg();
+            mParamInsertPart.addContextArg(new MContextArg());
         }
     }
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1

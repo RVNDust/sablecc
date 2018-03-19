@@ -2,9 +2,15 @@
 
 package org.sablecc.objectmacro.intermediate.macro;
 
+<<<<<<< HEAD:src/org/sablecc/objectmacro/intermediate/macro/MEolPart.java
 public class MEolPart {
 
   public MEolPart() {
+=======
+class MObjectMacroErrorHead {
+
+  MObjectMacroErrorHead() {
+>>>>>>> Mise à jour Visiteur - Build OK:tests/yds/org/test/back/MObjectMacroErrorHead.java
   }
 
   @Override

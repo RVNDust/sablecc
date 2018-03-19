@@ -2,7 +2,13 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+<<<<<<< HEAD
 public class MContextName {
+=======
+import java.util.*;
+
+public class MContextName extends Macro{
+>>>>>>> Mise à jour Visiteur - Build OK
 
   private final String pContextName;
   private final MContextName mContextName = this;
@@ -27,4 +33,53 @@ public class MContextName {
     return sb.toString();
   }
 
+<<<<<<< HEAD
+=======
+    private String buildContextName(){
+
+        return this.field_ContextName;
+    }
+
+    private String getContextName(){
+
+        return this.field_ContextName;
+    }
+    @Override
+    void apply(
+            InternalsInitializer internalsInitializer){
+
+        internalsInitializer.setContextName(this);
+    }
+
+    @Override
+    public String build(){
+
+        BuildState buildState = this.build_state;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("ContextName");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+
+        
+        
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append(buildContextName());
+
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+
+    @Override
+    String build(Context context) {
+        return build();
+    }
+>>>>>>> Mise à jour Visiteur - Build OK
 }

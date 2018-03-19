@@ -2,6 +2,7 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+<<<<<<< HEAD
 public class MContextVerifier {
 
   public MContextVerifier() {
@@ -19,4 +20,54 @@ public class MContextVerifier {
     return sb.toString();
   }
 
+=======
+import java.util.*;
+
+public class MContextVerifier extends Macro{
+
+    public MContextVerifier(){
+    }
+    @Override
+    void apply(
+            InternalsInitializer internalsInitializer){
+
+        internalsInitializer.setContextVerifier(this);
+    }
+
+    @Override
+    public String build(){
+
+        BuildState buildState = this.build_state;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("ContextVerifier");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+
+        
+        
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("        if(context == null)");
+        sb0.append("{");
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("            throw new RuntimeException(\"context cannot be null here\");");
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("        }");
+
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+
+    @Override
+    String build(Context context) {
+        return build();
+    }
+>>>>>>> Mise à jour Visiteur - Build OK
 }

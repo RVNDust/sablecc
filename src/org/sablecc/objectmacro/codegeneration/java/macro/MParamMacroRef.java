@@ -8,6 +8,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 public class MParamMacroRef {
@@ -152,6 +153,17 @@ public class MParamMacroRef {
     sb.append("        ");
     for(Object oNone : this.eNone) {
       sb.append(oNone.toString());
+=======
+import java.util.*;
+
+public class MParamMacroRef extends Macro{
+
+    private String field_Name;
+
+    public MParamMacroRef(String pName){
+
+        this.setPName(pName);
+>>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("        boolean first = true;");
     sb.append(System.getProperty("line.separator"));
@@ -168,6 +180,7 @@ public class MParamMacroRef {
     for(Object oSeparator : this.eSeparator) {
       sb.append(oSeparator.toString());
     }
+<<<<<<< HEAD
     sb.append(System.getProperty("line.separator"));
     sb.append("            sb");
     sb.append(rIndexBuilder());
@@ -179,6 +192,53 @@ public class MParamMacroRef {
     sb.append("            ");
     for(Object oAfterLast : this.eAfterLast) {
       sb.append(oAfterLast.toString());
+=======
+
+    private String getName(){
+
+        return this.field_Name;
+    }
+    @Override
+    void apply(
+            InternalsInitializer internalsInitializer){
+
+        internalsInitializer.setParamMacroRef(this);
+    }
+
+    @Override
+    public String build(){
+
+        BuildState buildState = this.build_state;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("ParamMacroRef");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+
+        
+        
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("    private InternalValue get");
+        sb0.append(buildName());
+        sb0.append("()");
+        sb0.append("{");
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("        return this.");
+        sb0.append(buildName());
+        sb0.append("Value;");
+        sb0.append(LINE_SEPARATOR);
+        sb0.append("    }");
+
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+>>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("        }");
     sb.append(System.getProperty("line.separator"));
