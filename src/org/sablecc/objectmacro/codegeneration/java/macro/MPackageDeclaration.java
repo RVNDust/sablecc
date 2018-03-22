@@ -38,12 +38,15 @@ public class MPackageDeclaration extends Macro{
 
     private String field_PackageName;
 
+
     public MPackageDeclaration(String pPackageName){
 
         this.setPPackageName(pPackageName);
+
+
     }
 
-    private void setPPackageName(String pPackageName){
+    private void setPPackageName( String pPackageName ){
         if(pPackageName == null){
             throw ObjectMacroException.parameterNull("PackageName");
         }
@@ -60,6 +63,8 @@ public class MPackageDeclaration extends Macro{
 
         return this.field_PackageName;
     }
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -67,7 +72,7 @@ public class MPackageDeclaration extends Macro{
         internalsInitializer.setPackageDeclaration(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -84,7 +89,9 @@ public class MPackageDeclaration extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("package ");
@@ -99,5 +106,9 @@ public class MPackageDeclaration extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

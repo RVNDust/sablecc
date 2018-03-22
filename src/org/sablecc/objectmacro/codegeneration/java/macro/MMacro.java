@@ -770,12 +770,14 @@ import java.util.*;
 public class MMacro extends Macro{
 
     private String field_Name;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     private Macro list_ListPackage[];
 =======
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     private final List<Macro> list_PackageDeclaration;
-
     private DSeparator PackageDeclarationSeparator;
 
     private DBeforeFirst PackageDeclarationBeforeFirst;
@@ -783,11 +785,8 @@ public class MMacro extends Macro{
     private DAfterLast PackageDeclarationAfterLast;
 
     private DNone PackageDeclarationNone;
-
     private final InternalValue PackageDeclarationValue;
-
     private final List<Macro> list_ListField;
-
     private DSeparator ListFieldSeparator;
 
     private DBeforeFirst ListFieldBeforeFirst;
@@ -795,11 +794,8 @@ public class MMacro extends Macro{
     private DAfterLast ListFieldAfterLast;
 
     private DNone ListFieldNone;
-
     private final InternalValue ListFieldValue;
-
     private final List<Macro> list_ListContextField;
-
     private DSeparator ListContextFieldSeparator;
 
     private DBeforeFirst ListContextFieldBeforeFirst;
@@ -807,11 +803,8 @@ public class MMacro extends Macro{
     private DAfterLast ListContextFieldAfterLast;
 
     private DNone ListContextFieldNone;
-
     private final InternalValue ListContextFieldValue;
-
     private final List<Macro> list_ListConstructor;
-
     private DSeparator ListConstructorSeparator;
 
     private DBeforeFirst ListConstructorBeforeFirst;
@@ -819,11 +812,8 @@ public class MMacro extends Macro{
     private DAfterLast ListConstructorAfterLast;
 
     private DNone ListConstructorNone;
-
     private final InternalValue ListConstructorValue;
-
     private final List<Macro> list_ListSetter;
-
     private DSeparator ListSetterSeparator;
 
     private DBeforeFirst ListSetterBeforeFirst;
@@ -831,11 +821,8 @@ public class MMacro extends Macro{
     private DAfterLast ListSetterAfterLast;
 
     private DNone ListSetterNone;
-
     private final InternalValue ListSetterValue;
-
     private final List<Macro> list_ListBuilder;
-
     private DSeparator ListBuilderSeparator;
 
     private DBeforeFirst ListBuilderBeforeFirst;
@@ -843,11 +830,8 @@ public class MMacro extends Macro{
     private DAfterLast ListBuilderAfterLast;
 
     private DNone ListBuilderNone;
-
     private final InternalValue ListBuilderValue;
-
     private final List<Macro> list_ListRef;
-
     private DSeparator ListRefSeparator;
 
     private DBeforeFirst ListRefBeforeFirst;
@@ -855,11 +839,8 @@ public class MMacro extends Macro{
     private DAfterLast ListRefAfterLast;
 
     private DNone ListRefNone;
-
     private final InternalValue ListRefValue;
-
     private final List<Macro> list_ListInitInternalsMethod;
-
     private DSeparator ListInitInternalsMethodSeparator;
 
     private DBeforeFirst ListInitInternalsMethodBeforeFirst;
@@ -867,12 +848,13 @@ public class MMacro extends Macro{
     private DAfterLast ListInitInternalsMethodAfterLast;
 
     private DNone ListInitInternalsMethodNone;
-
     private final InternalValue ListInitInternalsMethodValue;
-
     private final List<Macro> list_ListInitDirectives;
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     private DSeparator ListInitDirectivesSeparator;
 
     private DBeforeFirst ListInitDirectivesBeforeFirst;
@@ -880,14 +862,15 @@ public class MMacro extends Macro{
     private DAfterLast ListInitDirectivesAfterLast;
 
     private DNone ListInitDirectivesNone;
-
     private final InternalValue ListInitDirectivesValue;
-
     private final List<Macro> list_ListRedefinedApplyInitializer;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     private Macro list_ListRedefinedApplyInitializer[];
 =======
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     private DSeparator ListRedefinedApplyInitializerSeparator;
 
     private DBeforeFirst ListRedefinedApplyInitializerBeforeFirst;
@@ -896,11 +879,8 @@ public class MMacro extends Macro{
 >>>>>>> Mise à jour Visiteur - Build OK
 
     private DNone ListRedefinedApplyInitializerNone;
-
     private final InternalValue ListRedefinedApplyInitializerValue;
-
     private final List<Macro> list_ListMacroBuilder;
-
     private DSeparator ListMacroBuilderSeparator;
 
     private DBeforeFirst ListMacroBuilderBeforeFirst;
@@ -908,11 +888,8 @@ public class MMacro extends Macro{
     private DAfterLast ListMacroBuilderAfterLast;
 
     private DNone ListMacroBuilderNone;
-
     private final InternalValue ListMacroBuilderValue;
-
     private final List<Macro> list_ListEmptyBuilderWithContext;
-
     private DSeparator ListEmptyBuilderWithContextSeparator;
 
     private DBeforeFirst ListEmptyBuilderWithContextBeforeFirst;
@@ -920,9 +897,9 @@ public class MMacro extends Macro{
     private DAfterLast ListEmptyBuilderWithContextAfterLast;
 
     private DNone ListEmptyBuilderWithContextNone;
-
     private final InternalValue ListEmptyBuilderWithContextValue;
 
+<<<<<<< HEAD
     private final Context ListPackageContext = new Context();
     private final Context ListFieldContext = new Context();
     private final Context ListContextFieldContext = new Context();
@@ -933,6 +910,9 @@ public class MMacro extends Macro{
     private final Context ListRedefinedApplyInitializerContext = new Context();
     private final Context ListMacroBuilderContext = new Context();
     private final Context ListEmptyBuilderWithContextContext = new Context();
+=======
+    private final Context PackageDeclarationContext = new Context();    private final Context ListFieldContext = new Context();    private final Context ListContextFieldContext = new Context();    private final Context ListConstructorContext = new Context();    private final Context ListSetterContext = new Context();    private final Context ListBuilderContext = new Context();    private final Context ListRefContext = new Context();    private final Context ListInitInternalsMethodContext = new Context();    private final Context ListInitDirectivesContext = new Context();    private final Context ListRedefinedApplyInitializerContext = new Context();    private final Context ListMacroBuilderContext = new Context();    private final Context ListEmptyBuilderWithContextContext = new Context();
+>>>>>>> Correctifs objectmacro2-java(back)
 
 <<<<<<< HEAD
     public MMacro(String pName, Macro pListPackage[], Macro pListField[], Macro pListContextField[], Macro pListConstructor[], Macro pListSetter[], Macro pListBuilder[], Macro pListRef[], Macro pListRedefinedApplyInitializer[], Macro pListMacroBuilder[], Macro pListEmptyBuilderWithContext[]){
@@ -953,6 +933,7 @@ public class MMacro extends Macro{
 
         this.setPName(pName);
 
+<<<<<<< HEAD
     this.list_PackageDeclaration = new ArrayList<>();
     this.list_ListField = new ArrayList<>();
     this.list_ListContextField = new ArrayList<>();
@@ -982,6 +963,14 @@ public class MMacro extends Macro{
     }
 
     private void setPName(String pName){
+=======
+    this.list_PackageDeclaration = new ArrayList<>();    this.list_ListField = new ArrayList<>();    this.list_ListContextField = new ArrayList<>();    this.list_ListConstructor = new ArrayList<>();    this.list_ListSetter = new ArrayList<>();    this.list_ListBuilder = new ArrayList<>();    this.list_ListRef = new ArrayList<>();    this.list_ListInitInternalsMethod = new ArrayList<>();    this.list_ListInitDirectives = new ArrayList<>();    this.list_ListRedefinedApplyInitializer = new ArrayList<>();    this.list_ListMacroBuilder = new ArrayList<>();    this.list_ListEmptyBuilderWithContext = new ArrayList<>();
+
+    this.PackageDeclarationValue = new InternalValue(this.list_PackageDeclaration, this.PackageDeclarationContext);    this.ListFieldValue = new InternalValue(this.list_ListField, this.ListFieldContext);    this.ListContextFieldValue = new InternalValue(this.list_ListContextField, this.ListContextFieldContext);    this.ListConstructorValue = new InternalValue(this.list_ListConstructor, this.ListConstructorContext);    this.ListSetterValue = new InternalValue(this.list_ListSetter, this.ListSetterContext);    this.ListBuilderValue = new InternalValue(this.list_ListBuilder, this.ListBuilderContext);    this.ListRefValue = new InternalValue(this.list_ListRef, this.ListRefContext);    this.ListInitInternalsMethodValue = new InternalValue(this.list_ListInitInternalsMethod, this.ListInitInternalsMethodContext);    this.ListInitDirectivesValue = new InternalValue(this.list_ListInitDirectives, this.ListInitDirectivesContext);    this.ListRedefinedApplyInitializerValue = new InternalValue(this.list_ListRedefinedApplyInitializer, this.ListRedefinedApplyInitializerContext);    this.ListMacroBuilderValue = new InternalValue(this.list_ListMacroBuilder, this.ListMacroBuilderContext);    this.ListEmptyBuilderWithContextValue = new InternalValue(this.list_ListEmptyBuilderWithContext, this.ListEmptyBuilderWithContextContext);
+    }
+
+    private void setPName( String pName ){
+>>>>>>> Correctifs objectmacro2-java(back)
         if(pName == null){
             throw ObjectMacroException.parameterNull("Name");
 =======
@@ -1058,6 +1047,7 @@ public class MMacro extends Macro{
         this.setPListMacroBuilder(pListMacroBuilder);
         this.setPListEmptyBuilderWithContext(pListEmptyBuilderWithContext);
     }
+<<<<<<< HEAD
 
     private void setPName(String pName){
         if(pName == null){
@@ -1068,94 +1058,90 @@ public class MMacro extends Macro{
         sb.append(oParamStringSetter_SingleAdd_InternalStringSetter_InternalMacroSetter.toString());
       }
 =======
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     public void addPackageDeclaration(MPackageDeclaration macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("PackageDeclaration");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("PackageDeclaration");
         }
 
         this.list_PackageDeclaration.add(macro);
     }
-
     public void addListField(MParamMacroField macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListField");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ParamMacroField");
         }
 
         this.list_ListField.add(macro);
     }
-
     public void addListField(MParamStringField macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListField");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ParamStringField");
         }
 
         this.list_ListField.add(macro);
     }
-
     public void addListField(MInternalMacroField macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListField");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InternalMacroField");
         }
 
         this.list_ListField.add(macro);
     }
-
     public void addListField(MInternalStringField macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListField");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InternalStringField");
         }
 
         this.list_ListField.add(macro);
     }
-
     public void addListField(MInternalMacrosValueField macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListField");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InternalMacrosValueField");
         }
 
         this.list_ListField.add(macro);
     }
-
     public void addListField(MDirectiveFields macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListField");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("DirectiveFields");
         }
 
         this.list_ListField.add(macro);
     }
-
     public void addListContextField(MContextField macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListContextField");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ContextField");
         }
 
         this.list_ListContextField.add(macro);
 >>>>>>> Mise à jour Visiteur - Build OK
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 <<<<<<< HEAD
@@ -1163,13 +1149,15 @@ public class MMacro extends Macro{
         if(pPackageDeclaration == null){
             throw ObjectMacroException.parameterNull("PackageDeclaration");
 =======
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     public void addListConstructor(MConstructor macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListConstructor");
 >>>>>>> Mise à jour Visiteur - Build OK
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("Constructor");
         }
 
 <<<<<<< HEAD
@@ -1196,69 +1184,67 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 =======
         this.list_ListConstructor.add(macro);
     }
-
     public void addListSetter(MParamStringSetter macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListSetter");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ParamStringSetter");
         }
 
         this.list_ListSetter.add(macro);
     }
-
     public void addListSetter(MSingleAdd macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListSetter");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("SingleAdd");
         }
 
         this.list_ListSetter.add(macro);
     }
-
     public void addListSetter(MInternalStringSetter macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListSetter");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InternalStringSetter");
         }
 
         this.list_ListSetter.add(macro);
     }
-
     public void addListSetter(MInternalMacroSetter macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListSetter");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InternalMacroSetter");
         }
 
         this.list_ListSetter.add(macro);
     }
-
     public void addListBuilder(MParamStringRefBuilder macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListBuilder");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ParamStringRefBuilder");
         }
 
         this.list_ListBuilder.add(macro);
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     public void addListBuilder(MParamMacroRefBuilder macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListBuilder");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ParamMacroRefBuilder");
         }
 
 <<<<<<< HEAD
@@ -1267,8 +1253,20 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 =======
         this.list_ListBuilder.add(macro);
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
+=======
+    public void addListBuilder(MInternalMacroRefBuilder macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("ListBuilder");
+        }
+                if(this.build_state != null){
+            throw ObjectMacroException.cannotModify("InternalMacroRefBuilder");
+        }
+>>>>>>> Correctifs objectmacro2-java(back)
 
+        this.list_ListBuilder.add(macro);
+    }
     public void addListRef(MParamStringRef macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListRef");
@@ -1283,52 +1281,52 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
             this.list_PackageDeclaration[i++] = macro;
 =======
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ParamStringRef");
         }
 
         this.list_ListRef.add(macro);
     }
-
     public void addListRef(MParamMacroRef macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListRef");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("ParamMacroRef");
         }
 
         this.list_ListRef.add(macro);
     }
-
     public void addListRef(MInternalMacroRef macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListRef");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InternalMacroRef");
         }
 
         this.list_ListRef.add(macro);
     }
-
     public void addListInitInternalsMethod(MInitInternalsMethod macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListInitInternalsMethod");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InitInternalsMethod");
         }
 
         this.list_ListInitInternalsMethod.add(macro);
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     public void addListInitDirectives(MInitDirectives macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListInitDirectives");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("InitDirectives");
         }
 <<<<<<< HEAD
 >>>>>>> MaJ Fichier de Macro + Generation
@@ -1367,35 +1365,32 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         this.list_ListInitDirectives.add(macro);
     }
-
     public void addListRedefinedApplyInitializer(MRedefinedApplyInitializer macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListRedefinedApplyInitializer");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("RedefinedApplyInitializer");
         }
 
         this.list_ListRedefinedApplyInitializer.add(macro);
     }
-
     public void addListMacroBuilder(MMacroBuilder macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListMacroBuilder");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("MacroBuilder");
         }
 
         this.list_ListMacroBuilder.add(macro);
     }
-
     public void addListEmptyBuilderWithContext(MEmptyBuilderWithContext macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListEmptyBuilderWithContext");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("Macro");
+            throw ObjectMacroException.cannotModify("EmptyBuilderWithContext");
         }
 
         this.list_ListEmptyBuilderWithContext.add(macro);
@@ -1405,7 +1400,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return this.field_Name;
     }
-
     private String buildPackageDeclaration(){
         StringBuilder sb = new StringBuilder();
         Context local_context = PackageDeclarationContext;
@@ -1440,7 +1434,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListField(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListFieldContext;
@@ -1638,6 +1631,7 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
         sb.append(oInitDirectives.toString());
       }
     }
+<<<<<<< HEAD
     for(Object oRedefinedApplyInitializer : this.eRedefinedApplyInitializer) {
       sb.append(oRedefinedApplyInitializer.toString());
     }
@@ -1657,6 +1651,8 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
     for(Object oEmptyBuilderWithContext : this.eEmptyBuilderWithContext) {
       sb.append(oEmptyBuilderWithContext.toString());
 =======
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     private String buildListContextField(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListContextFieldContext;
@@ -1691,7 +1687,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListConstructor(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListConstructorContext;
@@ -1726,7 +1721,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListSetter(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListSetterContext;
@@ -1761,7 +1755,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListBuilder(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListBuilderContext;
@@ -1796,7 +1789,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListRef(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListRefContext;
@@ -1831,7 +1823,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListInitInternalsMethod(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListInitInternalsMethodContext;
@@ -1866,7 +1857,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListInitDirectives(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListInitDirectivesContext;
@@ -1901,7 +1891,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListRedefinedApplyInitializer(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListRedefinedApplyInitializerContext;
@@ -1936,7 +1925,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListMacroBuilder(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListMacroBuilderContext;
@@ -1971,7 +1959,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return sb.toString();
     }
-
     private String buildListEmptyBuilderWithContext(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListEmptyBuilderWithContextContext;
@@ -2011,51 +1998,39 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
         return this.field_Name;
     }
-
     private InternalValue getPackageDeclaration(){
         return this.PackageDeclarationValue;
     }
-
     private InternalValue getListField(){
         return this.ListFieldValue;
     }
-
     private InternalValue getListContextField(){
         return this.ListContextFieldValue;
     }
-
     private InternalValue getListConstructor(){
         return this.ListConstructorValue;
     }
-
     private InternalValue getListSetter(){
         return this.ListSetterValue;
     }
-
     private InternalValue getListBuilder(){
         return this.ListBuilderValue;
     }
-
     private InternalValue getListRef(){
         return this.ListRefValue;
     }
-
     private InternalValue getListInitInternalsMethod(){
         return this.ListInitInternalsMethodValue;
     }
-
     private InternalValue getListInitDirectives(){
         return this.ListInitDirectivesValue;
     }
-
     private InternalValue getListRedefinedApplyInitializer(){
         return this.ListRedefinedApplyInitializerValue;
     }
-
     private InternalValue getListMacroBuilder(){
         return this.ListMacroBuilderValue;
     }
-
     private InternalValue getListEmptyBuilderWithContext(){
         return this.ListEmptyBuilderWithContextValue;
     }
@@ -2065,296 +2040,295 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 @Override
 void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListFieldInternals(Context context){
         for(Macro macro : this.list_ListField){
             macro.apply(new InternalsInitializer("ListField"){
 @Override
 void setParamMacroField(MParamMacroField mParamMacroField){
 
-        }
-@Override
+    
+    
+}@Override
 void setParamStringField(MParamStringField mParamStringField){
 
-        }
-@Override
+    
+    
+}@Override
 void setInternalMacroField(MInternalMacroField mInternalMacroField){
 
-        }
-@Override
+    
+    
+}@Override
 void setInternalStringField(MInternalStringField mInternalStringField){
 
-        }
-@Override
+    
+    
+}@Override
 void setInternalMacrosValueField(MInternalMacrosValueField mInternalMacrosValueField){
 
-        }
-@Override
+    
+    
+}@Override
 void setDirectiveFields(MDirectiveFields mDirectiveFields){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListContextFieldInternals(Context context){
         for(Macro macro : this.list_ListContextField){
             macro.apply(new InternalsInitializer("ListContextField"){
 @Override
 void setContextField(MContextField mContextField){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListConstructorInternals(Context context){
         for(Macro macro : this.list_ListConstructor){
             macro.apply(new InternalsInitializer("ListConstructor"){
 @Override
 void setConstructor(MConstructor mConstructor){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListSetterInternals(Context context){
         for(Macro macro : this.list_ListSetter){
             macro.apply(new InternalsInitializer("ListSetter"){
 @Override
 void setParamStringSetter(MParamStringSetter mParamStringSetter){
 
-        }
-@Override
+    
+    
+}@Override
 void setSingleAdd(MSingleAdd mSingleAdd){
 
-        }
-@Override
+    
+    
+}@Override
 void setInternalStringSetter(MInternalStringSetter mInternalStringSetter){
 
-        }
-@Override
+    
+    
+}@Override
 void setInternalMacroSetter(MInternalMacroSetter mInternalMacroSetter){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListBuilderInternals(Context context){
         for(Macro macro : this.list_ListBuilder){
             macro.apply(new InternalsInitializer("ListBuilder"){
 @Override
 void setParamStringRefBuilder(MParamStringRefBuilder mParamStringRefBuilder){
 
-        }
-@Override
+    
+    
+}@Override
 void setParamMacroRefBuilder(MParamMacroRefBuilder mParamMacroRefBuilder){
 
-        }
+    
+    
+}@Override
+void setInternalMacroRefBuilder(MInternalMacroRefBuilder mInternalMacroRefBuilder){
+
+    
+    
+}
 });
         }
     }
-
     private void initListRefInternals(Context context){
         for(Macro macro : this.list_ListRef){
             macro.apply(new InternalsInitializer("ListRef"){
 @Override
 void setParamStringRef(MParamStringRef mParamStringRef){
 
-        }
-@Override
+    
+    
+}@Override
 void setParamMacroRef(MParamMacroRef mParamMacroRef){
 
-        }
-@Override
+    
+    
+}@Override
 void setInternalMacroRef(MInternalMacroRef mInternalMacroRef){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListInitInternalsMethodInternals(Context context){
         for(Macro macro : this.list_ListInitInternalsMethod){
             macro.apply(new InternalsInitializer("ListInitInternalsMethod"){
 @Override
 void setInitInternalsMethod(MInitInternalsMethod mInitInternalsMethod){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListInitDirectivesInternals(Context context){
         for(Macro macro : this.list_ListInitDirectives){
             macro.apply(new InternalsInitializer("ListInitDirectives"){
 @Override
 void setInitDirectives(MInitDirectives mInitDirectives){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListRedefinedApplyInitializerInternals(Context context){
         for(Macro macro : this.list_ListRedefinedApplyInitializer){
             macro.apply(new InternalsInitializer("ListRedefinedApplyInitializer"){
 @Override
 void setRedefinedApplyInitializer(MRedefinedApplyInitializer mRedefinedApplyInitializer){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListMacroBuilderInternals(Context context){
         for(Macro macro : this.list_ListMacroBuilder){
             macro.apply(new InternalsInitializer("ListMacroBuilder"){
 @Override
 void setMacroBuilder(MMacroBuilder mMacroBuilder){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListEmptyBuilderWithContextInternals(Context context){
         for(Macro macro : this.list_ListEmptyBuilderWithContext){
             macro.apply(new InternalsInitializer("ListEmptyBuilderWithContext"){
 @Override
 void setEmptyBuilderWithContext(MEmptyBuilderWithContext mEmptyBuilderWithContext){
 
-        }
+    
+    
+}
 });
         }
     }
 
     private void initPackageDeclarationDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.PackageDeclarationBeforeFirst = new DBeforeFirst(sb0.toString());
-        this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.PackageDeclarationBeforeFirst = new DBeforeFirst(sb0.toString());
+this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
+    }
     private void initListFieldDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListFieldSeparator = new DSeparator(sb0.toString());
-        this.ListFieldValue.setSeparator(this.ListFieldSeparator);
-        
-        StringBuilder sb1 = new StringBuilder();
-                sb1.append(LINE_SEPARATOR);
-        this.ListFieldBeforeFirst = new DBeforeFirst(sb1.toString());
-        this.ListFieldValue.setBeforeFirst(this.ListFieldBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListFieldSeparator = new DSeparator(sb0.toString());
+this.ListFieldValue.setSeparator(this.ListFieldSeparator);StringBuilder sb1 = new StringBuilder();
+        sb1.append(LINE_SEPARATOR);
+this.ListFieldBeforeFirst = new DBeforeFirst(sb1.toString());
+this.ListFieldValue.setBeforeFirst(this.ListFieldBeforeFirst);
+    }
     private void initListContextFieldDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListContextFieldBeforeFirst = new DBeforeFirst(sb0.toString());
-        this.ListContextFieldValue.setBeforeFirst(this.ListContextFieldBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListContextFieldBeforeFirst = new DBeforeFirst(sb0.toString());
+this.ListContextFieldValue.setBeforeFirst(this.ListContextFieldBeforeFirst);
+    }
     private void initListConstructorDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListConstructorBeforeFirst = new DBeforeFirst(sb0.toString());
-        this.ListConstructorValue.setBeforeFirst(this.ListConstructorBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListConstructorBeforeFirst = new DBeforeFirst(sb0.toString());
+this.ListConstructorValue.setBeforeFirst(this.ListConstructorBeforeFirst);
+    }
     private void initListSetterDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListSetterSeparator = new DSeparator(sb0.toString());
-        this.ListSetterValue.setSeparator(this.ListSetterSeparator);
-        
-        StringBuilder sb1 = new StringBuilder();
-                sb1.append(LINE_SEPARATOR);
-        this.ListSetterBeforeFirst = new DBeforeFirst(sb1.toString());
-        this.ListSetterValue.setBeforeFirst(this.ListSetterBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListSetterSeparator = new DSeparator(sb0.toString());
+this.ListSetterValue.setSeparator(this.ListSetterSeparator);StringBuilder sb1 = new StringBuilder();
+        sb1.append(LINE_SEPARATOR);
+this.ListSetterBeforeFirst = new DBeforeFirst(sb1.toString());
+this.ListSetterValue.setBeforeFirst(this.ListSetterBeforeFirst);
+    }
     private void initListBuilderDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListBuilderSeparator = new DSeparator(sb0.toString());
-        this.ListBuilderValue.setSeparator(this.ListBuilderSeparator);
-        
-        StringBuilder sb1 = new StringBuilder();
-                sb1.append(LINE_SEPARATOR);
-        this.ListBuilderBeforeFirst = new DBeforeFirst(sb1.toString());
-        this.ListBuilderValue.setBeforeFirst(this.ListBuilderBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListBuilderSeparator = new DSeparator(sb0.toString());
+this.ListBuilderValue.setSeparator(this.ListBuilderSeparator);StringBuilder sb1 = new StringBuilder();
+        sb1.append(LINE_SEPARATOR);
+this.ListBuilderBeforeFirst = new DBeforeFirst(sb1.toString());
+this.ListBuilderValue.setBeforeFirst(this.ListBuilderBeforeFirst);
+    }
     private void initListRefDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListRefSeparator = new DSeparator(sb0.toString());
-        this.ListRefValue.setSeparator(this.ListRefSeparator);
-        
-        StringBuilder sb1 = new StringBuilder();
-                sb1.append(LINE_SEPARATOR);
-        this.ListRefBeforeFirst = new DBeforeFirst(sb1.toString());
-        this.ListRefValue.setBeforeFirst(this.ListRefBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListRefSeparator = new DSeparator(sb0.toString());
+this.ListRefValue.setSeparator(this.ListRefSeparator);StringBuilder sb1 = new StringBuilder();
+        sb1.append(LINE_SEPARATOR);
+this.ListRefBeforeFirst = new DBeforeFirst(sb1.toString());
+this.ListRefValue.setBeforeFirst(this.ListRefBeforeFirst);
+    }
     private void initListInitInternalsMethodDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListInitInternalsMethodSeparator = new DSeparator(sb0.toString());
-        this.ListInitInternalsMethodValue.setSeparator(this.ListInitInternalsMethodSeparator);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListInitInternalsMethodSeparator = new DSeparator(sb0.toString());
+this.ListInitInternalsMethodValue.setSeparator(this.ListInitInternalsMethodSeparator);
+    }
     private void initListInitDirectivesDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListInitDirectivesSeparator = new DSeparator(sb0.toString());
-        this.ListInitDirectivesValue.setSeparator(this.ListInitDirectivesSeparator);
-        
-        StringBuilder sb1 = new StringBuilder();
-                sb1.append(LINE_SEPARATOR);
-        this.ListInitDirectivesBeforeFirst = new DBeforeFirst(sb1.toString());
-        this.ListInitDirectivesValue.setBeforeFirst(this.ListInitDirectivesBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListInitDirectivesSeparator = new DSeparator(sb0.toString());
+this.ListInitDirectivesValue.setSeparator(this.ListInitDirectivesSeparator);StringBuilder sb1 = new StringBuilder();
+        sb1.append(LINE_SEPARATOR);
+this.ListInitDirectivesBeforeFirst = new DBeforeFirst(sb1.toString());
+this.ListInitDirectivesValue.setBeforeFirst(this.ListInitDirectivesBeforeFirst);
+    }
     private void initListRedefinedApplyInitializerDirectives(){
-            }
-
+        
+    }
     private void initListMacroBuilderDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListMacroBuilderBeforeFirst = new DBeforeFirst(sb0.toString());
-        this.ListMacroBuilderValue.setBeforeFirst(this.ListMacroBuilderBeforeFirst);
-            }
-
+        sb0.append(LINE_SEPARATOR);
+this.ListMacroBuilderBeforeFirst = new DBeforeFirst(sb0.toString());
+this.ListMacroBuilderValue.setBeforeFirst(this.ListMacroBuilderBeforeFirst);
+    }
     private void initListEmptyBuilderWithContextDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.ListEmptyBuilderWithContextBeforeFirst = new DBeforeFirst(sb0.toString());
-        this.ListEmptyBuilderWithContextValue.setBeforeFirst(this.ListEmptyBuilderWithContextBeforeFirst);
-            }
+        sb0.append(LINE_SEPARATOR);
+this.ListEmptyBuilderWithContextBeforeFirst = new DBeforeFirst(sb0.toString());
+this.ListEmptyBuilderWithContextValue.setBeforeFirst(this.ListEmptyBuilderWithContextBeforeFirst);
+    }
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
 
         internalsInitializer.setMacro(this);
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
 >>>>>>> Now macro without internals has a builder with context that only return build
@@ -2380,6 +2354,11 @@ void setEmptyBuilderWithContext(MEmptyBuilderWithContext mEmptyBuilderWithContex
 <<<<<<< HEAD
 =======
     @Override
+=======
+    }
+
+   @Override
+>>>>>>> Correctifs objectmacro2-java(back)
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -2395,42 +2374,46 @@ void setEmptyBuilderWithContext(MEmptyBuilderWithContext mEmptyBuilderWithContex
         }
         this.build_state = buildState;
 
-                initPackageDeclarationDirectives();
-                initListFieldDirectives();
-                initListContextFieldDirectives();
-                initListConstructorDirectives();
-                initListSetterDirectives();
-                initListBuilderDirectives();
-                initListRefDirectives();
-                initListInitInternalsMethodDirectives();
-                initListInitDirectivesDirectives();
-                initListRedefinedApplyInitializerDirectives();
-                initListMacroBuilderDirectives();
-                initListEmptyBuilderWithContextDirectives();
-        
-                initPackageDeclarationInternals(null);
-                initListFieldInternals(null);
-                initListContextFieldInternals(null);
-                initListConstructorInternals(null);
-                initListSetterInternals(null);
-                initListBuilderInternals(null);
-                initListRefInternals(null);
-                initListInitInternalsMethodInternals(null);
-                initListInitDirectivesInternals(null);
-                initListRedefinedApplyInitializerInternals(null);
-                initListMacroBuilderInternals(null);
-                initListEmptyBuilderWithContextInternals(null);
-        
+        initPackageDeclarationDirectives();
+initListFieldDirectives();
+initListContextFieldDirectives();
+initListConstructorDirectives();
+initListSetterDirectives();
+initListBuilderDirectives();
+initListRefDirectives();
+initListInitInternalsMethodDirectives();
+initListInitDirectivesDirectives();
+initListRedefinedApplyInitializerDirectives();
+initListMacroBuilderDirectives();
+initListEmptyBuilderWithContextDirectives();
+
+        initPackageDeclarationInternals(null);
+initListFieldInternals(null);
+initListContextFieldInternals(null);
+initListConstructorInternals(null);
+initListSetterInternals(null);
+initListBuilderInternals(null);
+initListRefInternals(null);
+initListInitInternalsMethodInternals(null);
+initListInitDirectivesInternals(null);
+initListRedefinedApplyInitializerInternals(null);
+initListMacroBuilderInternals(null);
+initListEmptyBuilderWithContextInternals(null);
+
         StringBuilder sb0 = new StringBuilder();
 
         MHeader minsert_1 = new MHeader();
-                        sb0.append(minsert_1.build(null));
+        
+        
+        sb0.append(minsert_1.build(null));
         sb0.append(LINE_SEPARATOR);
         sb0.append(buildPackageDeclaration());
         sb0.append(LINE_SEPARATOR);
         sb0.append(LINE_SEPARATOR);
         MImportJavaUtil minsert_2 = new MImportJavaUtil();
-                        sb0.append(minsert_2.build(null));
+        
+        
+        sb0.append(minsert_2.build(null));
         sb0.append(LINE_SEPARATOR);
         sb0.append(LINE_SEPARATOR);
         sb0.append("public class M");
@@ -2470,5 +2453,9 @@ void setEmptyBuilderWithContext(MEmptyBuilderWithContext mEmptyBuilderWithContex
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

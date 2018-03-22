@@ -13,6 +13,7 @@ public class MContextName extends Macro{
   private final String pContextName;
   private final MContextName mContextName = this;
 
+<<<<<<< HEAD
   public MContextName(String pContextName) {
     if(pContextName == null) throw new NullPointerException();
     this.pContextName = pContextName;
@@ -25,6 +26,20 @@ public class MContextName extends Macro{
   private String rContextName() {
     return this.mContextName.pContextName();
   }
+=======
+
+    public MContextName(String pContextName){
+
+        this.setPContextName(pContextName);
+
+
+    }
+
+    private void setPContextName( String pContextName ){
+        if(pContextName == null){
+            throw ObjectMacroException.parameterNull("ContextName");
+        }
+>>>>>>> Correctifs objectmacro2-java(back)
 
   @Override
   public String toString() {
@@ -44,6 +59,8 @@ public class MContextName extends Macro{
 
         return this.field_ContextName;
     }
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -51,7 +68,7 @@ public class MContextName extends Macro{
         internalsInitializer.setContextName(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -68,7 +85,9 @@ public class MContextName extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append(buildContextName());
@@ -81,5 +100,9 @@ public class MContextName extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

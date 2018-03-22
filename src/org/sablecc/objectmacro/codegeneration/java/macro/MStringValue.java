@@ -8,6 +8,7 @@ public class MStringValue {
 import java.util.*;
 
 public class MStringValue extends Macro{
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 
   private final String pString;
@@ -37,6 +38,27 @@ public class MStringValue extends Macro{
 
 <<<<<<< HEAD
 =======
+=======
+
+    private String field_String;
+
+
+    public MStringValue(String pString){
+
+        this.setPString(pString);
+
+
+    }
+
+    private void setPString( String pString ){
+        if(pString == null){
+            throw ObjectMacroException.parameterNull("String");
+        }
+
+        this.field_String = pString;
+    }
+
+>>>>>>> Correctifs objectmacro2-java(back)
     private String buildString(){
 
         return this.field_String;
@@ -46,6 +68,8 @@ public class MStringValue extends Macro{
 
         return this.field_String;
     }
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -53,7 +77,7 @@ public class MStringValue extends Macro{
         internalsInitializer.setStringValue(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -70,7 +94,9 @@ public class MStringValue extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("\"");
@@ -85,5 +111,9 @@ public class MStringValue extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

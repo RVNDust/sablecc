@@ -48,9 +48,7 @@ public class MSetParam {
 public class MSetParam extends Macro{
 
     private String field_Name;
-
     private final List<Macro> list_ListParamArg;
-
     private DSeparator ListParamArgSeparator;
 
     private DBeforeFirst ListParamArgBeforeFirst;
@@ -58,7 +56,6 @@ public class MSetParam extends Macro{
     private DAfterLast ListParamArgAfterLast;
 
     private DNone ListParamArgNone;
-
     private final InternalValue ListParamArgValue;
 
     private final Context ListParamArgContext = new Context();
@@ -72,20 +69,19 @@ public class MSetParam extends Macro{
     this.ListParamArgValue = new InternalValue(this.list_ListParamArg, this.ListParamArgContext);
     }
 
-    private void setPName(String pName){
+    private void setPName( String pName ){
         if(pName == null){
             throw ObjectMacroException.parameterNull("Name");
         }
 
         this.field_Name = pName;
     }
-
     public void addListParamArg(MParamArg macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListParamArg");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("SetParam");
+            throw ObjectMacroException.cannotModify("ParamArg");
         }
 
         this.list_ListParamArg.add(macro);
@@ -95,7 +91,6 @@ public class MSetParam extends Macro{
 
         return this.field_Name;
     }
-
     private String buildListParamArg(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListParamArgContext;
@@ -135,7 +130,6 @@ public class MSetParam extends Macro{
 
         return this.field_Name;
     }
-
     private InternalValue getListParamArg(){
         return this.ListParamArgValue;
     }
@@ -145,13 +139,16 @@ public class MSetParam extends Macro{
 @Override
 void setParamArg(MParamArg mParamArg){
 
-        }
+    
+    
+}
 });
         }
     }
 
     private void initListParamArgDirectives(){
-            }
+        
+    }
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -159,7 +156,7 @@ void setParamArg(MParamArg mParamArg){
         internalsInitializer.setSetParam(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -175,10 +172,10 @@ void setParamArg(MParamArg mParamArg){
         }
         this.build_state = buildState;
 
-                initListParamArgDirectives();
-        
-                initListParamArgInternals(null);
-        
+        initListParamArgDirectives();
+
+        initListParamArgInternals(null);
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("        this.setP");
@@ -195,5 +192,9 @@ void setParamArg(MParamArg mParamArg){
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

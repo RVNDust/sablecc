@@ -20,8 +20,18 @@ import java.util.*;
 
 public class MGetInternalTail extends Macro{
 
+
+
     public MGetInternalTail(){
+
+
+
     }
+
+
+
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -29,7 +39,7 @@ public class MGetInternalTail extends Macro{
         internalsInitializer.setGetInternalTail(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -46,7 +56,9 @@ public class MGetInternalTail extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append(".get(context)");
@@ -59,5 +71,9 @@ public class MGetInternalTail extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

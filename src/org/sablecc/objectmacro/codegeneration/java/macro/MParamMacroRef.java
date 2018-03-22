@@ -160,9 +160,11 @@ public class MParamMacroRef extends Macro{
 
     private String field_Name;
 
+
     public MParamMacroRef(String pName){
 
         this.setPName(pName);
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("        boolean first = true;");
@@ -175,6 +177,18 @@ public class MParamMacroRef extends Macro{
     sb.append("            ");
     for(Object oBeforeFirst : this.eBeforeFirst) {
       sb.append(oBeforeFirst.toString());
+=======
+
+
+    }
+
+    private void setPName( String pName ){
+        if(pName == null){
+            throw ObjectMacroException.parameterNull("Name");
+        }
+
+        this.field_Name = pName;
+>>>>>>> Correctifs objectmacro2-java(back)
     }
     sb.append("            ");
     for(Object oSeparator : this.eSeparator) {
@@ -198,6 +212,8 @@ public class MParamMacroRef extends Macro{
 
         return this.field_Name;
     }
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -205,7 +221,7 @@ public class MParamMacroRef extends Macro{
         internalsInitializer.setParamMacroRef(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -222,7 +238,9 @@ public class MParamMacroRef extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("    private InternalValue get");
@@ -273,4 +291,12 @@ public class MParamMacroRef extends Macro{
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
+<<<<<<< HEAD
 }
+=======
+    @Override
+    String build(Context context) {
+        return build();
+    }
+}
+>>>>>>> Correctifs objectmacro2-java(back)

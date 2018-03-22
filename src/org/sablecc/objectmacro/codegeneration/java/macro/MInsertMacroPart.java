@@ -115,13 +115,9 @@ public class MInsertMacroPart {
 public class MInsertMacroPart extends Macro{
 
     private String field_Name;
-
     private String field_IndexBuilder;
-
     private String field_IndexInsert;
-
     private final List<Macro> list_ListPart;
-
     private DSeparator ListPartSeparator;
 
     private DBeforeFirst ListPartBeforeFirst;
@@ -129,11 +125,8 @@ public class MInsertMacroPart extends Macro{
     private DAfterLast ListPartAfterLast;
 
     private DNone ListPartNone;
-
     private final InternalValue ListPartValue;
-
     private final List<Macro> list_ListSetInternal;
-
     private DSeparator ListSetInternalSeparator;
 
     private DBeforeFirst ListSetInternalBeforeFirst;
@@ -141,93 +134,80 @@ public class MInsertMacroPart extends Macro{
     private DAfterLast ListSetInternalAfterLast;
 
     private DNone ListSetInternalNone;
-
     private final InternalValue ListSetInternalValue;
 
-    private final Context ListPartContext = new Context();
-    private final Context ListSetInternalContext = new Context();
+    private final Context ListPartContext = new Context();    private final Context ListSetInternalContext = new Context();
 
     public MInsertMacroPart(String pName, String pIndexBuilder, String pIndexInsert){
 
-        this.setPName(pName);
-        this.setPIndexBuilder(pIndexBuilder);
-        this.setPIndexInsert(pIndexInsert);
+        this.setPName(pName);        this.setPIndexBuilder(pIndexBuilder);        this.setPIndexInsert(pIndexInsert);
 
-    this.list_ListPart = new ArrayList<>();
-    this.list_ListSetInternal = new ArrayList<>();
+    this.list_ListPart = new ArrayList<>();    this.list_ListSetInternal = new ArrayList<>();
 
-    this.ListPartValue = new InternalValue(this.list_ListPart, this.ListPartContext);
-    this.ListSetInternalValue = new InternalValue(this.list_ListSetInternal, this.ListSetInternalContext);
+    this.ListPartValue = new InternalValue(this.list_ListPart, this.ListPartContext);    this.ListSetInternalValue = new InternalValue(this.list_ListSetInternal, this.ListSetInternalContext);
     }
 
-    private void setPName(String pName){
+    private void setPName( String pName ){
         if(pName == null){
             throw ObjectMacroException.parameterNull("Name");
         }
 
         this.field_Name = pName;
     }
-
-    private void setPIndexBuilder(String pIndexBuilder){
+    private void setPIndexBuilder( String pIndexBuilder ){
         if(pIndexBuilder == null){
             throw ObjectMacroException.parameterNull("IndexBuilder");
         }
 
         this.field_IndexBuilder = pIndexBuilder;
     }
-
-    private void setPIndexInsert(String pIndexInsert){
+    private void setPIndexInsert( String pIndexInsert ){
         if(pIndexInsert == null){
             throw ObjectMacroException.parameterNull("IndexInsert");
         }
 
         this.field_IndexInsert = pIndexInsert;
     }
-
     public void addListPart(MInitStringBuilder macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListPart");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("InsertMacroPart");
+            throw ObjectMacroException.cannotModify("InitStringBuilder");
         }
 
         this.list_ListPart.add(macro);
     }
-
     public void addListPart(MStringPart macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListPart");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("InsertMacroPart");
+            throw ObjectMacroException.cannotModify("StringPart");
         }
 
         this.list_ListPart.add(macro);
     }
-
     public void addListPart(MParamInsertPart macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListPart");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("InsertMacroPart");
+            throw ObjectMacroException.cannotModify("ParamInsertPart");
         }
 
         this.list_ListPart.add(macro);
     }
-
     public void addListPart(MEolPart macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListPart");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("InsertMacroPart");
+            throw ObjectMacroException.cannotModify("EolPart");
         }
 
         this.list_ListPart.add(macro);
     }
-
     public void addListPart(MInsertMacroPart macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListPart");
@@ -238,13 +218,12 @@ public class MInsertMacroPart extends Macro{
 
         this.list_ListPart.add(macro);
     }
-
     public void addListSetInternal(MSetInternal macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListSetInternal");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("InsertMacroPart");
+            throw ObjectMacroException.cannotModify("SetInternal");
         }
 
         this.list_ListSetInternal.add(macro);
@@ -254,17 +233,14 @@ public class MInsertMacroPart extends Macro{
 
         return this.field_Name;
     }
-
     private String buildIndexBuilder(){
 
         return this.field_IndexBuilder;
     }
-
     private String buildIndexInsert(){
 
         return this.field_IndexInsert;
     }
-
     private String buildListPart(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListPartContext;
@@ -299,7 +275,6 @@ public class MInsertMacroPart extends Macro{
 
         return sb.toString();
     }
-
     private String buildListSetInternal(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListSetInternalContext;
@@ -339,21 +314,17 @@ public class MInsertMacroPart extends Macro{
 
         return this.field_Name;
     }
-
     private String getIndexBuilder(){
 
         return this.field_IndexBuilder;
     }
-
     private String getIndexInsert(){
 
         return this.field_IndexInsert;
     }
-
     private InternalValue getListPart(){
         return this.ListPartValue;
     }
-
     private InternalValue getListSetInternal(){
         return this.ListSetInternalValue;
     }
@@ -363,43 +334,51 @@ public class MInsertMacroPart extends Macro{
 @Override
 void setInitStringBuilder(MInitStringBuilder mInitStringBuilder){
 
-        }
-@Override
+    
+    
+}@Override
 void setStringPart(MStringPart mStringPart){
 
-        }
-@Override
+    
+    
+}@Override
 void setParamInsertPart(MParamInsertPart mParamInsertPart){
 
-        }
-@Override
+    
+    
+}@Override
 void setEolPart(MEolPart mEolPart){
 
-        }
-@Override
+    
+    
+}@Override
 void setInsertMacroPart(MInsertMacroPart mInsertMacroPart){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListSetInternalInternals(Context context){
         for(Macro macro : this.list_ListSetInternal){
             macro.apply(new InternalsInitializer("ListSetInternal"){
 @Override
 void setSetInternal(MSetInternal mSetInternal){
 
-        }
+    
+    
+}
 });
         }
     }
 
     private void initListPartDirectives(){
-            }
-
+        
+    }
     private void initListSetInternalDirectives(){
-            }
+        
+    }
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -407,7 +386,7 @@ void setSetInternal(MSetInternal mSetInternal){
         internalsInitializer.setInsertMacroPart(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -423,12 +402,12 @@ void setSetInternal(MSetInternal mSetInternal){
         }
         this.build_state = buildState;
 
-                initListPartDirectives();
-                initListSetInternalDirectives();
-        
-                initListPartInternals(null);
-                initListSetInternalInternals(null);
-        
+        initListPartDirectives();
+initListSetInternalDirectives();
+
+        initListPartInternals(null);
+initListSetInternalInternals(null);
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("        M");
@@ -459,5 +438,9 @@ void setSetInternal(MSetInternal mSetInternal){
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

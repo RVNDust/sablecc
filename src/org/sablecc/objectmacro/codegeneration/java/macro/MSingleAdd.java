@@ -199,11 +199,8 @@ import java.util.*;
 public class MSingleAdd extends Macro{
 
     private String field_MacroName;
-
     private String field_ParamName;
-
     private final List<Macro> list_IsBuilt;
-
     private DSeparator IsBuiltSeparator;
 
     private DBeforeFirst IsBuiltBeforeFirst;
@@ -211,43 +208,39 @@ public class MSingleAdd extends Macro{
     private DAfterLast IsBuiltAfterLast;
 
     private DNone IsBuiltNone;
-
     private final InternalValue IsBuiltValue;
 
     private final Context IsBuiltContext = new Context();
 
     public MSingleAdd(String pMacroName, String pParamName){
 
-        this.setPMacroName(pMacroName);
-        this.setPParamName(pParamName);
+        this.setPMacroName(pMacroName);        this.setPParamName(pParamName);
 
     this.list_IsBuilt = new ArrayList<>();
 
     this.IsBuiltValue = new InternalValue(this.list_IsBuilt, this.IsBuiltContext);
     }
 
-    private void setPMacroName(String pMacroName){
+    private void setPMacroName( String pMacroName ){
         if(pMacroName == null){
             throw ObjectMacroException.parameterNull("MacroName");
         }
 
         this.field_MacroName = pMacroName;
     }
-
-    private void setPParamName(String pParamName){
+    private void setPParamName( String pParamName ){
         if(pParamName == null){
             throw ObjectMacroException.parameterNull("ParamName");
         }
 
         this.field_ParamName = pParamName;
     }
-
     public void addIsBuilt(MIsBuilt macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("IsBuilt");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("SingleAdd");
+            throw ObjectMacroException.cannotModify("IsBuilt");
         }
 
         this.list_IsBuilt.add(macro);
@@ -257,11 +250,11 @@ public class MSingleAdd extends Macro{
 
         return this.field_MacroName;
     }
-
     private String buildParamName(){
 
         return this.field_ParamName;
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> MaJ Fichier de Macro + Generation
 =======
@@ -270,6 +263,8 @@ public class MSingleAdd extends Macro{
       sb.append(oIsBuilt.toString());
 =======
 
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     private String buildIsBuilt(){
         StringBuilder sb = new StringBuilder();
         Context local_context = IsBuiltContext;
@@ -310,6 +305,7 @@ public class MSingleAdd extends Macro{
         return this.field_MacroName;
 >>>>>>> Mise à jour Visiteur - Build OK
     }
+<<<<<<< HEAD
     sb.append(System.getProperty("line.separator"));
     sb.append("        this.list_");
     sb.append(rParamName());
@@ -323,11 +319,12 @@ public class MSingleAdd extends Macro{
 
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> Correctifs objectmacro2-java(back)
     private String getParamName(){
 
         return this.field_ParamName;
     }
-
     private InternalValue getIsBuilt(){
         return this.IsBuiltValue;
     }
@@ -337,14 +334,16 @@ public class MSingleAdd extends Macro{
 @Override
 void setIsBuilt(MIsBuilt mIsBuilt){
 
-                mIsBuilt.setMacroName(IsBuiltContext, getMacroName());
+    
+            mIsBuilt.setMacroName(IsBuiltContext, getMacroName());
 }
 });
         }
     }
 
     private void initIsBuiltDirectives(){
-            }
+        
+    }
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -352,7 +351,7 @@ void setIsBuilt(MIsBuilt mIsBuilt){
         internalsInitializer.setSingleAdd(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -368,10 +367,10 @@ void setIsBuilt(MIsBuilt mIsBuilt){
         }
         this.build_state = buildState;
 
-                initIsBuiltDirectives();
-        
-                initIsBuiltInternals(null);
-        
+        initIsBuiltDirectives();
+
+        initIsBuiltInternals(null);
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("    public void add");
@@ -408,5 +407,9 @@ void setIsBuilt(MIsBuilt mIsBuilt){
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

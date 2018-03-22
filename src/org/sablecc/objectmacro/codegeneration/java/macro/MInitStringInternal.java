@@ -38,12 +38,15 @@ public class MInitStringInternal extends Macro{
 
     private String field_Name;
 
+
     public MInitStringInternal(String pName){
 
         this.setPName(pName);
+
+
     }
 
-    private void setPName(String pName){
+    private void setPName( String pName ){
         if(pName == null){
             throw ObjectMacroException.parameterNull("Name");
         }
@@ -60,6 +63,8 @@ public class MInitStringInternal extends Macro{
 
         return this.field_Name;
     }
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -67,7 +72,7 @@ public class MInitStringInternal extends Macro{
         internalsInitializer.setInitStringInternal(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -84,7 +89,9 @@ public class MInitStringInternal extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("    this.field_");
@@ -99,5 +106,9 @@ public class MInitStringInternal extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

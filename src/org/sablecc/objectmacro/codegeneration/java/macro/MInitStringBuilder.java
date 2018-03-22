@@ -38,12 +38,15 @@ public class MInitStringBuilder extends Macro{
 
     private String field_IndexBuilder;
 
+
     public MInitStringBuilder(String pIndexBuilder){
 
         this.setPIndexBuilder(pIndexBuilder);
+
+
     }
 
-    private void setPIndexBuilder(String pIndexBuilder){
+    private void setPIndexBuilder( String pIndexBuilder ){
         if(pIndexBuilder == null){
             throw ObjectMacroException.parameterNull("IndexBuilder");
         }
@@ -60,6 +63,8 @@ public class MInitStringBuilder extends Macro{
 
         return this.field_IndexBuilder;
     }
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -67,7 +72,7 @@ public class MInitStringBuilder extends Macro{
         internalsInitializer.setInitStringBuilder(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -84,7 +89,9 @@ public class MInitStringBuilder extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("        StringBuilder sb");
@@ -99,5 +106,9 @@ public class MInitStringBuilder extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

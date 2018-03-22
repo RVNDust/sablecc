@@ -32,7 +32,6 @@ public class MClassNone {
 public class MClassNone extends Macro{
 
     private final List<Macro> list_PackageDeclaration;
-
     private DSeparator PackageDeclarationSeparator;
 
     private DBeforeFirst PackageDeclarationBeforeFirst;
@@ -40,12 +39,12 @@ public class MClassNone extends Macro{
     private DAfterLast PackageDeclarationAfterLast;
 
     private DNone PackageDeclarationNone;
-
     private final InternalValue PackageDeclarationValue;
 
     private final Context PackageDeclarationContext = new Context();
 
     public MClassNone(){
+
 
     this.list_PackageDeclaration = new ArrayList<>();
 
@@ -57,7 +56,7 @@ public class MClassNone extends Macro{
             throw ObjectMacroException.parameterNull("PackageDeclaration");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("ClassNone");
+            throw ObjectMacroException.cannotModify("PackageDeclaration");
         }
 
         this.list_PackageDeclaration.add(macro);
@@ -150,18 +149,19 @@ public class MClassNone extends Macro{
 @Override
 void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
-        }
+    
+    
+}
 });
         }
     }
 
     private void initPackageDeclarationDirectives(){
-        
         StringBuilder sb0 = new StringBuilder();
-                sb0.append(LINE_SEPARATOR);
-        this.PackageDeclarationBeforeFirst = new DBeforeFirst(sb0.toString());
-        this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
-            }
+        sb0.append(LINE_SEPARATOR);
+this.PackageDeclarationBeforeFirst = new DBeforeFirst(sb0.toString());
+this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
+    }
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -169,7 +169,7 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
         internalsInitializer.setClassNone(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -185,14 +185,16 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
         }
         this.build_state = buildState;
 
-                initPackageDeclarationDirectives();
-        
-                initPackageDeclarationInternals(null);
-        
+        initPackageDeclarationDirectives();
+
+        initPackageDeclarationInternals(null);
+
         StringBuilder sb0 = new StringBuilder();
 
         MHeader minsert_1 = new MHeader();
-                        sb0.append(minsert_1.build(null));
+        
+        
+        sb0.append(minsert_1.build(null));
         sb0.append(LINE_SEPARATOR);
         sb0.append(buildPackageDeclaration());
         sb0.append(LINE_SEPARATOR);
@@ -247,5 +249,9 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

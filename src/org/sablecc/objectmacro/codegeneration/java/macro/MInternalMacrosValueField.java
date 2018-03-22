@@ -38,12 +38,15 @@ public class MInternalMacrosValueField extends Macro{
 
     private String field_ParamName;
 
+
     public MInternalMacrosValueField(String pParamName){
 
         this.setPParamName(pParamName);
+
+
     }
 
-    private void setPParamName(String pParamName){
+    private void setPParamName( String pParamName ){
         if(pParamName == null){
             throw ObjectMacroException.parameterNull("ParamName");
         }
@@ -60,6 +63,8 @@ public class MInternalMacrosValueField extends Macro{
 
         return this.field_ParamName;
     }
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -67,7 +72,7 @@ public class MInternalMacrosValueField extends Macro{
         internalsInitializer.setInternalMacrosValueField(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -84,7 +89,9 @@ public class MInternalMacrosValueField extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("    private final InternalValue ");
@@ -99,5 +106,9 @@ public class MInternalMacrosValueField extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

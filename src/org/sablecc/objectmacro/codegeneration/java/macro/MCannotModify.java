@@ -119,5 +119,9 @@ public class MCannotModify {
     return sb.toString();
   }
 
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

@@ -21,8 +21,18 @@ import java.util.*;
 
 public class MImportJavaUtil extends Macro{
 
+
+
     public MImportJavaUtil(){
+
+
+
     }
+
+
+
+
+
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -30,7 +40,7 @@ public class MImportJavaUtil extends Macro{
         internalsInitializer.setImportJavaUtil(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -47,7 +57,9 @@ public class MImportJavaUtil extends Macro{
         this.build_state = buildState;
 
         
+
         
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("import java.util.*;");
@@ -60,5 +72,9 @@ public class MImportJavaUtil extends Macro{
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

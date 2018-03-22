@@ -65,9 +65,7 @@ public class MParamStringRefBuilder {
 public class MParamStringRefBuilder extends Macro{
 
     private String field_Name;
-
     private final List<Macro> list_ListContextParam;
-
     private DSeparator ListContextParamSeparator;
 
     private DBeforeFirst ListContextParamBeforeFirst;
@@ -75,11 +73,8 @@ public class MParamStringRefBuilder extends Macro{
     private DAfterLast ListContextParamAfterLast;
 
     private DNone ListContextParamNone;
-
     private final InternalValue ListContextParamValue;
-
     private final List<Macro> list_ListGetInternalTail;
-
     private DSeparator ListGetInternalTailSeparator;
 
     private DBeforeFirst ListGetInternalTailBeforeFirst;
@@ -87,48 +82,42 @@ public class MParamStringRefBuilder extends Macro{
     private DAfterLast ListGetInternalTailAfterLast;
 
     private DNone ListGetInternalTailNone;
-
     private final InternalValue ListGetInternalTailValue;
 
-    private final Context ListContextParamContext = new Context();
-    private final Context ListGetInternalTailContext = new Context();
+    private final Context ListContextParamContext = new Context();    private final Context ListGetInternalTailContext = new Context();
 
     public MParamStringRefBuilder(String pName){
 
         this.setPName(pName);
 
-    this.list_ListContextParam = new ArrayList<>();
-    this.list_ListGetInternalTail = new ArrayList<>();
+    this.list_ListContextParam = new ArrayList<>();    this.list_ListGetInternalTail = new ArrayList<>();
 
-    this.ListContextParamValue = new InternalValue(this.list_ListContextParam, this.ListContextParamContext);
-    this.ListGetInternalTailValue = new InternalValue(this.list_ListGetInternalTail, this.ListGetInternalTailContext);
+    this.ListContextParamValue = new InternalValue(this.list_ListContextParam, this.ListContextParamContext);    this.ListGetInternalTailValue = new InternalValue(this.list_ListGetInternalTail, this.ListGetInternalTailContext);
     }
 
-    private void setPName(String pName){
+    private void setPName( String pName ){
         if(pName == null){
             throw ObjectMacroException.parameterNull("Name");
         }
 
         this.field_Name = pName;
     }
-
     public void addListContextParam(MContextParam macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListContextParam");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("ParamStringRefBuilder");
+            throw ObjectMacroException.cannotModify("ContextParam");
         }
 
         this.list_ListContextParam.add(macro);
     }
-
     public void addListGetInternalTail(MGetInternalTail macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ListGetInternalTail");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("ParamStringRefBuilder");
+            throw ObjectMacroException.cannotModify("GetInternalTail");
         }
 
         this.list_ListGetInternalTail.add(macro);
@@ -138,7 +127,6 @@ public class MParamStringRefBuilder extends Macro{
 
         return this.field_Name;
     }
-
     private String buildListContextParam(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListContextParamContext;
@@ -173,7 +161,6 @@ public class MParamStringRefBuilder extends Macro{
 
         return sb.toString();
     }
-
     private String buildListGetInternalTail(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ListGetInternalTailContext;
@@ -213,11 +200,9 @@ public class MParamStringRefBuilder extends Macro{
 
         return this.field_Name;
     }
-
     private InternalValue getListContextParam(){
         return this.ListContextParamValue;
     }
-
     private InternalValue getListGetInternalTail(){
         return this.ListGetInternalTailValue;
     }
@@ -227,27 +212,31 @@ public class MParamStringRefBuilder extends Macro{
 @Override
 void setContextParam(MContextParam mContextParam){
 
-        }
+    
+    
+}
 });
         }
     }
-
     private void initListGetInternalTailInternals(Context context){
         for(Macro macro : this.list_ListGetInternalTail){
             macro.apply(new InternalsInitializer("ListGetInternalTail"){
 @Override
 void setGetInternalTail(MGetInternalTail mGetInternalTail){
 
-        }
+    
+    
+}
 });
         }
     }
 
     private void initListContextParamDirectives(){
-            }
-
+        
+    }
     private void initListGetInternalTailDirectives(){
-            }
+        
+    }
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -255,7 +244,7 @@ void setGetInternalTail(MGetInternalTail mGetInternalTail){
         internalsInitializer.setParamStringRefBuilder(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -271,12 +260,12 @@ void setGetInternalTail(MGetInternalTail mGetInternalTail){
         }
         this.build_state = buildState;
 
-                initListContextParamDirectives();
-                initListGetInternalTailDirectives();
-        
-                initListContextParamInternals(null);
-                initListGetInternalTailInternals(null);
-        
+        initListContextParamDirectives();
+initListGetInternalTailDirectives();
+
+        initListContextParamInternals(null);
+initListGetInternalTailInternals(null);
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("    private String build");
@@ -302,5 +291,9 @@ void setGetInternalTail(MGetInternalTail mGetInternalTail){
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
+=======
+}
+>>>>>>> Correctifs objectmacro2-java(back)

@@ -66,9 +66,7 @@ import java.util.*;
 public class MInitInternalsMethod extends Macro{
 
     private String field_Name;
-
     private final List<Macro> list_ApplyInternalsInitializer;
-
     private DSeparator ApplyInternalsInitializerSeparator;
 
     private DBeforeFirst ApplyInternalsInitializerBeforeFirst;
@@ -76,7 +74,6 @@ public class MInitInternalsMethod extends Macro{
     private DAfterLast ApplyInternalsInitializerAfterLast;
 
     private DNone ApplyInternalsInitializerNone;
-
     private final InternalValue ApplyInternalsInitializerValue;
 
     private final Context ApplyInternalsInitializerContext = new Context();
@@ -90,20 +87,19 @@ public class MInitInternalsMethod extends Macro{
     this.ApplyInternalsInitializerValue = new InternalValue(this.list_ApplyInternalsInitializer, this.ApplyInternalsInitializerContext);
     }
 
-    private void setPName(String pName){
+    private void setPName( String pName ){
         if(pName == null){
             throw ObjectMacroException.parameterNull("Name");
         }
 
         this.field_Name = pName;
     }
-
     public void addApplyInternalsInitializer(MApplyInternalsInitializer macro){
         if(macro == null){
             throw ObjectMacroException.parameterNull("ApplyInternalsInitializer");
         }
                 if(this.build_state != null){
-            throw ObjectMacroException.cannotModify("InitInternalsMethod");
+            throw ObjectMacroException.cannotModify("ApplyInternalsInitializer");
         }
 
         this.list_ApplyInternalsInitializer.add(macro);
@@ -113,7 +109,6 @@ public class MInitInternalsMethod extends Macro{
 
         return this.field_Name;
     }
-
     private String buildApplyInternalsInitializer(){
         StringBuilder sb = new StringBuilder();
         Context local_context = ApplyInternalsInitializerContext;
@@ -153,7 +148,6 @@ public class MInitInternalsMethod extends Macro{
 
         return this.field_Name;
     }
-
     private InternalValue getApplyInternalsInitializer(){
         return this.ApplyInternalsInitializerValue;
     }
@@ -163,13 +157,16 @@ public class MInitInternalsMethod extends Macro{
 @Override
 void setApplyInternalsInitializer(MApplyInternalsInitializer mApplyInternalsInitializer){
 
-        }
+    
+    
+}
 });
         }
     }
 
     private void initApplyInternalsInitializerDirectives(){
-            }
+        
+    }
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
@@ -177,7 +174,7 @@ void setApplyInternalsInitializer(MApplyInternalsInitializer mApplyInternalsInit
         internalsInitializer.setInitInternalsMethod(this);
     }
 
-    @Override
+   @Override
     public String build(){
 
         BuildState buildState = this.build_state;
@@ -193,10 +190,10 @@ void setApplyInternalsInitializer(MApplyInternalsInitializer mApplyInternalsInit
         }
         this.build_state = buildState;
 
-                initApplyInternalsInitializerDirectives();
-        
-                initApplyInternalsInitializerInternals(null);
-        
+        initApplyInternalsInitializerDirectives();
+
+        initApplyInternalsInitializerInternals(null);
+
         StringBuilder sb0 = new StringBuilder();
 
         sb0.append("    private void init");
@@ -233,4 +230,12 @@ public class MInitInternalsMethod extends Macro{
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 
+<<<<<<< HEAD
 }
+=======
+    @Override
+    String build(Context context) {
+        return build();
+    }
+}
+>>>>>>> Correctifs objectmacro2-java(back)
