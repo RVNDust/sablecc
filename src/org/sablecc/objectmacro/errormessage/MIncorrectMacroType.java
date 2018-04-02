@@ -77,6 +77,7 @@ public class MIncorrectMacroType {
     sb.append(System.getProperty("line.separator"));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("Incorrect macro type at index ");
 =======
     sb.append("You provided a wrong argument type at index ");
@@ -84,6 +85,9 @@ public class MIncorrectMacroType {
 =======
     sb.append("Incorrect macro type at index ");
 >>>>>>> Update error message incorrect macro type
+=======
+    sb.append("Incorrect macro type at index ");
+>>>>>>> object-macro2.1
     sb.append(rIndex());
     sb.append(". (expected : ");
     sb.append(rExpected());

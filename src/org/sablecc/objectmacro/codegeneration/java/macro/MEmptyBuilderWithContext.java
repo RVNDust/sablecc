@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MEmptyBuilderWithContext {
 
   public MEmptyBuilderWithContext() {
@@ -23,6 +24,8 @@ public class MEmptyBuilderWithContext {
   }
 
 =======
+=======
+>>>>>>> object-macro2.1
 import java.util.*;
 
 public class MEmptyBuilderWithContext extends Macro{
@@ -86,8 +89,12 @@ public class MEmptyBuilderWithContext extends Macro{
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

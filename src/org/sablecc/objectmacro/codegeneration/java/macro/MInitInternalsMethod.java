@@ -5,6 +5,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 import java.util.*;
@@ -61,6 +62,8 @@ public class MInitInternalsMethod {
     for(Object oApplyInternalsInitializer : this.eApplyInternalsInitializer) {
       sb.append(oApplyInternalsInitializer.toString());
 =======
+=======
+>>>>>>> object-macro2.1
 import java.util.*;
 
 public class MInitInternalsMethod extends Macro{
@@ -215,6 +218,7 @@ void setApplyInternalsInitializer(MApplyInternalsInitializer mApplyInternalsInit
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("        }");
@@ -233,9 +237,17 @@ public class MInitInternalsMethod extends Macro{
 <<<<<<< HEAD
 }
 =======
+=======
+    }
+
+>>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

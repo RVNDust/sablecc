@@ -7,6 +7,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
@@ -232,6 +233,10 @@ public class MConstructor {
 import java.util.*;
 
 >>>>>>> Mise à jour Visiteur - Build OK
+=======
+import java.util.*;
+
+>>>>>>> object-macro2.1
 public class MConstructor extends Macro{
 
     private String field_Name;
@@ -254,6 +259,7 @@ public class MConstructor extends Macro{
     private DNone ListStringParamNone;
     private final InternalValue ListStringParamValue;
     private final List<Macro> list_ListInit;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 <<<<<<< HEAD
@@ -421,6 +427,9 @@ public class MConstructor extends Macro{
 >>>>>>> Correctifs objectmacro2-java(back)
     private DSeparator ListInitSeparator;
 >>>>>>> Mise à jour Visiteur - Build OK
+=======
+    private DSeparator ListInitSeparator;
+>>>>>>> object-macro2.1
 
     private DBeforeFirst ListInitBeforeFirst;
 
@@ -816,6 +825,7 @@ initListInternalInternals(null);
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       for(Object oStringParam : this.eStringParam) {
         if(first) {
@@ -857,3 +867,6 @@ initListInternalInternals(null);
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

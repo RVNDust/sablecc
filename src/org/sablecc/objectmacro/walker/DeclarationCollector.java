@@ -32,12 +32,15 @@ public class DeclarationCollector
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private Macro currentMacro;
 
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
 >>>>>>> Clean up code, add comments
+=======
+>>>>>>> object-macro2.1
     public DeclarationCollector(
             GlobalIndex globalIndex) {
 
@@ -49,6 +52,7 @@ public class DeclarationCollector
     }
 
     @Override
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void caseAMacro(
             AMacro node) {
@@ -91,10 +95,25 @@ public class DeclarationCollector
         List<PParam> params = node.getParams();
         List<PInternal> internals = node.getInternals();
 
+=======
+    public void caseAMacro(
+            AMacro node) {
+
+        if (node.getBegin().getPos() != 1) {
+            throw CompilerException.beginTokenMisused(node.getBegin());
+        }
+
+        Macro macro = this.globalIndex.newMacro(node);
+
+        List<PParam> params = node.getParams();
+        List<PInternal> internals = node.getInternals();
+
+>>>>>>> object-macro2.1
         for (PParam param_production : params) {
             AParam param_node = (AParam) param_production;
             macro.newParam(param_node);
         }
+<<<<<<< HEAD
 
         for (PInternal param_production : internals) {
             AInternal param_node = (AInternal) param_production;
@@ -112,4 +131,12 @@ public class DeclarationCollector
     }
 =======
 >>>>>>> Update walkers and fix lexer to handle inserts in string argument
+=======
+
+        for (PInternal param_production : internals) {
+            AInternal param_node = (AInternal) param_production;
+            macro.newInternal(param_node);
+        }
+    }
+>>>>>>> object-macro2.1
 }

@@ -1,7 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add copyrights
+=======
+>>>>>>> object-macro2.1
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -19,6 +22,7 @@
  * limitations under the License.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  */
 <<<<<<< HEAD
 =======
@@ -28,6 +32,9 @@
 =======
  */
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+ */
+>>>>>>> object-macro2.1
 package org.sablecc.objectmacro.codegeneration.java;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
@@ -50,6 +57,7 @@ public class MacroCollector
 
     public MacroCollector(
             Map<String, Macro> macros){
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> Add copyrights
@@ -80,10 +88,13 @@ public class MacroCollector
 =======
             Map<String, Macro> macros){
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+>>>>>>> object-macro2.1
 
         this.macros = macros;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -151,6 +162,8 @@ public class MacroCollector
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> object-macro2.1
     @Override
     public void inAMacro(
             AMacro node) {
@@ -159,8 +172,11 @@ public class MacroCollector
         this.currentInternals = new LinkedList<>();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
+=======
+>>>>>>> object-macro2.1
 
     @Override
     public void outAMacro(
@@ -188,5 +204,8 @@ public class MacroCollector
         this.currentInternals.add(param_name);
     }
 
+<<<<<<< HEAD
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
+=======
+>>>>>>> object-macro2.1
 }

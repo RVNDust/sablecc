@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MRedefinedApplyInitializer {
 
   private final String pName;
@@ -41,6 +42,8 @@ public class MRedefinedApplyInitializer {
   }
 
 =======
+=======
+>>>>>>> object-macro2.1
 import java.util.*;
 
 public class MRedefinedApplyInitializer extends Macro{
@@ -126,8 +129,12 @@ public class MRedefinedApplyInitializer extends Macro{
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

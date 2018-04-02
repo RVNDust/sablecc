@@ -5,6 +5,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 import java.util.*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MParamStringSetter {
 
   private final String pName;
@@ -75,6 +76,8 @@ public class MParamStringSetter {
   }
 
 =======
+=======
+>>>>>>> object-macro2.1
 public class MParamStringSetter extends Macro{
 
     private String field_Name;
@@ -317,8 +320,12 @@ initListParamArgInternals(null);
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

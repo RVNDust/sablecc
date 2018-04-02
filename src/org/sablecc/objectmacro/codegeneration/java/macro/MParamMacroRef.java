@@ -9,6 +9,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 public class MParamMacroRef {
@@ -154,6 +155,8 @@ public class MParamMacroRef {
     for(Object oNone : this.eNone) {
       sb.append(oNone.toString());
 =======
+=======
+>>>>>>> object-macro2.1
 import java.util.*;
 
 public class MParamMacroRef extends Macro{
@@ -164,6 +167,7 @@ public class MParamMacroRef extends Macro{
     public MParamMacroRef(String pName){
 
         this.setPName(pName);
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
@@ -178,6 +182,8 @@ public class MParamMacroRef extends Macro{
     for(Object oBeforeFirst : this.eBeforeFirst) {
       sb.append(oBeforeFirst.toString());
 =======
+=======
+>>>>>>> object-macro2.1
 
 
     }
@@ -188,6 +194,7 @@ public class MParamMacroRef extends Macro{
         }
 
         this.field_Name = pName;
+<<<<<<< HEAD
 >>>>>>> Correctifs objectmacro2-java(back)
     }
     sb.append("            ");
@@ -207,6 +214,14 @@ public class MParamMacroRef extends Macro{
     for(Object oAfterLast : this.eAfterLast) {
       sb.append(oAfterLast.toString());
 =======
+=======
+    }
+
+    private String buildName(){
+
+        return this.field_Name;
+    }
+>>>>>>> object-macro2.1
 
     private String getName(){
 
@@ -256,6 +271,7 @@ public class MParamMacroRef extends Macro{
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("        }");
@@ -294,9 +310,17 @@ public class MParamMacroRef extends Macro{
 <<<<<<< HEAD
 }
 =======
+=======
+    }
+
+>>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

@@ -57,6 +57,7 @@ public class MInvalidInsert {
     sb.append(rName());
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("' cannot be inserted because it also has parameters.");
 =======
     sb.append("' cannot be inserted because '");
@@ -66,6 +67,9 @@ public class MInvalidInsert {
 =======
     sb.append("' cannot be inserted because it also has parameters.");
 >>>>>>> Update error message for invalid insert with tests
+=======
+    sb.append("' cannot be inserted because it also has parameters.");
+>>>>>>> object-macro2.1
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

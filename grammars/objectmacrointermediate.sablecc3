@@ -28,6 +28,7 @@ Tokens
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add internals name in intermediate representation in args
     param_name_kw = 'ParamName';
@@ -44,6 +45,11 @@ Tokens
 >>>>>>> Rename Context by Internal
     directive_kw = 'Directive';
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+    param_name_kw = 'ParamName';
+    internal_kw = 'Internal';
+    directive_kw = 'Directive';
+>>>>>>> object-macro2.1
     name_kw = 'Name';
     macro_ref_kw = 'MacroRef';
     type_kw = 'Type';
@@ -52,12 +58,16 @@ Tokens
     value_kw = 'Value';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+>>>>>>> object-macro2.1
     args_kw = 'Args';
     macro_insert_kw = 'MacroInsert';
     var_kw = 'Var';
     macro_body_kw = 'MacroBody';
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -74,6 +84,9 @@ Tokens
 =======
     initialization_kw = 'Initialization Order';
 >>>>>>> Correct english for initialization
+=======
+    initialization_kw = 'Initialization Order';
+>>>>>>> object-macro2.1
 
     l_brace = '{';
     r_brace = '}';
@@ -100,6 +113,7 @@ Productions
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             macro_kw l_brace name [params]:param* [internals]:internal* initialization_order macro_body r_brace
                 {-> New macro([name.names], [params], [internals], [initialization_order.names], [macro_body.macro_parts])};
 =======
@@ -118,12 +132,17 @@ Productions
             macro_kw l_brace name [params]:param* [internals]:internal* initialization_order macro_body r_brace
                 {-> New macro([name.names], [params], [internals], [initialization_order.names], [macro_body.macro_parts])};
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+            macro_kw l_brace name [params]:param* [internals]:internal* initialization_order macro_body r_brace
+                {-> New macro([name.names], [params], [internals], [initialization_order.names], [macro_body.macro_parts])};
+>>>>>>> object-macro2.1
 
     macro_body
             {-> [macro_parts]:macro_part*}
         =
             macro_body_kw l_brace [macro_parts]:macro_part* r_brace
                 {-> [macro_parts]};
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     param
@@ -161,6 +180,8 @@ Productions
              {-> New macro(name.string, [params], [macro_parts])};
 =======
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+>>>>>>> object-macro2.1
 
     param
         =
@@ -191,6 +212,7 @@ Productions
                 {-> directive}
         =
 <<<<<<< HEAD
+<<<<<<< HEAD
             comma option
                 {-> option}
 >>>>>>> New grammar for intermediate representation and objectmacro
@@ -198,6 +220,10 @@ Productions
             comma directive
                 {-> directive}
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+            comma directive
+                {-> directive}
+>>>>>>> object-macro2.1
         ;
 
     type
@@ -209,6 +235,7 @@ Productions
                 {-> New type.macro_refs([macro_refs])}
         ;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     directive
@@ -236,12 +263,21 @@ Productions
             directive_kw l_brace name [text_parts]:text_part+ r_brace
                 {-> New directive([name.names], [text_parts])}
 >>>>>>> Value of directive is now only string
+=======
+    directive
+        =
+            directive_kw l_brace name [text_parts]:text_part+ r_brace
+                {-> New directive([name.names], [text_parts])}
+>>>>>>> object-macro2.1
         ;
 
     macro_ref
         =
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
             {identifier} macro_ref_kw l_brace name args? r_brace
                 {-> New macro_ref([name.names], [args.values])}
         ;
@@ -250,6 +286,7 @@ Productions
             {-> [values]:value*}
         =
             args_kw l_brace values r_brace
+<<<<<<< HEAD
 =======
             {identifier} name call?
                 {-> New macro_ref(name.string, [call.values])}
@@ -272,6 +309,8 @@ Productions
 =======
             args_kw l_brace values r_brace
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+>>>>>>> object-macro2.1
                 {-> [values.values]}
         ;
 
@@ -297,6 +336,9 @@ Productions
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
             {var} var_kw l_brace param_name name r_brace
                 {-> New value.var([param_name.names], [name.names])}
         |
@@ -331,6 +373,7 @@ Productions
             {-> string}
         =
             comma string
+<<<<<<< HEAD
 =======
             {var} name
                 {-> New value.var(name.string)}
@@ -389,6 +432,8 @@ Productions
 =======
             comma string
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+>>>>>>> object-macro2.1
                 {-> string}
         ;
 
@@ -403,6 +448,7 @@ Productions
         |
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {var} param_insert semicolon
                 {-> New macro_part.var([param_insert.names])}
         |
@@ -414,11 +460,16 @@ Productions
             {insert} macro_insert
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
+=======
+>>>>>>> object-macro2.1
             {var} param_insert semicolon
                 {-> New macro_part.var([param_insert.names])}
         |
             {insert} macro_insert semicolon
+<<<<<<< HEAD
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+>>>>>>> object-macro2.1
                 {-> New macro_part.insert(macro_insert.macro_ref)}
         ;
 
@@ -435,6 +486,7 @@ Productions
             {string} string semicolon
                 {-> New text_part.string(string)}
         |
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             {var} param_insert semicolon
@@ -454,20 +506,29 @@ Productions
 =======
                 {-> New text_part.var([param_insert.names])}
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+            {var} param_insert semicolon
+                {-> New text_part.var([param_insert.names])}
+>>>>>>> object-macro2.1
         |
             {insert} macro_insert semicolon
                 {-> New text_part.insert(macro_insert.macro_ref)}
         |
+<<<<<<< HEAD
 <<<<<<< HEAD
             {eol} eol_kw
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
             {eol} eol_kw semicolon
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+            {eol} eol_kw semicolon
+>>>>>>> object-macro2.1
                 {-> New text_part.eol()}
         ;
 
     param_insert
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             {-> [names]:string*}
@@ -481,11 +542,16 @@ Productions
                 {-> string}
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
+=======
+>>>>>>> object-macro2.1
             {-> [names]:string*}
         =
             param_insert_kw l_brace name r_brace
                 {-> [name.names]}
+<<<<<<< HEAD
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+>>>>>>> object-macro2.1
         ;
 
 Abstract Syntax Tree
@@ -500,6 +566,9 @@ Abstract Syntax Tree
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
         [names]:string* [params]:param* [internals]:internal* [init_order]:string* [macro_parts]:macro_part*;
 
     param =
@@ -507,6 +576,7 @@ Abstract Syntax Tree
 
     internal =
         [names]:string* type [directives]:directive*;
+<<<<<<< HEAD
 =======
         [name]:string [params]:param* [macro_parts]:macro_part*;
 
@@ -542,11 +612,14 @@ Abstract Syntax Tree
     internal =
         [names]:string* type [directives]:directive*;
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+>>>>>>> object-macro2.1
 
     type =
         {string} string_kw |
         {macro_refs} macro_ref*;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     directive =
@@ -571,11 +644,16 @@ Abstract Syntax Tree
 >>>>>>> FrontEnd is now independent about name conventions
 =======
 >>>>>>> Value of directive is now only string
+=======
+    directive =
+        [names]:string* [parts]:text_part+;
+>>>>>>> object-macro2.1
 
     macro_ref =
         [names]:string* [args]:value*;
 
     value =
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         {var} [name]:string |
@@ -592,10 +670,15 @@ Abstract Syntax Tree
         {var} [param_name]:string* [names]:string* |
         {string} [param_name]:string* [parts]:text_part+;
 >>>>>>> Add internals name in intermediate representation in args
+=======
+        {var} [param_name]:string* [names]:string* |
+        {string} [param_name]:string* [parts]:text_part+;
+>>>>>>> object-macro2.1
 
     macro_part =
         {string} string |
         {eol} |
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         {var} [names]:string* |
@@ -605,10 +688,14 @@ Abstract Syntax Tree
 =======
         {var} [names]:string* |
 >>>>>>> FrontEnd is now independent about name conventions
+=======
+        {var} [names]:string* |
+>>>>>>> object-macro2.1
         {insert} macro_ref;
 
     text_part =
         {string} string |
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         {var} [names]:string* |
@@ -633,3 +720,8 @@ Abstract Syntax Tree
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
 >>>>>>> Updated intermediate representation grammar to get a more readable file
+=======
+        {var} [names]:string* |
+        {insert} macro_ref |
+        {eol} ;
+>>>>>>> object-macro2.1

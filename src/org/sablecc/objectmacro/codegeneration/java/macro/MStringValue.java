@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MStringValue {
 =======
 import java.util.*;
@@ -39,6 +40,11 @@ public class MStringValue extends Macro{
 <<<<<<< HEAD
 =======
 =======
+=======
+import java.util.*;
+
+public class MStringValue extends Macro{
+>>>>>>> object-macro2.1
 
     private String field_String;
 
@@ -58,7 +64,10 @@ public class MStringValue extends Macro{
         this.field_String = pString;
     }
 
+<<<<<<< HEAD
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+>>>>>>> object-macro2.1
     private String buildString(){
 
         return this.field_String;
@@ -112,8 +121,12 @@ public class MStringValue extends Macro{
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

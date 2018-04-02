@@ -4,6 +4,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 
 import java.util.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 public class MSuperDirective {
 
@@ -28,6 +29,8 @@ public class MSuperDirective {
     for(Object oPackageDeclaration : this.ePackageDeclaration) {
       sb.append(oPackageDeclaration.toString());
 =======
+=======
+>>>>>>> object-macro2.1
 
 public class MSuperDirective extends Macro{
 
@@ -95,6 +98,7 @@ public class MSuperDirective extends Macro{
         }
 
         return sb.toString();
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append(System.getProperty("line.separator"));
@@ -123,6 +127,10 @@ public class MSuperDirective extends Macro{
 
 <<<<<<< HEAD
 =======
+=======
+    }
+
+>>>>>>> object-macro2.1
     private InternalValue getPackageDeclaration(){
         return this.PackageDeclarationValue;
     }
@@ -213,8 +221,12 @@ this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

@@ -2,6 +2,7 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+<<<<<<< HEAD
 public class MIsBuilt {
 
   private final String pMacroName;
@@ -36,6 +37,10 @@ public class MIsBuilt {
 
 <<<<<<< HEAD
 =======
+=======
+import java.util.*;
+
+>>>>>>> object-macro2.1
 public class MIsBuilt extends Macro{
 
     private Map<Context, String> field_MacroName = new LinkedHashMap<>();
@@ -111,9 +116,14 @@ public class MIsBuilt extends Macro{
         return sb0.toString();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+
+}
+>>>>>>> object-macro2.1

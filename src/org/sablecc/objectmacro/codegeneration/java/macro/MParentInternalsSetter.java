@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MParentInternalsSetter {
 
   private final String pName;
@@ -42,6 +43,8 @@ public class MParentInternalsSetter {
   }
 
 =======
+=======
+>>>>>>> object-macro2.1
 import java.util.*;
 
 public class MParentInternalsSetter extends Macro{
@@ -128,8 +131,12 @@ public class MParentInternalsSetter extends Macro{
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

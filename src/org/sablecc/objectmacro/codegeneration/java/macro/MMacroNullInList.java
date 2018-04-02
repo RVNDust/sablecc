@@ -2,6 +2,7 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+<<<<<<< HEAD
 import java.util.*;
 
 public class MMacroNullInList {
@@ -15,11 +16,41 @@ public class MMacroNullInList {
     MPackageDeclaration lPackageDeclaration = new MPackageDeclaration(pPackageName);
     this.ePackageDeclaration.add(lPackageDeclaration);
     return lPackageDeclaration;
+=======
+public class MMacroNullInList {
+
+  private final String pIndex;
+  private final String pParamName;
+  private final MMacroNullInList mMacroNullInList = this;
+
+  public MMacroNullInList(String pIndex, String pParamName) {
+    if(pIndex == null) throw new NullPointerException();
+    this.pIndex = pIndex;
+    if(pParamName == null) throw new NullPointerException();
+    this.pParamName = pParamName;
+  }
+
+  String pIndex() {
+    return this.pIndex;
+  }
+
+  String pParamName() {
+    return this.pParamName;
+  }
+
+  private String rIndex() {
+    return this.mMacroNullInList.pIndex();
+  }
+
+  private String rParamName() {
+    return this.mMacroNullInList.pParamName();
+>>>>>>> object-macro2.1
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append(new MHeader().toString());
     if(this.ePackageDeclaration.size() > 0) {
       sb.append(System.getProperty("line.separator"));
@@ -103,6 +134,13 @@ public class MMacroNullInList {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("}");
+=======
+    sb.append("A macro is null at index ");
+    sb.append(rIndex());
+    sb.append(" in the list '");
+    sb.append(rParamName());
+    sb.append("'.");
+>>>>>>> object-macro2.1
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

@@ -22,6 +22,7 @@ import org.sablecc.exception.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.objectmacro.exception.*;
 =======
 import org.sablecc.objectmacro.exception.CompilerException;
@@ -41,12 +42,17 @@ import org.sablecc.objectmacro.syntax3.node.*;
 import java.util.*;
 =======
 >>>>>>> Clean up code, add comments
+=======
+import org.sablecc.objectmacro.exception.*;
+import org.sablecc.objectmacro.syntax3.node.*;
+>>>>>>> object-macro2.1
 
 import java.util.*;
 
 public class Param {
 
     private final GlobalIndex globalIndex;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -84,6 +90,16 @@ public class Param {
 <<<<<<< HEAD
 <<<<<<< HEAD
     private final Map<String, Directive> directives = new HashMap<>();
+=======
+
+    private final Macro parent;
+
+    private final Set<AMacroReference> macroReferences = new LinkedHashSet<>();
+
+    private final Map<String, AMacroReference> macroReferencesName = new HashMap<>();
+
+    private final Map<String, Param> paramReferences = new LinkedHashMap<>();
+>>>>>>> object-macro2.1
 
     private final Set<Directive> allDirectives = new LinkedHashSet<>();
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
@@ -104,6 +120,7 @@ public class Param {
     private boolean isString;
 
     Param(
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -160,12 +177,26 @@ public class Param {
             throw new InternalException("globalIndex may not be null");
         }
 
+=======
+            Macro macro,
+            GlobalIndex globalIndex) {
+
+        if (macro == null) {
+            throw new InternalException("scope may not be null");
+        }
+
+        if(globalIndex == null){
+            throw new InternalException("globalIndex may not be null");
+        }
+
+>>>>>>> object-macro2.1
         this.parent = macro;
         this.globalIndex = globalIndex;
     }
 
     public void addMacroReference(
             AMacroReference macroRef){
+<<<<<<< HEAD
 
         if(macroRef == null){
             throw new InternalException("Macro reference cannot be null");
@@ -215,10 +246,13 @@ public class Param {
 <<<<<<< HEAD
     public void addMacroReference(
             AMacroReference macroRef){
+=======
+>>>>>>> object-macro2.1
 
         if(macroRef == null){
             throw new InternalException("Macro reference cannot be null");
         }
+<<<<<<< HEAD
 
         TIdentifier identifier = macroRef.getName();
 
@@ -302,6 +336,55 @@ public class Param {
 
 =======
 >>>>>>> Clean up code, add comments
+=======
+
+        TIdentifier identifier = macroRef.getName();
+
+        if(this.globalIndex.getMacro(identifier) == null){
+            throw CompilerException.unknownMacro(identifier);
+        }
+
+        if(this.macroReferencesName.containsKey(identifier.getText())){
+            throw CompilerException.duplicateMacroRef(macroRef.getName(), getNameDeclaration());
+        }
+
+        this.macroReferences.add(macroRef);
+        this.macroReferencesName.put(identifier.getText(), macroRef);
+    }
+
+    public void addParamReference(
+            TIdentifier paramName){
+
+        if(paramName == null){
+            throw new InternalException("param cannot be null");
+        }
+
+        String name = paramName.getText();
+        if(name.equals(getName())){
+            throw CompilerException.selfReference(paramName, getNameDeclaration());
+        }
+
+        Param newParamRef = this.parent.getParam(paramName);
+        if(newParamRef == null){
+            throw new InternalException("parameter may not be null");
+        }
+
+        this.paramReferences.put(name, newParamRef);
+    }
+
+    public Set<AMacroReference> getMacroReferences(){
+        return this.macroReferences;
+    }
+
+    public TIdentifier getNameDeclaration(){
+        return null;
+    }
+
+    public String getName() {
+        return null;
+    }
+
+>>>>>>> object-macro2.1
     public boolean isUsed() {
         return this.isUsed;
     }
@@ -313,15 +396,19 @@ public class Param {
     public boolean isString(){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
 >>>>>>> Clean up code, add comments
+=======
+>>>>>>> object-macro2.1
         return this.isString;
     }
 
     void setString(){
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         this.isString = true;
@@ -345,6 +432,9 @@ public class Param {
 >>>>>>> Clean up code, add comments
         this.isString = true;
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+        this.isString = true;
+>>>>>>> object-macro2.1
     }
 
     Set<Param> getDirectParamReferences(){

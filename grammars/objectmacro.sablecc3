@@ -74,6 +74,7 @@ Helpers
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   comment_char = [[ascii - ascii_c] + white_space_not_newline];
 =======
   short_comment_char = [[ascii - ascii_c] + white_space_not_newline];
@@ -82,6 +83,9 @@ Helpers
 =======
   comment_char = [[ascii - ascii_c] + white_space_not_newline];
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+  comment_char = [[ascii - ascii_c] + white_space_not_newline];
+>>>>>>> object-macro2.1
 
   text_char = [[[ascii - ascii_c] + white_space_not_newline] - '{'];
   text_escape = '{' '{';
@@ -105,6 +109,9 @@ Tokens
   {top_level->macro_definition}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
   macro_kw = 'Macro';
 
   {macro_definition}
@@ -112,6 +119,7 @@ Tokens
 
   {macro_definition}
   string_kw = 'String';
+<<<<<<< HEAD
 =======
   macro_command = 'Macro';
 =======
@@ -140,10 +148,15 @@ Tokens
 <<<<<<< HEAD
   {macro_definition}
 <<<<<<< HEAD
+=======
+
+  {macro_definition}
+>>>>>>> object-macro2.1
   internal_kw = 'Internal';
 
   /* custom transition *->previous state */
   insert_command = '{Insert:';
+<<<<<<< HEAD
 =======
   short_macro_comment = '//' short_comment_char* ascii_newline?;
 
@@ -151,12 +164,15 @@ Tokens
   long_macro_comment = '/*' [long_comment_char + '/']*
                        ('*' (long_comment_char [long_comment_char + '/']*)?)* '*/';
 >>>>>>> 
+=======
+>>>>>>> object-macro2.1
 
   {macro_definition->macro_body}
   begin = '{Begin}';
 
   {macro_body->top_level}
   end = '{End}';
+<<<<<<< HEAD
 =======
   {macro_definition, top_level, macro_body}
   comment = '#' comment_char* ascii_newline?;
@@ -221,6 +237,32 @@ Tokens
   {top_level, command, macro_definition}
   invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)+;
 >>>>>>> Update walkers and fix lexer to handle inserts in string argument
+=======
+
+  {macro_definition, top_level, macro_body}
+  comment = '#' comment_char* ascii_newline?;
+
+  {macro_body}
+  unknown_command = '{' uppercase normal_part* ':';
+
+  {macro_body}
+  text_part = text_char+ | '{';
+
+  {macro_body}
+  eol = ascii_newline;
+
+  {macro_body}
+  text_escape = text_escape;
+
+  {top_level, command, macro_body, string}
+  invalid_var = '{' ascii_id_start* ('_' digit+ ascii_id_continue*)+ '}';
+
+  {macro_definition, command}
+  identifier = normal_identifier;
+
+  {top_level, command, macro_definition}
+  invalid_identifier = ascii_id_start* ('_' digit+ ascii_id_continue*)+;
+>>>>>>> object-macro2.1
 
   {command, macro_definition}
   l_par = '(';
@@ -228,6 +270,7 @@ Tokens
   {command, macro_definition}
   r_par = ')';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -244,6 +287,11 @@ Tokens
   r_brace = '}';
 
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+  /* custom transition *->previous state */
+  r_brace = '}';
+
+>>>>>>> object-macro2.1
   {macro_definition, command}
   comma = ',';
 
@@ -265,6 +313,9 @@ Tokens
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
   {macro_body, string}
   variable = '{' normal_identifier '}';
 
@@ -273,6 +324,7 @@ Tokens
 
   {macro_definition}
   semi_colon = ';';
+<<<<<<< HEAD
 =======
   {top_level}
   ignore_macro_start = '{StartIgnoring}';
@@ -290,6 +342,8 @@ Tokens
   {macro_definition}
   semi_colon = ';';
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+>>>>>>> object-macro2.1
 
   ctrl_z = 0x001A;
 
@@ -314,6 +368,7 @@ Productions
     ;
 
   macro
+<<<<<<< HEAD
     =
       macro_definition macro_body
          {-> New macro(macro_definition.macro_kw, macro_definition.identifier,
@@ -360,6 +415,20 @@ Productions
       macro_kw identifier macro_parameters
         {-> macro_kw identifier [macro_parameters.params] [macro_parameters.internals] }
 >>>>>>> Rename Context by Internal
+=======
+    =
+      macro_definition macro_body
+         {-> New macro(macro_definition.macro_kw, macro_definition.identifier,
+            [macro_definition.params], [macro_definition.internals],
+             macro_body.begin, [macro_body.macro_body_parts])}
+    ;
+
+  macro_definition
+        {-> macro_kw identifier [params]:param* [internals]:internal* }
+    =
+      macro_kw identifier macro_parameters
+        {-> macro_kw identifier [macro_parameters.params] [macro_parameters.internals] }
+>>>>>>> object-macro2.1
     ;
 
   macro_body
@@ -375,12 +444,16 @@ Productions
       {insert} insert_command macro_reference r_brace
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         {-> New macro_body_part.insert(macro_reference)}
 =======
 >>>>>>> New grammar for intermediate representation and objectmacro
 =======
         {-> New macro_body_part.insert(macro_reference)}
 >>>>>>> Update walkers and fix lexer to handle inserts in string argument
+=======
+        {-> New macro_body_part.insert(macro_reference)}
+>>>>>>> object-macro2.1
     |
       {text} text_part
     |
@@ -390,6 +463,9 @@ Productions
     |
       {var} variable
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
     ;
 
   macro_parameters
@@ -404,6 +480,7 @@ Productions
     =
       params_kw [params]:param+
         {-> [params.param]};
+<<<<<<< HEAD
 
   internal_args
         {-> [params]:internal*}
@@ -488,10 +565,51 @@ Productions
     =
       internal_kw [params]:internal+
         {-> [params.internal]}
+=======
+
+  internal_args
+        {-> [params]:internal*}
+    =
+      internal_kw [params]:internal+
+        {-> [params.internal]}
     ;
 
   param
     =
+      [name]:identifier colon type [directives]:directive* semi_colon
+        {-> New param(name, type, [directives])}
+    ;
+
+  internal
+    =
+      [name]:identifier colon internal_type semi_colon
+        {-> New internal(name, internal_type)}
+    ;
+
+  directive
+    =
+      comma identifier assign string
+        {-> New directive(identifier, string.dquote, [string.string])}
+    ;
+
+  macro_reference
+    =
+      {name} identifier call?
+        {-> New macro_reference(identifier, [call.static_values])}
+    ;
+
+  static_value
+    =
+      {var} identifier
+    |
+      {string} string
+        {-> New static_value.string(string.dquote, [string.string])}
+>>>>>>> object-macro2.1
+    ;
+
+  type
+    =
+<<<<<<< HEAD
       [name]:identifier colon type [directives]:directive* semi_colon
         {-> New param(name, type, [directives])}
     ;
@@ -568,6 +686,57 @@ Productions
       static_value [additional_static_values]:additional_static_value*
         {-> [static_value, additional_static_values.static_value]}
     ;
+=======
+      {string} string_kw
+        {-> New type.string(string_kw)}
+    |
+      {macros} macro_reference [additional_macros_reference]:additional_macro_reference*
+        {-> New type.macros([macro_reference, additional_macros_reference.macro_reference])}
+    ;
+
+  internal_type
+    =
+      {string} string_kw
+        {-> New internal_type.string(string_kw)}
+    |
+      {identifiers} identifier [additionals]:additional_identifier*
+        {-> New internal_type.identifiers([identifier, additionals.identifier])}
+    ;
+
+  additional_identifier
+        {-> identifier}
+    =
+      comma identifier
+        {-> identifier}
+    ;
+
+  additional_macro_reference
+        {-> macro_reference}
+    =
+      comma macro_reference
+        {-> macro_reference}
+    ;
+
+  call
+        {-> [static_values]:static_value*}
+    =
+       l_par values r_par
+        {-> [values.static_values]}
+    ;
+
+  values
+        {-> [static_values]:static_value*}
+    =
+      static_value [additional_static_values]:additional_static_value*
+        {-> [static_value, additional_static_values.static_value]}
+    ;
+
+  additional_static_value
+        {-> static_value}
+    =
+      comma static_value
+        {-> static_value};
+>>>>>>> object-macro2.1
 
   additional_static_value
         {-> static_value}
@@ -578,10 +747,14 @@ Productions
   string
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
         {-> dquote [string]:string_part*}
     =
       [l_dquote]:dquote [parts]:string_part* [r_dquote]:dquote
         {-> l_dquote [parts.string_part]}
+<<<<<<< HEAD
 =======
         {-> [string]:string_part*}
     =
@@ -594,11 +767,14 @@ Productions
       [l_dquote]:dquote [parts]:string_part* [r_dquote]:dquote
         {-> l_dquote [parts.string_part]}
 >>>>>>> Add left double quote to AST for incorrect type exception
+=======
+>>>>>>> object-macro2.1
     ;
 
   string_part
     =
       {insert} insert_command macro_reference r_brace
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         {-> New string_part.insert(macro_reference)}
@@ -607,6 +783,9 @@ Productions
 =======
         {-> New string_part.insert(macro_reference)}
 >>>>>>> Update walkers and fix lexer to handle inserts in string argument
+=======
+        {-> New string_part.insert(macro_reference)}
+>>>>>>> object-macro2.1
     |
       {text} [text]:string_text
     |
@@ -624,6 +803,7 @@ Abstract Syntax Tree
       {macro} macro;
 
   macro =
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -687,11 +867,32 @@ Abstract Syntax Tree
       [name]:identifier [l_dquote]:dquote [parts]:string_part*;
 
 >>>>>>> New grammar for intermediate representation and objectmacro
+=======
+      macro_kw [name]:identifier [params]:param* [internals]:internal* begin [macro_body_parts]:macro_body_part*;
+
+  macro_body_part =
+      {insert} macro_reference |
+      {var} variable |
+      {text} text_part |
+      {eol} eol |
+      {escape} text_escape;
+
+  param =
+      [name]:identifier type [directives]:directive*;
+
+  internal =
+      [name]:identifier [type]:internal_type;
+
+  directive =
+      [name]:identifier [l_dquote]:dquote [parts]:string_part*;
+
+>>>>>>> object-macro2.1
   macro_reference =
       [name]:identifier [values]:static_value*;
 
   static_value =
       {var} identifier |
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       {string} [l_dquote]:dquote [parts]:string_part*;
@@ -700,10 +901,14 @@ Abstract Syntax Tree
 =======
       {string} [l_dquote]:dquote [parts]:string_part*;
 >>>>>>> Add left double quote to AST for incorrect type exception
+=======
+      {string} [l_dquote]:dquote [parts]:string_part*;
+>>>>>>> object-macro2.1
 
   type =
       {string} string_kw |
       {macros} [macros]:macro_reference+;
+<<<<<<< HEAD
 
   internal_type =
       {string} string_kw |
@@ -738,6 +943,18 @@ Abstract Syntax Tree
 =======
       {insert} [macro]:macro_reference |
 >>>>>>> Update walkers and fix lexer to handle inserts in string argument
+=======
+
+  internal_type =
+      {string} string_kw |
+      {identifiers} [macros]:identifier+;
+
+  call =
+      [static_values]:static_value+;
+
+  string_part =
+      {insert} [macro]:macro_reference |
+>>>>>>> object-macro2.1
       {text} [text]:string_text |
       {escape} string_escape |
       {var} variable;

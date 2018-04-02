@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 import java.util.*;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 public class MParamInsertPart {
@@ -51,13 +52,8 @@ public class MParamInsertPart {
     sb.append("(");
     for(Object oContextArg : this.eContextArg) {
       sb.append(oContextArg.toString());
-    }
-    sb.append("));");
-    sb.append(System.getProperty("line.separator"));
-    return sb.toString();
-  }
-
 =======
+
 public class MParamInsertPart extends Macro{
 
     private String field_ParamName;
@@ -81,20 +77,79 @@ public class MParamInsertPart extends Macro{
     this.list_ContextArg = new ArrayList<>();
 
     this.ContextArgValue = new InternalValue(this.list_ContextArg, this.ContextArgContext);
+>>>>>>> object-macro2.1
     }
+    sb.append("));");
+    sb.append(System.getProperty("line.separator"));
+    return sb.toString();
+  }
 
+=======
+public class MParamInsertPart extends Macro{
+
+    private String field_ParamName;
+    private String field_IndexBuilder;
+    private final List<Macro> list_ContextArg;
+    private DSeparator ContextArgSeparator;
+
+    private DBeforeFirst ContextArgBeforeFirst;
+
+<<<<<<< HEAD
+    private DAfterLast ContextArgAfterLast;
+
+    private DNone ContextArgNone;
+    private final InternalValue ContextArgValue;
+
+    private final Context ContextArgContext = new Context();
+
+    public MParamInsertPart(String pParamName, String pIndexBuilder){
+
+        this.setPParamName(pParamName);        this.setPIndexBuilder(pIndexBuilder);
+
+    this.list_ContextArg = new ArrayList<>();
+
+    this.ContextArgValue = new InternalValue(this.list_ContextArg, this.ContextArgContext);
+=======
     private void setPParamName( String pParamName ){
         if(pParamName == null){
             throw ObjectMacroException.parameterNull("ParamName");
         }
 
         this.field_ParamName = pParamName;
+>>>>>>> object-macro2.1
     }
     private void setPIndexBuilder( String pIndexBuilder ){
         if(pIndexBuilder == null){
             throw ObjectMacroException.parameterNull("IndexBuilder");
         }
 
+<<<<<<< HEAD
+    private void setPParamName( String pParamName ){
+        if(pParamName == null){
+            throw ObjectMacroException.parameterNull("ParamName");
+        }
+
+        this.field_ParamName = pParamName;
+=======
+        this.field_IndexBuilder = pIndexBuilder;
+    }
+    public void addContextArg(MContextArg macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("ContextArg");
+        }
+                if(this.build_state != null){
+            throw ObjectMacroException.cannotModify("ContextArg");
+        }
+
+        this.list_ContextArg.add(macro);
+>>>>>>> object-macro2.1
+    }
+    private void setPIndexBuilder( String pIndexBuilder ){
+        if(pIndexBuilder == null){
+            throw ObjectMacroException.parameterNull("IndexBuilder");
+        }
+
+<<<<<<< HEAD
         this.field_IndexBuilder = pIndexBuilder;
     }
     public void addContextArg(MContextArg macro){
@@ -114,6 +169,14 @@ public class MParamInsertPart extends Macro{
     }
     private String buildIndexBuilder(){
 
+=======
+    private String buildParamName(){
+
+        return this.field_ParamName;
+    }
+    private String buildIndexBuilder(){
+
+>>>>>>> object-macro2.1
         return this.field_IndexBuilder;
     }
     private String buildContextArg(){
@@ -170,6 +233,7 @@ void setContextArg(MContextArg mContextArg){
 
     
     
+<<<<<<< HEAD
 }
 });
         }
@@ -229,3 +293,59 @@ void setContextArg(MContextArg mContextArg){
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+});
+        }
+    }
+
+    private void initContextArgDirectives(){
+        
+    }
+    @Override
+    void apply(
+            InternalsInitializer internalsInitializer){
+
+        internalsInitializer.setParamInsertPart(this);
+    }
+
+   @Override
+    public String build(){
+
+        BuildState buildState = this.build_state;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("ParamInsertPart");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+
+        initContextArgDirectives();
+
+        initContextArgInternals(null);
+
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("        sb");
+        sb0.append(buildIndexBuilder());
+        sb0.append(".append(build");
+        sb0.append(buildParamName());
+        sb0.append("(");
+        sb0.append(buildContextArg());
+        sb0.append("));");
+
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+
+    @Override
+    String build(Context context) {
+        return build();
+    }
+}
+>>>>>>> object-macro2.1

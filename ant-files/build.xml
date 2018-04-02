@@ -178,6 +178,7 @@ public class Version {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <jar destfile="${lib.dir}/objectmacro-back.jar"
 =======
     <jar destfile="${lib.dir}/objectmacro-BACK.jar"
@@ -185,6 +186,9 @@ public class Version {
 =======
     <jar destfile="${lib.dir}/objectmacro-back.jar"
 >>>>>>> ant build generate now objectmacro-back
+=======
+    <jar destfile="${lib.dir}/objectmacro-back.jar"
+>>>>>>> object-macro2.1
          manifest="${manifest.dir}/OBJECTMACRO-BACK.MF"
          index="true"
          compress="true"

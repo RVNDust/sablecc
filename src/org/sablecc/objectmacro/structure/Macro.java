@@ -24,6 +24,7 @@ import org.sablecc.objectmacro.exception.*;
 import org.sablecc.objectmacro.syntax3.node.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.sablecc.util.ComponentFinder;
 import org.sablecc.util.Progeny;
 =======
@@ -82,6 +83,25 @@ public class Macro{
 =======
 >>>>>>> Clean up some unused code
 =======
+=======
+import org.sablecc.util.ComponentFinder;
+import org.sablecc.util.Progeny;
+
+public class Macro{
+
+    private final GlobalIndex globalIndex;
+
+    private final AMacro declaration;
+
+    private final Set<External> allParams = new LinkedHashSet<>();
+
+    private final Map<String, External> namedParams = new HashMap<>();
+
+    private final Set<Internal> allInternals = new LinkedHashSet<>();
+
+    private final Map<String, Internal> namedInternals = new HashMap<>();
+
+>>>>>>> object-macro2.1
     private ComponentFinder<Param> paramsComponentFinder;
 
 >>>>>>> Update initialization order using linearisation created in the component finder
@@ -107,6 +127,7 @@ public class Macro{
 
         if(param == null){
             throw new InternalException("AParam should not be null");
+<<<<<<< HEAD
 =======
 
     public Param newParam(
@@ -114,10 +135,13 @@ public class Macro{
 
         if(param == null){
             throw new InternalException("AParam should not be null");
+=======
+>>>>>>> object-macro2.1
         }
 
         TIdentifier name = param.getName();
         String stringName = name.getText();
+<<<<<<< HEAD
 
         if(containsKeyInInternals(stringName) || containsKeyInParams(stringName)){
             throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
@@ -158,10 +182,22 @@ public class Macro{
         this.namedParams.put(stringName, newParam);
         this.allParams.add(newParam);
 
+=======
+
+        if(containsKeyInInternals(stringName) || containsKeyInParams(stringName)){
+            throw CompilerException.duplicateDeclaration(name, getNameDeclaration());
+        }
+
+        External newParam = new External(param, this, this.globalIndex);
+        this.namedParams.put(stringName, newParam);
+        this.allParams.add(newParam);
+
+>>>>>>> object-macro2.1
         return newParam;
     }
 
     public Param newInternal(
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -307,6 +343,70 @@ public class Macro{
     public AMacro getDeclaration() {
 =======
 >>>>>>> Cleanup some code
+=======
+            AInternal param){
+
+        if(param == null){
+            throw new InternalException("AParam should not be null");
+        }
+
+        TIdentifier name = param.getName();
+        String stringName = name.getText();
+
+        Param duplicateDeclaration = getParamOrNull(name);
+        if(duplicateDeclaration != null){
+            throw CompilerException.duplicateDeclaration(name, duplicateDeclaration.getNameDeclaration());
+        }
+
+        Internal newInternal = new Internal(param, this, this.globalIndex);
+        this.allInternals.add(newInternal);
+        this.namedInternals.put(stringName, newInternal);
+
+        return newInternal;
+    }
+
+    private Param getParamOrNull(
+            TIdentifier var){
+
+        Param toReturn = null;
+        String name = var.getText();
+        if(containsKeyInParams(name)){
+            toReturn = this.namedParams.get(name);
+        }
+
+        if(containsKeyInInternals(name)){
+            toReturn = this.namedInternals.get(name);
+        }
+
+        return toReturn;
+    }
+
+    public Param getParam(
+            TIdentifier variable){
+
+        Param param = getParamOrNull(variable);
+        if(param == null){
+            throw CompilerException.unknownParam(variable);
+        }
+
+        return param;
+    }
+
+    public void setParamUsed(
+            TIdentifier variable){
+
+        this.getParam(variable).setUsed();
+    }
+
+    public void setParamToString(
+            TIdentifier variable){
+
+        this.getParam(variable).setString();
+    }
+
+
+    public AMacro getDeclaration() {
+>>>>>>> object-macro2.1
         return this.declaration;
     }
 
@@ -314,6 +414,7 @@ public class Macro{
         return this.declaration.getName();
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     public String getName(){
@@ -406,12 +507,38 @@ public class Macro{
     }
 
     private boolean containsKeyInInternals(
+=======
+    public String getName(){
+        return this.declaration.getName().getText();
+    }
+
+    public Set<External> getAllParams(){
+        return this.allParams;
+    }
+
+    public Set<Internal> getAllInternals(){
+        return this.allInternals;
+    }
+
+    private boolean containsKeyInInternals(
             String name){
 
         if(name == null){
             throw new InternalException("Name should not be null");
         }
 
+        return this.namedInternals.containsKey(name);
+    }
+
+    private boolean containsKeyInParams(
+>>>>>>> object-macro2.1
+            String name){
+
+        if(name == null){
+            throw new InternalException("Name should not be null");
+        }
+
+<<<<<<< HEAD
         return this.namedInternals.containsKey(name);
     }
 
@@ -480,6 +607,20 @@ public class Macro{
         return paramsName;
     }
 
+=======
+        return this.namedParams.containsKey(name);
+    }
+
+    public List<String> getInternalsName(){
+        List<String> paramsName = new LinkedList<>();
+        for(Param internal : this.getAllInternals()){
+            paramsName.add(internal.getName());
+        }
+
+        return paramsName;
+    }
+
+>>>>>>> object-macro2.1
     public void detectParamsCyclicReference(){
         Progeny<Param> referencedParamProgeny = new Progeny<Param>() {
 

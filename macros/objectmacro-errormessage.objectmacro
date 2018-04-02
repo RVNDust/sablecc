@@ -409,8 +409,11 @@ Parameter '$param' has already referenced Macro '$macro'.
 $end: duplicate_macro_ref $
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add semantic verification on argument type provided in a macro reference
+=======
+>>>>>>> object-macro2.1
 
 $comment: ========== incorrect_macro_type ============ $
 
@@ -421,6 +424,9 @@ Line : $line
 Char : $char
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> object-macro2.1
 Incorrect macro type at index $index. (expected : $expected, found : $found)
 $end: incorrect_macro_type $
 
@@ -432,6 +438,7 @@ $insert: semantic_error_head $
 Line : $line
 Char : $char
 Macro '$name' cannot be inserted because it also has parameters.
+<<<<<<< HEAD
 <<<<<<< HEAD
 $end: invalid_insert $
 =======
@@ -472,3 +479,6 @@ $end: minimum_macro_error $
 >>>>>>> Verify there is at least 1 macro without internals
 =======
 >>>>>>> Removed at least one macro without internals verification
+=======
+$end: invalid_insert $
+>>>>>>> object-macro2.1

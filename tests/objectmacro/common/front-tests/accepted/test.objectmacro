@@ -56,6 +56,7 @@ Macro macro_internals
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         a : text_internals;
 =======
         a : text_internals("a", "b");
@@ -69,6 +70,9 @@ Macro macro_internals
 =======
         a : text_internals;
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+        a : text_internals;
+>>>>>>> object-macro2.1
         b : text_params;
 {Begin}
     {a} {b}
@@ -76,8 +80,11 @@ Macro macro_internals
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add macro reference tests
+=======
+>>>>>>> object-macro2.1
 Macro macro_text_macro_internal
     Internal
         a : text_params;
@@ -88,10 +95,13 @@ Macro macro_text_macro_internal
 {End}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add refused and accepted tests for objectmacro
 =======
 >>>>>>> Add macro reference tests
+=======
+>>>>>>> object-macro2.1
 Macro macro_internals_references
     Param
         a : String;
@@ -111,6 +121,7 @@ Macro macro_params_internals_references
         a : macro_internals(c, b);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         d : text_internals("a", "b");
     Internal
         b : text_params;
@@ -121,19 +132,27 @@ Macro macro_params_internals_references
         c : text_internals("a", "b");
 >>>>>>> Add refused and accepted tests for objectmacro
 =======
+=======
+>>>>>>> object-macro2.1
         d : text_internals("a", "b");
     Internal
         b : text_params;
         c : String;
+<<<<<<< HEAD
 >>>>>>> Add macro reference tests
+=======
+>>>>>>> object-macro2.1
 {Begin}
 {a}
 {b}
 {c}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add macro reference tests
+=======
+>>>>>>> object-macro2.1
 {d}
 {End}
 
@@ -143,10 +162,13 @@ Macro macro_test_params_internals
 {Begin}
 {Insert: macro_text_macro_internal(a, "String")}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add refused and accepted tests for objectmacro
 =======
 >>>>>>> Add macro reference tests
+=======
+>>>>>>> object-macro2.1
 {End}
 
 # ========== insert ==========
@@ -226,8 +248,11 @@ Macro macro_escape_string
 {End}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add lexer test for state transitioning
+=======
+>>>>>>> object-macro2.1
 
 # =============== lexer test ============
 
@@ -246,7 +271,10 @@ Macro lexer_b
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add refused and accepted tests for objectmacro
 =======
 >>>>>>> Add lexer test for state transitioning
+=======
+>>>>>>> object-macro2.1

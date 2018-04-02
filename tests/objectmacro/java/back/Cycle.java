@@ -1,7 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Remove public to prevent user to access to supermacro attributes
+=======
+>>>>>>> object-macro2.1
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -20,14 +23,18 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add test for dynamic cyclic reference verification
 =======
 >>>>>>> Remove public to prevent user to access to supermacro attributes
+=======
+>>>>>>> object-macro2.1
 package back;
 
 import back.macro.*;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -37,6 +44,8 @@ import back.macro.*;
 >>>>>>> Add test for dynamic cyclic reference verification
 =======
 >>>>>>> Remove public to prevent user to access to supermacro attributes
+=======
+>>>>>>> object-macro2.1
 public class Cycle {
 
     public static void main(String args[]){
@@ -47,12 +56,16 @@ public class Cycle {
         MH h = new MH();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Removed letter P from add and addAll methods name
+=======
+>>>>>>> object-macro2.1
         f.addY(h);
         f.addX(g);
         f.addX(g);
         h.addLala(f);
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         f.addPY(h);
@@ -62,6 +75,8 @@ public class Cycle {
 >>>>>>> Add test for dynamic cyclic reference verification
 =======
 >>>>>>> Removed letter P from add and addAll methods name
+=======
+>>>>>>> object-macro2.1
 
         try{
             System.out.print(f.build());

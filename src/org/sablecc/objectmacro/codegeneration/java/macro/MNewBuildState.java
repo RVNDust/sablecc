@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MNewBuildState {
 
   public MNewBuildState() {
@@ -16,6 +17,8 @@ public class MNewBuildState {
   }
 
 =======
+=======
+>>>>>>> object-macro2.1
 import java.util.*;
 
 public class MNewBuildState extends Macro{
@@ -72,8 +75,12 @@ public class MNewBuildState extends Macro{
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

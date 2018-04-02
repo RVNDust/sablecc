@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MContextField {
 
   private final String pName;
@@ -32,6 +33,8 @@ public class MContextField {
   }
 
 =======
+=======
+>>>>>>> object-macro2.1
 import java.util.*;
 
 public class MContextField extends Macro{
@@ -107,8 +110,12 @@ public class MContextField extends Macro{
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

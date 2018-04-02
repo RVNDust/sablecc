@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MStringPart {
 
   private final String pString;
@@ -53,6 +54,16 @@ public class MStringPart extends Macro{
     private String field_IndexBuilder;
 
 
+=======
+import java.util.*;
+
+public class MStringPart extends Macro{
+
+    private String field_String;
+    private String field_IndexBuilder;
+
+
+>>>>>>> object-macro2.1
     public MStringPart(String pString, String pIndexBuilder){
 
         this.setPString(pString);        this.setPIndexBuilder(pIndexBuilder);
@@ -63,6 +74,11 @@ public class MStringPart extends Macro{
     private void setPString( String pString ){
         if(pString == null){
             throw ObjectMacroException.parameterNull("String");
+<<<<<<< HEAD
+        }
+
+        this.field_String = pString;
+=======
         }
 
         this.field_String = pString;
@@ -73,8 +89,19 @@ public class MStringPart extends Macro{
         }
 
         this.field_IndexBuilder = pIndexBuilder;
+>>>>>>> object-macro2.1
+    }
+    private void setPIndexBuilder( String pIndexBuilder ){
+        if(pIndexBuilder == null){
+            throw ObjectMacroException.parameterNull("IndexBuilder");
+        }
+
+<<<<<<< HEAD
+        this.field_IndexBuilder = pIndexBuilder;
     }
 
+=======
+>>>>>>> object-macro2.1
     private String buildString(){
 
         return this.field_String;
@@ -97,6 +124,7 @@ public class MStringPart extends Macro{
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
+<<<<<<< HEAD
 
         internalsInitializer.setStringPart(this);
     }
@@ -133,13 +161,55 @@ public class MStringPart extends Macro{
         return sb0.toString();
     }
 
+=======
+
+        internalsInitializer.setStringPart(this);
+    }
+
+   @Override
+    public String build(){
+
+        BuildState buildState = this.build_state;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("StringPart");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+
+        
+
+        
+
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("        sb");
+        sb0.append(buildIndexBuilder());
+        sb0.append(".append(\"");
+        sb0.append(buildString());
+        sb0.append("\");");
+
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+
+>>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

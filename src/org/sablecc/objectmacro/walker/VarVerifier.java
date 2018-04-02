@@ -24,11 +24,14 @@ import org.sablecc.objectmacro.syntax3.analysis.*;
 import org.sablecc.objectmacro.syntax3.node.*;
 import org.sablecc.objectmacro.util.Utils;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import java.util.HashSet;
 import java.util.Set;
 =======
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> object-macro2.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,12 +43,15 @@ public class VarVerifier
 
     private Macro currentMacro;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     private Param paramsList[];
 
     private Integer currentIndex = 0;
 =======
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
+=======
+>>>>>>> object-macro2.1
 
     private Param paramsList[];
 
@@ -71,12 +77,20 @@ public class VarVerifier
     @Override
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void inAMacroReference(
             AMacroReference node) {
 
         Macro referencedMacro = this.globalIndex.getMacro(node.getName());
 
 <<<<<<< HEAD
+=======
+    public void inAMacroReference(
+            AMacroReference node) {
+
+        Macro referencedMacro = this.globalIndex.getMacro(node.getName());
+
+>>>>>>> object-macro2.1
         int internalsSize = referencedMacro.getAllInternals().size();
         if(node.getValues().size() != internalsSize){
             throw CompilerException.incorrectArgumentCount(node, referencedMacro);
@@ -90,9 +104,15 @@ public class VarVerifier
     @Override
     public void caseAStringStaticValue(
             AStringStaticValue node) {
+<<<<<<< HEAD
 
         Param currentParam = this.paramsList[this.currentIndex++];
 
+=======
+
+        Param currentParam = this.paramsList[this.currentIndex++];
+
+>>>>>>> object-macro2.1
         //The internal corresponding to currentIndex must be of type String
         if(!currentParam.isString()){
             throw CompilerException.incorrectArgumentType("Macro", "String",
@@ -119,6 +139,7 @@ public class VarVerifier
         Param providedParam = this.currentMacro.getParam(node.getIdentifier());
         Set<String> expectedMacrosType = new HashSet<>();
         Set<String> providedMacrosType = new HashSet<>();
+<<<<<<< HEAD
 =======
         this.currentMacro = null;
 =======
@@ -292,6 +313,48 @@ public class VarVerifier
     public void caseAVarStringPart(
             AVarStringPart node) {
 
+=======
+
+        if(expectedParam.isString()
+                && !providedParam.isString()){
+
+            throw CompilerException.incorrectArgumentType(
+                    "String", "Macro",
+                    node.getIdentifier().getLine(), node.getIdentifier().getPos());
+        }
+
+        for(AMacroReference macroReference : expectedParam.getMacroReferences()){
+            expectedMacrosType.add(macroReference.getName().getText());
+        }
+
+        for(AMacroReference macroReference : providedParam.getMacroReferences()){
+            providedMacrosType.add(macroReference.getName().getText());
+        }
+
+        if(!expectedMacrosType.containsAll(providedMacrosType)){
+            throw CompilerException.incorrectMacroType(
+                    expectedMacrosType,
+                    providedMacrosType, currentIndex, node.getIdentifier());
+        }
+
+        this.currentMacro.setParamUsed(node.getIdentifier());
+    }
+
+    @Override
+    public void caseAVarMacroBodyPart(
+            AVarMacroBodyPart node) {
+
+        this.currentMacro.setParamUsed(
+                new TIdentifier(Utils.getVarName(
+                                    node.getVariable()),
+                                    node.getVariable().getLine(), node.getVariable().getPos()));
+    }
+
+    @Override
+    public void caseAVarStringPart(
+            AVarStringPart node) {
+
+>>>>>>> object-macro2.1
         this.currentMacro.setParamUsed(
                 new TIdentifier(Utils.getVarName(
                                     node.getVariable()),

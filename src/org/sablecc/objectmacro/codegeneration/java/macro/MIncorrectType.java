@@ -2,6 +2,7 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
+<<<<<<< HEAD
 import java.util.*;
 
 public class MIncorrectType {
@@ -15,11 +16,41 @@ public class MIncorrectType {
     MPackageDeclaration lPackageDeclaration = new MPackageDeclaration(pPackageName);
     this.ePackageDeclaration.add(lPackageDeclaration);
     return lPackageDeclaration;
+=======
+public class MIncorrectType {
+
+  private final String pType;
+  private final String pParamName;
+  private final MIncorrectType mIncorrectType = this;
+
+  public MIncorrectType(String pType, String pParamName) {
+    if(pType == null) throw new NullPointerException();
+    this.pType = pType;
+    if(pParamName == null) throw new NullPointerException();
+    this.pParamName = pParamName;
+  }
+
+  String pType() {
+    return this.pType;
+  }
+
+  String pParamName() {
+    return this.pParamName;
+  }
+
+  private String rType() {
+    return this.mIncorrectType.pType();
+  }
+
+  private String rParamName() {
+    return this.mIncorrectType.pParamName();
+>>>>>>> object-macro2.1
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     sb.append(new MHeader().toString());
     if(this.ePackageDeclaration.size() > 0) {
       sb.append(System.getProperty("line.separator"));
@@ -105,6 +136,14 @@ public class MIncorrectType {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("}");
+=======
+    sb.append(new MObjectMacroErrorHead().toString());
+    sb.append(System.getProperty("line.separator"));
+    sb.append(rType());
+    sb.append(" was not expected in parameter '");
+    sb.append(rParamName());
+    sb.append("'.");
+>>>>>>> object-macro2.1
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

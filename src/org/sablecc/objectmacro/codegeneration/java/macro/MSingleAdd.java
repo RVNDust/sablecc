@@ -5,6 +5,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 import java.util.*;
@@ -196,6 +197,10 @@ public class MSingleAdd {
 import java.util.*;
 
 >>>>>>> Mise à jour Visiteur - Build OK
+=======
+import java.util.*;
+
+>>>>>>> object-macro2.1
 public class MSingleAdd extends Macro{
 
     private String field_MacroName;
@@ -256,6 +261,7 @@ public class MSingleAdd extends Macro{
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> MaJ Fichier de Macro + Generation
 =======
     sb.append("        ");
@@ -265,6 +271,8 @@ public class MSingleAdd extends Macro{
 
 =======
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+>>>>>>> object-macro2.1
     private String buildIsBuilt(){
         StringBuilder sb = new StringBuilder();
         Context local_context = IsBuiltContext;
@@ -303,6 +311,7 @@ public class MSingleAdd extends Macro{
     private String getMacroName(){
 
         return this.field_MacroName;
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
 <<<<<<< HEAD
@@ -321,6 +330,9 @@ public class MSingleAdd extends Macro{
 =======
 =======
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+    }
+>>>>>>> object-macro2.1
     private String getParamName(){
 
         return this.field_ParamName;
@@ -408,8 +420,12 @@ void setIsBuilt(MIsBuilt mIsBuilt){
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

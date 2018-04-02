@@ -36,6 +36,7 @@
 /.idea/
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /sablecc.org.iml
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -55,3 +56,8 @@
 /tests/objectmacro/java/*/macro/
 /tests/objectmacro/common/intermediate/
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+/sablecc.org.iml
+/tests/objectmacro/java/*/macro/
+/tests/objectmacro/common/intermediate/
+>>>>>>> object-macro2.1

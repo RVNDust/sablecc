@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.*;
 
 public class MCyclicReference {
@@ -89,6 +90,8 @@ public class MCyclicReference {
   }
 
 =======
+=======
+>>>>>>> object-macro2.1
 public class MCyclicReference {
 
   private final String pMacroName;
@@ -120,8 +123,12 @@ public class MCyclicReference {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

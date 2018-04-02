@@ -2,10 +2,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Removed in constructor initialization and add lazy initialization
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> object-macro2.1
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -25,6 +28,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
@@ -33,10 +37,13 @@
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+>>>>>>> object-macro2.1
 package org.sablecc.objectmacro.codegeneration.java.structure;
 
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -68,10 +75,15 @@ import java.util.List;
 import java.util.*;
 
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+import java.util.*;
+
+>>>>>>> object-macro2.1
 public class Macro {
 
     private final MMacro macro;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     private final String name;
@@ -141,6 +153,11 @@ public class Macro {
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    private final String name;
+
+    private final List<String> parametersName;
+>>>>>>> object-macro2.1
 
     private final List<String> internalsName;
 
@@ -171,6 +188,7 @@ public class Macro {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         return macro;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
 =======
@@ -186,5 +204,9 @@ public class Macro {
     public String getName(){
         return this.name;
 >>>>>>> Revert "Changement Objectmacro-back"
+=======
+    public String getName(){
+        return this.name;
+>>>>>>> object-macro2.1
     }
 }

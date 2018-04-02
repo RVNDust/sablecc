@@ -3,6 +3,7 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class MPublic {
 
   public MPublic() {
@@ -25,6 +26,17 @@ public class MPublic extends Macro{
     public MPublic(){
 
 
+=======
+import java.util.*;
+
+public class MPublic extends Macro{
+
+
+
+    public MPublic(){
+
+
+>>>>>>> object-macro2.1
 
     }
 
@@ -35,6 +47,7 @@ public class MPublic extends Macro{
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
+<<<<<<< HEAD
 
         internalsInitializer.setPublic(this);
     }
@@ -67,13 +80,51 @@ public class MPublic extends Macro{
         return sb0.toString();
     }
 
+=======
+
+        internalsInitializer.setPublic(this);
+    }
+
+   @Override
+    public String build(){
+
+        BuildState buildState = this.build_state;
+
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("Public");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+
+        
+
+        
+
+        StringBuilder sb0 = new StringBuilder();
+
+        sb0.append("public");
+
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+
+>>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

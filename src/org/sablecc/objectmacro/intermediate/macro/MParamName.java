@@ -25,6 +25,7 @@ public class MParamName {
     StringBuilder sb = new StringBuilder();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sb.append("    ParamName { Name = '");
 =======
     sb.append("    ParamName { '");
@@ -32,6 +33,9 @@ public class MParamName {
 =======
     sb.append("    ParamName { Name = '");
 >>>>>>> Add cyclic semantic verification using component finder and progeny
+=======
+    sb.append("    ParamName { Name = '");
+>>>>>>> object-macro2.1
     sb.append(rParamName());
     sb.append("' }");
     sb.append(System.getProperty("line.separator"));

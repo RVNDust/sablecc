@@ -7,6 +7,7 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
@@ -179,6 +180,12 @@ public class MSetInternal extends Macro{
 
 <<<<<<< HEAD
 =======
+=======
+import java.util.*;
+
+public class MSetInternal extends Macro{
+
+>>>>>>> object-macro2.1
     private String field_MacroName;
     private String field_ParamName;
     private String field_Context;
@@ -376,8 +383,12 @@ void setStringBuilderBuild(MStringBuilderBuild mStringBuilderBuild){
         return build();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
+=======
+}
+>>>>>>> object-macro2.1

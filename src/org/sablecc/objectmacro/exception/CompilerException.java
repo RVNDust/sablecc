@@ -251,8 +251,11 @@ public class CompilerException
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add cyclic semantic verification using component finder and progeny
+=======
+>>>>>>> object-macro2.1
     public static CompilerException selfReference(
             TIdentifier reference,
             TIdentifier context) {
@@ -282,8 +285,11 @@ public class CompilerException
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add new errors incorrectArgumentType and incorrectArgumentCount
+=======
+>>>>>>> object-macro2.1
         String line = String.valueOf(declaration.getName().getLine());
         String pos = String.valueOf(declaration.getName().getPos());
         String expectedCount = String.valueOf(macroReferenced.getAllInternals().size());
@@ -305,6 +311,7 @@ public class CompilerException
         return new CompilerException(
                 new MIncorrectArgumentType(expected, found, stringLine, stringPos).toString());
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 //        TIdentifier insertName = declaration.getName();
 //        TIdentifier textBlockName = textInsert.getInsertedTextBlock()
@@ -324,6 +331,8 @@ public class CompilerException
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
 >>>>>>> Add new errors incorrectArgumentType and incorrectArgumentCount
+=======
+>>>>>>> object-macro2.1
     }
 
     public static CompilerException cannotCreateDirectory(
@@ -357,8 +366,11 @@ public class CompilerException
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add semantic verification on argument type provided in a macro reference
+=======
+>>>>>>> object-macro2.1
 
     public static CompilerException incorrectMacroType(
             Set<String> expectedMacros,
@@ -386,8 +398,11 @@ public class CompilerException
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add semantic verification cannot insert a macro with params
+=======
+>>>>>>> object-macro2.1
 
     public static CompilerException invalidInsert(
             Token name){
@@ -397,6 +412,7 @@ public class CompilerException
 
         return new CompilerException(new MInvalidInsert(line, pos, name.getText()).toString());
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -415,4 +431,6 @@ public class CompilerException
 >>>>>>> Verify there is at least 1 macro without internals
 =======
 >>>>>>> Removed at least one macro without internals verification
+=======
+>>>>>>> object-macro2.1
 }
