@@ -18,7 +18,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 =======
 >>>>>>> Add back end tests
@@ -30,9 +29,6 @@
 =======
 
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-
->>>>>>> object-macro2.1
 package back;
 
 import back.macro.MCommaSeparator;
@@ -45,7 +41,6 @@ public class Separator {
                 String[] args){
 
         MEmptyMacro mEmptyMacro = new MEmptyMacro();
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -79,12 +74,6 @@ public class Separator {
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-        MCommaSeparator mCommaSeparator = new MCommaSeparator();
-        mCommaSeparator.addX(mEmptyMacro);
-        mCommaSeparator.addX(mEmptyMacro);
-        mCommaSeparator.addX(mEmptyMacro);
->>>>>>> object-macro2.1
         System.out.println(mCommaSeparator.build());
     }
 

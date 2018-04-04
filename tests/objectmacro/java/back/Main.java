@@ -22,7 +22,6 @@ import back.macro.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,11 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-import java.util.ArrayList;
-import java.util.List;
-
->>>>>>> object-macro2.1
 public class Main {
 
     public static void main(
@@ -55,11 +49,8 @@ public class Main {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
         System.out.print("======== Main Test ===========\n");
         MA ma = new MA("First argument of MA");
         List<Macro> macros = new ArrayList<>();
@@ -69,9 +60,6 @@ public class Main {
         macros.add(new MB("First argument in MB1"));
         macros.add(new MB("First argument in MB2"));
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
 
         try{
             mb.addS(new MC());
@@ -80,7 +68,6 @@ public class Main {
             ma.addY(mb);
             ma.addZ(new MC());
             mb2.addS(new MC());
-<<<<<<< HEAD
 =======
 =======
 >>>>>>> Changement Objectmacro-back
@@ -150,8 +137,6 @@ public class Main {
             ma.addZ(new MC());
             mb2.addS(new MC());
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
             System.out.println(ma.build());
         }
         catch(ObjectMacroException e){

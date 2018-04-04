@@ -22,7 +22,6 @@ import back.macro.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,18 +39,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-import java.util.ArrayList;
-import java.util.List;
-
->>>>>>> object-macro2.1
 public class IncorrectType {
 
     public static void main(
             String[] args){
 
         System.out.println("---------- Incorrect type ----------");
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -108,20 +101,10 @@ public class IncorrectType {
             MA ma = new MA("First argument of MA", macros, macros);
 >>>>>>> Changement Objectmacro-back
 =======
-=======
-        List<MB> macros = new ArrayList<>();
-        macros.add(new MB("First argument in MB0"));
-        macros.add(new MB("First argument in MB1"));
-        macros.add(new MB("First argument in MB2"));
-
-        try{
-            MA ma = new MA("First argument of MA");
->>>>>>> object-macro2.1
             for(MB macro : macros){
                 ma.addY(macro);
             }
 
-<<<<<<< HEAD
 >>>>>>> Removed add all function to keep only the static overload
 =======
         List<Macro> macros = new ArrayList<>();
@@ -134,8 +117,6 @@ public class IncorrectType {
             ma.addAllZ(macros);
             ma.addAllY(macros);
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);

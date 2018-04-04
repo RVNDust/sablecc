@@ -2,13 +2,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -28,20 +25,16 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
 package entity;
 
 import entity.macro.*;
 
 import java.io.File;
 import java.io.FileWriter;
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 import java.util.ArrayList;
@@ -66,9 +59,6 @@ import java.io.IOException;
 =======
 import java.util.ArrayList;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-import java.util.ArrayList;
->>>>>>> object-macro2.1
 
 public class Main {
 
@@ -78,11 +68,8 @@ public class Main {
         MEntity entity = createEntity("Person");
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> moved jpa_entity test
-=======
->>>>>>> object-macro2.1
         File entities_directory = new File("tests/objectmacro/java/entities");
         if(!entities_directory.exists()){
             entities_directory.mkdir();
@@ -90,17 +77,13 @@ public class Main {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Add script to run jpa entity test
-=======
->>>>>>> object-macro2.1
         File directory = new File("tests/objectmacro/java/entities");
         if(!directory.exists()){
             directory.mkdir();
         }
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> Add refused, accepted tests
@@ -108,8 +91,6 @@ public class Main {
 >>>>>>> moved jpa_entity test
 =======
 >>>>>>> Add script to run jpa entity test
-=======
->>>>>>> object-macro2.1
         File destination = new File("tests/objectmacro/java/entities", "Person.java");
         writeFile(destination, entity.build());
         entity = createEntity("Book");
@@ -138,9 +119,6 @@ public class Main {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
         MEntity mEntity = new MEntity(entity_name);
         mEntity.addPackage(new MPackageDeclaration("entities"));
         MSetter setter = new MSetter("id_" + entity_name.toLowerCase(), Integer.class.getSimpleName());
@@ -163,7 +141,6 @@ public class Main {
         mEntity.addAccessors(getter);
 
         return mEntity;
-<<<<<<< HEAD
 =======
 =======
 >>>>>>> Changement Objectmacro-back
@@ -225,15 +202,12 @@ public class Main {
 =======
         return mEntity;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
     }
 
     private static MAttribute createId(
             String name,
             String generation_strategy){
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -249,9 +223,6 @@ public class Main {
 =======
         MAttribute mAttribute = new MAttribute(name, "Integer");
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-        MAttribute mAttribute = new MAttribute(name, "Integer");
->>>>>>> object-macro2.1
         MPrimaryKey mPrimaryKey = new MPrimaryKey();
         MIdIncrementationStrategy mIdIncrementationStrategy = null;
         if(!generation_strategy.equals("")){
@@ -263,9 +234,6 @@ public class Main {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
         mAttribute.addNotNull(new MNotNull());
 
         if (mIdIncrementationStrategy == null) {
@@ -277,7 +245,6 @@ public class Main {
         }
 
         return mAttribute;
-<<<<<<< HEAD
 =======
         Macro[] id_related;
 =======
@@ -316,8 +283,6 @@ public class Main {
 =======
         return mAttribute;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
     }
 
     private static MAttribute createAttribute(
@@ -326,9 +291,6 @@ public class Main {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
             String type,
             boolean notNull){
 
@@ -338,7 +300,6 @@ public class Main {
         }
 
         return mAttribute;
-<<<<<<< HEAD
 =======
             String type){
 =======
@@ -376,8 +337,6 @@ public class Main {
 =======
         return mAttribute;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
     }
 
 }

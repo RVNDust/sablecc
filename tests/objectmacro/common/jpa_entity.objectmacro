@@ -32,16 +32,12 @@ Macro entity
 {package}
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 =======
 >>>>>>> Add refused, accepted tests
 =======
 
 >>>>>>> Now macro without internals has a builder with context that only return build
-=======
-
->>>>>>> object-macro2.1
 @Entity
 {Insert: annotation_table(name)}
 public class {name} {
@@ -73,7 +69,6 @@ Macro attribute
         type : String;
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         id : primary_key, id_incrementation_strategy, separator="\n";
 =======
         id : primary_key, id_incrementation_strategy;
@@ -81,9 +76,6 @@ Macro attribute
 =======
         id : primary_key, id_incrementation_strategy, separator="\n";
 >>>>>>> Now macro without internals has a builder with context that only return build
-=======
-        id : primary_key, id_incrementation_strategy, separator="\n";
->>>>>>> object-macro2.1
         not_null : not_null;
 {Begin}
 {id}
@@ -155,7 +147,6 @@ Macro one_to_one
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         column : String;
         join_column : join_column(column);
     Internal
@@ -181,16 +172,11 @@ Macro one_to_one
         directives : fetch_strategy(fetch_type), mapped_by, separator=", ";
 >>>>>>> Changement Objectmacro-back
 =======
-=======
->>>>>>> object-macro2.1
         column : String;
         join_column : join_column(column);
     Internal
         directives : fetch_strategy, mapped_by;
-<<<<<<< HEAD
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
 {Begin}
 @OneToOne({directives})
 {join_column}
@@ -201,7 +187,6 @@ Macro many_to_many
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -224,10 +209,6 @@ Macro many_to_many
     Internal
         directives : fetch_strategy, mapped_by;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-    Internal
-        directives : fetch_strategy, mapped_by;
->>>>>>> object-macro2.1
 {Begin}
 @ManyToMany({directives})
 {End}
@@ -237,7 +218,6 @@ Macro many_to_one
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -260,10 +240,6 @@ Macro many_to_one
     Internal
         directives : fetch_strategy, mapped_by;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-    Internal
-        directives : fetch_strategy, mapped_by;
->>>>>>> object-macro2.1
 {Begin}
 @ManyToOne({directives})
 {End}
@@ -273,7 +249,6 @@ Macro one_to_many
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
     Internal
         directives : fetch_strategy, mapped_by;
 =======
@@ -296,10 +271,6 @@ Macro one_to_many
     Internal
         directives : fetch_strategy, mapped_by;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-    Internal
-        directives : fetch_strategy, mapped_by;
->>>>>>> object-macro2.1
 {Begin}
 @OneToMany({directives})
 {End}

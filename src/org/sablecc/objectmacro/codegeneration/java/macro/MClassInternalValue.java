@@ -4,7 +4,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 
 import java.util.*;
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 public class MClassInternalValue {
 
@@ -42,8 +41,6 @@ public class MClassInternalValue {
     for(Object oImportJavaUtil : this.eImportJavaUtil) {
       sb.append(oImportJavaUtil.toString());
 =======
-=======
->>>>>>> object-macro2.1
 
 public class MClassInternalValue extends Macro{
 
@@ -335,7 +332,6 @@ this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
 <<<<<<< HEAD
@@ -646,17 +642,9 @@ this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
 <<<<<<< HEAD
 }
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

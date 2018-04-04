@@ -7,7 +7,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
@@ -139,10 +138,6 @@ public class MRedefinedInternalsSetter {
 import java.util.*;
 
 >>>>>>> Mise à jour Visiteur - Build OK
-=======
-import java.util.*;
-
->>>>>>> object-macro2.1
 public class MRedefinedInternalsSetter extends Macro{
 
     private String field_Name;
@@ -208,7 +203,6 @@ public class MRedefinedInternalsSetter extends Macro{
             throw ObjectMacroException.parameterNull("ListPart");
         }
 <<<<<<< HEAD
-<<<<<<< HEAD
 @Override
 void setStringPart(MStringPart mStringPart){
 
@@ -250,8 +244,6 @@ void setStringPart(MStringPart mStringPart){
     for(Object oSetInternal : this.eSetInternal) {
       sb.append(oSetInternal.toString());
 =======
-=======
->>>>>>> object-macro2.1
                 if(this.build_state != null){
             throw ObjectMacroException.cannotModify("ParamInsertPart");
         }
@@ -287,7 +279,6 @@ void setStringPart(MStringPart mStringPart){
         }
 
         this.list_ListSetInternal.add(macro);
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("}");
@@ -298,9 +289,6 @@ void setStringPart(MStringPart mStringPart){
 =======
 =======
 >>>>>>> MaJ Fichier de Macro + Generation
-=======
-    }
->>>>>>> object-macro2.1
 
     private String buildName(){
 
@@ -445,7 +433,6 @@ this.ListPartValue.setSeparator(this.ListPartSeparator);
 
         internalsInitializer.setRedefinedInternalsSetter(this);
 <<<<<<< HEAD
-<<<<<<< HEAD
     }
 <<<<<<< HEAD
 >>>>>>> Changement Objectmacro-back
@@ -454,9 +441,6 @@ this.ListPartValue.setSeparator(this.ListPartSeparator);
     for(Object oSetInternal : this.eSetInternal) {
       sb.append(oSetInternal.toString());
 =======
-=======
-    }
->>>>>>> object-macro2.1
 
    @Override
     public String build(){
@@ -504,7 +488,6 @@ initListSetInternalInternals(null);
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("}");
@@ -531,12 +514,3 @@ initListSetInternalInternals(null);
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-    }
-
-    @Override
-    String build(Context context) {
-        return build();
-    }
-}
->>>>>>> object-macro2.1

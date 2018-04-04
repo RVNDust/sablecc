@@ -5,7 +5,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 import java.util.*;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MInternalsInitializer {
 
   private final List<Object> ePackageDeclaration = new LinkedList<Object>();
@@ -72,8 +71,6 @@ public class MInternalsInitializer {
         sb.append(oParentInternalsSetter.toString());
       }
 =======
-=======
->>>>>>> object-macro2.1
 public class MInternalsInitializer extends Macro{
 
     private final List<Macro> list_PackageDeclaration;
@@ -304,7 +301,6 @@ initListParentInternalSettersInternals(null);
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append(System.getProperty("line.separator"));
@@ -317,17 +313,9 @@ initListParentInternalSettersInternals(null);
 <<<<<<< HEAD
 }
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

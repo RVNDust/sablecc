@@ -5,7 +5,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 import java.util.*;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MInitDirectives {
 
   private final String pParamName;
@@ -48,8 +47,6 @@ public class MInitDirectives {
   }
 
 =======
-=======
->>>>>>> object-macro2.1
 public class MInitDirectives extends Macro{
 
     private String field_ParamName;
@@ -202,12 +199,8 @@ void setNewDirective(MNewDirective mNewDirective){
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MInternalStringField {
 
   private final String pName;
@@ -33,8 +32,6 @@ public class MInternalStringField {
   }
 
 =======
-=======
->>>>>>> object-macro2.1
 import java.util.*;
 
 public class MInternalStringField extends Macro{
@@ -110,12 +107,8 @@ public class MInternalStringField extends Macro{
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

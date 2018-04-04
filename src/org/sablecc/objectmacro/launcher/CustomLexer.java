@@ -31,9 +31,6 @@ public class CustomLexer
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
     public CustomLexer(PushbackReader in) {
         super(in);
     }
@@ -43,7 +40,6 @@ public class CustomLexer
     @Override
     protected void filter() throws
             LexerException, IOException {
-<<<<<<< HEAD
 
         if(this.token instanceof TDquote){
             if(this.state != State.STRING){
@@ -90,8 +86,6 @@ public class CustomLexer
     @Override
     protected void filter() throws
             LexerException, IOException {
-=======
->>>>>>> object-macro2.1
 
         if(this.token instanceof TDquote){
             if(this.state != State.STRING){
@@ -114,10 +108,7 @@ public class CustomLexer
                 this.state = getLastState();
             }
         }
-<<<<<<< HEAD
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
-=======
->>>>>>> object-macro2.1
     }
 
     private State getLastState(){

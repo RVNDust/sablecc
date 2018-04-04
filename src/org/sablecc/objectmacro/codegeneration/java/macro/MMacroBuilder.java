@@ -7,7 +7,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
@@ -297,8 +296,6 @@ public class MMacroBuilder {
     if(this.eContextBuildState.size() == 0) {
       sb.append("this.build_state");
 =======
-=======
->>>>>>> object-macro2.1
 import java.util.*;
 
 public class MMacroBuilder extends Macro{
@@ -675,7 +672,6 @@ public class MMacroBuilder extends Macro{
         }
 
         return sb.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     for(Object oContextBuildState : this.eContextBuildState) {
@@ -770,14 +766,6 @@ public class MMacroBuilder extends Macro{
 
 =======
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-    }
-
-    private String getMacroName(){
-
-        return this.field_MacroName;
-    }
->>>>>>> object-macro2.1
     private InternalValue getListContextParam(){
         return this.ListContextParamValue;
     }
@@ -1024,7 +1012,6 @@ initListPartInternals(null);
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append(System.getProperty("line.separator"));
@@ -1063,17 +1050,9 @@ public class MMacroBuilder extends Macro{
 <<<<<<< HEAD
 }
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

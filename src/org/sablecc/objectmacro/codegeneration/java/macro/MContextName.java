@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MContextName {
 =======
 import java.util.*;
@@ -28,14 +27,6 @@ public class MContextName extends Macro{
     return this.mContextName.pContextName();
   }
 =======
-=======
-import java.util.*;
-
-public class MContextName extends Macro{
-
-    private String field_ContextName;
-
->>>>>>> object-macro2.1
 
     public MContextName(String pContextName){
 
@@ -48,7 +39,6 @@ public class MContextName extends Macro{
         if(pContextName == null){
             throw ObjectMacroException.parameterNull("ContextName");
         }
-<<<<<<< HEAD
 >>>>>>> Correctifs objectmacro2-java(back)
 
   @Override
@@ -60,12 +50,6 @@ public class MContextName extends Macro{
 
 <<<<<<< HEAD
 =======
-=======
-
-        this.field_ContextName = pContextName;
-    }
-
->>>>>>> object-macro2.1
     private String buildContextName(){
 
         return this.field_ContextName;
@@ -117,12 +101,8 @@ public class MContextName extends Macro{
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

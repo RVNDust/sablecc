@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MContextVerifier {
 
   public MContextVerifier() {
@@ -22,8 +21,6 @@ public class MContextVerifier {
   }
 
 =======
-=======
->>>>>>> object-macro2.1
 import java.util.*;
 
 public class MContextVerifier extends Macro{
@@ -85,12 +82,8 @@ public class MContextVerifier extends Macro{
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

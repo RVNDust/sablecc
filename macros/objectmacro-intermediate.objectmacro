@@ -25,7 +25,6 @@ $end: intermediate_representation $
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 $comment: ========= macro ============== $
 
 $macro: macro $
@@ -56,16 +55,6 @@ $expand: internal $
 =======
 $expand: initialization_order $
 >>>>>>> Add initialization order to params depending on the relations between params
-=======
-$comment: ========= macro ============== $
-
-$macro: macro $
-Macro {
-  Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
-$expand: param $
-$expand: internal $
-$expand: initialization_order $
->>>>>>> object-macro2.1
   MacroBody{
 $expand: string_part, eol_part, param_insert, macro_insert$
   }
@@ -75,17 +64,13 @@ $end: macro $
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Add initialization order to params depending on the relations between params
-=======
->>>>>>> object-macro2.1
 $comment: ========= param ============== $
 
 $macro: param $
  Param {
     Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
-<<<<<<< HEAD
 =======
 $macro: param(name) $
  Param {
@@ -96,8 +81,6 @@ $macro: param $
  Param {
     Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
 >>>>>>> FrontEnd is now independent about name conventions
-=======
->>>>>>> object-macro2.1
 $expand: string_type, macro_type$
 $expand: directive, separator=", "$
  }
@@ -107,9 +90,6 @@ $end: param $
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
 $comment: ========= internal ============== $
 
 $macro: internal $
@@ -121,7 +101,6 @@ $expand: directive, separator=", "$
 $end: internal $
 
 $comment: ========= string_type ============== $
-<<<<<<< HEAD
 =======
 $macro: context(name) $
  Context {
@@ -151,14 +130,10 @@ $end: internal $
 
 $comment: ========= string_type ============== $
 
-=======
-
->>>>>>> object-macro2.1
 $macro: string_type$
  Type = String $expand: directive, separator=", ", before_one=", "$
 $end: string_type $
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========= macro_type ============== $
@@ -169,10 +144,6 @@ $comment: ========= macro_type ============== $
 $comment: ========= macro_type ============== $
 
 >>>>>>> Add initialization order to params depending on the relations between params
-=======
-$comment: ========= macro_type ============== $
-
->>>>>>> object-macro2.1
 $macro: macro_type$
  Type {
 $expand: macro_ref $
@@ -183,17 +154,13 @@ $end: macro_type $
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Add initialization order to params depending on the relations between params
-=======
->>>>>>> object-macro2.1
 $comment: ========= macro_ref ============== $
 
 $macro: macro_ref$
  MacroRef {
  Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
-<<<<<<< HEAD
 =======
 $macro: macro_ref(name)$
  MacroRef {
@@ -204,13 +171,10 @@ $macro: macro_ref$
  MacroRef {
  Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $
 >>>>>>> FrontEnd is now independent about name conventions
-=======
->>>>>>> object-macro2.1
 $expand: args$
  }
 $end: macro_ref $
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========= args ============== $
@@ -221,10 +185,6 @@ $comment: ========= args ============== $
 $comment: ========= args ============== $
 
 >>>>>>> Add initialization order to params depending on the relations between params
-=======
-$comment: ========= args ============== $
-
->>>>>>> object-macro2.1
 $macro: args$
  Args {
 $expand: var_argument, text_argument, separator=", "$
@@ -234,9 +194,6 @@ $end: args$
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
 $comment: ========= var_argument ============== $
 
 $macro: var_argument $
@@ -258,7 +215,6 @@ $end: text_argument $
 $comment: ========== param_name ============== $
 
 $macro: param_name(param_name) $
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     ParamName { Name = '$param_name' }
@@ -305,11 +261,6 @@ $end: text_argument $
 $end: param_name $
 
 >>>>>>> Add internals name in intermediate representation in args
-=======
-    ParamName { Name = '$param_name' }
-$end: param_name $
-
->>>>>>> object-macro2.1
 $comment: ========= string_part ============== $
 
 $macro: string_part(string) $
@@ -322,7 +273,6 @@ $macro: eol_part $
   eol;
 $end: eol_part $
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 $comment: ========= macro_insert ============== $
@@ -348,22 +298,6 @@ $macro: param_insert $
  ParamInsert { Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $ } ;
 $end: param_insert $
 
-=======
-$comment: ========= macro_insert ============== $
-
-$macro: macro_insert$
- MacroInsert {
-$expand: macro_ref $
- };
-$end: macro_insert $
-
-$comment: ========= param_insert ============== $
-
-$macro: param_insert $
- ParamInsert { Name = $expand: simple_name, separator=", ", before_many="{ ", after_many=" }" $ } ;
-$end: param_insert $
-
->>>>>>> object-macro2.1
 $comment: ========= directive ============== $
 
 $macro: directive $
@@ -372,7 +306,6 @@ $macro: directive $
      $expand: string_part, eol_part, param_insert, macro_insert$
  }
 $end: directive $
-<<<<<<< HEAD
 
 $comment: ========= simple_name ============== $
 
@@ -420,11 +353,6 @@ $end: simple_name $
 =======
 $comment: ========= simple_name ============== $
 
-=======
-
-$comment: ========= simple_name ============== $
-
->>>>>>> object-macro2.1
 $macro: simple_name(name) $
 '$name'$no_eol$
 $end: simple_name $
@@ -436,7 +364,4 @@ $macro: initialization_order$
         $expand: simple_name $
     }
 $end: initialization_order $
-<<<<<<< HEAD
 >>>>>>> Add initialization order to params depending on the relations between params
-=======
->>>>>>> object-macro2.1

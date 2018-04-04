@@ -7,7 +7,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.*;
 
 =======
@@ -105,8 +104,6 @@ public class MInitInternalsCall {
     for(Object oContextArg : this.eContextArg) {
       sb.append(oContextArg.toString());
 =======
-=======
->>>>>>> object-macro2.1
 import java.util.*;
 
 public class MInitInternalsCall extends Macro{
@@ -253,7 +250,6 @@ this.ContextArgValue.setNone(this.ContextArgNone);
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append(");");
@@ -287,17 +283,9 @@ public class MInitInternalsCall extends Macro{
 <<<<<<< HEAD
 }
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

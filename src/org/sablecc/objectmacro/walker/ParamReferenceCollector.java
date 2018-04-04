@@ -1,10 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Add copyrights
-=======
->>>>>>> object-macro2.1
 /* This file is part of SableCC ( http://sablecc.org ).
  *
  * See the NOTICE file distributed with this work for copyright information.
@@ -22,7 +19,6 @@
  * limitations under the License.
  */
 <<<<<<< HEAD
-<<<<<<< HEAD
 package org.sablecc.objectmacro.walker;
 
 =======
@@ -38,10 +34,6 @@ import org.sablecc.objectmacro.structure.Insert;
 package org.sablecc.objectmacro.walker;
 
 >>>>>>> Add copyrights
-=======
-package org.sablecc.objectmacro.walker;
-
->>>>>>> object-macro2.1
 import org.sablecc.objectmacro.syntax3.analysis.DepthFirstAdapter;
 import org.sablecc.objectmacro.structure.GlobalIndex;
 import org.sablecc.objectmacro.structure.Macro;
@@ -51,7 +43,6 @@ import org.sablecc.objectmacro.util.Utils;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 /**
  * Created by lam on 06/09/17.
@@ -59,8 +50,6 @@ import org.sablecc.objectmacro.util.Utils;
 >>>>>>> Split DefinitionCollector into MacroReferenceCollector and ParamReferenceCollector
 =======
 >>>>>>> Add copyrights
-=======
->>>>>>> object-macro2.1
 public class ParamReferenceCollector
         extends DepthFirstAdapter {
 
@@ -100,7 +89,6 @@ public class ParamReferenceCollector
                             Utils.getVarName(
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
                                     node.getVariable()), node.getVariable().getLine(), node.getVariable().getPos()));
 =======
                                     node.getVariable())));
@@ -108,9 +96,6 @@ public class ParamReferenceCollector
 =======
                                     node.getVariable()), node.getVariable().getLine(), node.getVariable().getPos()));
 >>>>>>> Add line and pos to a param reference in order to get the line and position in an error
-=======
-                                    node.getVariable()), node.getVariable().getLine(), node.getVariable().getPos()));
->>>>>>> object-macro2.1
         }
     }
 
@@ -139,7 +124,6 @@ public class ParamReferenceCollector
     }
 
     @Override
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -185,8 +169,6 @@ public class ParamReferenceCollector
                 this.currentParam.getNameDeclaration());
 >>>>>>> Changement Objectmacro-back
 =======
-=======
->>>>>>> object-macro2.1
     public void inAInternal(
             AInternal node) {
 
@@ -199,9 +181,6 @@ public class ParamReferenceCollector
             AInternal node) {
 
         this.currentParam = null;
-<<<<<<< HEAD
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
     }
 }

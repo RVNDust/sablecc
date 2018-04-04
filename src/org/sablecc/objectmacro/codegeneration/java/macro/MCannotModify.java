@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.*;
 
 public class MCannotModify {
@@ -90,8 +89,6 @@ public class MCannotModify {
   }
 
 =======
-=======
->>>>>>> object-macro2.1
 public class MCannotModify {
 
   private final String pMacroName;
@@ -123,12 +120,8 @@ public class MCannotModify {
   }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 import java.util.*;
-<<<<<<< HEAD
 
 <<<<<<< HEAD
 public class MParamRef {
@@ -51,9 +50,6 @@ public class MParamRef {
   }
 
 =======
-=======
-
->>>>>>> object-macro2.1
 public class MParamRef extends Macro{
 
     private String field_Name;
@@ -118,26 +114,17 @@ public class MParamRef extends Macro{
         int i = 0;
         int nb_macros = macros.size();
         String expansion = null;
-<<<<<<< HEAD
 
         if(this.ListContextArgNone != null){
             sb.append(this.ListContextArgNone.apply(i, "", nb_macros));
         }
 
-=======
-
-        if(this.ListContextArgNone != null){
-            sb.append(this.ListContextArgNone.apply(i, "", nb_macros));
-        }
-
->>>>>>> object-macro2.1
         for(Macro macro : macros){
             expansion = macro.build(local_context);
 
             if(this.ListContextArgBeforeFirst != null){
                 expansion = this.ListContextArgBeforeFirst.apply(i, expansion, nb_macros);
             }
-<<<<<<< HEAD
 
             if(this.ListContextArgAfterLast != null){
                 expansion = this.ListContextArgAfterLast.apply(i, expansion, nb_macros);
@@ -151,21 +138,6 @@ public class MParamRef extends Macro{
             i++;
         }
 
-=======
-
-            if(this.ListContextArgAfterLast != null){
-                expansion = this.ListContextArgAfterLast.apply(i, expansion, nb_macros);
-            }
-
-            if(this.ListContextArgSeparator != null){
-                expansion = this.ListContextArgSeparator.apply(i, expansion, nb_macros);
-            }
-
-            sb.append(expansion);
-            i++;
-        }
-
->>>>>>> object-macro2.1
         return sb.toString();
     }
 
@@ -202,7 +174,6 @@ void setContextName(MContextName mContextName){
             InternalsInitializer internalsInitializer){
 
         internalsInitializer.setParamRef(this);
-<<<<<<< HEAD
     }
 
    @Override
@@ -237,53 +208,13 @@ void setContextName(MContextName mContextName){
         return sb0.toString();
     }
 
-=======
-    }
-
-   @Override
-    public String build(){
-
-        BuildState buildState = this.build_state;
-
-        if(buildState == null){
-            buildState = new BuildState();
-        }
-        else if(buildState.getExpansion() == null){
-            throw ObjectMacroException.cyclicReference("ParamRef");
-        }
-        else{
-            return buildState.getExpansion();
-        }
-        this.build_state = buildState;
-
-        initListContextArgDirectives();
-
-        initListContextArgInternals(null);
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("get");
-        sb0.append(buildName());
-        sb0.append("(");
-        sb0.append(buildListContextArg());
-        sb0.append(")");
-
-        buildState.setExpansion(sb0.toString());
-        return sb0.toString();
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

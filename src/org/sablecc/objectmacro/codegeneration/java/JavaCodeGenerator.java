@@ -24,7 +24,6 @@ import java.util.Map;
 import org.sablecc.objectmacro.codegeneration.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
 =======
 import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
@@ -32,9 +31,6 @@ import org.sablecc.objectmacro.codegeneration.java.macro.MMacro;
 =======
 import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
-=======
-import org.sablecc.objectmacro.codegeneration.java.structure.Macro;
->>>>>>> object-macro2.1
 import org.sablecc.objectmacro.exception.*;
 import org.sablecc.util.*;
 
@@ -88,7 +84,6 @@ public class JavaCodeGenerator
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         Map<String, Macro> macros = new LinkedHashMap<>();
 =======
         Map<String, MMacro> macros = new LinkedHashMap<>();
@@ -96,15 +91,11 @@ public class JavaCodeGenerator
 =======
         Map<String, Macro> macros = new LinkedHashMap<>();
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
-=======
-        Map<String, Macro> macros = new LinkedHashMap<>();
->>>>>>> object-macro2.1
 
         MacroCollector macroCollector = new MacroCollector(macros);
         getIr().getAST().apply(macroCollector);
 
         CodeGenerationWalker walker = new CodeGenerationWalker(getIr(),
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                 packageDirectory, macros);
@@ -134,16 +125,11 @@ public class JavaCodeGenerator
         getIr().getAST().apply(walker);
 >>>>>>> Changement Objectmacro-back
 =======
-=======
->>>>>>> object-macro2.1
                 packageDirectory, macros);
         UtilsGenerationWalker utilsGenerationWalker = new UtilsGenerationWalker(getIr(), packageDirectory);
 
         getIr().getAST().apply(walker);
         getIr().getAST().apply(utilsGenerationWalker);
-<<<<<<< HEAD
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
     }
 }

@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MStringBuilderBuild {
 =======
 import java.util.*;
@@ -40,11 +39,6 @@ public class MStringBuilderBuild extends Macro{
 <<<<<<< HEAD
 =======
 =======
-=======
-import java.util.*;
-
-public class MStringBuilderBuild extends Macro{
->>>>>>> object-macro2.1
 
     private String field_IndexBuilder;
 
@@ -64,10 +58,7 @@ public class MStringBuilderBuild extends Macro{
         this.field_IndexBuilder = pIndexBuilder;
     }
 
-<<<<<<< HEAD
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
->>>>>>> object-macro2.1
     private String buildIndexBuilder(){
 
         return this.field_IndexBuilder;
@@ -121,12 +112,8 @@ public class MStringBuilderBuild extends Macro{
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

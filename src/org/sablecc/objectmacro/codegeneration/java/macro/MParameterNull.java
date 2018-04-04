@@ -2,7 +2,6 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
-<<<<<<< HEAD
 import java.util.*;
 
 public class MParameterNull {
@@ -16,30 +15,11 @@ public class MParameterNull {
     MPackageDeclaration lPackageDeclaration = new MPackageDeclaration(pPackageName);
     this.ePackageDeclaration.add(lPackageDeclaration);
     return lPackageDeclaration;
-=======
-public class MParameterNull {
-
-  private final String pParamName;
-  private final MParameterNull mParameterNull = this;
-
-  public MParameterNull(String pParamName) {
-    if(pParamName == null) throw new NullPointerException();
-    this.pParamName = pParamName;
-  }
-
-  String pParamName() {
-    return this.pParamName;
-  }
-
-  private String rParamName() {
-    return this.mParameterNull.pParamName();
->>>>>>> object-macro2.1
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-<<<<<<< HEAD
     sb.append(new MHeader().toString());
     if(this.ePackageDeclaration.size() > 0) {
       sb.append(System.getProperty("line.separator"));
@@ -100,11 +80,6 @@ public class MParameterNull {
     sb.append(System.getProperty("line.separator"));
     sb.append("}");
     sb.append(System.getProperty("line.separator"));
-=======
-    sb.append("Parameter '");
-    sb.append(rParamName());
-    sb.append("' cannot be null.");
->>>>>>> object-macro2.1
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

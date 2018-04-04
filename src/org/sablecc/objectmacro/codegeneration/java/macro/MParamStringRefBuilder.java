@@ -5,7 +5,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 import java.util.*;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MParamStringRefBuilder {
 
   private final String pName;
@@ -63,8 +62,6 @@ public class MParamStringRefBuilder {
   }
 
 =======
-=======
->>>>>>> object-macro2.1
 public class MParamStringRefBuilder extends Macro{
 
     private String field_Name;
@@ -295,12 +292,8 @@ initListGetInternalTailInternals(null);
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

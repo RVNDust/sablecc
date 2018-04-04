@@ -7,7 +7,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
@@ -62,8 +61,6 @@ public class MApplyInternalsInitializer {
     for(Object oRedefinedInternalsSetter : this.eRedefinedInternalsSetter) {
       sb.append(oRedefinedInternalsSetter.toString());
 =======
-=======
->>>>>>> object-macro2.1
 import java.util.*;
 
 public class MApplyInternalsInitializer extends Macro{
@@ -210,7 +207,6 @@ void setRedefinedInternalsSetter(MRedefinedInternalsSetter mRedefinedInternalsSe
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append("});");
@@ -233,17 +229,9 @@ public class MApplyInternalsInitializer extends Macro{
 <<<<<<< HEAD
 }
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

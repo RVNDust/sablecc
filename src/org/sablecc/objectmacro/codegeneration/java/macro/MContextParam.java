@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MContextParam {
 
   public MContextParam() {
@@ -17,8 +16,6 @@ public class MContextParam {
   }
 
 =======
-=======
->>>>>>> object-macro2.1
 import java.util.*;
 
 public class MContextParam extends Macro{
@@ -75,12 +72,8 @@ public class MContextParam extends Macro{
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

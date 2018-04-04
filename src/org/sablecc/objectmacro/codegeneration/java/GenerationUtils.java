@@ -22,16 +22,12 @@ import org.sablecc.objectmacro.exception.CompilerException;
 import org.sablecc.objectmacro.intermediate.syntax3.node.TString;
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 import org.sablecc.objectmacro.util.Utils;
 =======
 >>>>>>> Moved utils files for generation to another walker
 =======
 import org.sablecc.objectmacro.util.Utils;
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
-=======
-import org.sablecc.objectmacro.util.Utils;
->>>>>>> object-macro2.1
 
 import java.io.File;
 import java.io.FileWriter;
@@ -46,7 +42,6 @@ class GenerationUtils {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
     static final String SEPARATOR_DIRECTIVE = "Separator";
 
     static final String AFTER_LAST_DIRECTIVE = "AfterLast";
@@ -59,9 +54,6 @@ class GenerationUtils {
 =======
     static final String SEPARATOR_DIRECTIVE = "Separator";
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
-=======
-    static final String SEPARATOR_DIRECTIVE = "Separator";
->>>>>>> object-macro2.1
 
     static final String AFTER_LAST_DIRECTIVE = "AfterLast";
 
@@ -69,7 +61,6 @@ class GenerationUtils {
 
     static final String BEFORE_FIRST_DIRECTIVE = "BeforeFirst";
 
-<<<<<<< HEAD
 <<<<<<< HEAD
     /**
      * Example : SetInternal needs a macroName, but adder does not need a macro because the parameter is always macro
@@ -80,8 +71,6 @@ class GenerationUtils {
 
 =======
 >>>>>>> Add BuildState class in order to do a cheap cycle verification on build method
-=======
->>>>>>> object-macro2.1
     static String string(
             TString tString) {
 
@@ -137,7 +126,6 @@ class GenerationUtils {
         for(TString partName : name_parts){
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
             macroName.append(Utils.toCamelCase(string(partName)));
 =======
             macroName.append(org.sablecc.objectmacro.util.Utils.toCamelCase(string(partName)));
@@ -145,9 +133,6 @@ class GenerationUtils {
 =======
             macroName.append(Utils.toCamelCase(string(partName)));
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
-=======
-            macroName.append(Utils.toCamelCase(string(partName)));
->>>>>>> object-macro2.1
         }
 
         return macroName.toString();
@@ -182,11 +167,8 @@ class GenerationUtils {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
-=======
->>>>>>> object-macro2.1
 
     static String getLetterFromInteger(
             Integer i){
@@ -194,11 +176,8 @@ class GenerationUtils {
         return i > 0 && i < 27 ? String.valueOf((char) (i + 64)) : null;
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Moved utils files for generation to another walker
 =======
 >>>>>>> Add directives into InternalValue and update directives in order to easily add new directives
-=======
->>>>>>> object-macro2.1
 }

@@ -2,7 +2,6 @@
 
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
-<<<<<<< HEAD
 import java.util.*;
 
 public class MObjectMacroErrorHead {
@@ -16,17 +15,11 @@ public class MObjectMacroErrorHead {
     MPackageDeclaration lPackageDeclaration = new MPackageDeclaration(pPackageName);
     this.ePackageDeclaration.add(lPackageDeclaration);
     return lPackageDeclaration;
-=======
-class MObjectMacroErrorHead {
-
-  MObjectMacroErrorHead() {
->>>>>>> object-macro2.1
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-<<<<<<< HEAD
     sb.append(new MHeader().toString());
     if(this.ePackageDeclaration.size() > 0) {
       sb.append(System.getProperty("line.separator"));
@@ -59,9 +52,6 @@ class MObjectMacroErrorHead {
     sb.append(System.getProperty("line.separator"));
     sb.append(System.getProperty("line.separator"));
     sb.append("}");
-=======
-    sb.append("*** OBJECT MACRO ERROR ***");
->>>>>>> object-macro2.1
     sb.append(System.getProperty("line.separator"));
     return sb.toString();
   }

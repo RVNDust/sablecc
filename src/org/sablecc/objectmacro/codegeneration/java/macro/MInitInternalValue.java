@@ -5,7 +5,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 public class MInitInternalValue {
@@ -78,12 +77,6 @@ public class MInitInternalValue extends Macro{
 
 <<<<<<< HEAD
 =======
-=======
-import java.util.*;
-
-public class MInitInternalValue extends Macro{
-
->>>>>>> object-macro2.1
     private String field_ParamName;
 
 
@@ -159,12 +152,8 @@ public class MInitInternalValue extends Macro{
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

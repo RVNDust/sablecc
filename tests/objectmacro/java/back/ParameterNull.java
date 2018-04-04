@@ -22,7 +22,6 @@ import back.macro.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,18 +39,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-import java.util.ArrayList;
-import java.util.List;
-
->>>>>>> object-macro2.1
 public class ParameterNull {
 
     public static void main(
             String[] args){
 
         System.out.println("---------- Parameter null ----------");
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -117,12 +110,6 @@ public class ParameterNull {
         try{
             ma.addZ(null);
 >>>>>>> Removed add all function to keep only the static overload
-=======
-        MA ma = new MA("First argument of MA");
-
-        try{
-            ma.addZ(null);
->>>>>>> object-macro2.1
             System.err.println("It should throw an exception here");
             System.exit(1);
         }

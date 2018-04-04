@@ -7,7 +7,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
 =======
@@ -236,10 +235,6 @@ public class MParamMacroRefBuilder {
 import java.util.*;
 
 >>>>>>> Mise à jour Visiteur - Build OK
-=======
-import java.util.*;
-
->>>>>>> object-macro2.1
 public class MParamMacroRefBuilder extends Macro{
 
     private String field_Name;
@@ -307,14 +302,11 @@ public class MParamMacroRefBuilder extends Macro{
             }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         return sb0.toString();
 >>>>>>> MaJ Fichier de Macro + Generation
 =======
 >>>>>>> Revert "MaJ Fichier de Macro + Generation"
 =======
-=======
->>>>>>> object-macro2.1
             if(this.ContextNameAfterLast != null){
                 expansion = this.ContextNameAfterLast.apply(i, expansion, nb_macros);
             }
@@ -328,7 +320,6 @@ public class MParamMacroRefBuilder extends Macro{
         }
 
         return sb.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     for(Object oContextName : this.eContextName) {
@@ -468,14 +459,6 @@ public class MParamMacroRefBuilder extends Macro{
 
 =======
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-    }
-
-    private String getName(){
-
-        return this.field_Name;
-    }
->>>>>>> object-macro2.1
     private InternalValue getContextName(){
         return this.ContextNameValue;
     }
@@ -617,7 +600,6 @@ this.ContextNameValue.setNone(this.ContextNameNone);
 
         buildState.setExpansion(sb0.toString());
         return sb0.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
 >>>>>>> Allow to set internals with string and macro by adding a structure containing the macro and parameters and internals name
@@ -660,17 +642,9 @@ public class MParamMacroRefBuilder extends Macro{
 <<<<<<< HEAD
 }
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

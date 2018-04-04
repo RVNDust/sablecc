@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MPackageDeclaration {
 
   private final String pPackageName;
@@ -40,15 +39,6 @@ public class MPackageDeclaration extends Macro{
     private String field_PackageName;
 
 
-=======
-import java.util.*;
-
-public class MPackageDeclaration extends Macro{
-
-    private String field_PackageName;
-
-
->>>>>>> object-macro2.1
     public MPackageDeclaration(String pPackageName){
 
         this.setPPackageName(pPackageName);
@@ -80,7 +70,6 @@ public class MPackageDeclaration extends Macro{
             InternalsInitializer internalsInitializer){
 
         internalsInitializer.setPackageDeclaration(this);
-<<<<<<< HEAD
     }
 
    @Override
@@ -113,51 +102,13 @@ public class MPackageDeclaration extends Macro{
         return sb0.toString();
     }
 
-=======
-    }
-
-   @Override
-    public String build(){
-
-        BuildState buildState = this.build_state;
-
-        if(buildState == null){
-            buildState = new BuildState();
-        }
-        else if(buildState.getExpansion() == null){
-            throw ObjectMacroException.cyclicReference("PackageDeclaration");
-        }
-        else{
-            return buildState.getExpansion();
-        }
-        this.build_state = buildState;
-
-        
-
-        
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("package ");
-        sb0.append(buildPackageName());
-        sb0.append(";");
-
-        buildState.setExpansion(sb0.toString());
-        return sb0.toString();
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

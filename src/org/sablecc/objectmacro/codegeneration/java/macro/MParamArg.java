@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MParamArg {
 =======
 import java.util.*;
@@ -43,15 +42,6 @@ public class MParamArg extends Macro{
     private String field_Name;
 
 
-=======
-import java.util.*;
-
-public class MParamArg extends Macro{
-
-    private String field_Name;
-
-
->>>>>>> object-macro2.1
     public MParamArg(String pName){
 
         this.setPName(pName);
@@ -67,10 +57,7 @@ public class MParamArg extends Macro{
         this.field_Name = pName;
     }
 
-<<<<<<< HEAD
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
->>>>>>> object-macro2.1
     private String buildName(){
 
         return this.field_Name;
@@ -85,7 +72,6 @@ public class MParamArg extends Macro{
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
-<<<<<<< HEAD
 
         internalsInitializer.setParamArg(this);
     }
@@ -119,52 +105,13 @@ public class MParamArg extends Macro{
         return sb0.toString();
     }
 
-=======
-
-        internalsInitializer.setParamArg(this);
-    }
-
-   @Override
-    public String build(){
-
-        BuildState buildState = this.build_state;
-
-        if(buildState == null){
-            buildState = new BuildState();
-        }
-        else if(buildState.getExpansion() == null){
-            throw ObjectMacroException.cyclicReference("ParamArg");
-        }
-        else{
-            return buildState.getExpansion();
-        }
-        this.build_state = buildState;
-
-        
-
-        
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("p");
-        sb0.append(buildName());
-
-        buildState.setExpansion(sb0.toString());
-        return sb0.toString();
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

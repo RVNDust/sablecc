@@ -5,7 +5,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 import java.util.*;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MSuperMacro {
 
   private final List<Object> ePackageDeclaration = new LinkedList<Object>();
@@ -39,8 +38,6 @@ public class MSuperMacro {
     for(Object oImportJavaUtil : this.eImportJavaUtil) {
       sb.append(oImportJavaUtil.toString());
 =======
-=======
->>>>>>> object-macro2.1
 public class MSuperMacro extends Macro{
 
     private final List<Macro> list_PackageDeclaration;
@@ -123,7 +120,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 }
 });
         }
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
 <<<<<<< HEAD
@@ -237,10 +233,6 @@ void setPackageDeclaration(MPackageDeclaration mPackageDeclaration){
 
 <<<<<<< HEAD
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     private void initPackageDeclarationDirectives(){
         StringBuilder sb0 = new StringBuilder();
         sb0.append(LINE_SEPARATOR);
@@ -344,12 +336,8 @@ this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

@@ -45,7 +45,6 @@ public class GlobalIndex {
         if (firstMacro != null) {
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
             throw CompilerException.duplicateDeclaration(duplicateDeclaration,
                     firstMacro.getNameDeclaration());
 =======
@@ -57,10 +56,6 @@ public class GlobalIndex {
             throw CompilerException.duplicateDeclaration(duplicateDeclaration,
                     firstMacro.getNameDeclaration());
 >>>>>>> Clean up code, add comments
-=======
-            throw CompilerException.duplicateDeclaration(duplicateDeclaration,
-                    firstMacro.getNameDeclaration());
->>>>>>> object-macro2.1
         }
 
         Macro macro = new Macro(this, declaration);
@@ -80,7 +75,6 @@ public class GlobalIndex {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         return this.macroMap.get(identifier.getText());
 =======
         String name = identifier.getText();
@@ -90,9 +84,6 @@ public class GlobalIndex {
 =======
         return this.macroMap.get(identifier.getText());
 >>>>>>> Clean up code, add comments
-=======
-        return this.macroMap.get(identifier.getText());
->>>>>>> object-macro2.1
     }
 
     public Macro getMacro(
@@ -105,14 +96,11 @@ public class GlobalIndex {
         Macro macro = getMacroOrNull(identifier);
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
 >>>>>>> Cleanup some code
-=======
->>>>>>> object-macro2.1
         if (macro == null) {
             throw CompilerException.unknownMacro(identifier);
         }
@@ -121,7 +109,6 @@ public class GlobalIndex {
 
     }
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -159,9 +146,4 @@ public class GlobalIndex {
 >>>>>>> ObjectMacro2 syntaxic/lexical/semantic analysis
 =======
 >>>>>>> Add cyclic semantic verification using component finder and progeny
-=======
-    public Set<Macro> getAllMacros() {
-        return this.allMacros;
-    }
->>>>>>> object-macro2.1
 }

@@ -46,7 +46,6 @@ public class UtilsGenerationWalker
         MContext mContext = new MContext();
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         MParameterNull mParameterNull = new MParameterNull();
         MIncorrectType mIncorrectType = new MIncorrectType();
         MObjectMacroErrorHead mObjectMacroErrorHead = new MObjectMacroErrorHead();
@@ -57,8 +56,6 @@ public class UtilsGenerationWalker
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
-=======
->>>>>>> object-macro2.1
         MExParameterNull mParameterNull = new MExParameterNull();
         MExIncorrectType mIncorrectType = new MExIncorrectType();
         MExObjectMacroErrorHead mObjectMacroErrorHead = new MExObjectMacroErrorHead();
@@ -66,7 +63,6 @@ public class UtilsGenerationWalker
         MExCyclicReference mCyclicReference = new MExCyclicReference();
         MExCannotModify mCannotModify = new MExCannotModify();
         MExObjectMacroException mObjectMacroException = new MExObjectMacroException();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
         MClassInternalValue mClassInternalValue = new MClassInternalValue();
         MClassBuildState mClassBuildState = new MClassBuildState();
@@ -85,10 +81,6 @@ public class UtilsGenerationWalker
 >>>>>>> Add structure which contains list of macros and the context associated
 =======
 >>>>>>> Generate class BuildState.java
-=======
-        MClassInternalValue mClassInternalValue = new MClassInternalValue();
-        MClassBuildState mClassBuildState = new MClassBuildState();
->>>>>>> object-macro2.1
 
         MSuperDirective mSuperDirective = new MSuperDirective();
         MClassAfterLast mClassAfterLast = new MClassAfterLast();
@@ -98,7 +90,6 @@ public class UtilsGenerationWalker
 
         if(!this.ir.getDestinationPackage().equals("")){
             String destinationPackage = this.ir.getDestinationPackage();
-<<<<<<< HEAD
 <<<<<<< HEAD
             mContext.newPackageDeclaration(destinationPackage);
             mIncorrectType.newPackageDeclaration(destinationPackage);
@@ -135,8 +126,6 @@ public class UtilsGenerationWalker
             mClassBuildState.newPackageDeclaration(destinationPackage);
 >>>>>>> Generate class BuildState.java
 =======
-=======
->>>>>>> object-macro2.1
             MPackageDeclaration mPackageDeclaration = new MPackageDeclaration(destinationPackage);
             mContext.addPackageDeclaration(mPackageDeclaration);
             mIncorrectType.addPackageDeclaration(mPackageDeclaration);
@@ -153,10 +142,7 @@ public class UtilsGenerationWalker
             mClassNone.addPackageDeclaration(mPackageDeclaration);
             mClassSeparator.addPackageDeclaration(mPackageDeclaration);
             mClassBuildState.addPackageDeclaration(mPackageDeclaration);
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
-=======
->>>>>>> object-macro2.1
         }
 
         GenerationUtils.writeFile(this.packageDirectory,"Context.java", mContext.build());
@@ -168,7 +154,6 @@ public class UtilsGenerationWalker
         GenerationUtils.writeFile(this.packageDirectory,"MCyclicReference.java", mCyclicReference.build());
         GenerationUtils.writeFile(this.packageDirectory,"MCannotModify.java", mCannotModify.build());
         GenerationUtils
-<<<<<<< HEAD
 <<<<<<< HEAD
                 .writeFile(this.packageDirectory,"ObjectMacroException.java", mObjectMacroException.toString());
 <<<<<<< HEAD
@@ -200,8 +185,6 @@ public class UtilsGenerationWalker
         GenerationUtils.writeFile(this.packageDirectory, "BuildState.java", mClassBuildState.toString());
 >>>>>>> Generate class BuildState.java
 =======
-=======
->>>>>>> object-macro2.1
                 .writeFile(this.packageDirectory,"ObjectMacroException.java", mObjectMacroException.build());
         GenerationUtils.writeFile(this.packageDirectory, "InternalValue.java", mClassInternalValue.build());
         GenerationUtils.writeFile(this.packageDirectory, "Directive.java", mSuperDirective.build());
@@ -211,9 +194,6 @@ public class UtilsGenerationWalker
         GenerationUtils.writeFile(this.packageDirectory, "DSeparator.java", mClassSeparator.build());
 
         GenerationUtils.writeFile(this.packageDirectory, "BuildState.java", mClassBuildState.build());
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
-=======
->>>>>>> object-macro2.1
     }
 }

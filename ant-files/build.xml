@@ -176,11 +176,27 @@
 
         </jar>
 
+<<<<<<< HEAD
         <jar destfile="${lib.dir}/objectmacro-back.jar"
              manifest="${manifest.dir}/OBJECTMACRO-BACK.MF"
              index="true"
              compress="true"
              level="9">
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <jar destfile="${lib.dir}/objectmacro-back.jar"
+=======
+    <jar destfile="${lib.dir}/objectmacro-BACK.jar"
+>>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
+=======
+    <jar destfile="${lib.dir}/objectmacro-back.jar"
+>>>>>>> ant build generate now objectmacro-back
+         manifest="${manifest.dir}/OBJECTMACRO-BACK.MF"
+         index="true"
+         compress="true"
+         level="9">
+>>>>>>> parent of e03aa12... Merge branch 'object-macro2.1'
 
             <fileset dir="${classes.dir}" excludes="org/sablecc/sablecc/**" >
                 <exclude name="org/sablecc/objectmacro/launcher/ObjectMacro.java"/>

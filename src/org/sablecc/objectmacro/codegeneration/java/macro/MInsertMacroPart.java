@@ -5,7 +5,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 import java.util.*;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MInsertMacroPart {
 
   private final String pName;
@@ -113,8 +112,6 @@ public class MInsertMacroPart {
   }
 
 =======
-=======
->>>>>>> object-macro2.1
 public class MInsertMacroPart extends Macro{
 
     private String field_Name;
@@ -442,12 +439,8 @@ initListSetInternalInternals(null);
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

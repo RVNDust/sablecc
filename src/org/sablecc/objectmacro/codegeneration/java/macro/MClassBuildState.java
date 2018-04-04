@@ -4,7 +4,6 @@ package org.sablecc.objectmacro.codegeneration.java.macro;
 
 import java.util.*;
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 public class MClassBuildState {
 
@@ -29,8 +28,6 @@ public class MClassBuildState {
     for(Object oPackageDeclaration : this.ePackageDeclaration) {
       sb.append(oPackageDeclaration.toString());
 =======
-=======
->>>>>>> object-macro2.1
 
 public class MClassBuildState extends Macro{
 
@@ -98,7 +95,6 @@ public class MClassBuildState extends Macro{
         }
 
         return sb.toString();
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
     }
     sb.append(System.getProperty("line.separator"));
@@ -132,10 +128,6 @@ public class MClassBuildState extends Macro{
 
 <<<<<<< HEAD
 =======
-=======
-    }
-
->>>>>>> object-macro2.1
     private InternalValue getPackageDeclaration(){
         return this.PackageDeclarationValue;
     }
@@ -231,12 +223,8 @@ this.PackageDeclarationValue.setBeforeFirst(this.PackageDeclarationBeforeFirst);
         return build();
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

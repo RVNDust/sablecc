@@ -35,7 +35,6 @@ Macro semicolon_separator
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         x : empty_macro;
 =======
         x : empty_macro, separator="; ";
@@ -49,9 +48,6 @@ Macro semicolon_separator
 =======
         x : empty_macro;
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-        x : empty_macro;
->>>>>>> object-macro2.1
 {Begin}
 Le corps de C : {x}
 {End}
@@ -64,7 +60,6 @@ Macro a
         y : b(z), separator="\n";
         z : c("first argument of c in a", x);
 {Begin}
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -88,15 +83,10 @@ Y : {y}
 ============= A ===============
 Y : {y}
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-============= A ===============
-Y : {y}
->>>>>>> object-macro2.1
 {End}
 
 Macro b
     Param
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -154,16 +144,6 @@ S : {s}
 P : {p}
 S : {s}
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-        o : String;
-        s : c(o, o);
-    Internal
-        p : c;
-{Begin}
-============== B ===============
-P : {p}
-S : {s}
->>>>>>> object-macro2.1
 {End}
 
 Macro c
@@ -172,16 +152,12 @@ Macro c
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
         q : String;
         r : String;
 {Begin}
 =============== C ==============
 Q : {q}
 R : {r}
-<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         y : String;
@@ -217,8 +193,6 @@ R : {r}
 Q : {q}
 R : {r}
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
 {End}
 
 Macro d
@@ -236,11 +210,8 @@ Macro e
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
         s : String;
         t : String;
         u : String;
@@ -256,15 +227,11 @@ Macro f
     Param
         x : g(y);
 <<<<<<< HEAD
-<<<<<<< HEAD
         y : h;
 <<<<<<< HEAD
 =======
         y : h("a");
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-        y : h;
->>>>>>> object-macro2.1
 {Begin}
 {y} {x}
 {End}
@@ -280,7 +247,6 @@ Macro h
     Param
         lala : f;
 <<<<<<< HEAD
-<<<<<<< HEAD
 {Begin}
 =======
     Internal
@@ -288,9 +254,6 @@ Macro h
 {Begin}
 {la}
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-{Begin}
->>>>>>> object-macro2.1
 {lala}
 {End}
 
@@ -300,7 +263,6 @@ Macro i
     Param
         y : k("lala");
         z : k("On est dans i"), j(y);
-<<<<<<< HEAD
 <<<<<<< HEAD
 {Begin}
 =======
@@ -395,17 +357,11 @@ Macro i
 >>>>>>> Changement Objectmacro-back
 {Begin}
 {x}
-=======
-{Begin}
->>>>>>> object-macro2.1
 {y}
 {z}
 {End}
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> object-macro2.1
 Macro j
     Internal
         y : k;
@@ -421,12 +377,9 @@ Macro k
 {End}
 
 
-<<<<<<< HEAD
 >>>>>>> Remove arguments in macro references in internal declaration
 =======
 #{Insert: c("y2 ", "")}
 >>>>>>> Changement Objectmacro-back
 =======
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1

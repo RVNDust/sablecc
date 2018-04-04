@@ -3,7 +3,6 @@
 package org.sablecc.objectmacro.codegeneration.java.macro;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 public class MEolPart {
 
   private final String pIndexBuilder;
@@ -37,12 +36,6 @@ import java.util.*;
 
 public class MEolPart extends Macro{
 
-=======
-import java.util.*;
-
-public class MEolPart extends Macro{
-
->>>>>>> object-macro2.1
     private String field_IndexBuilder;
 
 
@@ -64,7 +57,6 @@ public class MEolPart extends Macro{
     private String buildIndexBuilder(){
 
         return this.field_IndexBuilder;
-<<<<<<< HEAD
     }
 
     private String getIndexBuilder(){
@@ -72,20 +64,10 @@ public class MEolPart extends Macro{
         return this.field_IndexBuilder;
     }
 
-=======
-    }
-
-    private String getIndexBuilder(){
-
-        return this.field_IndexBuilder;
-    }
-
->>>>>>> object-macro2.1
 
     @Override
     void apply(
             InternalsInitializer internalsInitializer){
-<<<<<<< HEAD
 
         internalsInitializer.setEolPart(this);
     }
@@ -120,53 +102,13 @@ public class MEolPart extends Macro{
         return sb0.toString();
     }
 
-=======
-
-        internalsInitializer.setEolPart(this);
-    }
-
-   @Override
-    public String build(){
-
-        BuildState buildState = this.build_state;
-
-        if(buildState == null){
-            buildState = new BuildState();
-        }
-        else if(buildState.getExpansion() == null){
-            throw ObjectMacroException.cyclicReference("EolPart");
-        }
-        else{
-            return buildState.getExpansion();
-        }
-        this.build_state = buildState;
-
-        
-
-        
-
-        StringBuilder sb0 = new StringBuilder();
-
-        sb0.append("        sb");
-        sb0.append(buildIndexBuilder());
-        sb0.append(".append(LINE_SEPARATOR);");
-
-        buildState.setExpansion(sb0.toString());
-        return sb0.toString();
-    }
-
->>>>>>> object-macro2.1
     @Override
     String build(Context context) {
         return build();
     }
-<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Mise à jour Visiteur - Build OK
 }
 =======
 }
 >>>>>>> Correctifs objectmacro2-java(back)
-=======
-}
->>>>>>> object-macro2.1

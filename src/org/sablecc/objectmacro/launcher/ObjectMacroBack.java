@@ -102,7 +102,6 @@ public class ObjectMacroBack {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         // default target is java-constructor
         String targetLanguage = "java-constructor";
 =======
@@ -113,10 +112,6 @@ public class ObjectMacroBack {
         // default target is java-constructor
         String targetLanguage = "java-constructor";
 >>>>>>> Clean up code, add comments
-=======
-        // default target is java-constructor
-        String targetLanguage = "java-constructor";
->>>>>>> object-macro2.1
 
         // default destination directory is current working directory
         File destinationDirectory = new File(System.getProperty("user.dir"));
@@ -143,7 +138,6 @@ public class ObjectMacroBack {
                 System.out.println("Available targets:");
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
                 System.out.println(" java-constructor (default)");
 =======
                 System.out.println(" java (default)");
@@ -154,9 +148,6 @@ public class ObjectMacroBack {
 =======
                 System.out.println(" java-constructor (default)");
 >>>>>>> Clean up code, add comments
-=======
-                System.out.println(" java-constructor (default)");
->>>>>>> object-macro2.1
                 return;
 
             case TARGET:
@@ -202,7 +193,6 @@ public class ObjectMacroBack {
             case VERSION:
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
                 System.out.println("ObjectMacro-back, part of SableCC version "
 =======
                 System.out.println("ObjectMacroBack, part of SableCC version "
@@ -210,14 +200,10 @@ public class ObjectMacroBack {
 =======
                 System.out.println("ObjectMacro-back, part of SableCC version "
 >>>>>>> Invalid suffix intermediate
-=======
-                System.out.println("ObjectMacro-back, part of SableCC version "
->>>>>>> object-macro2.1
                         + Version.VERSION);
                 return;
 
             case HELP:
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                 System.out.println("Usage: objectmacro backend "
@@ -233,10 +219,6 @@ public class ObjectMacroBack {
 >>>>>>> Invalid suffix intermediate
                         + Option.getShortHelpMessage() + " file.intermediate");
 >>>>>>> Clean up code, add comments
-=======
-                System.out.println("Usage: objectmacro backend "
-                        + Option.getShortHelpMessage() + " file.intermediate");
->>>>>>> object-macro2.1
                 System.out.println("Options:");
                 System.out.println(Option.getLongHelpMessage());
                 return;
@@ -264,7 +246,6 @@ public class ObjectMacroBack {
             System.out.println("Usage: objectmacro "
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
                     + Option.getShortHelpMessage() + " file.intermediate");
 =======
                     + Option.getShortHelpMessage() + " file.objectmacro");
@@ -272,9 +253,6 @@ public class ObjectMacroBack {
 =======
                     + Option.getShortHelpMessage() + " file.intermediate");
 >>>>>>> Clean up code, add comments
-=======
-                    + Option.getShortHelpMessage() + " file.intermediate");
->>>>>>> object-macro2.1
             return;
         }
         else if (argumentCollection.getTextArguments().size() > 1) {
@@ -282,7 +260,6 @@ public class ObjectMacroBack {
         }
 
         // check target
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         if (!(targetLanguage.equals("java-constructor"))) {
@@ -294,9 +271,6 @@ public class ObjectMacroBack {
 =======
         if (!(targetLanguage.equals("java-constructor"))) {
 >>>>>>> Clean up code, add comments
-=======
-        if (!(targetLanguage.equals("java-constructor"))) {
->>>>>>> object-macro2.1
             throw CompilerException.unknownTarget(targetLanguage);
         }
 
@@ -308,7 +282,6 @@ public class ObjectMacroBack {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         if (!textArgument.getText().endsWith(".intermediate")) {
             throw CompilerException.invalidIntermediateSuffix(textArgument.getText());
         }
@@ -316,16 +289,11 @@ public class ObjectMacroBack {
 =======
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
-=======
->>>>>>> object-macro2.1
         if (!textArgument.getText().endsWith(".intermediate")) {
             throw CompilerException.invalidIntermediateSuffix(textArgument.getText());
         }
 
-<<<<<<< HEAD
 >>>>>>> Clean up code, add comments
-=======
->>>>>>> object-macro2.1
         if (!macroFile.exists()) {
             throw CompilerException.missingMacroFile(textArgument.getText());
         }
@@ -390,11 +358,8 @@ public class ObjectMacroBack {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Clean up code, add comments
-=======
->>>>>>> object-macro2.1
         if (targetLanguage.equals("java-constructor")) {
             codeGenerator = new JavaCodeGenerator(ir);
         }
@@ -419,7 +384,6 @@ public class ObjectMacroBack {
 
             codeGenerator.generateCode();
         }
-<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 //        if (targetLanguage.equals("java")) {
@@ -458,7 +422,5 @@ public class ObjectMacroBack {
 >>>>>>> Java code generation Objectmacro 2 using the lib ObjectMacro 1
 =======
 >>>>>>> Clean up code, add comments
-=======
->>>>>>> object-macro2.1
     }
 }

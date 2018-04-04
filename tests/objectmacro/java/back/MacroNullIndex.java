@@ -22,7 +22,6 @@ import back.macro.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,11 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
-import java.util.ArrayList;
-import java.util.List;
-
->>>>>>> object-macro2.1
 public class MacroNullIndex {
 
     public static void main(
@@ -55,17 +49,13 @@ public class MacroNullIndex {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Update tests to be adapted to the lazy initialization
-=======
->>>>>>> object-macro2.1
         MA ma = new MA("First argument of MA");
         List<MB> macros = new ArrayList<>();
         macros.add(new MB("First argument in MB0"));
         macros.add(null);
         macros.add(new MB("First argument in MB2"));
-<<<<<<< HEAD
 <<<<<<< HEAD
 
         try{
@@ -115,18 +105,10 @@ public class MacroNullIndex {
             MA ma = new MA("First argument of MA", macros, macros1);
 >>>>>>> Changement Objectmacro-back
 =======
-=======
-
-        try{
-            MC mc = new MC();
-            ma.addZ(mc);
-            ma.addZ(mc);
->>>>>>> object-macro2.1
             for(MB mb : macros){
                 ma.addY(mb);
             }
 
-<<<<<<< HEAD
 >>>>>>> Removed add all function to keep only the static overload
 =======
         MA ma = new MA("First argument of MA");
@@ -141,8 +123,6 @@ public class MacroNullIndex {
             ma.addZ(mc);
             ma.addAllY(macros);
 >>>>>>> Revert "Changement Objectmacro-back"
-=======
->>>>>>> object-macro2.1
             ma.build();
             System.err.println("It should throw an exception here");
             System.exit(1);
