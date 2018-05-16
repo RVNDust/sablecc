@@ -458,9 +458,12 @@ public class ObjectMacro {
                 AEscapeMacroBodyPart escapeMacroBodyPart
                         = (AEscapeMacroBodyPart) bodyPart;
 
-                if (escapeMacroBodyPart.getTextEscape().getText()
-                        .equals("{{")) {
+                String textEscape = escapeMacroBodyPart.getTextEscape().getText();
+                if (textEscape.equals("{{")) {
                     mMacro.newStringPart("{");
+                }
+                else if(textEscape.equals("{#")){
+                    mMacro.newStringPart("#");
                 }
                 else {
                     throw new InternalException("case unhandled");
