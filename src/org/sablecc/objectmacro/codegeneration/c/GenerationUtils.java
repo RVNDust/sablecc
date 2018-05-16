@@ -15,17 +15,17 @@
  * limitations under the License.
  */
 
-package org.sablecc.objectmacro.codegeneration.java;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.LinkedList;
+package org.sablecc.objectmacro.codegeneration.c;
 
 import org.sablecc.exception.InternalException;
 import org.sablecc.objectmacro.exception.CompilerException;
 import org.sablecc.objectmacro.intermediate.syntax3.node.TString;
 import org.sablecc.objectmacro.util.Utils;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedList;
 
 class GenerationUtils {
 
