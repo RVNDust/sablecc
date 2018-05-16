@@ -28,6 +28,7 @@ import java.io.StringWriter;
 import org.sablecc.exception.InternalException;
 import org.sablecc.objectmacro.codegeneration.CodeGenerator;
 import org.sablecc.objectmacro.codegeneration.IntermediateRepresentation;
+import org.sablecc.objectmacro.codegeneration.c.CCodeGenerator;
 import org.sablecc.objectmacro.codegeneration.java.JavaCodeGenerator;
 import org.sablecc.objectmacro.errormessage.MInternalError;
 import org.sablecc.objectmacro.errormessage.MLexicalError;
@@ -139,6 +140,7 @@ public class ObjectMacroBack {
             case LIST_TARGETS:
                 System.out.println("Available targets:");
                 System.out.println(" java-constructor (default)");
+                System.out.println(" c ");
                 return;
 
             case TARGET:
@@ -222,7 +224,7 @@ public class ObjectMacroBack {
         }
 
         // check target
-        if (!targetLanguage.equals("java-constructor")) {
+        if (!targetLanguage.equals("java-constructor") && !targetLanguage.equals("c")) {
             throw CompilerException.unknownTarget(targetLanguage);
         }
 
@@ -297,11 +299,15 @@ public class ObjectMacroBack {
                 ast.getPIntermediateRepresentation(), macroFile,
                 destinationDirectory, destinationPackage);
 
-        CodeGenerator codeGenerator = new JavaCodeGenerator(ir);
-        codeGenerator.generateCode();
+//        CodeGenerator codeGenerator = new JavaCodeGenerator(ir);
+        CodeGenerator codeGenerator = null;
+//        codeGenerator.generateCode();
 
         if (targetLanguage.equals("java-constructor")) {
             codeGenerator = new JavaCodeGenerator(ir);
+        }
+        else if (targetLanguage.equals("c")){
+            codeGenerator = new CCodeGenerator(ir);
         }
         else {
             throw new InternalException("unhandled case");
