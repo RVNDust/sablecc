@@ -46,7 +46,36 @@ typedef struct Node
     struct Node *next;
 } Node;
 
+Node* new_Node();
+void free_Node(struct Node*);
+
 {#endif //LINKEDLISTNODE_H
+{End}
+
+#========== linked_list_node_c ==========
+Macro linked_list_node_c
+{Body}
+{Insert: header}
+
+{#include <stdio.h>
+{#include <stdlib.h>
+
+{#include "LinkedListNode.h"
+
+Node* new_Node()
+{
+    Node* node = malloc(sizeof(Node));
+    node->data = NULL;
+    node->next = NULL;
+    return node;
+}
+
+void free_Node(Node* This)
+{
+    This->data = NULL;
+    This->next = NULL;
+    free(This);
+}
 {End}
 
 #========== linked_list_h ==========
@@ -57,26 +86,39 @@ Macro linked_list_h
 {#ifndef LINKEDLIST_H
 {#define LINKEDLIST_H
 
-extern struct LinkedListVT VT_LinkedList;
+extern struct LinkedList_VT VT_LinkedList;
 extern void *HT_LinkedList[];
 
 typedef struct LinkedList
 {
-    struct LinkedListVT (*vt)
+    struct LinkedListVT (*vt);
     struct Node *nodes;
+    unsigned int size;
 } LinkedList;
 
-typedef struct LinkedListVT
+typedef struct LinkedList_VT
 {
     int hl;
     void* (*ht)[];
-    void (*push)(struct LinkedList*, void *new_data, size_t data_size);
-} LinkedListVT;
+    void (*addFirst)(struct LinkedList*, void *new_data, size_t data_size);
+    void (*addLast)(struct LinkedList*, void *new_data, size_t data_size);
+    void (*addAtIndex)(struct LinkedList*, void *new_data, size_t data_size, unsigned int index);
+    void (*removeFirst)(struct LinkedList*);
+    void (*removeLast)(struct LinkedList*);
+    void (*removeAtIndex)(struct LinkedList*, unsigned int index);
+    char* (*toString)(struct LinkedList*);
+} LinkedList_VT;
 
 LinkedList* new_LinkedList();
 void free_LinkedList(struct LinkedList*);
 
-void LinkedList_push(struct LinkedList*, void *new_data, size_t data_size);
+void LinkedList_addFirst(struct LinkedList*, void *new_data, size_t data_size);
+void LinkedList_addLast(struct LinkedList*, void *new_data, size_t data_size);
+void LinkedList_addAtIndex(struct LinkedList*, void *new_data, size_t data_size, unsigned int index);
+void LinkedList_removeFirst(struct LinkedList*);
+void LinkedList_removeLast(struct LinkedList*);
+void LinkedList_removeAtIndex(struct LinkedList*, unsigned int index);
+char* LinkedList_toString(struct LinkedList*);
 
 {#endif //LINKEDLIST_H
 {End}
@@ -88,11 +130,12 @@ Macro linked_list_c
 
 {#include<stdlib.h>
 {#include<stdio.h>
+{#include<string.h>
 
 {#include "LinkedListNode.h"
 {#include "LinkedList.h"
 
-struct LinkedListVT VT_LinkedList={0, &HT_LinkedList, &LinkedList_push};
+struct LinkedList_VT VT_LinkedList={0, &HT_LinkedList, &LinkedList_addFirst, &LinkedList_addLast, &LinkedList_addAtIndex, &LinkedList_removeFirst, &LinkedList_removeLast, &LinkedList_removeAtIndex, &LinkedList_toString};
 void* HT_LinkedList[] = {&VT_LinkedList};
 
 LinkedList* new_LinkedList()
@@ -100,6 +143,8 @@ LinkedList* new_LinkedList()
     LinkedList* linkedList = malloc(sizeof(LinkedList));
     linkedList->vt = &VT_LinkedList;
     linkedList->nodes = NULL;
+    linkedList->size = 0;
+    return linkedList;
 }
 
 void free_LinkedList(LinkedList* This)
@@ -107,25 +152,239 @@ void free_LinkedList(LinkedList* This)
     //TODO
 }
 
-void LinkedList_push(LinkedList* This, void *new_data, size_t data_size)
+void LinkedList_addFirst(LinkedList* This, void *new_data, size_t data_size)
 {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    new_node->data = malloc(data_size);
+    This->vt->addAtIndex(This, new_data, data_size, 0);
+}
 
-    if(This->nodes != NULL)
+void LinkedList_addLast(LinkedList* This, void *new_data, size_t data_size)
+{
+    This->vt->addAtIndex(This, new_data, data_size, This->size-1);
+}
+
+void LinkedList_addAtIndex(LinkedList* This, void *new_data, size_t data_size, unsigned int index)
+{
+    if(index <= This->size)
     {
-        new_node->next = This->nodes;
+        struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+        new_node->data = malloc(data_size);
+        new_node->data = new_data;
+
+        if(This->nodes != NULL)
+        {
+            Node* prevNode = NULL;
+            Node* currentNode = This->nodes;
+
+            if(index==0)
+            {
+                new_node->next = currentNode;
+                This->nodes = new_node;
+            }
+            else
+            {
+                for(int i = 0; i < index; i++)
+                {
+                    prevNode = currentNode;
+                    currentNode = currentNode->next;
+                }
+
+                prevNode->next = new_node;
+                new_node->next = currentNode;
+            }
+        }
+        else
+        {
+            This->nodes = new_node;
+        }
+
+        This->size = This->size + 1;
+    }
+    else
+    {
+        exit(1);
+    }
+}
+
+void LinkedList_removeFirst(LinkedList* This)
+{
+    This->vt->removeAtIndex(This, 0);
+}
+
+void LinkedList_removeLast(LinkedList* This)
+{
+    This->vt->removeAtIndex(This, This->size-1);
+}
+
+void LinkedList_removeAtIndex(LinkedList* This, unsigned int index)
+{
+    if(index <= This->size)
+    {
+        if(This->nodes != NULL)
+        {
+            Node* prevNode = NULL;
+            Node* currentNode = This->nodes;
+            if(This->size == 1)
+            {
+                This->nodes = NULL;
+            }
+            else
+            {
+                for(int i = 0; i < index; i++)
+                {
+                    prevNode = currentNode;
+                    currentNode = currentNode->next;
+                }
+
+                prevNode->next = currentNode->next;
+            }
+            free_Node(currentNode);
+            This->size = This->size - 1;
+        }
+    }
+    else
+    {
+        exit(1);
+    }
+}
+
+char* LinkedList_toString(LinkedList* This)
+{
+    Node *currentNode = This->nodes;
+    int currentTextSize = 1;
+
+    if(currentNode != NULL)
+    {
+        void *current_data = NULL;
+        for(int i = 0; i < This->size; i++)
+        {
+            current_data = currentNode->data;
+            //int textSize = strlen((char*)current_data);
+            //int textSize = sizeof(current_data);
+            currentTextSize = currentTextSize + textSize;
+
+            currentNode = currentNode->next;
+        }
+
+        char *currentText = calloc(currentTextSize, sizeof(char));
+        strcpy(currentText, "");
+        //char *currentText = "";
+
+        currentNode = This->nodes;
+
+        for(int i = 0; i < This->size; i++)
+        {
+            current_data = currentNode->data;
+            strcat(currentText, (const char*)current_data);
+            currentNode = currentNode->next;
+        }
+
+        return currentText;
     }
 
-    // Copy contents of new_data to newly allocated memory.
-    // Assumption: char takes 1 byte
-    int i;
-    for (i=0; i<data_size; i++)
-    {
-        *(char *)(new_node->data + i) = *(char *)(new_data + i);
-    }
+    return "";
+}
 
-    This->nodes = new_node;
+{End}
+
+#========== string_builder_h ==========
+Macro string_builder_h
+{Body}
+{Insert: header}
+
+{#ifndef STRINGBUILDER_H
+{#define STRINGBUILDER_H
+
+{#include <stddef.h>
+{#include <stdbool.h>
+
+extern struct Stringbuilder_VT VT_Stringbuilder;
+extern void *HT_Stringbuilder[];
+
+typedef struct Stringbuilder
+{
+    struct Stringbuilder_VT (*vt);
+    char* mem;
+    size_t count;
+    size_t cap;
+} Stringbuilder;
+
+typedef struct Stringbuilder_VT
+{
+    int hl;
+    void* (*ht)[];
+    bool (*append)(struct Stringbuilder*, char*);
+    char* (*toString)(struct Stringbuilder*);
+} Stringbuilder_VT;
+
+Stringbuilder* new_Stringbuilder(size_t init_cap);
+void free_Stringbuilder(struct Stringbuilder*);
+
+bool Stringbuilder_append(struct Stringbuilder*, char*);
+char* Stringbuilder_toString(struct Stringbuilder*);
+
+{#endif //STRINGBUILDER_H
+{End}
+
+
+#========== string_builder_c ==========
+Macro string_builder_c
+{Body}
+{Insert: header}
+
+{#include<stdlib.h>
+{#include<stdio.h>
+
+{#include "Stringbuilder.h"
+
+struct Stringbuilder_VT VT_Stringbuilder={0, &HT_Stringbuilder, &Stringbuilder_append, &Stringbuilder_toString};
+void* HT_Stringbuilder[] = {&VT_Stringbuilder};
+
+Stringbuilder* new_Stringbuilder(size_t init_cap)
+{
+    Stringbuilder* ret = malloc(sizeof(struct Stringbuilder));
+    if (!ret) return NULL;
+    ret->mem = calloc(init_cap, sizeof(char));
+    if (!ret->mem) return NULL;
+    ret->cap = init_cap;
+    ret->count = 0;
+    return ret;
+}
+
+void free_Stringbuilder(Stringbuilder* This)
+{
+    free(sb->mem);
+    free(sb);
+}
+
+{#define LOAD_FACTOR 2
+bool Stringbuilder_append(Stringbuilder *This, char* string)
+{
+    bool size_ok = true;
+    int len = strlen(string);
+    for(int i = 0; i < len; i++)
+    {
+        size_ok = Stringbuilder_appendChar(to, string[i]);
+    }
+    return size_ok;
+}
+
+bool Stringbuilder_appendChar(Stringbuilder *This, char c) {
+    This->mem[This->count] = c;
+    ++This->count;
+    if (This->count == This->cap) {
+        char *new_mem = realloc(This->mem, This->cap * LOAD_FACTOR);
+        if (!new_mem) {
+            return false;
+        }
+        memset(new_mem + This->cap, 0, This->cap);
+        This->mem = new_mem;
+        This->cap *= LOAD_FACTOR;
+    }
+    return true;
+}
+
+char* Stringbuilder_toString(Stringbuilder *This) {
+    return This->mem;
 }
 {End}
 
@@ -148,7 +407,7 @@ extern char* LINE_SEPARATOR = "";
 typedef struct Macro
 {
     struct Macro_VT (*vt);
-};
+} Macro;
 
 typedef struct Macro_VT
 {
@@ -156,7 +415,7 @@ typedef struct Macro_VT
     void* (*ht)[];
     char* (*build)(struct Macro*);
     void (*apply)(struct Macro*);
-};
+} Macro_VT;
 
 Macro* new_Macro();
 void free_Macro(Macro*);
@@ -187,9 +446,9 @@ Macro* new_Macro()
     return macro;
 }
 
-void free_macro(Macro* This)
+void free_Macro(Macro* This)
 {
-    free_Macro(This);
+    free(This);
 }
 
 char* Macro_build(Macro* This)
@@ -208,24 +467,24 @@ Macro macro_h
     Param
         macro_name : String;
         fields : field_string_declaration, separator="\n";
-        methods : getter_string_vt_h(macro_name), separator="\n";
-        functions : getter_string_h(macro_name), separator="\n";
+        methods : getter_string_vt_h(macro_name), setter_string_vt_h(macro_name), separator="\n";
+        functions : getter_string_h(macro_name), setter_string_h(macro_name), separator="\n";
 {Body}
-{#ifndef MACRO_H
-{#define MACRO_H
+{#ifndef {macro_name}_H
+{#define {macro_name}_H
 
-extern struct Macro_VT VT_Macro;
-extern void *HT_Macro;
+extern struct {macro_name}_VT VT_{macro_name};
+extern void *HT_{macro_name};
 
-typedef struct Macro
+typedef struct {macro_name}
 {
-    struct Macro_VT (*vt);
+    struct {macro_name}_VT (*vt);
 {Indent: "\t"}
 {fields}
 {End}
-} Macro;
+} {macro_name};
 
-typedef struct Macro_VT
+typedef struct {macro_name}_VT
 {
     int hl;
     void* (*ht)[];
@@ -236,10 +495,73 @@ typedef struct Macro_VT
 
 {macro_name}* new_{macro_name}();
 void free_{macro_name}(struct {macro_name}*);
+char* {macro_name}_build({macro_name}* This);
+void {macro_name}_apply({macro_name}* This);
 
 {functions}
 
-{#endif MACRO_H
+{#endif {macro_name}_H
+{End}
+
+#========== macro_c ==========
+Macro macro_c
+    Param
+        macro_name : String;
+        field_initializers : field_string_initializer(macro_name), separator="\n";
+        function_names :  function_refs(macro_name) ,before_first=" ,", separator=" ,";
+        functions : getter_string_c(macro_name), setter_string_c(macro_name), separator="\n";
+        macro_builder : macro_builder(macro_name);
+{Body}
+{Insert: header}
+
+{#include<stdlib.h>
+{#include<stdio.h>
+
+{#include "Macro.h"
+{#include "{macro_name}.h"
+
+struct {macro_name}_VT VT_{macro_name} = {0, &HT_{macro_name}, &{macro_name}_build, &{macro_name}_apply{function_names}};
+void* HT_{macro_name}[] = {&VT_{macro_name}};
+
+{macro_name}* new_{macro_name}()
+{
+    {macro_name}* macro = malloc(sizeof({macro_name}));
+    macro->vt = &VT_{macro_name};
+{Indent: "\t"}
+{field_initializers}
+{End}
+    return macro;
+}
+
+void free_{macro_name}({macro_name}* This)
+{
+    free(This);
+}
+
+{macro_builder}
+
+void {macro_name}_apply({macro_name}* This)
+{
+    exit(1);
+}
+
+{functions}
+{End}
+
+Macro macro_builder
+    Param
+        macro_body_parts : string_part, separator="\n";
+    Internal
+        macro_name : String;
+{Body}
+char* {macro_name}_build({macro_name}* This)
+{
+    Stringbuilder sb0 = new_Stringbuilder(5);
+{Indent: "\t"}
+{macro_body_parts}
+{End}
+    return sb0->vt->toString();
+}
 {End}
 
 #============================
@@ -261,7 +583,7 @@ Macro field_string_initializer
     Internal
         class_name : String;
 {Body}
-{class_name}->{field_name};
+{class_name}->{field_name} = "";
 {End}
 
 #============================
@@ -301,3 +623,66 @@ char* {class_name}_get{field_name}(struct {class_name} *This)
 }
 {End}
 
+#============================
+#========== Setter =======
+#============================
+
+#========== setter_string_vt_h ==========
+Macro setter_string_vt_h
+    Param
+        field_name : String;
+    Internal
+        class_name : String;
+{Body}
+void (*set{field_name})(struct {class_name}*, char* value);
+{End}
+
+#========== setter_string_h ==========
+Macro setter_string_h
+    Param
+        field_name : String;
+    Internal
+        class_name : String;
+{Body}
+void {class_name}_set{field_name}(struct {class_name}*, char* value);
+{End}
+
+#========== setter_string_c ==========
+Macro setter_string_c
+    Param
+        field_name : String;
+    Internal
+        class_name : String;
+{Body}
+void {class_name}_set{field_name}(struct {class_name} *This, char* value)
+{
+    This->{field_name} = value;
+}
+{End}
+
+#============================
+#========== Function =======
+#============================
+
+Macro function_refs
+    Param
+        function_type : String;
+        function_name : String;
+    Internal
+        macro_name : String;
+
+{Body}
+&{macro_name}_{function_type}{function_name}
+{End}
+
+#============================
+#========== Parts     =======
+#============================
+
+Macro string_part
+    Param
+        string : String;
+        index_builder : String;
+{Body}
+sb{index_builder}->vt->append("{string}");
+{End}

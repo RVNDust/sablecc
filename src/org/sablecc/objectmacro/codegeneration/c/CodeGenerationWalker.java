@@ -20,15 +20,11 @@ package org.sablecc.objectmacro.codegeneration.c;
 import org.sablecc.exception.InternalException;
 import org.sablecc.objectmacro.codegeneration.IntermediateRepresentation;
 import org.sablecc.objectmacro.codegeneration.c.macro.*;
-import org.sablecc.objectmacro.exception.CompilerException;
 import org.sablecc.objectmacro.intermediate.syntax3.analysis.DepthFirstAdapter;
 import org.sablecc.objectmacro.intermediate.syntax3.node.*;
-import org.sablecc.sablecc.codegeneration.java.macro.MNode;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 public class CodeGenerationWalker extends
         DepthFirstAdapter {
@@ -43,6 +39,17 @@ public class CodeGenerationWalker extends
     private MLinkedListH mLinkedListH;
     private MLinkedListC mLinkedListC;
     private MLinkedListNodeH mLinkedListNodeH;
+    private MLinkedListNodeC mLinkedListNodeC;
+
+    private MStringBuilderH mStringbuilderH;
+    private MStringBuilderC mStringbuilderC;
+
+    private MMacroH currentMacroH;
+    private MMacroC currentMacroC;
+    private String currentMacroName;
+
+    private String currentParamName;
+    private MMacroBuilder currentMacroBuilder;
 
     public CodeGenerationWalker(
             IntermediateRepresentation ir,
@@ -61,6 +68,10 @@ public class CodeGenerationWalker extends
         this.mLinkedListH = new MLinkedListH();
         this.mLinkedListC = new MLinkedListC();
         this.mLinkedListNodeH = new MLinkedListNodeH();
+        this.mLinkedListNodeC = new MLinkedListNodeC();
+
+        this.mStringbuilderH = new MStringBuilderH();
+        this.mStringbuilderC = new MStringBuilderC();
     }
 
     @Override
@@ -78,16 +89,34 @@ public class CodeGenerationWalker extends
                 this.mLinkedListC.build());
         GenerationUtils.writeFile(this.packageDirectory, "LinkedListNode.h",
                 this.mLinkedListNodeH.build());
+        GenerationUtils.writeFile(this.packageDirectory, "LinkedListNode.c",
+                this.mLinkedListNodeC.build());
+
+        GenerationUtils.writeFile(this.packageDirectory, "Stringbuilder.h",
+                this.mStringbuilderH.build());
+        GenerationUtils.writeFile(this.packageDirectory, "Stringbuilder.c",
+                this.mStringbuilderC.build());
     }
 
     @Override
     public void inAMacro(
             AMacro node) {
+        currentMacroName = GenerationUtils.buildNameCamelCase(node.getNames());
+
+        this.currentMacroH = new MMacroH(currentMacroName);
+        this.currentMacroC = new MMacroC(currentMacroName);
+
+        this.currentMacroBuilder = new MMacroBuilder();
+        this.currentMacroC.addMacroBuilder(this.currentMacroBuilder);
     }
 
     @Override
     public void outAMacro(
             AMacro node) {
+        GenerationUtils.writeFile(this.packageDirectory, currentMacroName+".h",
+                this.currentMacroH.build());
+        GenerationUtils.writeFile(this.packageDirectory, currentMacroName+".c",
+                this.currentMacroC.build());
 
     }
 
@@ -106,7 +135,23 @@ public class CodeGenerationWalker extends
     @Override
     public void caseAParam(
             AParam node) {
+        String paramName = this.currentParamName
+                = GenerationUtils.buildNameCamelCase(node.getNames());
 
+        if (node.getType() instanceof AStringType) {
+            //
+            this.currentMacroH.addFields(new MFieldStringDeclaration(paramName));
+            this.currentMacroH.addFunctions(new MGetterStringH(paramName));
+            this.currentMacroH.addFunctions(new MSetterStringH(paramName));
+            this.currentMacroH.addMethods(new MGetterStringVtH(paramName));
+            this.currentMacroH.addMethods(new MSetterStringVtH(paramName));
+
+            this.currentMacroC.addFieldInitializers(new MFieldStringInitializer(paramName));
+            this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
+            this.currentMacroC.addFunctionNames(new MFunctionRefs("set",paramName));
+            this.currentMacroC.addFunctions(new MGetterStringC(paramName));
+            this.currentMacroC.addFunctions(new MSetterStringC(paramName));
+        }
     }
 
     @Override
