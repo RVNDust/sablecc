@@ -139,7 +139,7 @@ public class CodeGenerationWalker extends
                 = GenerationUtils.buildNameCamelCase(node.getNames());
 
         if (node.getType() instanceof AStringType) {
-            //
+
             this.currentMacroH.addFields(new MFieldStringDeclaration(paramName));
             this.currentMacroH.addFunctions(new MGetterStringH(paramName));
             this.currentMacroH.addFunctions(new MSetterStringH(paramName));
@@ -151,6 +151,16 @@ public class CodeGenerationWalker extends
             this.currentMacroC.addFunctionNames(new MFunctionRefs("set",paramName));
             this.currentMacroC.addFunctions(new MGetterStringC(paramName));
             this.currentMacroC.addFunctions(new MSetterStringC(paramName));
+        }
+        else if (node.getType() instanceof AMacroRefsType) {
+            this.currentMacroH.addFields(new MFieldMacroDeclaration(paramName));
+//            this.currentMacroH.addFunctions(new MGetterMacroH(paramName));
+//            this.currentMacroH.addMethods(new MGetterMacroVtH(paramName));
+
+            this.currentMacroC.addFieldInitializers(new MFieldMacroInitializer(paramName));
+            this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
+            this.currentMacroC.addFunctionNames(new MFunctionRefs("set",paramName));
+//            this.currentMacroC.addFunctions(new MGetterMacroC(paramName));
         }
     }
 
