@@ -44,9 +44,14 @@ public class CodeGenerationWalker extends
     private MStringBuilderH mStringbuilderH;
     private MStringBuilderC mStringbuilderC;
 
+    private MBuildStateH mBuildStateH;
+    private MBuildStateC mBuildStateC;
+
     private MMacroH currentMacroH;
     private MMacroC currentMacroC;
     private String currentMacroName;
+    private MConstructorH currentConstructorH;
+    private MConstructorC currentConstructorC;
 
     private String currentParamName;
     private MMacroBuilder currentMacroBuilder;
@@ -72,6 +77,9 @@ public class CodeGenerationWalker extends
 
         this.mStringbuilderH = new MStringBuilderH();
         this.mStringbuilderC = new MStringBuilderC();
+
+        this.mBuildStateH = new MBuildStateH();
+        this.mBuildStateC = new MBuildStateC();
     }
 
     @Override
@@ -96,6 +104,11 @@ public class CodeGenerationWalker extends
                 this.mStringbuilderH.build());
         GenerationUtils.writeFile(this.packageDirectory, "Stringbuilder.c",
                 this.mStringbuilderC.build());
+
+        GenerationUtils.writeFile(this.packageDirectory, "Buildstate.h",
+                this.mBuildStateH.build());
+        GenerationUtils.writeFile(this.packageDirectory, "Buildstate.c",
+                this.mBuildStateC.build());
     }
 
     @Override
@@ -106,6 +119,11 @@ public class CodeGenerationWalker extends
         this.currentMacroH = new MMacroH(currentMacroName);
         this.currentMacroC = new MMacroC(currentMacroName);
 
+        this.currentConstructorH = new MConstructorH();
+        this.currentConstructorC = new MConstructorC();
+        this.currentMacroH.addConstructor(this.currentConstructorH);
+        this.currentMacroC.addConstructor(this.currentConstructorC);
+
         this.currentMacroBuilder = new MMacroBuilder();
         this.currentMacroC.addMacroBuilder(this.currentMacroBuilder);
     }
@@ -113,9 +131,9 @@ public class CodeGenerationWalker extends
     @Override
     public void outAMacro(
             AMacro node) {
-        GenerationUtils.writeFile(this.packageDirectory, currentMacroName+".h",
+        GenerationUtils.writeFile(this.packageDirectory, "M"+currentMacroName+".h",
                 this.currentMacroH.build());
-        GenerationUtils.writeFile(this.packageDirectory, currentMacroName+".c",
+        GenerationUtils.writeFile(this.packageDirectory, "M"+currentMacroName+".c",
                 this.currentMacroC.build());
 
     }
@@ -146,7 +164,7 @@ public class CodeGenerationWalker extends
             this.currentMacroH.addMethods(new MGetterStringVtH(paramName));
             this.currentMacroH.addMethods(new MSetterStringVtH(paramName));
 
-            this.currentMacroC.addFieldInitializers(new MFieldStringInitializer(paramName));
+            this.currentConstructorC.addFieldInitializers(new MFieldStringInitializer(paramName));
             this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
             this.currentMacroC.addFunctionNames(new MFunctionRefs("set",paramName));
             this.currentMacroC.addFunctions(new MGetterStringC(paramName));
@@ -156,12 +174,18 @@ public class CodeGenerationWalker extends
             this.currentMacroH.addFields(new MFieldMacroDeclaration(paramName));
 //            this.currentMacroH.addFunctions(new MGetterMacroH(paramName));
 //            this.currentMacroH.addMethods(new MGetterMacroVtH(paramName));
+            this.currentMacroH.addFunctions(new MAddMacroH(paramName));
+            this.currentMacroH.addMethods(new MAddMacroVtH(paramName));
 
-            this.currentMacroC.addFieldInitializers(new MFieldMacroInitializer(paramName));
-            this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
-            this.currentMacroC.addFunctionNames(new MFunctionRefs("set",paramName));
+            this.currentConstructorC.addFieldInitializers(new MFieldMacroInitializer(paramName));
+//            this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
 //            this.currentMacroC.addFunctions(new MGetterMacroC(paramName));
+            this.currentMacroC.addFunctionNames(new MFunctionRefs("add",paramName));
+            this.currentMacroC.addFunctions(new MAddMacroC(paramName));
         }
+
+        node.getType().apply(this);
+        outAParam(node);
     }
 
     @Override

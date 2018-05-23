@@ -342,6 +342,7 @@ void* HT_Stringbuilder[] = {&VT_Stringbuilder};
 Stringbuilder* new_Stringbuilder(size_t init_cap)
 {
     Stringbuilder* ret = malloc(sizeof(struct Stringbuilder));
+    ret->vt = &VT_Stringbuilder;
     if (!ret) return NULL;
     ret->mem = calloc(init_cap, sizeof(char));
     if (!ret->mem) return NULL;
@@ -386,6 +387,79 @@ bool Stringbuilder_appendChar(Stringbuilder *This, char c) {
 char* Stringbuilder_toString(Stringbuilder *This) {
     return This->mem;
 }
+{End}
+
+#=============== build_state_h =========
+Macro build_state_h
+{Body}
+{Insert: header}
+
+{#ifndef BUILDSTATE_H
+{#define BUILDSTATE_H
+
+extern struct BuildState_VT VT_BuildState;
+extern void *HT_BuildState[];
+
+typedef struct BuildState
+{
+    struct BuildState_VT (*vt);
+    char* expansion;
+} BuildState;
+
+typedef struct BuildState_VT
+{
+    int hl;
+    void* (*ht)[];
+    char* (*getExpansion)(struct BuildState*);
+    void (*setExpansion)(struct BuildState*, char* expansion);
+} BuildState_VT;
+
+BuildState* new_BuildState();
+void free_BuildState();
+
+char* BuildState_getExpansion(BuildState *This);
+void BuildState_setExpansion(BuildState *This, char* expansion);
+
+{#endif //BUILDSTATE_H
+{End}
+
+#=============== build_state_c =========
+Macro build_state_c
+{Body}
+{Insert: header}
+
+{#include<stdlib.h>
+{#include<stdio.h>
+
+{#include "Buildstate.h"
+
+struct BuildState_VT VT_BuildState={0, &HT_BuildState, &BuildState_getExpansion, &BuildState_setExpansion};
+void* HT_BuildState[] = {&VT_BuildState};
+
+BuildState* new_BuildState()
+{
+    BuildState* buildState = malloc(sizeof(struct BuildState));
+    buildState->vt = &VT_BuildState;
+    buildState->expansion = NULL;
+    return buildState;
+}
+
+void free_BuildState(BuildState* This)
+{
+    free(sb->mem);
+    free(sb);
+}
+
+char* BuildState_getExpansion(BuildState *This)
+{
+    return This->expansion;
+}
+
+void BuildState_setExpansion(BuildState *This, char* expansion)
+{
+    This->expansion = expansion;
+}
+
 {End}
 
 #============================
@@ -467,8 +541,9 @@ Macro macro_h
     Param
         macro_name : String;
         fields : field_string_declaration, field_macro_declaration, separator="\n";
-        methods : getter_string_vt_h(macro_name), setter_string_vt_h(macro_name), separator="\n";
-        functions : getter_string_h(macro_name), setter_string_h(macro_name), separator="\n";
+        constructor : constructor_h(macro_name);
+        methods : getter_string_vt_h(macro_name), setter_string_vt_h(macro_name), add_macro_vt_h(macro_name),separator="\n";
+        functions : getter_string_h(macro_name), setter_string_h(macro_name), add_macro_h(macro_name), separator="\n";
 {Body}
 {#ifndef M{macro_name}_H
 {#define M{macro_name}_H
@@ -493,7 +568,7 @@ typedef struct M{macro_name}_VT
 {End}
 }
 
-M{macro_name}* new_M{macro_name}();
+{constructor}
 void free_M{macro_name}(struct M{macro_name}*);
 char* M{macro_name}_build(M{macro_name}* This);
 void M{macro_name}_apply(M{macro_name}* This);
@@ -507,9 +582,9 @@ void M{macro_name}_apply(M{macro_name}* This);
 Macro macro_c
     Param
         macro_name : String;
-        field_initializers : field_string_initializer(macro_name), field_macro_initializer(macro_name), separator="\n";
+        constructor : constructor_c(macro_name);
         function_names :  function_refs(macro_name) ,before_first=" ,", separator=" ,";
-        functions : getter_string_c(macro_name), setter_string_c(macro_name), separator="\n";
+        functions : getter_string_c(macro_name), setter_string_c(macro_name), add_macro_c(macro_name), separator="\n";
         macro_builder : macro_builder(macro_name);
 {Body}
 {Insert: header}
@@ -523,15 +598,7 @@ Macro macro_c
 struct M{macro_name}_VT VT_M{macro_name} = {0, &HT_M{macro_name}, &M{macro_name}_build, &M{macro_name}_apply{function_names}};
 void* HT_M{macro_name}[] = {&VT_M{macro_name}};
 
-M{macro_name}* new_M{macro_name}()
-{
-    M{macro_name}* macro = malloc(sizeof(M{macro_name}));
-    macro->vt = &VT_M{macro_name};
-{Indent: "\t"}
-{field_initializers}
-{End}
-    return macro;
-}
+{constructor}
 
 void free_M{macro_name}(M{macro_name}* This)
 {
@@ -551,18 +618,78 @@ void M{macro_name}_apply(M{macro_name}* This)
 #========== macro_builder ==========
 Macro macro_builder
     Param
-        macro_body_parts : init_string_builder, string_part, param_insert_part(macro_name),  eol_part, insert_macro_part(macro_name), add_indent(macro_name), indent_part, separator="\n";
+        context_param : context_param;
+        context_build_state : context_build_state, none="This->build_state";
+        new_build_state : new_build_state, none="This->build_state = buildState";
+        directive_calls : init_directive_call, separator="\n";
+        internal_calls : init_internals_call, separator="\n";
+        macro_body_parts : init_string_builder, string_part, param_insert_part,  eol_part, insert_macro_part(macro_name), add_indent(macro_name), indent_part, separator="\n";
     Internal
         macro_name : String;
 {Body}
-char* M{macro_name}_build(M{macro_name}* This)
+char* M{macro_name}_build(M{macro_name}* This, {context_param})
 {
+    BuildState *buildState = {context_build_state};
+
+    if(buildState == NULL)
+    {
+        buildState = new_BuildState();
+    }
+    else if(buildState->vt->getExpansion(buildState) == NULL)
+    {
+        exit(1);
+    }
+    else
+    {
+        return buildState->vt->getExpansion();
+    }
+{Indent: "\t"}
+{new_build_state};
+{End}
+    LinkedList *indentations = new_LinkedList();
+    Stringbuilder sbIndentation = new_Stringbuilder(5);
+{Indent: "\t"}
+{directive_calls}
+{internal_calls}
+{End}
+
     Stringbuilder sb0 = new_Stringbuilder(5);
+
 {Indent: "\t"}
 {macro_body_parts}
 {End}
+    buildState->vt->setExpansion(sb0->vt->toString());
     return sb0->vt->toString();
 }
+{End}
+
+#============ init_directive_call ============
+Macro init_directive_call
+    Param
+        param_name: String;
+{Body}
+init{param_name}Directives();
+{End}
+
+#============ init_internals_call ============
+Macro init_internals_call
+    Param
+        param_name: String;
+        context_arg: context_arg, none="null";
+{Body}
+init{param_name}Internals({context_arg});
+{End}
+
+#========== context_build_state =======
+Macro context_build_state
+{Body}
+This->build_states->vt->get(context)
+{End}
+
+#========== new_build_state =========
+Macro new_build_state
+{Body}
+This->build_states->vt->put(context, buildState)
 {End}
 
 #========== redefined_apply_initializer ==========
@@ -576,6 +703,43 @@ void M{macro_name}_apply(M{macro_name}* This, InternalsInitializer internalsInit
 }
 {End}
 
+#======================================================
+#===================== CONSTRUCTOR ====================
+#======================================================
+Macro constructor_h
+    Internal
+        macro_name : String;
+{Body}
+M{macro_name}* new_M{macro_name}();
+{End}
+
+Macro constructor_c
+    Param
+        field_initializers : field_string_initializer(macro_name), field_macro_initializer(macro_name), separator="\n";
+    Internal
+        macro_name : String;
+{Body}
+M{macro_name}* new_M{macro_name}()
+{
+    M{macro_name}* macro = malloc(sizeof(M{macro_name}));
+    macro->vt = &VT_M{macro_name};
+{Indent: "\t"}
+{field_initializers}
+{End}
+    return macro;
+}
+{End}
+#================================================================
+#===================== MACRO FUNCTIONS ==========================
+#================================================================
+#=========== is_built ===========
+Macro is_built
+{Body}
+if(This->build_state != NULL){
+    exit(1);
+}
+{End}
+
 #============================
 #========== Fields    =======
 #============================
@@ -585,7 +749,7 @@ Macro field_string_declaration
     Param
         field_name : String;
 {Body}
-char* {field_name};
+LinkedList *field_{field_name};
 {End}
 
 #========== field_string_initializer ==========
@@ -595,7 +759,7 @@ Macro field_string_initializer
     Internal
         class_name : String;
 {Body}
-{class_name}->{field_name} = "";
+{class_name}->field_{field_name} = new_LinkedList();
 {End}
 
 #========== field_macro_declaration ==========
@@ -628,7 +792,7 @@ Macro getter_string_vt_h
     Internal
         class_name : String;
 {Body}
-char* (*get{field_name})(struct M{class_name}*);
+LinkedList* (*get{field_name})(struct M{class_name}*);
 {End}
 
 #========== getter_string_h ==========
@@ -638,7 +802,7 @@ Macro getter_string_h
     Internal
         class_name : String;
 {Body}
-char* M{class_name}_get{field_name}(struct M{class_name}*);
+LinkedList* M{class_name}_get{field_name}(struct M{class_name}*);
 {End}
 
 #========== getter_string_c ==========
@@ -648,7 +812,7 @@ Macro getter_string_c
     Internal
         class_name : String;
 {Body}
-char* M{class_name}_get{field_name}(struct M{class_name} *This)
+LinkedList* M{class_name}_get{field_name}(struct M{class_name} *This)
 {
     return This->{field_name};
 }
@@ -724,6 +888,48 @@ void M{class_name}_set{field_name}(struct M{class_name} *This, char* value)
 }
 {End}
 
+#========= add_macro_vt_h ===========
+Macro add_macro_vt_h
+    Param
+        field_name : String;
+    Internal
+        class_name : String;
+{Body}
+void (*add{field_name})(struct M{class_name}*, struct* M{field_name});
+{End}
+
+#========= add_macro_h ===========
+Macro add_macro_h
+    Param
+        field_name : String;
+    Internal
+        class_name : String;
+{Body}
+void add{field_name}(struct M{class_name}*, struct* M{field_name});
+{End}
+
+#========= add_macro_c ===========
+Macro add_macro_c
+    Param
+        field_name: String;
+        is_built: is_built;
+    Internal
+        class_name: String;
+{Body}
+void add{field_name}(M{class_name}* This, M{field_name}* macro){
+    if(macro == NULL){
+        exit(1);
+    }
+{Indent: "\t"}
+{is_built}
+{End}
+
+    This->list_{field_name}->append(macro);
+    This->children->append(macro);
+    //TODO Macro.cycleDetector.detectCycle(this, macro);
+}
+{End}
+
 #============================
 #========== Functions =======
 #============================
@@ -766,10 +972,8 @@ Macro param_insert_part
         param_name : String;
         index_builder : String;
         context_arg : context_arg;
-    Internal
-        macro_name : String;
 {Body}
-sb{index_builder}->vt->append(m{macro_name}->vt->build{param_name}({context_arg}));
+sb{index_builder}->vt->append(This->vt->build{param_name}({context_arg}));
 {End}
 
 #========== indent_part ===========
@@ -786,7 +990,7 @@ Macro insert_macro_part
     Param
         index_builder : String;
         index_insert : String;
-        macro_body_parts : init_string_builder, string_part, param_insert_part(macro_name), eol_part, insert_macro_part(macro_name);
+        macro_body_parts : init_string_builder, string_part, param_insert_part, eol_part, insert_macro_part(macro_name);
         set_internals : set_internal(macro_name);
     Internal
         macro_name : String;
@@ -839,7 +1043,7 @@ m{macro_name}->vt->get{name}({get_params})
 #========= add_indent ===================
 Macro add_indent
     Param
-        macro_body_parts : init_string_builder, string_part, param_insert_part(macro_name), eol_part, insert_macro_part(macro_name);
+        macro_body_parts : init_string_builder, string_part, param_insert_part, eol_part, insert_macro_part(macro_name);
     Internal
         macro_name : String;
 {Body}
@@ -852,6 +1056,38 @@ indentations->vt->add(sbIndentation->vt->toString());
 #===================== OTHER =======================
 #===================================================
 
+#========== string_value ========
+Macro string_value
+  Param
+    string : String;
+{Body}
+"{string}"
+{End}
+
+#=========== macro_arg ==========
+Macro macro_arg
+  Param
+    name : String;
+{Body}
+list_{name}
+{End}
+
+#=========== string_arg =========
+Macro string_arg
+  Param
+    name : String;
+{Body}
+field_{name}
+{End}
+
+#========== param_arg ==========
+Macro param_arg
+  Param
+    name : String;
+{Body}
+p{name}
+{End}
+
 #=========== context_name =============
 Macro context_name
   Param
@@ -860,8 +1096,28 @@ Macro context_name
 {context_name}
 {End}
 
+#======== context_param ============
+Macro context_param
+{Body}
+Context context
+{End}
+
 #========= context_arg ============
 Macro context_arg
 {Body}
 context
+{End}
+
+#=========== get_internal_tail ============
+Macro get_internal_tail
+{Body}
+->vt->get(context)
+{End}
+
+#========== string_param ==========
+Macro string_param
+  Param
+    name : String;
+{Body}
+char* p{name}
 {End}
