@@ -44,9 +44,6 @@ public class CodeGenerationWalker extends
     private MStringBuilderH mStringbuilderH;
     private MStringBuilderC mStringbuilderC;
 
-    private MBuildStateH mBuildStateH;
-    private MBuildStateC mBuildStateC;
-
     private MMacroH currentMacroH;
     private MMacroC currentMacroC;
     private String currentMacroName;
@@ -77,9 +74,6 @@ public class CodeGenerationWalker extends
 
         this.mStringbuilderH = new MStringBuilderH();
         this.mStringbuilderC = new MStringBuilderC();
-
-        this.mBuildStateH = new MBuildStateH();
-        this.mBuildStateC = new MBuildStateC();
     }
 
     @Override
@@ -104,11 +98,6 @@ public class CodeGenerationWalker extends
                 this.mStringbuilderH.build());
         GenerationUtils.writeFile(this.packageDirectory, "Stringbuilder.c",
                 this.mStringbuilderC.build());
-
-        GenerationUtils.writeFile(this.packageDirectory, "Buildstate.h",
-                this.mBuildStateH.build());
-        GenerationUtils.writeFile(this.packageDirectory, "Buildstate.c",
-                this.mBuildStateC.build());
     }
 
     @Override
@@ -174,14 +163,33 @@ public class CodeGenerationWalker extends
             this.currentMacroH.addFields(new MFieldMacroDeclaration(paramName));
 //            this.currentMacroH.addFunctions(new MGetterMacroH(paramName));
 //            this.currentMacroH.addMethods(new MGetterMacroVtH(paramName));
-            this.currentMacroH.addFunctions(new MAddMacroH(paramName));
-            this.currentMacroH.addMethods(new MAddMacroVtH(paramName));
+
+            MParamMacroArgH mParamMacroArgH = new MParamMacroArgH();
+            MParamArgType mParamArgType = new MParamArgType(paramName);
+            mParamMacroArgH.addParamType(mParamArgType);
+
+            MAddMacroH mAddMacroH = new MAddMacroH(paramName);
+            mAddMacroH.addParamArgs(mParamMacroArgH);
+
+            MAddMacroVtH mAddMacroVtH = new MAddMacroVtH(paramName);
+            mAddMacroVtH.addParamArgs(mParamMacroArgH);
+
+            MParamMacroArgC mParamMacroArgC = new MParamMacroArgC();
+            MParamArgName mParamArgName = new MParamArgName(paramName);
+            mParamMacroArgC.addParamType(mParamArgType);
+            mParamMacroArgC.addParamArg(mParamArgName);
+
+            MAddMacroC mAddMacroC = new MAddMacroC(paramName);
+            mAddMacroC.addParamArg(mParamMacroArgC);
+
+            this.currentMacroH.addFunctions(mAddMacroH);
+            this.currentMacroH.addMethods(mAddMacroVtH);
 
             this.currentConstructorC.addFieldInitializers(new MFieldMacroInitializer(paramName));
 //            this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
 //            this.currentMacroC.addFunctions(new MGetterMacroC(paramName));
             this.currentMacroC.addFunctionNames(new MFunctionRefs("add",paramName));
-            this.currentMacroC.addFunctions(new MAddMacroC(paramName));
+            this.currentMacroC.addFunctions(mAddMacroC);
         }
 
         node.getType().apply(this);
