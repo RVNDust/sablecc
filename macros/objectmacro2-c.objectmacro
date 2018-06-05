@@ -29,7 +29,29 @@ Macro include
     Param
         include_name : String;
 {Body}
-include "{include_name}.h"
+{#include "M{include_name}.h"
+{End}
+
+#========== line_separator ==========
+Macro line_separator
+{Body}
+sb0->vt->append(sb0, "\\n");
+{End}
+
+#========== context_h ==========
+Macro context
+{Body}
+{Insert: header}
+
+{#ifndef CONTEXT_H
+{#define CONTEXT_H
+
+typedef struct Context
+{
+
+} Context;
+
+{#endif //CONTEXT_H
 {End}
 
 #========== linked_list_node_h ==========
@@ -161,7 +183,7 @@ void LinkedList_addFirst(LinkedList* this, void *new_data, size_t data_size)
 
 void LinkedList_addLast(LinkedList* this, void *new_data, size_t data_size)
 {
-    this->vt->addAtIndex(this, new_data, data_size, this->size-1);
+    this->vt->addAtIndex(this, new_data, data_size, this->size);
 }
 
 void LinkedList_addAtIndex(LinkedList* this, void *new_data, size_t data_size, unsigned int index)
@@ -177,7 +199,7 @@ void LinkedList_addAtIndex(LinkedList* this, void *new_data, size_t data_size, u
             Node* prevNode = NULL;
             Node* currentNode = this->nodes;
 
-            if(index==0)
+            if(index == 0)
             {
                 new_node->next = currentNode;
                 this->nodes = new_node;
@@ -207,6 +229,37 @@ void LinkedList_addAtIndex(LinkedList* this, void *new_data, size_t data_size, u
     }
 }
 
+void* LinkedList_getAtIndex(LinkedList* this, unsigned int index)
+{
+    if(index <= this->size)
+    {
+        if(this->nodes != NULL)
+        {
+            Node* prevNode = NULL;
+            Node* currentNode = this->nodes;
+            if(index == 0)
+            {
+                return this->nodes->data;
+            }
+            else
+            {
+                for(int i = 0; i < index; i++)
+                {
+                    prevNode = currentNode;
+                    currentNode = currentNode->next;
+                }
+
+                return currentNode->data;
+            }
+        }
+        exit(1);
+    }
+    else
+    {
+        exit(1);
+    }
+}
+
 void LinkedList_removeFirst(LinkedList* this)
 {
     this->vt->removeAtIndex(this, 0);
@@ -214,7 +267,7 @@ void LinkedList_removeFirst(LinkedList* this)
 
 void LinkedList_removeLast(LinkedList* this)
 {
-    this->vt->removeAtIndex(this, this->size-1);
+    this->vt->removeAtIndex(this, this->size);
 }
 
 void LinkedList_removeAtIndex(LinkedList* this, unsigned int index)
@@ -225,7 +278,7 @@ void LinkedList_removeAtIndex(LinkedList* this, unsigned int index)
         {
             Node* prevNode = NULL;
             Node* currentNode = this->nodes;
-            if(this->size == 1)
+            if(index == 1)
             {
                 this->nodes = NULL;
             }
@@ -261,7 +314,7 @@ char* LinkedList_toString(LinkedList* this)
         {
             current_data = currentNode->data;
             //int textSize = strlen((char*)current_data);
-            //int textSize = sizeof(current_data);
+            int textSize = sizeof(current_data);
             currentTextSize = currentTextSize + textSize;
 
             currentNode = currentNode->next;
@@ -322,6 +375,7 @@ Stringbuilder* new_Stringbuilder(size_t init_cap);
 void free_Stringbuilder(struct Stringbuilder*);
 
 bool Stringbuilder_append(struct Stringbuilder*, char*);
+bool Stringbuilder_appendChar(struct Stringbuilder*, char);
 char* Stringbuilder_toString(struct Stringbuilder*);
 
 {#endif //STRINGBUILDER_H
@@ -355,8 +409,9 @@ Stringbuilder* new_Stringbuilder(size_t init_cap)
 
 void free_Stringbuilder(Stringbuilder* this)
 {
-    free(sb->mem);
-    free(sb);
+    free(this->mem);
+    free(this);
+    this = NULL;
 }
 
 {#define LOAD_FACTOR 2
@@ -366,7 +421,7 @@ bool Stringbuilder_append(Stringbuilder *this, char* string)
     int len = strlen(string);
     for(int i = 0; i < len; i++)
     {
-        size_ok = Stringbuilder_appendChar(to, string[i]);
+        size_ok = Stringbuilder_appendChar(this, string[i]);
     }
     return size_ok;
 }
@@ -391,6 +446,319 @@ char* Stringbuilder_toString(Stringbuilder *this) {
 }
 {End}
 
+#========== map_h ==========
+Macro map_h
+{Body}
+/**
+ * Copyright (c) 2014 rxi
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the MIT license. See LICENSE for details.
+ */
+
+{#ifndef MAP_H
+{#define MAP_H
+
+{#include <string.h>
+
+{#define MAP_VERSION "0.1.0"
+
+struct map_node_t;
+typedef struct map_node_t map_node_t;
+
+typedef struct {
+    map_node_t **buckets;
+    unsigned nbuckets, nnodes;
+} map_base_t;
+
+typedef struct {
+    unsigned bucketidx;
+    map_node_t *node;
+} map_iter_t;
+
+
+{#define map_t(T)\\
+  struct { map_base_t base; T *ref; T tmp; }
+
+
+{#define map_init(m)\\
+  memset(m, 0, sizeof(*(m)))
+
+
+{#define map_deinit(m)\\
+  map_deinit_(&(m)->base)
+
+
+{#define map_get(m, key)\\
+  ( (m)->ref = map_get_(&(m)->base, key) )
+
+
+{#define map_set(m, key, value)\\
+  ( (m)->tmp = (value),\\
+    map_set_(&(m)->base, key, &(m)->tmp, sizeof((m)->tmp)) )
+
+
+{#define map_remove(m, key)\\
+  map_remove_(&(m)->base, key)
+
+
+{#define map_iter(m)\\
+  map_iter_()
+
+
+{#define map_next(m, iter)\\
+  map_next_(&(m)->base, iter)
+
+
+void map_deinit_(map_base_t *m);
+void *map_get_(map_base_t *m, const char *key);
+int map_set_(map_base_t *m, const char *key, void *value, int vsize);
+void map_remove_(map_base_t *m, const char *key);
+map_iter_t map_iter_(void);
+const char *map_next_(map_base_t *m, map_iter_t *iter);
+
+
+typedef map_t(void*) map_void_t;
+typedef map_t(char*) map_str_t;
+typedef map_t(int) map_int_t;
+typedef map_t(char) map_char_t;
+typedef map_t(float) map_float_t;
+typedef map_t(double) map_double_t;
+
+{#endif
+{End}
+
+#========== map_c ==========
+Macro map_c
+{Body}
+/**
+ * Copyright (c) 2014 rxi
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the MIT license. See LICENSE for details.
+ */
+
+{#include <stdlib.h>
+{#include <string.h>
+{#include "map.h"
+
+struct map_node_t {
+    unsigned hash;
+    void *value;
+    map_node_t *next;
+    /* char key[]; */
+    /* char value[]; */
+};
+
+
+static unsigned map_hash(const char *str) {
+    unsigned hash = 5381;
+    while (*str) {
+        hash = ((hash << 5) + hash) ^ *str++;
+    }
+    return hash;
+}
+
+
+static map_node_t *map_newnode(const char *key, void *value, int vsize) {
+    map_node_t *node;
+    int ksize = strlen(key) + 1;
+    int voffset = ksize + ((sizeof(void*) - ksize) % sizeof(void*));
+    node = malloc(sizeof(*node) + voffset + vsize);
+    if (!node) return NULL;
+    memcpy(node + 1, key, ksize);
+    node->hash = map_hash(key);
+    node->value = ((char*) (node + 1)) + voffset;
+    memcpy(node->value, value, vsize);
+    return node;
+}
+
+
+static int map_bucketidx(map_base_t *m, unsigned hash) {
+    /* If the implementation is changed to allow a non-power-of-2 bucket count,
+     * the line below should be changed to use mod instead of AND */
+    return hash & (m->nbuckets - 1);
+}
+
+
+static void map_addnode(map_base_t *m, map_node_t *node) {
+    int n = map_bucketidx(m, node->hash);
+    node->next = m->buckets[n];
+    m->buckets[n] = node;
+}
+
+
+static int map_resize(map_base_t *m, int nbuckets) {
+    map_node_t *nodes, *node, *next;
+    map_node_t **buckets;
+    int i;
+    /* Chain all nodes together */
+    nodes = NULL;
+    i = m->nbuckets;
+    while (i--) {
+        node = (m->buckets)[i];
+        while (node) {
+            next = node->next;
+            node->next = nodes;
+            nodes = node;
+            node = next;
+        }
+    }
+    /* Reset buckets */
+    buckets = realloc(m->buckets, sizeof(*m->buckets) * nbuckets);
+    if (buckets != NULL) {
+        m->buckets = buckets;
+        m->nbuckets = nbuckets;
+    }
+    if (m->buckets) {
+        memset(m->buckets, 0, sizeof(*m->buckets) * m->nbuckets);
+        /* Re-add nodes to buckets */
+        node = nodes;
+        while (node) {
+            next = node->next;
+            map_addnode(m, node);
+            node = next;
+        }
+    }
+    /* Return error code if realloc() failed */
+    return (buckets == NULL) ? -1 : 0;
+}
+
+
+static map_node_t **map_getref(map_base_t *m, const char *key) {
+    unsigned hash = map_hash(key);
+    map_node_t **next;
+    if (m->nbuckets > 0) {
+        next = &m->buckets[map_bucketidx(m, hash)];
+        while (*next) {
+            if ((*next)->hash == hash && !strcmp((char*) (*next + 1), key)) {
+                return next;
+            }
+            next = &(*next)->next;
+        }
+    }
+    return NULL;
+}
+
+
+void map_deinit_(map_base_t *m) {
+    map_node_t *next, *node;
+    int i;
+    i = m->nbuckets;
+    while (i--) {
+        node = m->buckets[i];
+        while (node) {
+            next = node->next;
+            free(node);
+            node = next;
+        }
+    }
+    free(m->buckets);
+}
+
+
+void *map_get_(map_base_t *m, const char *key) {
+    map_node_t **next = map_getref(m, key);
+    return next ? (*next)->value : NULL;
+}
+
+
+int map_set_(map_base_t *m, const char *key, void *value, int vsize) {
+    int n, err;
+    map_node_t **next, *node;
+    /* Find & replace existing node */
+    next = map_getref(m, key);
+    if (next) {
+        memcpy((*next)->value, value, vsize);
+        return 0;
+    }
+    /* Add new node */
+    node = map_newnode(key, value, vsize);
+    if (node == NULL) goto fail;
+    if (m->nnodes >= m->nbuckets) {
+        n = (m->nbuckets > 0) ? (m->nbuckets << 1) : 1;
+        err = map_resize(m, n);
+        if (err) goto fail;
+    }
+    map_addnode(m, node);
+    m->nnodes++;
+    return 0;
+    fail:
+    if (node) free(node);
+    return -1;
+}
+
+
+void map_remove_(map_base_t *m, const char *key) {
+    map_node_t *node;
+    map_node_t **next = map_getref(m, key);
+    if (next) {
+        node = *next;
+        *next = (*next)->next;
+        free(node);
+        m->nnodes--;
+    }
+}
+
+
+map_iter_t map_iter_(void) {
+    map_iter_t iter;
+    iter.bucketidx = -1;
+    iter.node = NULL;
+    return iter;
+}
+
+
+const char *map_next_(map_base_t *m, map_iter_t *iter) {
+    if (iter->node) {
+        iter->node = iter->node->next;
+        if (iter->node == NULL) goto nextBucket;
+    } else {
+        nextBucket:
+        do {
+            if (++iter->bucketidx >= m->nbuckets) {
+                return NULL;
+            }
+            iter->node = m->buckets[iter->bucketidx];
+        } while (iter->node == NULL);
+    }
+    return (char*) (iter->node + 1);
+}
+{End}
+
+#========== class_internal_value_h ==========
+Macro class_internal_value
+{Body}
+{Insert: header}
+
+{#ifndef INTERNALVALUE_H
+{#define INTERNALVALUE_H
+
+extern struct InternalValue_VT VT_InternalValue;
+extern void *HT_InternalValue[];
+
+typedef struct InternalValue
+{
+    struct InternalValue_VT (*vt);
+    LinkedList *macros;
+    Context *context;
+    char* cache;
+} InternalValue;
+
+typedef struct InternalValue_VT
+{
+    int hl;
+    void* (*ht)[];
+    char* (*build)();
+} InternalValue_VT;
+
+InternalValue* new_InternalValue(LinkedList *macros, Context *context);
+void free_InternalValue(InternalValue*);
+
+{#endif //INTERNALVALUE_H
+
+{End}
+
 #============================
 #========== Basics   ========
 #============================
@@ -405,11 +773,12 @@ Macro super_macro_h
 
 extern struct Macro_VT VT_Macro;
 extern void *HT_Macro[];
-extern char* LINE_SEPARATOR = "";
+extern char* LINE_SEPARATOR = "\\n";
 
 typedef struct Macro
 {
     struct Macro_VT (*vt);
+    struct LinkedList *children;
 } Macro;
 
 typedef struct Macro_VT
@@ -418,6 +787,7 @@ typedef struct Macro_VT
     void* (*ht)[];
     char* (*build)(struct Macro*);
     void (*apply)(struct Macro*);
+    struct LinkedList* (*getChildren)(struct Macro*);
 } Macro_VT;
 
 Macro* new_Macro();
@@ -425,6 +795,7 @@ void free_Macro(Macro*);
 
 char* Macro_build(struct Macro*);
 void Macro_apply(struct Macro*);
+struct LinkedList* Macro_getChildren(struct Macro*);
 
 {#endif //MACRO_H
 {End}
@@ -439,7 +810,7 @@ Macro super_macro_c
 
 {#include "Macro.h"
 
-struct Macro_VT VT_Macro = {0, &HT_Macro, &Macro_build, &Macro_apply};
+struct Macro_VT VT_Macro = {0, &HT_Macro, &Macro_build, &Macro_apply, &Macro_getChildren};
 void* HT_Macro[] = {&VT_Macro};
 
 Macro* new_Macro()
@@ -463,6 +834,13 @@ void Macro_apply(Macro* this)
 {
     exit(1);
 }
+
+
+LinkedList* Macro_getChildren(Macro* this)
+{
+    return this->children;
+}
+
 {End}
 
 #========== macro_h ==========
@@ -471,18 +849,19 @@ Macro macro_h
         macro_name : String;
         fields : field_string_declaration, field_macro_declaration, separator="\n";
         constructor : constructor_h(macro_name);
-        methods : getter_string_vt_h(macro_name), setter_string_vt_h(macro_name), add_macro_vt_h(macro_name),separator="\n";
-        functions : getter_string_h(macro_name), setter_string_h(macro_name), add_macro_h(macro_name), separator="\n";
+        methods : add_string_vt_h(macro_name), add_macro_vt_h(macro_name), separator="\n";
+        functions : add_string_h(macro_name), add_macro_h(macro_name), param_ref_builder_h(macro_name), separator="\n";
 {Body}
 {#ifndef M{macro_name}_H
 {#define M{macro_name}_H
 
 extern struct M{macro_name}_VT VT_M{macro_name};
-extern void *HT_M{macro_name};
+extern void *HT_M{macro_name}[];
 
 typedef struct M{macro_name}
 {
     struct M{macro_name}_VT (*vt);
+    struct LinkedList *children;
 {Indent: "\t"}
 {fields}
 {End}
@@ -492,28 +871,34 @@ typedef struct M{macro_name}_VT
 {
     int hl;
     void* (*ht)[];
+    char* (*build)(struct M{macro_name}*);
+    void (*apply)(struct M{macro_name}*);
+    struct LinkedList* (*getChildren)(struct M{macro_name}*);
 {Indent: "\t"}
 {methods}
 {End}
-}
+} M{macro_name}_VT;
 
 {constructor}
 void free_M{macro_name}(struct M{macro_name}*);
-char* M{macro_name}_build(M{macro_name}* this);
-void M{macro_name}_apply(M{macro_name}* this);
+char* M{macro_name}_build(struct M{macro_name}*);
+void M{macro_name}_apply(struct M{macro_name}*);
+struct LinkedList* M{macro_name}_getChildren(struct M{macro_name}*);
 
 {functions}
 
-{#endif M{macro_name}_H
+{#endif //M{macro_name}_H
 {End}
 
 #========== macro_c ==========
 Macro macro_c
     Param
         macro_name : String;
+        includes : include, separator="\n";
         constructor : constructor_c(macro_name);
         function_names :  function_refs(macro_name) ,before_first=" ,", separator=" ,";
-        functions : getter_string_c(macro_name), setter_string_c(macro_name), add_macro_c(macro_name), separator="\n";
+        functions : add_string_c(macro_name), add_macro_c(macro_name), before_first="\n", separator="\n";
+        internal_functions : param_string_ref_builder(macro_name), param_macro_ref_builder(macro_name), param_string_getter(macro_name), before_first="\n", separator="\n";
         macro_builder : macro_builder(macro_name);
 {Body}
 {Insert: header}
@@ -521,10 +906,14 @@ Macro macro_c
 {#include<stdlib.h>
 {#include<stdio.h>
 
-{#include "Macro.h"
+{#include "Stringbuilder.h"
+{#include "LinkedList.h"
+{#include "Map.h"
+{includes}
+
 {#include "M{macro_name}.h"
 
-struct M{macro_name}_VT VT_M{macro_name} = {0, &HT_M{macro_name}, &M{macro_name}_build, &M{macro_name}_apply{function_names}};
+struct M{macro_name}_VT VT_M{macro_name} = {0, &HT_M{macro_name}, &M{macro_name}_build, &M{macro_name}_apply, &M{macro_name}_getChildren{function_names}};
 void* HT_M{macro_name}[] = {&VT_M{macro_name}};
 
 {constructor}
@@ -541,35 +930,40 @@ void M{macro_name}_apply(M{macro_name}* this)
     exit(1);
 }
 
+LinkedList* M{macro_name}_getChildren(M{macro_name}* this)
+{
+    return this->children;
+}
+
 {functions}
+{internal_functions}
 {End}
 
 #========== macro_builder ==========
 Macro macro_builder
     Param
-        context_param : context_param;
+        context_param : context_param, before_first="\n";
         directive_calls : init_directive_call, separator="\n";
         internal_calls : init_internals_call, separator="\n";
-        macro_body_parts : init_string_builder, string_part, param_insert_part,  eol_part, insert_macro_part(macro_name), add_indent(macro_name), indent_part, separator="\n";
+        macro_body_parts : init_string_builder, string_part, param_insert_part(macro_name),  eol_part, insert_macro_part(macro_name), add_indent(macro_name), indent_part, separator="\n{Insert: line_separator}\n";
     Internal
         macro_name : String;
 {Body}
-char* M{macro_name}_build(M{macro_name}* this, {context_param})
+char* M{macro_name}_build(M{macro_name}* this{context_param})
 {
     LinkedList *indentations = new_LinkedList();
-    Stringbuilder sbIndentation = new_Stringbuilder(5);
+    Stringbuilder *sbIndentation = new_Stringbuilder(5);
 {Indent: "\t"}
 {directive_calls}
 {internal_calls}
 {End}
 
-    Stringbuilder sb0 = new_Stringbuilder(5);
+    Stringbuilder *sb0 = new_Stringbuilder(5);
 
 {Indent: "\t"}
 {macro_body_parts}
 {End}
-    buildState->vt->setExpansion(sb0->vt->toString());
-    return sb0->vt->toString();
+    return sb0->vt->toString(sb0);
 }
 {End}
 
@@ -613,7 +1007,7 @@ M{macro_name}* new_M{macro_name}();
 
 Macro constructor_c
     Param
-        field_initializers : field_string_initializer(macro_name), field_macro_initializer(macro_name), separator="\n";
+        field_initializers : field_string_initializer, field_macro_initializer, separator="\n";
     Internal
         macro_name : String;
 {Body}
@@ -630,6 +1024,95 @@ M{macro_name}* new_M{macro_name}()
 #================================================================
 #===================== MACRO FUNCTIONS ==========================
 #================================================================
+#========== param_ref_builder_h ==================
+Macro param_ref_builder_h
+    Param
+        field_name : String;
+    Internal
+        macro_name : String;
+{Body}
+char* M{macro_name}_build{field_name}(struct M{macro_name}*);
+{End}
+
+#=========== param_string_ref_builder =============
+Macro param_string_ref_builder
+    Param
+        field_name : String;
+    Internal
+        macro_name : String;
+{Body}
+char* M{macro_name}_build{field_name}(M{macro_name} *this)
+{
+    return this->list_{field_name}->vt->toString(this->list_{field_name});
+}
+{End}
+
+#========== param_macro_ref_builder ==================
+Macro param_macro_ref_builder
+    Param
+        field_name : String;
+        macro_type : String;
+    Internal
+        macro_name : String;
+{Body}
+char* M{macro_name}_build{field_name}(M{macro_name} *this)
+{
+    Stringbuilder *sb = new_Stringbuilder(5);
+    LinkedList* macros = this->list_{field_name};
+
+    int i = 0;
+    int nb_macros = macros->size;
+    char* expansion = NULL;
+
+    for(i; i < nb_macros;i++)
+    {
+        M{macro_type} *macro = macros->vt->getAtIndex(macros, i);
+        expansion = macro->vt->build(macro);
+
+        sb->vt->append(sb, expansion);
+    }
+
+    return sb->vt->toString(sb);
+}
+{End}
+
+#=========== param_string_getter =============
+Macro param_string_getter
+    Param
+        field_name : String;
+    Internal
+        macro_name : String;
+{Body}
+char* M{macro_name}_get{field_name}(M{macro_name} *this)
+{
+    return this->list_{field_name}->vt->toString(this->list_{field_name});
+}
+{End}
+
+#========= internal_string_setter =========
+Macro internal_string_setter
+    Param
+        field_name : String;
+    Internal
+        macro_name : String;
+{Body}
+void M{macro_name}_set{field_name}(M{macro_name} *this, Context *key,char* value)
+    map_set(&this->list_{field_name}, key, value);
+}
+{End}
+
+#========= internal_string_getter =========
+Macro internal_string_setter
+    Param
+        field_name : String;
+    Internal
+        macro_name : String;
+{Body}
+char* M{macro_name}_set{field_name}(M{macro_name} *this, Context *key)
+    char* value = map_get(&this->list_{field_name}, key);
+    return value;
+}
+{End}
 
 #============================
 #========== Fields    =======
@@ -640,17 +1123,15 @@ Macro field_string_declaration
     Param
         field_name : String;
 {Body}
-LinkedList *list_{field_name};
+struct LinkedList *list_{field_name};
 {End}
 
 #========== field_string_initializer ==========
 Macro field_string_initializer
     Param
         field_name : String;
-    Internal
-        class_name : String;
 {Body}
-{class_name}->list_{field_name} = new_LinkedList();
+macro->list_{field_name} = new_LinkedList();
 {End}
 
 #========== field_macro_declaration ==========
@@ -658,19 +1139,40 @@ Macro field_macro_declaration
     Param
         field_name : String;
 {Body}
-LinkedList *list_{field_name};
+struct LinkedList *list_{field_name};
 {End}
 
 #========== field_macro_initializer ==========
 Macro field_macro_initializer
     Param
         field_name : String;
-    Internal
-        class_name : String;
 {Body}
-{class_name}->list_{field_name} = new_LinkedList();
+macro->list_{field_name} = new_LinkedList();
 {End}
 
+#========== internal_field_string_declaration ==========
+Macro internal_field_string_declaration
+    Param
+        field_name : String;
+{Body}
+map_str_t list_{field_name};
+{End}
+
+#========== internal_field_string_initializer ==========
+Macro internal_field_string_initializer
+    Param
+        field_name : String;
+{Body}
+map_init(&macro->list_{field_name});
+{End}
+
+#========== internal_field_string_deinitializer ==========
+Macro internal_field_string_deinitializer
+    Param
+        field_name : String;
+{Body}
+map_deinit(&macro->list_{field_name});
+{End}
 
 #============================
 #========== Getter =======
@@ -743,42 +1245,43 @@ char* M{class_name}_get{field_name}(struct M{class_name} *this)
 {End}
 
 #============================
-#========== Setter =======
+#========== Add   ===========
 #============================
 
 #========== add_string_vt_h ==========
-Macro setter_string_vt_h
+Macro add_string_vt_h
     Param
         field_name : String;
-        param_args : param_string_arg_h, before_first=", ",separator=", ";
+        param_arg : param_string_arg, before_first=", ",separator=", ";
     Internal
         class_name : String;
 {Body}
-void (*add{field_name})(struct M{class_name}*, char* value);
+void (*add{field_name})(struct M{class_name}*{param_arg});
 {End}
 
 #========== add_string_h ==========
-Macro setter_string_h
+Macro add_string_h
     Param
         field_name : String;
-        param_args : param_string_arg_h, before_first=", ",separator=", ";
+        param_arg : param_string_arg, before_first=", ",separator=", ";
     Internal
         class_name : String;
 {Body}
-void M{class_name}_add{field_name}(struct M{class_name}*, char* value);
+void M{class_name}_add{field_name}(struct M{class_name}*{param_arg});
 {End}
 
 #========== add_string_c ==========
-Macro setter_string_c
+Macro add_string_c
     Param
         field_name : String;
-        param_args : param_string_arg_c, before_first=", ",separator=", ";
+        param_arg : param_string_arg, before_first=", ",separator=", ";
+        param_value : param_arg_name;
     Internal
         class_name : String;
 {Body}
-void M{class_name}_add{field_name}(struct M{class_name} *this, char* value)
+void M{class_name}_add{field_name}(struct M{class_name} *this{param_arg})
 {
-    this->{field_name}->vt->addLast(value);
+    this->list_{field_name}->vt->addLast(this->list_{field_name}, {param_value}, sizeof({param_value}));
 }
 {End}
 
@@ -801,7 +1304,7 @@ Macro add_macro_h
     Internal
         class_name : String;
 {Body}
-void add{field_name}(struct M{class_name}*{param_args});
+void M{class_name}_add{field_name}(struct M{class_name}*{param_args});
 {End}
 
 #========= add_macro_c ===========
@@ -812,14 +1315,14 @@ Macro add_macro_c
     Internal
         class_name : String;
 {Body}
-void add{field_name}(M{class_name}* this{param_arg}){
+void M{class_name}_add{field_name}(struct M{class_name}* this{param_arg}){
     if(macro == NULL){
         exit(1);
     }
 
-    this->list_{field_name}->addLast(macro);
-    this->children->append(macro);
-    //TODO Macro.cycleDetector.detectCycle(this, macro);
+    this->list_{field_name}->vt->addLast(this->list_{field_name}, {Insert: param_macro_arg_name}, sizeof({Insert: param_macro_arg_name}));
+    //this->children->vt->addLast(this->children, macro, sizeof(macro));
+    //Macro.cycleDetector.detectCycle(this, macro);
 }
 {End}
 
@@ -848,7 +1351,7 @@ Macro string_part
         string : String;
         index_builder : String;
 {Body}
-sb{index_builder}->vt->append("{string}");
+sb{index_builder}->vt->append(sb{index_builder}, "{string}");
 {End}
 
 #========= eol_part ===================
@@ -856,7 +1359,7 @@ Macro eol_part
     Param
         index_builder : String;
 {Body}
-sb{index_builder}->vt->append(LINE_SEPARATOR);
+sb{index_builder}->vt->append(sb{index_builder}, LINE_SEPARATOR);
 {End}
 
 #========== param_insert_part ==========
@@ -864,9 +1367,10 @@ Macro param_insert_part
     Param
         param_name : String;
         index_builder : String;
-        context_arg : context_arg;
+    Internal
+        macro_name : String;
 {Body}
-sb{index_builder}->vt->append(this->vt->build{param_name}({context_arg}));
+sb{index_builder}->vt->append(sb{index_builder}, M{macro_name}_build{param_name}(this));
 {End}
 
 #========== indent_part ===========
@@ -875,7 +1379,7 @@ Macro indent_part
         index_builder : String;
         index_indent : String;
 {Body}
-sb{index_builder}->vt->append(applyIndent(sb{index_indent}->vt->toString(), indentations->vt->remove(indentations->size - 1)));
+sb{index_builder}->vt->append(sb{index_builder}, applyIndent(sb{index_indent}->vt->toString(), indentations->vt->remove(indentations->size - 1)));
 {End}
 
 #========== insert_macro_part ===============
@@ -883,7 +1387,7 @@ Macro insert_macro_part
     Param
         index_builder : String;
         index_insert : String;
-        macro_body_parts : init_string_builder, string_part, param_insert_part, eol_part, insert_macro_part(macro_name);
+        macro_body_parts : init_string_builder, string_part, param_insert_part(macro_name), eol_part, insert_macro_part(macro_name);
         set_internals : set_internal(macro_name);
     Internal
         macro_name : String;
@@ -891,7 +1395,7 @@ Macro insert_macro_part
 M{macro_name} minsert_{index_insert} = new M{macro_name}();
 {macro_body_parts}
 {set_internals}
-sb{index_builder}.append(minsert_{index_insert}.build(null));
+sb{index_builder}.append(sb{index_builder}, minsert_{index_insert}.build(null));
 {End}
 
 #========= init_string_builder =========
@@ -899,7 +1403,7 @@ Macro init_string_builder
     Param
         index_builder : String;
 {Body}
-Stringbuilder sb{index_builder} = new_Stringbuilder(5);
+Stringbuilder *sb{index_builder} = new_Stringbuilder(5);
 {End}
 
 #========== set_internal ==================
@@ -936,7 +1440,7 @@ m{macro_name}->vt->get{name}({get_params})
 #========= add_indent ===================
 Macro add_indent
     Param
-        macro_body_parts : init_string_builder, string_part, param_insert_part, eol_part, insert_macro_part(macro_name);
+        macro_body_parts : init_string_builder, string_part, param_insert_part(macro_name), eol_part, insert_macro_part(macro_name);
     Internal
         macro_name : String;
 {Body}
@@ -944,6 +1448,82 @@ sbIndentation = new_Stringbuilder(5);
 {macro_body_parts}
 indentations->vt->add(sbIndentation->vt->toString());
 {End}
+
+#===================================================
+#===================== DIRECTIVES ==================
+#===================================================
+#=========== class_none_h ============
+Macro class_none_h
+{Body}
+{Insert: header}
+
+{#ifndef NONE_H
+{#define NONE_H
+
+extern struct None_VT VT_None;
+extern void *HT_None;
+
+typedef struct None
+{
+    struct None_VT (*vt);
+    char* value;
+} None;
+
+typedef struct None_VT
+{
+    int hl;
+    void* (*ht)[];
+    char* (*apply)(int index, char* macro, int list_size);
+} None_VT;
+
+None* new_None();
+void free_None(struct None*);
+
+char* None_apply(int index, char* macro, int list_size);
+
+{#endif //NONE_H
+{End}
+
+#=========== class_none_c ============
+Macro class_none_c
+{Body}
+{Insert: header}
+
+{#include<stdlib.h>
+{#include<stdio.h>
+
+{#include "None.h"
+
+struct None_VT VT_None = {1, &HT_None, &None_apply};
+void* HT_None[] = {&VT_None};
+
+None* new_None()
+{
+    None* none = malloc(sizeof(None));
+    none->vt = &VT_None;
+    return none;
+}
+
+void free_None(None* this)
+{
+    free(this);
+}
+
+char* None_apply(None *this, int index, char* macro, int list_size)
+{
+    if(list_size == 0){
+        return this->value;
+    }
+
+    return macro;
+}
+{End}
+
+#========== class_before_first =========
+
+#========== class_after_last ==========
+
+#======== class_separator ===========
 
 #===================================================
 #===================== OTHER =======================
@@ -973,12 +1553,20 @@ Macro string_arg
 list_{name}
 {End}
 
+#========== param_macro_arg_type ==========
+Macro param_macro_arg_type
+  Param
+    name : String;
+{Body}
+M{name}
+{End}
+
 #========== param_arg_type ==========
 Macro param_arg_type
   Param
     name : String;
 {Body}
-M{name}
+{name}
 {End}
 
 #========== param_arg_name ==========
@@ -989,38 +1577,35 @@ Macro param_arg_name
 p{name}
 {End}
 
+#========== param_macro_arg_name ==========
+Macro param_macro_arg_name
+{Body}
+macro
+{End}
+
 #========== param_macro_arg_h ==========
 Macro param_macro_arg_h
     Param
-        param_type : param_arg_type;
+        param_type : param_macro_arg_type;
 {Body}
-struct* {param_type}
+struct {param_type}*
 {End}
 
 #========== param_macro_arg_c ==========
 Macro param_macro_arg_c
     Param
-        param_type : param_arg_type;
-        param_arg : param_arg_name;
+        param_type : param_macro_arg_type, before_first="struct ";
 {Body}
-{param_type} *{param_arg}
+{param_type} *{Insert: param_macro_arg_name}
 {End}
 
-#========== param_string_arg_h ==========
-Macro param_string_arg_h
-    Param
-        param_type : param_arg_type;
-{Body}
-char*
-{End}
-
-#========== param_string_arg_c ==========
-Macro param_string_arg_c
+#========== param_string_arg ==========
+Macro param_string_arg
     Param
         param_type : param_arg_type;
         param_arg : param_arg_name;
 {Body}
-{param_type} *{param_arg}
+{param_type} {param_arg}
 {End}
 
 #=========== context_name =============

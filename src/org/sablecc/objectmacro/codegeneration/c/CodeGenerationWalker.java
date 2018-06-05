@@ -24,6 +24,7 @@ import org.sablecc.objectmacro.intermediate.syntax3.analysis.DepthFirstAdapter;
 import org.sablecc.objectmacro.intermediate.syntax3.node.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CodeGenerationWalker extends
@@ -44,14 +45,32 @@ public class CodeGenerationWalker extends
     private MStringBuilderH mStringbuilderH;
     private MStringBuilderC mStringbuilderC;
 
+    private MMapH mMapH;
+    private MMapC mMapC;
+
     private MMacroH currentMacroH;
     private MMacroC currentMacroC;
     private String currentMacroName;
     private MConstructorH currentConstructorH;
     private MConstructorC currentConstructorC;
+    private MParamMacroArgH currentMParamMacroArgH;
+    private MParamMacroArgC currentMParamMacroArgC;
+    private MParamMacroArgType currentParamMacroArgType;
+    private MAddMacroH currentMAddMacroH;
+    private MAddMacroVtH currentMAddMacroVtH;
+    private MAddMacroC currentMAddMacroC;
+    private String currentMacroRefName;
 
     private String currentParamName;
     private MMacroBuilder currentMacroBuilder;
+    private MParamRefBuilderH currentParamRefBuilderH;
+    private MParamMacroRefBuilder currentParamMacroRefBuilder;
+    private MInsertMacroPart currentInsertMacroPart;
+    private int indexBuilder = 0;
+    private int indexInsert = 0;
+
+    private List<Integer> createdBuilders = new ArrayList<>();
+    private List<Integer> createdInserts = new ArrayList<>();
 
     public CodeGenerationWalker(
             IntermediateRepresentation ir,
@@ -74,6 +93,9 @@ public class CodeGenerationWalker extends
 
         this.mStringbuilderH = new MStringBuilderH();
         this.mStringbuilderC = new MStringBuilderC();
+
+        this.mMapH = new MMapH();
+        this.mMapC = new MMapC();
     }
 
     @Override
@@ -98,6 +120,11 @@ public class CodeGenerationWalker extends
                 this.mStringbuilderH.build());
         GenerationUtils.writeFile(this.packageDirectory, "Stringbuilder.c",
                 this.mStringbuilderC.build());
+
+        GenerationUtils.writeFile(this.packageDirectory, "Map.h",
+                this.mMapH.build());
+        GenerationUtils.writeFile(this.packageDirectory, "Map.c",
+                this.mMapC.build());
     }
 
     @Override
@@ -125,18 +152,32 @@ public class CodeGenerationWalker extends
         GenerationUtils.writeFile(this.packageDirectory, "M"+currentMacroName+".c",
                 this.currentMacroC.build());
 
+
+        this.currentMacroH = null;
+        this.currentMacroC = null;
+        this.currentConstructorH = null;
+        this.currentConstructorC = null;
+        this.currentMacroBuilder = null;
+
     }
 
     @Override
     public void caseAInternal(
             AInternal node) {
+        String paramName = GenerationUtils.buildNameCamelCase(node.getNames());
 
+        this.indexBuilder = 0;
+
+        if (node.getType() instanceof AStringType) {
+
+        }
     }
 
     @Override
     public void outAInternal(
             AInternal node) {
-
+        this.indexBuilder = 0;
+        this.indexInsert = 0;
     }
 
     @Override
@@ -145,51 +186,63 @@ public class CodeGenerationWalker extends
         String paramName = this.currentParamName
                 = GenerationUtils.buildNameCamelCase(node.getNames());
 
+        this.indexBuilder = 0;
+
         if (node.getType() instanceof AStringType) {
 
+            //Adding external function
             this.currentMacroH.addFields(new MFieldStringDeclaration(paramName));
-            this.currentMacroH.addFunctions(new MGetterStringH(paramName));
-            this.currentMacroH.addFunctions(new MSetterStringH(paramName));
-            this.currentMacroH.addMethods(new MGetterStringVtH(paramName));
-            this.currentMacroH.addMethods(new MSetterStringVtH(paramName));
+
+            MParamStringArg mParamStringArg = new MParamStringArg();
+            mParamStringArg.addParamType(new MParamArgType("char*"));
+            mParamStringArg.addParamArg(new MParamArgName(paramName));
+
+            MAddStringH mAddStringH = new MAddStringH(paramName);
+            mAddStringH.addParamArg(mParamStringArg);
+
+            MAddStringVtH mAddStringVtH = new MAddStringVtH(paramName);
+            mAddStringVtH.addParamArg(mParamStringArg);
+
+            MAddStringC mAddStringC = new MAddStringC(paramName);
+            mAddStringC.addParamArg(mParamStringArg);
+            mAddStringC.addParamValue(new MParamArgName(paramName));
+
+
+            this.currentMacroH.addFunctions(mAddStringH);
+            this.currentMacroH.addMethods(mAddStringVtH);
 
             this.currentConstructorC.addFieldInitializers(new MFieldStringInitializer(paramName));
-            this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
-            this.currentMacroC.addFunctionNames(new MFunctionRefs("set",paramName));
-            this.currentMacroC.addFunctions(new MGetterStringC(paramName));
-            this.currentMacroC.addFunctions(new MSetterStringC(paramName));
+            this.currentMacroC.addFunctionNames(new MFunctionRefs("add",paramName));
+            this.currentMacroC.addFunctions(mAddStringC);
+
+            //Adding internals functions
+            MParamStringRefBuilder mParamStringRefBuilder = new MParamStringRefBuilder(paramName);
+            MParamStringGetter mParamStringGetter = new MParamStringGetter(paramName);
+
+            this.currentMacroC.addInternalFunctions(mParamStringRefBuilder);
+            this.currentMacroC.addInternalFunctions(mParamStringGetter);
+
+            this.currentParamRefBuilderH = new MParamRefBuilderH(paramName);
+            this.currentMacroH.addFunctions(this.currentParamRefBuilderH);
         }
         else if (node.getType() instanceof AMacroRefsType) {
             this.currentMacroH.addFields(new MFieldMacroDeclaration(paramName));
-//            this.currentMacroH.addFunctions(new MGetterMacroH(paramName));
-//            this.currentMacroH.addMethods(new MGetterMacroVtH(paramName));
 
-            MParamMacroArgH mParamMacroArgH = new MParamMacroArgH();
-            MParamArgType mParamArgType = new MParamArgType(paramName);
-            mParamMacroArgH.addParamType(mParamArgType);
+            this.currentMAddMacroH = new MAddMacroH(paramName);
 
-            MAddMacroH mAddMacroH = new MAddMacroH(paramName);
-            mAddMacroH.addParamArgs(mParamMacroArgH);
+            this.currentMAddMacroVtH = new MAddMacroVtH(paramName);
 
-            MAddMacroVtH mAddMacroVtH = new MAddMacroVtH(paramName);
-            mAddMacroVtH.addParamArgs(mParamMacroArgH);
+            this.currentMAddMacroC = new MAddMacroC(paramName);
 
-            MParamMacroArgC mParamMacroArgC = new MParamMacroArgC();
-            MParamArgName mParamArgName = new MParamArgName(paramName);
-            mParamMacroArgC.addParamType(mParamArgType);
-            mParamMacroArgC.addParamArg(mParamArgName);
-
-            MAddMacroC mAddMacroC = new MAddMacroC(paramName);
-            mAddMacroC.addParamArg(mParamMacroArgC);
-
-            this.currentMacroH.addFunctions(mAddMacroH);
-            this.currentMacroH.addMethods(mAddMacroVtH);
+            this.currentMacroH.addFunctions(this.currentMAddMacroH);
+            this.currentMacroH.addMethods(this.currentMAddMacroVtH);
 
             this.currentConstructorC.addFieldInitializers(new MFieldMacroInitializer(paramName));
-//            this.currentMacroC.addFunctionNames(new MFunctionRefs("get",paramName));
-//            this.currentMacroC.addFunctions(new MGetterMacroC(paramName));
             this.currentMacroC.addFunctionNames(new MFunctionRefs("add",paramName));
-            this.currentMacroC.addFunctions(mAddMacroC);
+            this.currentMacroC.addFunctions(this.currentMAddMacroC);
+
+            this.currentParamRefBuilderH = new MParamRefBuilderH(paramName);
+            this.currentMacroH.addFunctions(this.currentParamRefBuilderH);
         }
 
         node.getType().apply(this);
@@ -199,7 +252,43 @@ public class CodeGenerationWalker extends
     @Override
     public void outAParam(
             AParam node) {
+        this.indexBuilder = 0;
+        this.indexInsert = 0;
+    }
 
+    @Override
+    public void inAMacroRef(
+            AMacroRef node) {
+
+        String macro_ref_name = this.currentMacroRefName
+                = GenerationUtils.buildNameCamelCase(node.getNames());
+
+        this.currentMacroC.addIncludes(new MInclude(macro_ref_name));
+
+        this.currentParamMacroRefBuilder = new MParamMacroRefBuilder(this.currentParamName, macro_ref_name);
+        this.currentMacroC.addInternalFunctions(this.currentParamMacroRefBuilder);
+
+        this.currentMParamMacroArgH = new MParamMacroArgH();
+        this.currentMAddMacroH.addParamArgs(this.currentMParamMacroArgH);
+        this.currentMAddMacroVtH.addParamArgs(this.currentMParamMacroArgH);
+
+        this.currentMParamMacroArgC = new MParamMacroArgC();
+        this.currentMAddMacroC.addParamArg(this.currentMParamMacroArgC);
+
+        this.currentParamMacroArgType = new MParamMacroArgType(macro_ref_name);
+
+        this.currentMParamMacroArgH.addParamType(this.currentParamMacroArgType);
+        this.currentMParamMacroArgC.addParamType(this.currentParamMacroArgType);
+    }
+
+    @Override
+    public void outAMacroRef(
+            AMacroRef node) {
+
+        this.currentMacroRefName = null;
+        this.currentParamMacroArgType = null;
+        this.currentMParamMacroArgH = null;
+        this.currentMParamMacroArgC = null;
     }
 
     @Override
@@ -208,4 +297,56 @@ public class CodeGenerationWalker extends
 
     }
 
+    @Override
+    public void caseAVarTextPart(
+            AVarTextPart node) {
+        String index_builder = String.valueOf(this.indexBuilder);
+        String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
+
+        index_builder = GenerationUtils.getLetterFromInteger(this.indexBuilder);
+
+        if(this.currentInsertMacroPart != null)
+        {
+            this.currentInsertMacroPart.addMacroBodyParts(new MParamInsertPart(param_name, index_builder));
+        }
+
+    }
+
+    @Override
+    public void caseAStringMacroPart(
+            AStringMacroPart node) {
+        MStringPart mStringPart = new MStringPart(GenerationUtils.escapedString(node.getString()), String.valueOf(this.indexBuilder));
+        this.currentMacroBuilder.addMacroBodyParts(mStringPart);
+    }
+
+    @Override
+    public void caseAInsertMacroPart(
+            AInsertMacroPart node) {
+
+        AMacroRef macroRef = (AMacroRef) node.getMacroRef();
+        this.indexInsert++;
+
+        this.currentInsertMacroPart = new MInsertMacroPart(String.valueOf(this.indexBuilder), String.valueOf(this.indexInsert));
+        this.currentMacroBuilder.addMacroBodyParts(this.currentInsertMacroPart);
+
+        this.createdInserts.add(this.indexInsert);
+        Integer tempIndexBuilder = this.indexBuilder;
+        Integer tempIndexInsert = this.indexInsert;
+
+        node.getMacroRef().apply(this);
+
+        this.indexInsert = tempIndexInsert;
+        this.indexBuilder = tempIndexBuilder;
+        this.currentInsertMacroPart = null;
+    }
+
+    @Override
+    public void outAVarMacroPart(
+            AVarMacroPart node) {
+
+        String param_name = GenerationUtils.buildNameCamelCase(node.getNames());
+        MParamInsertPart mParamInsertPart = new MParamInsertPart(param_name,
+                String.valueOf(this.indexBuilder));
+        this.currentMacroBuilder.addMacroBodyParts(mParamInsertPart);
+    }
 }
