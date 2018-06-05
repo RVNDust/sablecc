@@ -91,7 +91,7 @@ extern void *HT_LinkedList[];
 
 typedef struct LinkedList
 {
-    struct LinkedListVT (*vt);
+    struct LinkedList_VT (*vt);
     struct Node *nodes;
     unsigned int size;
 } LinkedList;
@@ -103,6 +103,7 @@ typedef struct LinkedList_VT
     void (*addFirst)(struct LinkedList*, void *new_data, size_t data_size);
     void (*addLast)(struct LinkedList*, void *new_data, size_t data_size);
     void (*addAtIndex)(struct LinkedList*, void *new_data, size_t data_size, unsigned int index);
+    void* (*getAtIndex)(struct LinkedList*, unsigned int index);
     void (*removeFirst)(struct LinkedList*);
     void (*removeLast)(struct LinkedList*);
     void (*removeAtIndex)(struct LinkedList*, unsigned int index);
@@ -115,6 +116,7 @@ void free_LinkedList(struct LinkedList*);
 void LinkedList_addFirst(struct LinkedList*, void *new_data, size_t data_size);
 void LinkedList_addLast(struct LinkedList*, void *new_data, size_t data_size);
 void LinkedList_addAtIndex(struct LinkedList*, void *new_data, size_t data_size, unsigned int index);
+void* LinkedList_getAtIndex(struct LinkedList*, unsigned int index);
 void LinkedList_removeFirst(struct LinkedList*);
 void LinkedList_removeLast(struct LinkedList*);
 void LinkedList_removeAtIndex(struct LinkedList*, unsigned int index);
@@ -135,7 +137,7 @@ Macro linked_list_c
 {#include "LinkedListNode.h"
 {#include "LinkedList.h"
 
-struct LinkedList_VT VT_LinkedList={0, &HT_LinkedList, &LinkedList_addFirst, &LinkedList_addLast, &LinkedList_addAtIndex, &LinkedList_removeFirst, &LinkedList_removeLast, &LinkedList_removeAtIndex, &LinkedList_toString};
+struct LinkedList_VT VT_LinkedList={0, &HT_LinkedList, &LinkedList_addFirst, &LinkedList_addLast, &LinkedList_addAtIndex, &LinkedList_getAtIndex, &LinkedList_removeFirst, &LinkedList_removeLast, &LinkedList_removeAtIndex, &LinkedList_toString};
 void* HT_LinkedList[] = {&VT_LinkedList};
 
 LinkedList* new_LinkedList()
