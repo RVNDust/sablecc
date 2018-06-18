@@ -5,326 +5,154 @@ package org.sablecc.objectmacro.codegeneration.c.macro;
 import java.util.*;
 
 public class MParamMacroArgC extends Macro{
-    
-
-    private final List<Macro> list_ParamType;
-
-    
-
-    private DSeparator ParamTypeSeparator;
-
-    
-
-    private DBeforeFirst ParamTypeBeforeFirst;
-
-    
-
-    private DAfterLast ParamTypeAfterLast;
-
-    
-
-    private DNone ParamTypeNone;
-
-    
-
-    private final InternalValue ParamTypeValue;
-
-    
-
-    
-
-    private final Context ParamTypeContext = new Context();
-
-    
-
-    
-
-    public MParamMacroArgC(){
-
-    
-
-        this.list_ParamType = new ArrayList<>();
-
-    
-
-        this.ParamTypeValue = new InternalValue(this.list_ParamType, this.ParamTypeContext);
-
-    }
-
-    
-
-    
-
-    public void addParamType(MParamMacroArgType macro){
-
-        if(macro == null){
-
-            throw ObjectMacroException.parameterNull("ParamType");
-
-        }
-
-                if(this.build_state != null){
-
-
-                    throw ObjectMacroException.cannotModify("ParamMacroArgType");
-
-
-                }
-
-    
-
-        this.list_ParamType.add(macro);
-
-        this.children.add(macro);
-
-        Macro.cycleDetector.detectCycle(this, macro);
-
-    }
-
-    
-
-    
-
-    private String buildParamType(){
-
-        StringBuilder sb = new StringBuilder();
-
-        Context local_context = ParamTypeContext;
-
-        List<Macro> macros = this.list_ParamType;
-
-    
-
-        int i = 0;
-
-        int nb_macros = macros.size();
-
-        String expansion = null;
-
-    
-
-        if(this.ParamTypeNone != null){
-
-            sb.append(this.ParamTypeNone.apply(i, "", nb_macros));
-
-        }
-
-    
-
-        for(Macro macro : macros){
-
-            expansion = macro.build(local_context);
-
-    
-
-            if(this.ParamTypeBeforeFirst != null){
-
-                expansion = this.ParamTypeBeforeFirst.apply(i, expansion, nb_macros);
-
-            }
-
-    
-
-            if(this.ParamTypeAfterLast != null){
-
-                expansion = this.ParamTypeAfterLast.apply(i, expansion, nb_macros);
-
-            }
-
-    
-
-            if(this.ParamTypeSeparator != null){
-
-                expansion = this.ParamTypeSeparator.apply(i, expansion, nb_macros);
-
-            }
-
-    
-
-            sb.append(expansion);
-
-            i++;
-
-        }
-
-    
-
-        return sb.toString();
-
-    }
-
-    
-
-    
-
-    private InternalValue getParamType(){
-
-        return this.ParamTypeValue;
-
-    }
-
-    
-
-    private void initParamTypeInternals(Context context){
-
-        for(Macro macro : this.list_ParamType){
-
-            macro.apply(new InternalsInitializer("ParamType"){
-
-
-                @Override
-
-
-
-                void setParamMacroArgType(MParamMacroArgType mParamMacroArgType){
-
-
-
-                
-
-
-
-                    
-
-
-
-                    
-
-
-
-                }
-
-
-            });
-
-        }
-
-    }
-
-    
-
-    
-
-    private void initParamTypeDirectives(){
-
-//        StringBuilder sb0 = new StringBuilder();
-//
-//
-//        sb1.append("struct ");
-//
-//
-//        this.ParamTypeBeforeFirst = new DBeforeFirst(sb0.toString());
-//
-//
-//        this.ParamTypeValue.setBeforeFirst(this.ParamTypeBeforeFirst);
-
-    }
-
-    
-
-    @Override
-
-     void apply(
-
-             InternalsInitializer internalsInitializer){
-
-    
-
-         internalsInitializer.setParamMacroArgC(this);
-
-     }
-
-    
-
-    
-
-    @Override
-
-    public String build(){
-
-    
-
-        BuildState buildState = this.build_state;
-
-    
-
-        if(buildState == null){
-
-            buildState = new BuildState();
-
-        }
-
-        else if(buildState.getExpansion() == null){
-
-            throw ObjectMacroException.cyclicReference("ParamMacroArgC");
-
-        }
-
-        else{
-
-            return buildState.getExpansion();
-
-        }
-
-        this.build_state = buildState;
-
-        List<String> indentations = new LinkedList<>();
-
-        StringBuilder sbIndentation = new StringBuilder();
-
-    
-
-        initParamTypeDirectives();
-
-
-        
-
-
-        initParamTypeInternals(null);
-
-    
-
-        StringBuilder sb0 = new StringBuilder();
-
-    
-
-        sb0.append(buildParamType());
-
-
-        sb0.append(" *");
-
-
-        MParamMacroArgName minsert_1 = new MParamMacroArgName();
-
-
-        
-
-
-        
-
-
-        sb0.append(minsert_1.build(null));
-
-    
-
-        buildState.setExpansion(sb0.toString());
-
-        return sb0.toString();
-
-    }
-
-    
-
-    
-
-    @Override
-
-    String build(Context context) {
-
-     return build();
-
-    }
-
+    
+    private final List<Macro> list_ParamType;
+    
+    private DSeparator ParamTypeSeparator;
+    
+    private DBeforeFirst ParamTypeBeforeFirst;
+    
+    private DAfterLast ParamTypeAfterLast;
+    
+    private DNone ParamTypeNone;
+    
+    private final InternalValue ParamTypeValue;
+    
+    
+    private final Context ParamTypeContext = new Context();
+    
+    
+    public MParamMacroArgC(){
+    
+        this.list_ParamType = new ArrayList<>();
+    
+        this.ParamTypeValue = new InternalValue(this.list_ParamType, this.ParamTypeContext);
+    }
+    
+    
+    public void addParamType(MParamMacroArgType macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("ParamType");
+        }
+                if(this.build_state != null){
+                    throw ObjectMacroException.cannotModify("ParamMacroArgType");
+                }
+    
+        this.list_ParamType.add(macro);
+        this.children.add(macro);
+        Macro.cycleDetector.detectCycle(this, macro);
+    }
+    
+    
+    private String buildParamType(){
+        StringBuilder sb = new StringBuilder();
+        Context local_context = ParamTypeContext;
+        List<Macro> macros = this.list_ParamType;
+    
+        int i = 0;
+        int nb_macros = macros.size();
+        String expansion = null;
+    
+        if(this.ParamTypeNone != null){
+            sb.append(this.ParamTypeNone.apply(i, "", nb_macros));
+        }
+    
+        for(Macro macro : macros){
+            expansion = macro.build(local_context);
+    
+            if(this.ParamTypeBeforeFirst != null){
+                expansion = this.ParamTypeBeforeFirst.apply(i, expansion, nb_macros);
+            }
+    
+            if(this.ParamTypeAfterLast != null){
+                expansion = this.ParamTypeAfterLast.apply(i, expansion, nb_macros);
+            }
+    
+            if(this.ParamTypeSeparator != null){
+                expansion = this.ParamTypeSeparator.apply(i, expansion, nb_macros);
+            }
+    
+            sb.append(expansion);
+            i++;
+        }
+    
+        return sb.toString();
+    }
+    
+    
+    private InternalValue getParamType(){
+        return this.ParamTypeValue;
+    }
+    
+    private void initParamTypeInternals(Context context){
+        for(Macro macro : this.list_ParamType){
+            macro.apply(new InternalsInitializer("ParamType"){
+                @Override
+                void setParamMacroArgType(MParamMacroArgType mParamMacroArgType){
+                
+                    
+                    
+                }
+            });
+        }
+    }
+    
+    
+    private void initParamTypeDirectives(){
+        StringBuilder sb0 = new StringBuilder();
+        sb0.append("struct ");
+        this.ParamTypeBeforeFirst = new DBeforeFirst(sb0.toString());
+        this.ParamTypeValue.setBeforeFirst(this.ParamTypeBeforeFirst);
+    }
+    
+    @Override
+     void apply(
+             InternalsInitializer internalsInitializer){
+    
+         internalsInitializer.setParamMacroArgC(this);
+     }
+    
+    
+    @Override
+    public String build(){
+    
+        BuildState buildState = this.build_state;
+    
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("ParamMacroArgC");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_state = buildState;
+        List<String> indentations = new LinkedList<>();
+        StringBuilder sbIndentation = new StringBuilder();
+    
+        initParamTypeDirectives();
+        
+        initParamTypeInternals(null);
+    
+        StringBuilder sb0 = new StringBuilder();
+    
+        sb0.append(buildParamType());
+        sb0.append(" *");
+        MParamMacroArgName minsert_1 = new MParamMacroArgName();
+        
+        
+        sb0.append(minsert_1.build(null));
+    
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+    
+    
+    @Override
+    String build(Context context) {
+     return build();
+    }
     private String applyIndent(
                             String macro,
                             String indent){

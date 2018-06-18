@@ -5,412 +5,196 @@ package org.sablecc.objectmacro.codegeneration.c.macro;
 import java.util.*;
 
 public class MAddStringVtH extends Macro{
-    
-
-    private String field_FieldName;
-
-    
-
-    private final List<Macro> list_ParamArg;
-
-    
-
-    private DSeparator ParamArgSeparator;
-
-    
-
-    private DBeforeFirst ParamArgBeforeFirst;
-
-    
-
-    private DAfterLast ParamArgAfterLast;
-
-    
-
-    private DNone ParamArgNone;
-
-    
-
-    private final InternalValue ParamArgValue;
-
-    
-
-    private Map<Context, String> field_ClassName = new LinkedHashMap<>();
-
-    
-
-    
-
-    private final Context ParamArgContext = new Context();
-
-    
-
-    
-
-    public MAddStringVtH(String pFieldName){
-
-    
-
-            this.setPFieldName(pFieldName);
-
-        this.list_ParamArg = new ArrayList<>();
-
-    
-
-        this.ParamArgValue = new InternalValue(this.list_ParamArg, this.ParamArgContext);
-
-    }
-
-    
-
-    
-
-    private void setPFieldName( String pFieldName ){
-
-        if(pFieldName == null){
-
-            throw ObjectMacroException.parameterNull("FieldName");
-
-        }
-
-    
-
-        this.field_FieldName = pFieldName;
-
-    }
-
-    
-
-    public void addParamArg(MParamStringArg macro){
-
-        if(macro == null){
-
-            throw ObjectMacroException.parameterNull("ParamArg");
-
-        }
-
-        
-
-    
-
-        this.list_ParamArg.add(macro);
-
-        this.children.add(macro);
-
-        Macro.cycleDetector.detectCycle(this, macro);
-
-    }
-
-    
-
-        void setClassName(
-
-                Context context,
-
-                String value) {
-
-    
-
-            if(value == null){
-
-                throw new RuntimeException("value cannot be null here");
-
-            }
-
-    
-
-            this.field_ClassName.put(context, value);
-
-        }
-
-    
-
-    
-
-    private String buildFieldName(){
-
-    
-
-        return this.field_FieldName;
-
-    }
-
-    
-
-    private String buildParamArg(){
-
-        StringBuilder sb = new StringBuilder();
-
-        Context local_context = ParamArgContext;
-
-        List<Macro> macros = this.list_ParamArg;
-
-    
-
-        int i = 0;
-
-        int nb_macros = macros.size();
-
-        String expansion = null;
-
-    
-
-        if(this.ParamArgNone != null){
-
-            sb.append(this.ParamArgNone.apply(i, "", nb_macros));
-
-        }
-
-    
-
-        for(Macro macro : macros){
-
-            expansion = macro.build(local_context);
-
-    
-
-            if(this.ParamArgBeforeFirst != null){
-
-                expansion = this.ParamArgBeforeFirst.apply(i, expansion, nb_macros);
-
-            }
-
-    
-
-            if(this.ParamArgAfterLast != null){
-
-                expansion = this.ParamArgAfterLast.apply(i, expansion, nb_macros);
-
-            }
-
-    
-
-            if(this.ParamArgSeparator != null){
-
-                expansion = this.ParamArgSeparator.apply(i, expansion, nb_macros);
-
-            }
-
-    
-
-            sb.append(expansion);
-
-            i++;
-
-        }
-
-    
-
-        return sb.toString();
-
-    }
-
-    
-
-    private String buildClassName(Context context){
-
-    
-
-        return this.field_ClassName.get(context);
-
-    }
-
-    
-
-    
-
-    private String getFieldName(){
-
-    
-
-        return this.field_FieldName;
-
-    }
-
-    
-
-    private InternalValue getParamArg(){
-
-        return this.ParamArgValue;
-
-    }
-
-    
-
-    private String getClassName(Context context){
-
-    
-
-        return this.field_ClassName.get(context);
-
-    }
-
-    
-
-    private void initParamArgInternals(Context context){
-
-        for(Macro macro : this.list_ParamArg){
-
-            macro.apply(new InternalsInitializer("ParamArg"){
-
-
-                @Override
-
-
-
-                void setParamStringArg(MParamStringArg mParamStringArg){
-
-
-
-                
-
-
-
-                    
-
-
-
-                    
-
-
-
-                }
-
-
-            });
-
-        }
-
-    }
-
-    
-
-    
-
-    private void initParamArgDirectives(){
-
-//        StringBuilder sb0 = new StringBuilder();
-//
-//
-//        sb1.append(", ");
-//
-//
-//        this.ParamArgBeforeFirst = new DBeforeFirst(sb0.toString());
-//
-//
-//        this.ParamArgValue.setBeforeFirst(this.ParamArgBeforeFirst);StringBuilder sb2 = new StringBuilder();
-//
-//
-//        sb3.append(", ");
-//
-//
-//        this.ParamArgSeparator = new DSeparator(sb2.toString());
-//
-//
-//        this.ParamArgValue.setSeparator(this.ParamArgSeparator);
-
-    }
-
-    
-
-    @Override
-
-     void apply(
-
-             InternalsInitializer internalsInitializer){
-
-    
-
-         internalsInitializer.setAddStringVtH(this);
-
-     }
-
-    
-
-    
-
-    @Override
-
-    public String build(Context context){
-
-    
-
-        BuildState buildState = this.build_states.get(context);
-
-    
-
-        if(buildState == null){
-
-            buildState = new BuildState();
-
-        }
-
-        else if(buildState.getExpansion() == null){
-
-            throw ObjectMacroException.cyclicReference("AddStringVtH");
-
-        }
-
-        else{
-
-            return buildState.getExpansion();
-
-        }
-
-        this.build_states.put(context, buildState);
-
-        List<String> indentations = new LinkedList<>();
-
-        StringBuilder sbIndentation = new StringBuilder();
-
-    
-
-        initParamArgDirectives();
-
-
-        
-
-
-        initParamArgInternals(context);
-
-    
-
-        StringBuilder sb0 = new StringBuilder();
-
-    
-
-        sb0.append("void (*add");
-
-
-        sb0.append(buildFieldName());
-
-
-        sb0.append(")(struct M");
-
-
-        sb0.append(buildClassName(context));
-
-
-        sb0.append("*");
-
-
-        sb0.append(buildParamArg());
-
-
-        sb0.append(");");
-
-    
-
-        buildState.setExpansion(sb0.toString());
-
-        return sb0.toString();
-
-    }
-
-    
-
-    
-
+    
+    private String field_FieldName;
+    
+    private final List<Macro> list_ParamArg;
+    
+    private DSeparator ParamArgSeparator;
+    
+    private DBeforeFirst ParamArgBeforeFirst;
+    
+    private DAfterLast ParamArgAfterLast;
+    
+    private DNone ParamArgNone;
+    
+    private final InternalValue ParamArgValue;
+    
+    private Map<Context, String> field_ClassName = new LinkedHashMap<>();
+    
+    
+    private final Context ParamArgContext = new Context();
+    
+    
+    public MAddStringVtH(String pFieldName){
+    
+            this.setPFieldName(pFieldName);
+        this.list_ParamArg = new ArrayList<>();
+    
+        this.ParamArgValue = new InternalValue(this.list_ParamArg, this.ParamArgContext);
+    }
+    
+    
+    private void setPFieldName( String pFieldName ){
+        if(pFieldName == null){
+            throw ObjectMacroException.parameterNull("FieldName");
+        }
+    
+        this.field_FieldName = pFieldName;
+    }
+    
+    public void addParamArg(MParamStringArg macro){
+        if(macro == null){
+            throw ObjectMacroException.parameterNull("ParamArg");
+        }
+        
+    
+        this.list_ParamArg.add(macro);
+        this.children.add(macro);
+        Macro.cycleDetector.detectCycle(this, macro);
+    }
+    
+        void setClassName(
+                Context context,
+                String value) {
+    
+            if(value == null){
+                throw new RuntimeException("value cannot be null here");
+            }
+    
+            this.field_ClassName.put(context, value);
+        }
+    
+    
+    private String buildFieldName(){
+    
+        return this.field_FieldName;
+    }
+    
+    private String buildParamArg(){
+        StringBuilder sb = new StringBuilder();
+        Context local_context = ParamArgContext;
+        List<Macro> macros = this.list_ParamArg;
+    
+        int i = 0;
+        int nb_macros = macros.size();
+        String expansion = null;
+    
+        if(this.ParamArgNone != null){
+            sb.append(this.ParamArgNone.apply(i, "", nb_macros));
+        }
+    
+        for(Macro macro : macros){
+            expansion = macro.build(local_context);
+    
+            if(this.ParamArgBeforeFirst != null){
+                expansion = this.ParamArgBeforeFirst.apply(i, expansion, nb_macros);
+            }
+    
+            if(this.ParamArgAfterLast != null){
+                expansion = this.ParamArgAfterLast.apply(i, expansion, nb_macros);
+            }
+    
+            if(this.ParamArgSeparator != null){
+                expansion = this.ParamArgSeparator.apply(i, expansion, nb_macros);
+            }
+    
+            sb.append(expansion);
+            i++;
+        }
+    
+        return sb.toString();
+    }
+    
+    private String buildClassName(Context context){
+    
+        return this.field_ClassName.get(context);
+    }
+    
+    
+    private String getFieldName(){
+    
+        return this.field_FieldName;
+    }
+    
+    private InternalValue getParamArg(){
+        return this.ParamArgValue;
+    }
+    
+    private String getClassName(Context context){
+    
+        return this.field_ClassName.get(context);
+    }
+    
+    private void initParamArgInternals(Context context){
+        for(Macro macro : this.list_ParamArg){
+            macro.apply(new InternalsInitializer("ParamArg"){
+                @Override
+                void setParamStringArg(MParamStringArg mParamStringArg){
+                
+                    
+                    
+                }
+            });
+        }
+    }
+    
+    
+    private void initParamArgDirectives(){
+        StringBuilder sb0 = new StringBuilder();
+        sb0.append(", ");
+        this.ParamArgBeforeFirst = new DBeforeFirst(sb0.toString());
+        this.ParamArgValue.setBeforeFirst(this.ParamArgBeforeFirst);StringBuilder sb1 = new StringBuilder();
+        sb1.append(", ");
+        this.ParamArgSeparator = new DSeparator(sb1.toString());
+        this.ParamArgValue.setSeparator(this.ParamArgSeparator);
+    }
+    
+    @Override
+     void apply(
+             InternalsInitializer internalsInitializer){
+    
+         internalsInitializer.setAddStringVtH(this);
+     }
+    
+    
+    @Override
+    public String build(Context context){
+    
+        BuildState buildState = this.build_states.get(context);
+    
+        if(buildState == null){
+            buildState = new BuildState();
+        }
+        else if(buildState.getExpansion() == null){
+            throw ObjectMacroException.cyclicReference("AddStringVtH");
+        }
+        else{
+            return buildState.getExpansion();
+        }
+        this.build_states.put(context, buildState);
+        List<String> indentations = new LinkedList<>();
+        StringBuilder sbIndentation = new StringBuilder();
+    
+        initParamArgDirectives();
+        
+        initParamArgInternals(context);
+    
+        StringBuilder sb0 = new StringBuilder();
+    
+        sb0.append("void (*add");
+        sb0.append(buildFieldName());
+        sb0.append(")(struct M");
+        sb0.append(buildClassName(context));
+        sb0.append("*");
+        sb0.append(buildParamArg());
+        sb0.append(");");
+    
+        buildState.setExpansion(sb0.toString());
+        return sb0.toString();
+    }
+    
+    
     private String applyIndent(
                             String macro,
                             String indent){
